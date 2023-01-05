@@ -2,10 +2,10 @@ package main027.server.domain.place.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import main027.server.global.BaseTime;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 public class PlaceDto {
 
@@ -27,15 +27,14 @@ public class PlaceDto {
     }
 
     @Data
-    public class PlaceResponseDto {
+    public class PlaceResponseDto extends BaseTime {
         private Long placeId;
         private String name;
         private String address;
         private String description;
         private String category;
         private Long likeCount;
-        private Long mapId;
-        private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
+        private Long latitude;
+        private Long longitude;
     }
 }
