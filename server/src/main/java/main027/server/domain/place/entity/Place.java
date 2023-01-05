@@ -2,7 +2,7 @@ package main027.server.domain.place.entity;
 
 
 import lombok.Data;
-import main027.server.global.BaseTime;
+import main027.server.domain.audit.BaseTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
