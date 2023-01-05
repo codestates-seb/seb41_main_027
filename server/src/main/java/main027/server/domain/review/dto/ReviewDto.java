@@ -1,7 +1,9 @@
 package main027.server.domain.review.dto;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
@@ -14,6 +16,8 @@ public class ReviewDto {
 
     @Getter
     @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Post {
         @NotNull
         private Long userId;
