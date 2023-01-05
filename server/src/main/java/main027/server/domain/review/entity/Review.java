@@ -1,11 +1,17 @@
 package main027.server.domain.review.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import main027.server.domain.audit.BaseTime;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.user.entity.User;
 
 import javax.persistence.*;
 
+@Getter @Setter
+@AllArgsConstructor @NoArgsConstructor
 @Entity(name = "reviews")
 public class Review extends BaseTime {
 
