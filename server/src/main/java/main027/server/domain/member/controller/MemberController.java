@@ -1,6 +1,6 @@
-package main027.server.domain.user.controller;
+package main027.server.domain.member.controller;
 
-import main027.server.domain.user.dto.MemberDto;
+import main027.server.domain.member.dto.MemberDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
