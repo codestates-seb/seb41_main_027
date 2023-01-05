@@ -1,4 +1,4 @@
-package main027.server.domain.user.entity;
+package main027.server.domain.member.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

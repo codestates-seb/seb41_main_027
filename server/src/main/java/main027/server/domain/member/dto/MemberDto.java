@@ -1,4 +1,4 @@
-package main027.server.domain.user.dto;
+package main027.server.domain.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
