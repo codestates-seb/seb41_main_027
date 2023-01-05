@@ -11,9 +11,9 @@ public class PlaceDto extends BaseTime {
 
     @Data
     @AllArgsConstructor
-    public class PlacePostDto {
+    public static class PlacePostDto {
         @NotNull
-        private Long userId;
+        private Long memberId;
         @NotBlank
         private String name;
         @NotBlank
@@ -22,12 +22,17 @@ public class PlaceDto extends BaseTime {
         private String description;
     }
 
-    public class PlacePatchDto {
+    @Data
+    @AllArgsConstructor
+    public static class PlacePatchDto {
+                @NotBlank
+        private String description;
 
     }
 
     @Data
-    public class PlaceResponseDto {
+    @AllArgsConstructor
+    public static class PlaceResponseDto {
         private Long placeId;
         private String name;
         private String address;
