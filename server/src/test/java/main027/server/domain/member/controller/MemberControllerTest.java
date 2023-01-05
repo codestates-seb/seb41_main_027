@@ -54,7 +54,7 @@ class MemberControllerTest {
     void patchMember() throws Exception {
         // given
         long id = 1L;
-        MemberDto.Patch patch = new MemberDto.Patch("김길동");
+        MemberDto.Patch patch = new MemberDto.Patch("홍길동");
 
         String content = gson.toJson(patch);
 
