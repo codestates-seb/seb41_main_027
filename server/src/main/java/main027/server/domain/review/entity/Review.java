@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import main027.server.domain.audit.BaseTime;
+import main027.server.domain.member.entity.Member;
 import main027.server.domain.place.entity.Place;
-import main027.server.domain.user.entity.User;
 
 import javax.persistence.*;
 
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
-@Entity(name = "reviews")
+@Entity(name = "review")
 public class Review extends BaseTime {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +23,8 @@ public class Review extends BaseTime {
     private Place place;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Column(length = 40)
     private String content;
