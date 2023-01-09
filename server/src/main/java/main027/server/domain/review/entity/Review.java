@@ -1,22 +1,26 @@
 package main027.server.domain.review.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import main027.server.domain.audit.BaseTime;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.place.entity.Place;
 
+import javax.lang.model.element.Name;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Getter @Setter
-@AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity(name = "review")
 public class Review extends BaseTime {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long reviewId;
 
     @ManyToOne
     @JoinColumn(name = "place_id")
@@ -29,7 +33,9 @@ public class Review extends BaseTime {
     @Column(length = 40)
     private String content;
 
-    @Column(length = 20)
-    private String emoji;
+    //review -> emoji 단방향 연관관계 매핑 (양방향 X)
+    @ManyToOne
+    @JoinColumn(name = "emoji_id")
+    private Emoji emoji;
 
 }

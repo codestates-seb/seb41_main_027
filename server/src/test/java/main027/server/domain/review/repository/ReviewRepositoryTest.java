@@ -1,14 +1,23 @@
 package main027.server.domain.review.repository;
 
+import lombok.extern.slf4j.Slf4j;
+import main027.server.domain.review.entity.Emoji;
 import main027.server.domain.review.entity.Review;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.TestPropertySource;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 @DataJpaTest
+@TestPropertySource(locations = "/application-test.properties")
 class ReviewRepositoryTest {
 
     @Autowired
@@ -20,7 +29,6 @@ class ReviewRepositoryTest {
         //given
         Review review = new Review();
         review.setContent("추천합니다");
-        review.setEmoji(":smile:");
 
         //when
         Review savedReview = reviewRepository.save(review);
@@ -28,7 +36,7 @@ class ReviewRepositoryTest {
         //then
         assertThat(savedReview.getContent()).isEqualTo(review.getContent());
         assertThat(savedReview.getEmoji()).isEqualTo(review.getEmoji());
-        assertThat(savedReview.getId()).isEqualTo(1L);
+        assertThat(savedReview.getReviewId()).isEqualTo(1L);
     }
 
 }
