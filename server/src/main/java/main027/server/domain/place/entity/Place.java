@@ -29,9 +29,6 @@ public class Place extends BaseTime {
     private String description;
 
     @Column(nullable = false)
-    private String category;
-
-    @Column(nullable = false)
     private Long likeCount = 0L;
 
     /**
@@ -51,6 +48,10 @@ public class Place extends BaseTime {
      */
     @Column(nullable = false)
     private Long longitude;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
@@ -73,5 +74,10 @@ public class Place extends BaseTime {
     public void setMember(Member member) {
         this.member = member;
         member.getPlaceList().add(this);
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+        category.getPlaceList().add(this);
     }
 }
