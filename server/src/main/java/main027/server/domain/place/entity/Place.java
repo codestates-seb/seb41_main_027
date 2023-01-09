@@ -29,9 +29,6 @@ public class Place extends BaseTime {
     private String description;
 
     @Column(nullable = false)
-    private String category;
-
-    @Column(nullable = false)
     private Long likeCount = 0L;
 
     /**
@@ -53,6 +50,10 @@ public class Place extends BaseTime {
     private Long longitude;
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -63,15 +64,21 @@ public class Place extends BaseTime {
     // place가 삭제되면 해당 palce가 속해 있는 북마크는 삭제된다.
     @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
     private List<Bookmark> bookmarkList = new ArrayList<>();
-//
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
+    private List<PlaceLikeUser> placeLikeUserList = new ArrayList<>();
+
 //    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
 //    private List<Tag> tags = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
-//    private List<PlaceLikeUser> placeLikeUsers = new ArrayList<>();
+
 
     public void setMember(Member member) {
         this.member = member;
         member.getPlaceList().add(this);
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+        category.getPlaceList().add(this);
     }
 }
