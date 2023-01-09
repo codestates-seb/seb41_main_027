@@ -11,5 +11,7 @@ public interface ReviewMapper {
     @Mapping(source = "emojiId", target = "emoji.emojiId")
     Review PostToEntity(ReviewDto.Post postDto);
 
+    @Mapping(source = "emoji.emojiId", target = "emojiId")
     ReviewDto.Response entityToResponse(Review review);
+    
 }
