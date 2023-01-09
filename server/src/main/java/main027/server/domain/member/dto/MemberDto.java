@@ -2,6 +2,7 @@ package main027.server.domain.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
@@ -26,6 +27,7 @@ public class MemberDto {
     }
 
     @Getter
+    @AllArgsConstructor
     public static class Patch {
 
         @Setter

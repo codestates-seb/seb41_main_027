@@ -20,6 +20,6 @@ public class Member extends BaseTime {
     @Column(nullable = false, unique = true, updatable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nickName;
 }
