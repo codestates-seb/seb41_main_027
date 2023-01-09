@@ -25,6 +25,8 @@ public class PlaceDto extends BaseTime {
     @Data
     @AllArgsConstructor
     public static class PlacePatchDto {
+
+        private  Long placeId;
                 @NotBlank
         private String description;
 
@@ -34,6 +36,7 @@ public class PlaceDto extends BaseTime {
     @AllArgsConstructor
     public static class PlaceResponseDto {
         private Long placeId;
+        private Long memberId;
         private String name;
         private String address;
         private String description;

@@ -42,13 +42,13 @@ public class Place extends BaseTime {
     /**
      * 위도
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Long latitude;
 
     /**
      * 경도
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Long longitude;
 
     @ManyToOne

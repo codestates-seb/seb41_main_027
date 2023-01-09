@@ -2,12 +2,13 @@ package main027.server.domain.review.mapper;
 
 import javax.annotation.processing.Generated;
 import main027.server.domain.review.dto.ReviewDto;
+import main027.server.domain.review.entity.Emoji;
 import main027.server.domain.review.entity.Review;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-06T00:06:12+0900",
+    date = "2023-01-09T20:59:55+0900",
     comments = "version: 1.5.1.Final, compiler: javac, environment: Java 11.0.16.1 (Oracle Corporation)"
 )
 @Component
@@ -21,8 +22,8 @@ public class ReviewMapperImpl implements ReviewMapper {
 
         Review review = new Review();
 
+        review.setEmoji( postToEmoji( postDto ) );
         review.setContent( postDto.getContent() );
-        review.setEmoji( postDto.getEmoji() );
 
         return review;
     }
@@ -35,11 +36,38 @@ public class ReviewMapperImpl implements ReviewMapper {
 
         ReviewDto.Response response = new ReviewDto.Response();
 
-        response.setId( review.getId() );
+        response.setEmojiId( reviewEmojiEmojiId( review ) );
+        response.setReviewId( review.getReviewId() );
         response.setContent( review.getContent() );
-        response.setEmoji( review.getEmoji() );
         response.setCreatedAt( review.getCreatedAt() );
 
         return response;
+    }
+
+    protected Emoji postToEmoji(ReviewDto.Post post) {
+        if ( post == null ) {
+            return null;
+        }
+
+        Emoji emoji = new Emoji();
+
+        emoji.setEmojiId( post.getEmojiId() );
+
+        return emoji;
+    }
+
+    private Long reviewEmojiEmojiId(Review review) {
+        if ( review == null ) {
+            return null;
+        }
+        Emoji emoji = review.getEmoji();
+        if ( emoji == null ) {
+            return null;
+        }
+        Long emojiId = emoji.getEmojiId();
+        if ( emojiId == null ) {
+            return null;
+        }
+        return emojiId;
     }
 }
