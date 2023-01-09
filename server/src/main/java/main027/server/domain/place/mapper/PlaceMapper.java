@@ -13,7 +13,7 @@ public interface PlaceMapper {
 
     Place placePatchDtoToPlace(PlaceDto.PlacePatchDto placePatchDto);
 
-    Place placeToPlaceResponseDto(Place place);
+    PlaceDto.PlaceResponseDto placeToPlaceResponseDto(Place place);
 
     List<PlaceDto.PlaceResponseDto> placeListToResponseDto(List<Place> places);
 }
