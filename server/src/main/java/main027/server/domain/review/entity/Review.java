@@ -22,13 +22,6 @@ public class Review extends BaseTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @ManyToOne
-    @JoinColumn(name = "place_id")
-    private Place place;
-
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
 
     @Column(length = 40)
     private String content;
@@ -38,4 +31,21 @@ public class Review extends BaseTime {
     @JoinColumn(name = "emoji_id")
     private Emoji emoji;
 
+    @ManyToOne
+    @JoinColumn(name = "place_id")
+    private Place place;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    public void setMember(Member member) {
+        this.member = member;
+        member.getReviewList().add(this);
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+        place.getReviewList().add(this);
+    }
 }
