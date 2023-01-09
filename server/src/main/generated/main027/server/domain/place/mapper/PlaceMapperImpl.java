@@ -6,12 +6,14 @@ import javax.annotation.processing.Generated;
 import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.review.entity.Review;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-06T00:55:51+0900",
+    date = "2023-01-09T21:52:35+0900",
     comments = "version: 1.5.1.Final, compiler: javac, environment: Java 11.0.16.1 (Oracle Corporation)"
 )
+@Component
 public class PlaceMapperImpl implements PlaceMapper {
 
     @Override
@@ -37,6 +39,7 @@ public class PlaceMapperImpl implements PlaceMapper {
 
         Place place = new Place();
 
+        place.setPlaceId( placePatchDto.getPlaceId() );
         place.setDescription( placePatchDto.getDescription() );
 
         return place;
@@ -68,5 +71,49 @@ public class PlaceMapperImpl implements PlaceMapper {
         }
 
         return place1;
+    }
+
+    @Override
+    public List<PlaceDto.PlaceResponseDto> placeListToResponseDto(List<Place> places) {
+        if ( places == null ) {
+            return null;
+        }
+
+        List<PlaceDto.PlaceResponseDto> list = new ArrayList<PlaceDto.PlaceResponseDto>( places.size() );
+        for ( Place place : places ) {
+            list.add( placeToPlaceResponseDto1( place ) );
+        }
+
+        return list;
+    }
+
+    protected PlaceDto.PlaceResponseDto placeToPlaceResponseDto1(Place place) {
+        if ( place == null ) {
+            return null;
+        }
+
+        Long placeId = null;
+        String name = null;
+        String address = null;
+        String description = null;
+        String category = null;
+        Long likeCount = null;
+        Long latitude = null;
+        Long longitude = null;
+
+        placeId = place.getPlaceId();
+        name = place.getName();
+        address = place.getAddress();
+        description = place.getDescription();
+        category = place.getCategory();
+        likeCount = place.getLikeCount();
+        latitude = place.getLatitude();
+        longitude = place.getLongitude();
+
+        Long memberId = null;
+
+        PlaceDto.PlaceResponseDto placeResponseDto = new PlaceDto.PlaceResponseDto( placeId, memberId, name, address, description, category, likeCount, latitude, longitude );
+
+        return placeResponseDto;
     }
 }
