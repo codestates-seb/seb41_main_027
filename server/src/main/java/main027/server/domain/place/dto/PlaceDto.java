@@ -2,6 +2,7 @@ package main027.server.domain.place.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import main027.server.domain.audit.BaseTime;
 
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ public class PlaceDto extends BaseTime {
 
     @Data
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class PlacePostDto {
         @NotNull
         private Long memberId;
@@ -24,6 +26,7 @@ public class PlaceDto extends BaseTime {
 
     @Data
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class PlacePatchDto {
 
         private  Long placeId;

@@ -1,7 +1,6 @@
 package main027.server.domain.place;
 
 import com.google.gson.Gson;
-
 import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.mapper.PlaceMapper;
@@ -12,10 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -41,32 +46,31 @@ class PlaceControllerTest {
     @Test
     void postPlaceTest() throws Exception {
         //given
-        PlaceDto.PlacePostDto placePostDto = new PlaceDto.PlacePostDto(1L,"강남역7번출구맥도날드","서울시 강남구","사람이많아요");
+        PlaceDto.PlacePostDto placePostDto = new PlaceDto.PlacePostDto(1L, "강남역7번출구맥도날드", "서울시 강남구", "사람이많아요");
 
         String content = gson.toJson(placePostDto);
 
-//        PlaceDto.PlaceResponseDto responseDto = new PlaceDto.PlaceResponseDto(1L,
-//                                                                              1L,
-//                                                                              "강남역7번출구맥도날드",
-//                                                                              "서울시 강남구",
-//                                                                              "사람이많아요",
-//                                                                              "햄버거",
-//                                                                              0L,
-//                                                                              37L,
-//                                                                              127L);
-//
-//        given(placeMapper.placePostDtoToPlace(Mockito.any(PlaceDto.PlacePostDto.class))).willReturn(new Place());
-//        given(placeService.createPlace(Mockito.any(Place.class))).willReturn(new Place());
-//        given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class))).willReturn(responseDto);
+        PlaceDto.PlaceResponseDto responseDto = new PlaceDto.PlaceResponseDto(1L,
+                                                                              1L,
+                                                                              "강남역7번출구맥도날드",
+                                                                              "서울시 강남구",
+                                                                              "사람이많아요",
+                                                                              "햄버거",
+                                                                              0L,
+                                                                              37L,
+                                                                              127L);
+
+        given(placeMapper.placePostDtoToPlace(Mockito.any(PlaceDto.PlacePostDto.class))).willReturn(new Place());
+        given(placeService.createPlace(Mockito.any(Place.class))).willReturn(new Place());
+        given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class))).willReturn(responseDto);
 
         //when
         ResultActions actions =
                 mockMvc.perform(post("/places")
-                                             .accept(MediaType.APPLICATION_JSON)
-                                             .contentType(MediaType.APPLICATION_JSON)
+                                        .accept(MediaType.APPLICATION_JSON)
+                                        .contentType(MediaType.APPLICATION_JSON)
                                         .content(content)
                 );
-
 
         //then
         actions
@@ -76,10 +80,24 @@ class PlaceControllerTest {
     @Test
     void patchPlaceTest() throws Exception {
         // given
-        long id = 1L;
-        PlaceDto.PlacePatchDto placePatchDto = new PlaceDto.PlacePatchDto( 1L,"존나 맛없어요");
+        Long id = 1L;
+        PlaceDto.PlacePatchDto placePatchDto = new PlaceDto.PlacePatchDto(1L, "존나 맛없어요");
 
         String content = gson.toJson(placePatchDto);
+
+        PlaceDto.PlaceResponseDto responseDto = new PlaceDto.PlaceResponseDto(1L,
+                                                                              1L,
+                                                                              "강남역7번출구맥도날드",
+                                                                              "서울시 강남구",
+                                                                              "존나 맛없어요",
+                                                                              "햄버거",
+                                                                              0L,
+                                                                              37L,
+                                                                              127L);
+
+        given(placeMapper.placePatchDtoToPlace(Mockito.any(PlaceDto.PlacePatchDto.class))).willReturn(new Place());
+        given(placeService.updatePlace(Mockito.any(Place.class))).willReturn(new Place());
+        given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class))).willReturn(responseDto);
 
         // when
         ResultActions actions =
@@ -95,28 +113,74 @@ class PlaceControllerTest {
 
     @Test
     void getPlace() throws Exception {
-        PlaceDto.PlacePostDto placePostDto = new PlaceDto.PlacePostDto(1L, "강남역맥도날드","서울시강남구","존나 맛없어요");
-        String contnet = gson.toJson(placePostDto);
+        Long placeId = 1L;
+        PlaceDto.PlaceResponseDto responseDto = new PlaceDto.PlaceResponseDto(1L,
+                                                                              1L,
+                                                                              "강남역7번출구맥도날드",
+                                                                              "서울시 강남구",
+                                                                              "존나 맛없어요",
+                                                                              "햄버거",
+                                                                              0L,
+                                                                              37L,
+                                                                              127L);
+        given(placeService.findPlace(Mockito.anyLong())).willReturn(new Place());
+        given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class))).willReturn(responseDto);
 
         ResultActions actions =
-                mockMvc.perform(
-                        post("/places")
-                                .accept(MediaType.APPLICATION_JSON)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(contnet)
-                );
         mockMvc.perform(
-                get("/places/{}placeId")
+                get("/places/{placeId}" , placeId)
                         .accept(MediaType.APPLICATION_JSON)
-        )
-               .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value(placePostDto.getName()));
+        );
+        actions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value(responseDto.getName()));
 
     }
 
+//    @Test
+//    void getPlaces() throws Exception {
+//
+//        List<PlaceDto.PlaceResponseDto> responseDto = List.of(
+//                new PlaceDto.PlaceResponseDto(1L,
+//                                              1L,
+//                                              "강남역7번출구맥도날드",
+//                                              "서울시 강남구",
+//                                              "존나 맛없어요",
+//                                              "햄버거",
+//                                              0L,
+//                                              37L,
+//                                              127L),
+//
+//                new PlaceDto.PlaceResponseDto(2L,
+//                                              1L,
+//                                              "건대역2번출구맥도날드",
+//                                              "서울시 광진구",
+//                                              "존나 맛있어요",
+//                                              "햄버거",
+//                                              0L,
+//                                              37L,
+//                                              127L));
+//
+//        Page<Place> placePage = new PageImpl<>(List.of());
+//
+//        given(placeService.findPlaces(Mockito.any(Pageable.class))).willReturn(placePage);
+//        given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class))).willReturn(responseDto)
+//
+//        ResultActions actions =
+//                mockMvc.perform(
+//                        get("/places")
+//                                .param("page", "1")
+//                                .param("size", "20")
+//                                .accept(MediaType.APPLICATION_JSON)
+//                );
+//
+//        actions
+//                .andExpect(status().isOk());
+//    }
+
     @Test
     void deletePlace() throws Exception {
-        long id = 1L;
+        Long id = 1L;
 
         ResultActions actions =
                 mockMvc.perform(delete("/places/{placeId}", id));

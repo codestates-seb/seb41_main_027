@@ -5,12 +5,11 @@ import java.util.List;
 import javax.annotation.processing.Generated;
 import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
-import main027.server.domain.review.entity.Review;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-09T21:52:35+0900",
+    date = "2023-01-09T22:29:08+0900",
     comments = "version: 1.5.1.Final, compiler: javac, environment: Java 11.0.16.1 (Oracle Corporation)"
 )
 @Component
@@ -46,48 +45,7 @@ public class PlaceMapperImpl implements PlaceMapper {
     }
 
     @Override
-    public Place placeToPlaceResponseDto(Place place) {
-        if ( place == null ) {
-            return null;
-        }
-
-        Place place1 = new Place();
-
-        place1.setCreatedAt( place.getCreatedAt() );
-        place1.setModifiedAt( place.getModifiedAt() );
-        place1.setPlaceId( place.getPlaceId() );
-        place1.setName( place.getName() );
-        place1.setAddress( place.getAddress() );
-        place1.setDescription( place.getDescription() );
-        place1.setCategory( place.getCategory() );
-        place1.setLikeCount( place.getLikeCount() );
-        place1.setKakaoId( place.getKakaoId() );
-        place1.setLatitude( place.getLatitude() );
-        place1.setLongitude( place.getLongitude() );
-        place1.setMember( place.getMember() );
-        List<Review> list = place.getReviews();
-        if ( list != null ) {
-            place1.setReviews( new ArrayList<Review>( list ) );
-        }
-
-        return place1;
-    }
-
-    @Override
-    public List<PlaceDto.PlaceResponseDto> placeListToResponseDto(List<Place> places) {
-        if ( places == null ) {
-            return null;
-        }
-
-        List<PlaceDto.PlaceResponseDto> list = new ArrayList<PlaceDto.PlaceResponseDto>( places.size() );
-        for ( Place place : places ) {
-            list.add( placeToPlaceResponseDto1( place ) );
-        }
-
-        return list;
-    }
-
-    protected PlaceDto.PlaceResponseDto placeToPlaceResponseDto1(Place place) {
+    public PlaceDto.PlaceResponseDto placeToPlaceResponseDto(Place place) {
         if ( place == null ) {
             return null;
         }
@@ -115,5 +73,19 @@ public class PlaceMapperImpl implements PlaceMapper {
         PlaceDto.PlaceResponseDto placeResponseDto = new PlaceDto.PlaceResponseDto( placeId, memberId, name, address, description, category, likeCount, latitude, longitude );
 
         return placeResponseDto;
+    }
+
+    @Override
+    public List<PlaceDto.PlaceResponseDto> placeListToResponseDto(List<Place> places) {
+        if ( places == null ) {
+            return null;
+        }
+
+        List<PlaceDto.PlaceResponseDto> list = new ArrayList<PlaceDto.PlaceResponseDto>( places.size() );
+        for ( Place place : places ) {
+            list.add( placeToPlaceResponseDto( place ) );
+        }
+
+        return list;
     }
 }
