@@ -2,10 +2,15 @@ package main027.server.domain.member.controller;
 
 import com.google.gson.Gson;
 import main027.server.domain.member.dto.MemberDto;
+import main027.server.domain.member.entity.Member;
+import main027.server.domain.member.mapper.MemberMapper;
+import main027.server.domain.member.service.MemberService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -14,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,12 +35,28 @@ class MemberControllerTest {
     @Autowired
     private Gson gson;
 
+    @MockBean
+    private MemberService memberService;
+
+    @MockBean
+    private MemberMapper mapper;
+
     @Test
     void postMember() throws Exception {
         // given
-        MemberDto.Post post = new MemberDto.Post("hgd@gmail.com", "박길동");
+        MemberDto.Post post = new MemberDto.Post("hgd@gmail.com", "HongGilDong");
 
         String content = gson.toJson(post);
+
+        MemberDto.Response responseDto = new MemberDto.Response(1L,
+                                                                "hgd@gmail.com",
+                                                                "HongGilDong",
+                                                                LocalDateTime.now(),
+                                                                LocalDateTime.now());
+
+        given(mapper.memberPostDtoToMember(Mockito.any(MemberDto.Post.class))).willReturn(new Member());
+        given(memberService.createMember(Mockito.any(Member.class))).willReturn(new Member());
+        given(mapper.memberToMemberResponseDto(Mockito.any(Member.class))).willReturn(responseDto);
 
         // when
         ResultActions actions =
@@ -45,28 +67,41 @@ class MemberControllerTest {
                                 .content(content)
                 );
 
+        System.out.println(actions.andReturn().getResponse().getContentAsString());
+
         // then
         actions
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.email").value(responseDto.getEmail()))
+                .andExpect(jsonPath("$.nickName").value(responseDto.getNickName()));
     }
 
     @Test
     void patchMember() throws Exception {
         // given
         long id = 1L;
-        MemberDto.Patch patch = new MemberDto.Patch("홍길동");
+        MemberDto.Patch patch = new MemberDto.Patch(1L,"HongGilDong");
 
         String content = gson.toJson(patch);
+
+        MemberDto.Response responseDto = new MemberDto.Response(1L,
+                                                                "hgd@gmail.com",
+                                                                "HongGilDong",
+                                                                LocalDateTime.now(),
+                                                                LocalDateTime.now());
+
+        given(mapper.memberPatchDtoToMember(Mockito.any(MemberDto.Patch.class))).willReturn(new Member());
+        given(memberService.updateMember(Mockito.any(Member.class))).willReturn(new Member());
+        given(mapper.memberToMemberResponseDto(Mockito.any(Member.class))).willReturn(responseDto);
 
         // when
         ResultActions actions =
                 mockMvc.perform(
-                        patch("/members/{member-id}", id)
+                        patch("/members/{memberId}", id)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(content)
                 );
-
         //then
         actions
                 .andExpect(status().isOk())
@@ -76,9 +111,10 @@ class MemberControllerTest {
     @Test
     void deleteMember() throws Exception {
         long id = 1L;
+        doNothing().when(memberService).deleteMember(Mockito.anyLong());
 
         ResultActions actions = mockMvc.perform(
-                delete("/members/{member-id}", id)
+                delete("/members/{memberId}", id)
         );
 
         actions
