@@ -64,12 +64,13 @@ public class Place extends BaseTime {
     // place가 삭제되면 해당 palce가 속해 있는 북마크는 삭제된다.
     @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
     private List<Bookmark> bookmarkList = new ArrayList<>();
-//
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
+    private List<PlaceLikeUser> placeLikeUserList = new ArrayList<>();
+
 //    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
 //    private List<Tag> tags = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
-//    private List<PlaceLikeUser> placeLikeUsers = new ArrayList<>();
+
 
     public void setMember(Member member) {
         this.member = member;
