@@ -1,4 +1,4 @@
-package main027.server.global;
+package main027.server.global.utils;
 
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;

@@ -2,7 +2,7 @@ package main027.server.domain.place.entity;
 
 
 import lombok.Data;
-import main027.server.domain.audit.BaseTime;
+import main027.server.global.audit.BaseTime;
 import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.review.entity.Review;
