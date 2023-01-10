@@ -6,6 +6,7 @@ import main027.server.domain.audit.BaseTime;
 import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.review.entity.Review;
+import main027.server.domain.tag.entity.Tag;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -68,8 +69,8 @@ public class Place extends BaseTime {
     @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
     private List<PlaceLikeUser> placeLikeUserList = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
-//    private List<Tag> tags = new ArrayList<>();
+    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
+    private List<Tag> tagList = new ArrayList<>();
 
 
     public void setMember(Member member) {
