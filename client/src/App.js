@@ -1,10 +1,22 @@
-import GlobalStyle from '../src/styles/GlobalStyle'
 import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPagelines } from '@fortawesome/free-brands-svg-icons'
+import GlobalStyle from '../src/styles/GlobalStyle'
+// import { faPagelines } from '@fortawesome/free-brands-svg-icons'
+// import { faMap, faComment, faBug, faUser } from '@fortawesome/free-solid-svg-icons'
 
-const StyleFontAwesomeIcon = styled(FontAwesomeIcon)`
-  color: green;
+import Nav from './components/Nav/Nav'
+import Map from './components/Map/Map'
+import Header from './components/Header/Header'
+
+const Main = styled.main`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: #13c57c;
+  box-sizing: border-box;
+`
+
+const Wrapper = styled.section`
+  width: 100%;
 `
 
 function App() {
@@ -12,12 +24,14 @@ function App() {
     <section className="App">
       <reset />
       <GlobalStyle />
-      <h1 className="test">
-        <StyleFontAwesomeIcon icon={faPagelines} />
-        Set up 🫡
-      </h1>
-
-      {/* 주석 샘플 나중에 다쓰고 날릴게요🥹 */}
+      <Main>
+        <Nav />
+        <Wrapper>
+          <Header />
+          <Map />
+        </Wrapper>
+      </Main>
+      {/* 주석 샘플 다쓰고 나중에 날릴게요🥹 */}
     </section>
   )
 }
