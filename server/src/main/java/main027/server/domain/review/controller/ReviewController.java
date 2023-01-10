@@ -28,6 +28,6 @@ public class ReviewController {
 
     @GetMapping("/{reviewId}")
     public Review getReview(@PathVariable Long reviewId) {
-        return reviewService.findReview(reviewId);
+        return reviewService.findVerifiedReview(reviewId);
     }
 }

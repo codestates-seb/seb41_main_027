@@ -13,8 +13,8 @@ public class EmojiService {
 
     private final EmojiRepository emojiRepository;
 
-    public void verifyExistEmoji(Long emojiId) {
-        emojiRepository.findById(emojiId).orElseThrow(
+    public Emoji findVerifiedEmoji(Long emojiId) {
+        return emojiRepository.findById(emojiId).orElseThrow(
                 () -> new BusinessLogicException(ExceptionCode.EMOJI_NOT_FOUND));
     }
 }
