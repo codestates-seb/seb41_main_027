@@ -45,7 +45,7 @@ public class MemberService {
                 memberRepository.findById(memberId);
         Member findMember =
                 optionalMember.orElseThrow(() ->
-                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND)); // 예외처리 리팩토링 필요.
+                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         return findMember;
     }
@@ -53,6 +53,6 @@ public class MemberService {
     public void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
         if (member.isPresent())
-            throw new BusinessLogicException(ExceptionCode.MEMBER_ALREADY_EXISTS); // 예외처리 리팩토링 필요.
+            throw new BusinessLogicException(ExceptionCode.MEMBER_ALREADY_EXISTS);
     }
 }
