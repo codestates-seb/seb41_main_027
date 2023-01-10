@@ -1,4 +1,4 @@
-package main027.server.domain.audit;
+package main027.server.global.audit;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
