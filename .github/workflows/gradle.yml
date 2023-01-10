@@ -15,7 +15,7 @@ permissions:
   contents: read
   
 env:
-  S3_BUCKET_NAME: main027
+  S3_BUCKET_NAME: main027-bucket
 
 jobs:
   build:
@@ -63,7 +63,7 @@ jobs:
     # CodeDeploy에게 배포 명령을 내립니다.
     - name: Code Deploy
       run: >
-        aws deploy create-deployment --application-name main027
+        aws deploy create-deployment --application-name main027-bucket
         --deployment-config-name CodeDeployDefault.AllAtOnce
         --deployment-group-name main027
         --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=deploy.zip
