@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import main027.server.domain.review.entity.Emoji;
 import main027.server.domain.review.entity.Review;
 import main027.server.domain.review.repository.ReviewRepository;
+import main027.server.global.exception.BusinessLogicException;
+import main027.server.global.exception.ExceptionCode;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +22,6 @@ public class ReviewService {
 
     public Review findReview(Long reviewId) {
         return reviewRepository.findById(reviewId).orElseThrow(
-                () -> new RuntimeException("Review Not Found")); // 예외 리팩토링 필요
+                () -> new BusinessLogicException(ExceptionCode.REVIEW_NOT_FOUND));
     }
-
 }

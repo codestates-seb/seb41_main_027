@@ -1,6 +1,8 @@
 package main027.server.domain.bookmark.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.place.entity.Place;
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Bookmark {
 
     @Id
@@ -32,5 +35,10 @@ public class Bookmark {
     public void setPlace(Place place) {
         this.place = place;
         member.getBookmarkList().add(this);
+    }
+
+    public Bookmark(Member member, Place place) {
+        this.member = member;
+        this.place = place;
     }
 }

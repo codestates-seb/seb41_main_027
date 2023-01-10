@@ -3,7 +3,7 @@ package main027.server.domain.member.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import main027.server.domain.audit.BaseTime;
+import main027.server.global.audit.BaseTime;
 import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.review.entity.Review;
@@ -20,7 +20,7 @@ public class Member extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long memberId;
 
     @Column(nullable = false, unique = true, updatable = false)
     private String email;
