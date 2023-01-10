@@ -6,7 +6,6 @@ import main027.server.global.audit.BaseTime;
 import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.review.entity.Review;
-import main027.server.domain.tag.entity.Tag;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,9 +27,6 @@ public class Place extends BaseTime {
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
-
-    @Column(nullable = false)
-    private Long likeCount = 0L;
 
     /**
      * 카카오 API ID
@@ -68,10 +64,6 @@ public class Place extends BaseTime {
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
     private List<PlaceLikeUser> placeLikeUserList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
-    private List<Tag> tagList = new ArrayList<>();
-
 
     public void setMember(Member member) {
         this.member = member;

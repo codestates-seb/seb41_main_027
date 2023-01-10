@@ -7,6 +7,7 @@ import main027.server.global.audit.BaseTime;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class PlaceDto extends BaseTime {
 

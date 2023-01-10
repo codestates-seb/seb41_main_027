@@ -49,7 +49,7 @@ public class PlaceController {
 
     @GetMapping
     public ResponseEntity getPlaces(@RequestParam(defaultValue = "-1") Integer page,
-                                    @RequestParam(defaultValue = "20") Integer size) {
+                                    @RequestParam(defaultValue = "10") Integer size) {
         List<Place> places;
         if (page > 0 && size > 0) {
             Page<Place> placePage = placeService.findPlaces(
