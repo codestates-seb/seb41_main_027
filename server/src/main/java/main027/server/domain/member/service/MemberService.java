@@ -2,11 +2,12 @@ package main027.server.domain.member.service;
 
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.repository.MemberRepository;
-import main027.server.global.CustomBeanUtils;
+import main027.server.global.exception.BusinessLogicException;
+import main027.server.global.exception.ExceptionCode;
+import main027.server.global.utils.CustomBeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.Email;
 import java.util.Optional;
 
 @Transactional
@@ -27,7 +28,7 @@ public class MemberService {
     }
 
     public Member updateMember(Member member) {
-        Member verifiedMember = findVerifiedMember(member.getId());
+        Member verifiedMember = findVerifiedMember(member.getMemberId());
 
         Member updatedMember = beanUtils.copyNonNullProperties(member, verifiedMember);
 
@@ -44,7 +45,7 @@ public class MemberService {
                 memberRepository.findById(memberId);
         Member findMember =
                 optionalMember.orElseThrow(() ->
-                        new RuntimeException("Member Not Found")); // 예외처리 리팩토링 필요.
+                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND)); // 예외처리 리팩토링 필요.
 
         return findMember;
     }
@@ -52,6 +53,6 @@ public class MemberService {
     public void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
         if (member.isPresent())
-            throw new RuntimeException("Member Already Exists"); // 예외처리 리팩토링 필요.
+            throw new BusinessLogicException(ExceptionCode.MEMBER_ALREADY_EXISTS); // 예외처리 리팩토링 필요.
     }
 }

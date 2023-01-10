@@ -3,6 +3,8 @@ package main027.server.domain.place.service;
 import lombok.RequiredArgsConstructor;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.repository.PlaceRepository;
+import main027.server.global.exception.BusinessLogicException;
+import main027.server.global.exception.ExceptionCode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -46,13 +48,13 @@ public class PlaceService {
     public Place findVerifiedPlace(Long placeId) {
         Optional<Place> optionalPlace = placeRepository.findById(placeId);
         Place findPlace = optionalPlace.orElseThrow(() ->
-                new RuntimeException("No Such Place"));
+                new BusinessLogicException(ExceptionCode.PLACE_NOT_FOUND));
         return findPlace;
     }
 
     public void verifyExistsPlace (Long placeId) {
         Optional<Place> place = placeRepository.findById(placeId);
         if(place.isPresent())
-            throw new RuntimeException("Place Already Exists");
+            throw new BusinessLogicException(ExceptionCode.PLACE_ALREADY_EXISTS);
     }
 }
