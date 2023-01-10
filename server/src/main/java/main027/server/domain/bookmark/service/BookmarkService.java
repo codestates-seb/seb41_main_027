@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.bookmark.repository.BookmarkRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BookmarkService {
 
     private final BookmarkRepository bookmarkRepository;
@@ -23,7 +25,7 @@ public class BookmarkService {
                 .checkBookmarked(bookmark.getMember().getMemberId(),
                                  bookmark.getPlace().getPlaceId());
 
-        // 북마킹이 되어 있는지 여부 확인
+    //     북마킹이 되어 있는지 여부 확인
         boolean isBookmarked = findBookmark.isPresent();
 
         // 북마킹이 되어 있었다면 해당 북마크를 삭제 하고 false를 반환
