@@ -3,7 +3,7 @@ package main027.server.domain.place.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import main027.server.domain.audit.BaseTime;
+import main027.server.global.audit.BaseTime;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

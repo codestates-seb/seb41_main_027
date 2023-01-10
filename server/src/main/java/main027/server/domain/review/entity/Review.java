@@ -1,14 +1,11 @@
 package main027.server.domain.review.entity;
 
 import lombok.*;
-import main027.server.domain.audit.BaseTime;
+import main027.server.global.audit.BaseTime;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.place.entity.Place;
 
-import javax.lang.model.element.Name;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
