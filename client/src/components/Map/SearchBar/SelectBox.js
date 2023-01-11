@@ -5,20 +5,20 @@ const Wrapper = styled.div`
   width: 180px;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
-  // Dropdown ico demo
+  // Dropdown ico Demo
   &::after {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    margin-right: 8px;
+    content: '▾';
     // color: #393D45;
     color: #737980;
-    content: '▾';
-    margin-right: 8px;
+    font-size: 32px;
     pointer-events: none;
-    position: absolute;
-    right: 8px;
-    top: 6px;
-    font-size: 24px;
   }
 
-  // Default state
+  // 🚧 Default state
   .select {
     cursor: pointer;
     padding: 12px 16px;
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
     &:focus {
       color: black;
     }
-    // Hack for IE 11+
+    // option IE 11+
     &::-ms-expand {
       display: none;
     }
