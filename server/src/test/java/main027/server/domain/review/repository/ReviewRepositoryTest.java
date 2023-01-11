@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @DataJpaTest
-@TestPropertySource(locations = "/application-test.properties")
+@TestPropertySource(locations = "/application-jpaLog.properties")
 class ReviewRepositoryTest {
 
     @Autowired
