@@ -23,7 +23,7 @@ const Main = styled.main`
 `
 
 const StyleToastContainer = styled(ToastContainer)`
-  z-index: 9999;
+  z-index: 9500;
 `
 
 function App() {
