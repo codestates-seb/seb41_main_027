@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import main027.server.domain.member.dto.MemberDto;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.mapper.MemberMapper;
-import main027.server.domain.member.service.MemberServiceImpl;
-import main027.server.domain.member.service.MemberUpdateServiceImpl;
+import main027.server.domain.member.service.MemberService;
+import main027.server.domain.member.service.MemberUpdateService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +38,9 @@ class MemberControllerTest {
     private Gson gson;
 
     @MockBean
-    private MemberServiceImpl memberService;
+    private MemberService memberService;
     @MockBean
-    private MemberUpdateServiceImpl memberUpdateService;
+    private MemberUpdateService memberUpdateService;
 
     @MockBean
     private MemberMapper mapper;

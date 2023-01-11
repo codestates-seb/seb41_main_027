@@ -3,8 +3,8 @@ package main027.server.domain.member.controller;
 import main027.server.domain.member.dto.MemberDto;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.mapper.MemberMapper;
-import main027.server.domain.member.service.MemberServiceImpl;
-import main027.server.domain.member.service.MemberUpdateServiceImpl;
+import main027.server.domain.member.service.MemberService;
+import main027.server.domain.member.service.MemberUpdateService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,12 +17,11 @@ import javax.validation.constraints.Positive;
 @RequestMapping("/members")
 @Validated
 public class MemberController {
-    private final MemberServiceImpl memberService;
-    private final MemberUpdateServiceImpl memberUpdateService;
+    private final MemberService memberService;
+    private final MemberUpdateService memberUpdateService;
     private final MemberMapper mapper;
 
-    public MemberController(MemberServiceImpl memberService, MemberUpdateServiceImpl memberUpdateService,
-                            MemberMapper mapper) {
+    public MemberController(MemberService memberService, MemberUpdateService memberUpdateService, MemberMapper mapper) {
         this.memberService = memberService;
         this.memberUpdateService = memberUpdateService;
         this.mapper = mapper;
