@@ -44,6 +44,7 @@ public class BookmarkServiceSliceTest {
         Bookmark bookmark = new Bookmark(member, place);
         Optional<Bookmark> optBookmark = Optional.ofNullable(new Bookmark());
 
+        // mocking
         when(memberService.findVerifiedMember(anyLong())).thenReturn(null);
         when(placeService.findVerifiedPlace(anyLong())).thenReturn(null);
         when(bookmarkRepository.checkBookmarked(anyLong(), anyLong())).thenReturn(optBookmark);
