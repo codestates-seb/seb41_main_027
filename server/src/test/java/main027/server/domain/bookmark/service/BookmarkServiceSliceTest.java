@@ -5,7 +5,7 @@ import main027.server.domain.bookmark.repository.BookmarkRepository;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.service.MemberService;
 import main027.server.domain.place.entity.Place;
-import main027.server.domain.place.service.PlaceServiceImpl;
+import main027.server.domain.place.service.PlaceService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +27,7 @@ public class BookmarkServiceSliceTest {
     @Mock
     MemberService memberService;
     @Mock
-    PlaceServiceImpl placeService;
+    PlaceService placeService;
 
     @InjectMocks
     BookmarkService bookmarkService;

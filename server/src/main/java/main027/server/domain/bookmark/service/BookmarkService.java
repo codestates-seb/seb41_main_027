@@ -5,12 +5,13 @@ import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.bookmark.repository.BookmarkRepository;
 import main027.server.domain.member.service.MemberService;
 import main027.server.domain.place.entity.Place;
-import main027.server.domain.place.service.PlaceServiceImpl;
+import main027.server.domain.place.service.PlaceService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,7 +21,7 @@ public class BookmarkService {
 
     private final BookmarkRepository bookmarkRepository;
     private final MemberService memberService;
-    private final PlaceServiceImpl placeService;
+    private final PlaceService placeService;
 
     /**
      * @return 북마킹이 되어 있지 않았고 해당 로직을 통해 북마킹이 되었다면 true 리턴 <br>

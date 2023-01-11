@@ -3,10 +3,11 @@ package main027.server.domain.review.service;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.service.MemberService;
 import main027.server.domain.place.entity.Place;
-import main027.server.domain.place.service.PlaceServiceImpl;
+import main027.server.domain.place.service.PlaceService;
 import main027.server.domain.review.entity.Emoji;
 import main027.server.domain.review.entity.Review;
 import main027.server.domain.review.repository.ReviewRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,7 +30,7 @@ public class ReviewServiceSliceTest {
     @Mock
     MemberService memberService;
     @Mock
-    PlaceServiceImpl placeService;
+    PlaceService placeService;
 
     @InjectMocks
     ReviewService reviewService;
