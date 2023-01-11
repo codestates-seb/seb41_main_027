@@ -49,9 +49,7 @@ public interface BookmarkMapper {
         return response;
     }
 
-    @Mapping(source = "pages.content", target = "placeList")
-    @Mapping(source = "pages.totalPages", target = "totalPage")
-    @Mapping(source = "pages.totalElements", target = "totalElements")
+    @Mapping(source = "content", target = "placeList")
     BookmarkDto.Response pageToListChild(Page<Place> pages);
 
     List<PlaceDto.PlaceResponseDto> placeListToResponseDto(List<Place> places);

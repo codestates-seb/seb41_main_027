@@ -21,7 +21,10 @@ public class ReviewDto {
     @AllArgsConstructor
     public static class Post {
         @NotNull
-        private Long userId;
+        private Long memberId;
+
+        @NotNull
+        private Long placeId;
 
         @NotNull
         @Length(max = 40)
@@ -36,7 +39,7 @@ public class ReviewDto {
     @Setter
     public static class Response {
         private Long reviewId;
-        private Long userId;
+        private Long memberId;
         private Long placeId;
         private String content;
         private Long emojiId;
