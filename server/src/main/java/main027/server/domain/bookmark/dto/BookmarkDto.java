@@ -32,7 +32,7 @@ public class BookmarkDto {
     public static class Response {
 
         private List<PlaceDto.PlaceResponseDto> placeList;
-        private Long totalPage;
+        private Long totalPages;
         private Long presentPage;
         private Long totalElements;
     }
