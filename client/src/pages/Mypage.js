@@ -9,27 +9,23 @@ const Wrapper = styled.section`
 
 const Container = styled.section`
   z-index: 1000;
-  overflow: scroll;
+  overflow: hidden;
   height: calc(100% - 100px);
   border-radius: 32px 0px 0px 0px;
   box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.4);
   background-color: #fff;
-
-  p {
-    height: 150px;
-  }
 `
 
-const Place = () => {
+const Mypage = () => {
   return (
     <>
       <Nav />
       <Wrapper>
         <Header />
-        <Container>Place</Container>
+        <Container>MyPage</Container>
       </Wrapper>
     </>
   )
 }
 
-export default Place
+export default Mypage
