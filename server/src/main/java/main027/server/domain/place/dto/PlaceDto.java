@@ -44,9 +44,18 @@ public class PlaceDto extends BaseTime {
         private String name;
         private String address;
         private String description;
+
+        private Long kakaoId;
         private String category;
-        private Long likeCount;
         private Long latitude;
         private Long longitude;
+    }
+
+    @Data
+    public static class PageResponseDto {
+        List<PlaceResponseDto> placeList;
+        private Long totalPages;
+        private Long presentPage;
+        private Long totalElements;
     }
 }

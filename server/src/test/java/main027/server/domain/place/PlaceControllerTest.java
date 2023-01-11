@@ -5,22 +5,17 @@ import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.mapper.PlaceMapper;
 import main027.server.domain.place.service.PlaceService;
+import main027.server.domain.place.service.PlaceUpdateService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -36,6 +31,9 @@ class PlaceControllerTest {
 
     @MockBean
     private PlaceService placeService;
+
+    @MockBean
+    private PlaceUpdateService placeUpdateService;
 
     @MockBean
     private PlaceMapper placeMapper;
@@ -55,8 +53,8 @@ class PlaceControllerTest {
                                                                               "강남역7번출구맥도날드",
                                                                               "서울시 강남구",
                                                                               "사람이많아요",
-                                                                              "햄버거",
                                                                               0L,
+                                                                              "공방",
                                                                               37L,
                                                                               127L);
 
@@ -89,14 +87,14 @@ class PlaceControllerTest {
                                                                               1L,
                                                                               "강남역7번출구맥도날드",
                                                                               "서울시 강남구",
-                                                                              "존나 맛없어요",
-                                                                              "햄버거",
+                                                                              "사람이많아요",
                                                                               0L,
+                                                                              "공방",
                                                                               37L,
                                                                               127L);
 
         given(placeMapper.placePatchDtoToPlace(Mockito.any(PlaceDto.PlacePatchDto.class))).willReturn(new Place());
-        given(placeService.updatePlace(Mockito.any(Place.class))).willReturn(new Place());
+        given(placeUpdateService.updatePlace(Mockito.any(Place.class))).willReturn(new Place());
         given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class))).willReturn(responseDto);
 
         // when
@@ -118,9 +116,9 @@ class PlaceControllerTest {
                                                                               1L,
                                                                               "강남역7번출구맥도날드",
                                                                               "서울시 강남구",
-                                                                              "존나 맛없어요",
-                                                                              "햄버거",
+                                                                              "사람이많아요",
                                                                               0L,
+                                                                              "공방",
                                                                               37L,
                                                                               127L);
         given(placeService.findPlace(Mockito.anyLong())).willReturn(new Place());
@@ -146,8 +144,8 @@ class PlaceControllerTest {
 //                                              "강남역7번출구맥도날드",
 //                                              "서울시 강남구",
 //                                              "존나 맛없어요",
-//                                              "햄버거",
 //                                              0L,
+//                                              "햄버거",
 //                                              37L,
 //                                              127L),
 //
@@ -156,21 +154,21 @@ class PlaceControllerTest {
 //                                              "건대역2번출구맥도날드",
 //                                              "서울시 광진구",
 //                                              "존나 맛있어요",
-//                                              "햄버거",
 //                                              0L,
+//                                              "햄버거",
 //                                              37L,
 //                                              127L));
 //
 //        Page<Place> placePage = new PageImpl<>(List.of());
 //
 //        given(placeService.findPlaces(Mockito.any(Pageable.class))).willReturn(placePage);
-//        given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class))).willReturn(responseDto)
+//        given()
 //
 //        ResultActions actions =
 //                mockMvc.perform(
 //                        get("/places")
 //                                .param("page", "1")
-//                                .param("size", "20")
+//                                .param("size", "10")
 //                                .accept(MediaType.APPLICATION_JSON)
 //                );
 //
