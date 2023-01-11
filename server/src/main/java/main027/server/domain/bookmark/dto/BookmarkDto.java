@@ -1,5 +1,6 @@
 package main027.server.domain.bookmark.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ public class BookmarkDto {
 
     @NoArgsConstructor
     @Getter
+    @AllArgsConstructor
     public static class Post {
 
         @NotNull

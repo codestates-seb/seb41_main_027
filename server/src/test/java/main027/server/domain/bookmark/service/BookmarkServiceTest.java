@@ -9,10 +9,7 @@ import main027.server.domain.member.repository.MemberRepository;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.repository.PlaceRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
@@ -56,6 +53,7 @@ class BookmarkServiceTest {
 
     @Transactional
     @Test
+    @DisplayName("북마크 상태 변경")
     void bookmark() {
         Member member = new Member();
         member.setMemberId(1L);
