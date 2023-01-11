@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { Link } from 'react-router-dom'
+
 const HeaderW = styled.header`
   z-index: 500;
   display: flex;
@@ -29,9 +31,15 @@ const Header = () => {
     <HeaderW>
       <h1>에코그린서울 제로웨이스트숍 공유 지도</h1>
       <ul>
-        <li>로그인</li>
-        <li>로그아웃</li>
-        <li>회원가입</li>
+        <li>
+          <Link to="/signin">로그인</Link>
+        </li>
+        <li>
+          <Link to="/">로그아웃</Link>
+        </li>
+        <li>
+          <Link to="/signup">회원가입</Link>
+        </li>
       </ul>
     </HeaderW>
   )
