@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class BookmarkDto {
 
@@ -11,9 +12,9 @@ public class BookmarkDto {
     @Getter
     public static class Post {
 
-        @NotBlank
+        @NotNull
         private Long memberId;
-        @NotBlank
+        @NotNull
         private Long placeId;
     }
 
