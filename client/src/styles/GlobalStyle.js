@@ -6,7 +6,6 @@ import reset from 'styled-reset'
 const GlobalStyle = createGlobalStyle`
   ${reset}
   /* 필요한 부분 추가해주셔요 🥹 */
-  .test { font-size: 2rem; margin: 32px} /* set up test 용 날리시면 됩니다 */
   
   body{
     margin: 0;
@@ -58,6 +57,7 @@ const GlobalStyle = createGlobalStyle`
     border: none;
     cursor: pointer;
   }
+
 
 `
 
