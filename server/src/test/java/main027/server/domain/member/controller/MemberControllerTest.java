@@ -4,7 +4,8 @@ import com.google.gson.Gson;
 import main027.server.domain.member.dto.MemberDto;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.mapper.MemberMapper;
-import main027.server.domain.member.service.MemberService;
+import main027.server.domain.member.service.MemberServiceImpl;
+import main027.server.domain.member.service.MemberUpdateServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.BDDMockito.given;
@@ -36,7 +38,9 @@ class MemberControllerTest {
     private Gson gson;
 
     @MockBean
-    private MemberService memberService;
+    private MemberServiceImpl memberService;
+    @MockBean
+    private MemberUpdateServiceImpl memberUpdateService;
 
     @MockBean
     private MemberMapper mapper;
@@ -44,13 +48,15 @@ class MemberControllerTest {
     @Test
     void postMember() throws Exception {
         // given
-        MemberDto.Post post = new MemberDto.Post("hgd@gmail.com", "HongGilDong");
+        MemberDto.Post post = new MemberDto.Post("hgd@gmail.com", "HongGilDong", "12345678");
 
         String content = gson.toJson(post);
 
         MemberDto.Response responseDto = new MemberDto.Response(1L,
                                                                 "hgd@gmail.com",
                                                                 "HongGilDong",
+                                                                Member.MemberStatus.ACTIVE,
+                                                                List.of("ROLE_USER"),
                                                                 LocalDateTime.now(),
                                                                 LocalDateTime.now());
 
@@ -73,25 +79,29 @@ class MemberControllerTest {
         actions
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.email").value(responseDto.getEmail()))
-                .andExpect(jsonPath("$.nickName").value(responseDto.getNickName()));
+                .andExpect(jsonPath("$.nickName").value(responseDto.getNickName()))
+                .andExpect(jsonPath("$.memberStatus").value(responseDto.getNickName()))
+                .andExpect(jsonPath("$.roles").isArray());
     }
 
     @Test
     void patchMember() throws Exception {
         // given
         long id = 1L;
-        MemberDto.Patch patch = new MemberDto.Patch(1L,"HongGilDong");
+        MemberDto.Patch patch = new MemberDto.Patch(1L, "HongGilDong", "12345678", Member.MemberStatus.ACTIVE);
 
         String content = gson.toJson(patch);
 
         MemberDto.Response responseDto = new MemberDto.Response(1L,
                                                                 "hgd@gmail.com",
                                                                 "HongGilDong",
+                                                                Member.MemberStatus.ACTIVE,
+                                                                List.of("ROLE_USER"),
                                                                 LocalDateTime.now(),
                                                                 LocalDateTime.now());
 
         given(mapper.memberPatchDtoToMember(Mockito.any(MemberDto.Patch.class))).willReturn(new Member());
-        given(memberService.updateMember(Mockito.any(Member.class))).willReturn(new Member());
+        given(memberUpdateService.updateMember(Mockito.any(Member.class))).willReturn(new Member());
         given(mapper.memberToMemberResponseDto(Mockito.any(Member.class))).willReturn(responseDto);
 
         // when
@@ -105,7 +115,10 @@ class MemberControllerTest {
         //then
         actions
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.memberId").value(patch.getMemberId()))
+                .andExpect(jsonPath("$.nickName").value(patch.getNickName()))
                 .andExpect(jsonPath("$.nickName").value(patch.getNickName()));
+
     }
 
     @Test
