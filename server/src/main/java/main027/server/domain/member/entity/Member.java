@@ -25,8 +25,14 @@ public class Member extends BaseTime {
     @Column(nullable = false, unique = true, updatable = false)
     private String email;
 
+    @Column(length = 100, nullable = false)
+    private String password;
+
     @Column(nullable = false, unique = true)
     private String nickName;
+
+    @Enumerated(EnumType.STRING)
+    private MemberStatus status = MemberStatus.ACTIVE;
 
     // member가 삭제 될 때 place정보는 남겨둬야하는 것이 필요하므로, 해당 로직 작성 필요
     @OneToMany(mappedBy = "member")
@@ -39,5 +45,27 @@ public class Member extends BaseTime {
     // member가 삭제되면 해당 member의 북마크는 삭제되어진다.
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Bookmark> bookmarkList = new ArrayList<>();
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles =new ArrayList<>();
+
+    public Member(String email, String password, String nickName) {
+        this.email = email;
+        this.password = password;
+        this.nickName = nickName;
+    }
+
+    public enum MemberStatus {
+        ACTIVE("활동중"),
+        SLEEP("휴면 계정"),
+        QUIT("탈퇴");
+
+        @Getter
+        private String status;
+
+        MemberStatus(String status) {
+            this.status = status;
+        }
+    }
 
 }
