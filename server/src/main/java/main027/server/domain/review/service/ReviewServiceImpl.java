@@ -1,6 +1,7 @@
 package main027.server.domain.review.service;
 
 import lombok.RequiredArgsConstructor;
+import main027.server.domain.member.verifier.MemberVerifier;
 import main027.server.domain.place.verifier.PlaceVerifier;
 import main027.server.domain.review.entity.Review;
 import main027.server.domain.review.repository.ReviewRepository;

@@ -6,8 +6,9 @@ import main027.server.domain.review.repository.ReviewRepository;
 import main027.server.global.exception.BusinessLogicException;
 import main027.server.global.exception.ExceptionCode;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class ReviewVerifier {
 

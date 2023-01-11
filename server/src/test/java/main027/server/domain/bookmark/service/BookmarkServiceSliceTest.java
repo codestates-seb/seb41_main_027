@@ -3,7 +3,9 @@ package main027.server.domain.bookmark.service;
 import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.bookmark.repository.BookmarkRepository;
 import main027.server.domain.member.entity.Member;
+import main027.server.domain.member.verifier.MemberVerifier;
 import main027.server.domain.place.entity.Place;
+import main027.server.domain.place.verifier.PlaceVerifier;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +30,7 @@ public class BookmarkServiceSliceTest {
     PlaceVerifier placeVerifier;
 
     @InjectMocks
-    BookmarkService bookmarkService;
+    BookmarkServiceImpl bookmarkService;
 
     @Test
     @DisplayName("북마크 추가 기능")
