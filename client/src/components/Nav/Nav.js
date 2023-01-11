@@ -20,7 +20,7 @@ const Wrapper = styled.nav`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  width: 104px !important;
+  width: 94px !important;
   height: 100%;
 
   .logo {
