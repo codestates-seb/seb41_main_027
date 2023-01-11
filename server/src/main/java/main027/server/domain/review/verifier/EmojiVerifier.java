@@ -1,4 +1,4 @@
-package main027.server.domain.review.service;
+package main027.server.domain.review.verifier;
 
 import lombok.RequiredArgsConstructor;
 import main027.server.domain.review.entity.Emoji;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class EmojiService {
+public class EmojiVerifier {
 
     private final EmojiRepository emojiRepository;
 

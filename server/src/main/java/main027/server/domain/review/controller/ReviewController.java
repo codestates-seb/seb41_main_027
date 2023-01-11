@@ -5,6 +5,7 @@ import main027.server.domain.review.dto.ReviewDto;
 import main027.server.domain.review.entity.Review;
 import main027.server.domain.review.mapper.ReviewMapper;
 import main027.server.domain.review.service.ReviewService;
+import main027.server.domain.review.verifier.ReviewVerifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class ReviewController {
 
     private final ReviewService reviewService;
+    private final ReviewVerifier reviewVerifier;
     private final ReviewMapper mapper;
 
     @PostMapping
@@ -28,6 +30,6 @@ public class ReviewController {
 
     @GetMapping("/{reviewId}")
     public Review getReview(@PathVariable Long reviewId) {
-        return reviewService.findVerifiedReview(reviewId);
+        return reviewVerifier.findVerifiedReview(reviewId);
     }
 }
