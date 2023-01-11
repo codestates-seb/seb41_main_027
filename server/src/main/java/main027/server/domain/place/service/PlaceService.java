@@ -1,65 +1,15 @@
 package main027.server.domain.place.service;
 
-import lombok.RequiredArgsConstructor;
 import main027.server.domain.place.entity.Place;
-import main027.server.domain.place.repository.PlaceRepository;
-import main027.server.global.exception.BusinessLogicException;
-import main027.server.global.exception.ExceptionCode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+public interface PlaceService {
 
-@Service
-@RequiredArgsConstructor
-@Transactional
-public class PlaceService {
-
-    private final PlaceRepository placeRepository;
-
-    public Place createPlace(Place place) {
-        verifyExistsPlace(place.getName());
-        return placeRepository.save(place);
-    }
-
-    public Place findPlace(Long placeId) {
-        return findVerifiedPlace(placeId);
-    }
-
-    public Page<Place> findPlaces(Pageable pageable) {
-        return placeRepository.findAll(pageable);
-    }
-
-    public List<Place> findAll() {
-        return placeRepository.findAll();
-    }
-
-    public Place updatePlace(Place place) {
-        Place findPlace = findVerifiedPlace(place.getPlaceId());
-        Optional.ofNullable(place.getDescription()).ifPresent(description -> findPlace.setDescription(description));
-        return placeRepository.save(findPlace);
-    }
-
-    public void deletePlace(Long placeId) {
-        Place verifiedPlace = findVerifiedPlace(placeId);
-        placeRepository.delete(verifiedPlace);
-    }
+    Place createPlace(Place place);
+    Place findPlace(Long placeId);
+    Page<Place> findPlaces(Pageable pageable);
+    void deletePlace(Long placeId);
 
 
-    public Place findVerifiedPlace(Long placeId) {
-        Optional<Place> optionalPlace = placeRepository.findById(placeId);
-        Place findPlace = optionalPlace.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.PLACE_NOT_FOUND));
-        return findPlace;
-    }
-
-    public void verifyExistsPlace (String name) {
-        Optional<Place> place = placeRepository.findByName(name);
-        if(place.isPresent())
-            throw new BusinessLogicException(ExceptionCode.PLACE_ALREADY_EXISTS);
-
-    }
 }
