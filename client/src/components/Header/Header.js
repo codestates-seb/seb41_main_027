@@ -12,14 +12,17 @@ const HeaderW = styled.header`
   height: 100px;
   color: #fff;
   h1 {
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 28px;
+    font-weight: 400;
+    span {
+      font-weight: 700;
+    }
   }
 
   ul {
     display: flex;
     font-weight: 400;
-    font-size: 24px;
+    font-size: 18px;
     li {
       margin-left: 32px;
     }
@@ -29,7 +32,9 @@ const HeaderW = styled.header`
 const Header = () => {
   return (
     <HeaderW>
-      <h1>에코그린서울 제로웨이스트숍 공유 지도</h1>
+      <h1>
+        우리가 그린 서울, <span>에코그린 서울</span>
+      </h1>
       <ul>
         <li>
           <Link to="/signin">로그인</Link>

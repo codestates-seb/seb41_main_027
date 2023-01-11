@@ -13,8 +13,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     background-color: #ffffff;
     color: #232629;
-    font-family: "Roboto",system-ui,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif; 
-  }
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;  }
 
   a {
     text-decoration: none;
