@@ -3,9 +3,7 @@ package main027.server.domain.bookmark.service;
 import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.bookmark.repository.BookmarkRepository;
 import main027.server.domain.member.entity.Member;
-import main027.server.domain.member.service.MemberService;
 import main027.server.domain.place.entity.Place;
-import main027.server.domain.place.service.PlaceService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,9 +23,9 @@ public class BookmarkServiceSliceTest {
     @Mock
     BookmarkRepository bookmarkRepository;
     @Mock
-    MemberService memberService;
+    MemberVerifier memberVerifier;
     @Mock
-    PlaceService placeService;
+    PlaceVerifier placeVerifier;
 
     @InjectMocks
     BookmarkService bookmarkService;
@@ -45,8 +43,8 @@ public class BookmarkServiceSliceTest {
         Optional<Bookmark> optBookmark = Optional.ofNullable(new Bookmark());
 
         // mocking
-        when(memberService.findVerifiedMember(anyLong())).thenReturn(null);
-        when(placeService.findVerifiedPlace(anyLong())).thenReturn(null);
+        when(memberVerifier.findVerifiedMember(anyLong())).thenReturn(null);
+        when(placeVerifier.findVerifiedPlace(anyLong())).thenReturn(null);
         when(bookmarkRepository.checkBookmarked(anyLong(), anyLong())).thenReturn(optBookmark);
 
         // when
@@ -68,8 +66,8 @@ public class BookmarkServiceSliceTest {
         Bookmark bookmark = new Bookmark(member, place);
         Optional<Bookmark> nullBookmark = Optional.ofNullable(null);
 
-        when(memberService.findVerifiedMember(anyLong())).thenReturn(null);
-        when(placeService.findVerifiedPlace(anyLong())).thenReturn(null);
+        when(memberVerifier.findVerifiedMember(anyLong())).thenReturn(null);
+        when(placeVerifier.findVerifiedPlace(anyLong())).thenReturn(null);
         when(bookmarkRepository.checkBookmarked(anyLong(), anyLong())).thenReturn(nullBookmark);
 
         // when
