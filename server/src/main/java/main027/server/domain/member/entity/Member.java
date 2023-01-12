@@ -32,7 +32,7 @@ public class Member extends BaseTime {
     private String nickName;
 
     @Enumerated(EnumType.STRING)
-    private MemberStatus status = MemberStatus.ACTIVE;
+    private MemberStatus memberStatus = MemberStatus.ACTIVE;
 
     // member가 삭제 될 때 place정보는 남겨둬야하는 것이 필요하므로, 해당 로직 작성 필요
     @OneToMany(mappedBy = "member")
@@ -61,10 +61,10 @@ public class Member extends BaseTime {
         QUIT("탈퇴");
 
         @Getter
-        private String status;
+        private String memberStatus;
 
-        MemberStatus(String status) {
-            this.status = status;
+        MemberStatus(String memberStatus) {
+            this.memberStatus = memberStatus;
         }
     }
 

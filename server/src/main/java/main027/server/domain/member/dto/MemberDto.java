@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class MemberDto {
+    @Getter
     @AllArgsConstructor
     public static class Post {
         @Email
