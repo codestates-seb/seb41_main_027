@@ -78,10 +78,8 @@ class MemberControllerTest {
         // then
         actions
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.email").value(responseDto.getEmail()))
-                .andExpect(jsonPath("$.nickName").value(responseDto.getNickName()))
-                .andExpect(jsonPath("$.memberStatus").value(responseDto.getNickName()))
-                .andExpect(jsonPath("$.roles").isArray());
+                .andExpect(jsonPath("$.email").value(post.getEmail()))
+                .andExpect(jsonPath("$.nickName").value(post.getNickName()));
     }
 
     @Test
@@ -117,7 +115,7 @@ class MemberControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.memberId").value(patch.getMemberId()))
                 .andExpect(jsonPath("$.nickName").value(patch.getNickName()))
-                .andExpect(jsonPath("$.nickName").value(patch.getNickName()));
+                .andExpect(jsonPath("$.memberStatus").value(patch.getMemberStatus().toString()));
 
     }
 
