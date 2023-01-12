@@ -9,6 +9,7 @@ on:
 permissions:
   contents: read
   
+  
 jobs:
   test:
     name: merge-test
@@ -17,6 +18,22 @@ jobs:
         run: 
           working-directory: ./server
     steps:
+    - name: write ADMIN EMAIL
+      run: echo "ADMIN_EMAIL=$ADMIN_EMAIL" >> /src/main/resources/env.yml
+      env:
+        ADMIN_EMAIL: ${{secrets.ADMIN_EMAIL}}
+    - name: write KEY
+      run: echo "JWT_SECRET_KEY=$JWT_SECRET_KEY" >> /src/main/resources/env.yml
+      env:
+        JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
+    - name: access minute    
+      run: echo "ACCESS_TOKEN_EXPIRATION_MINUTE=$ACCESS_TOKEN_EXPIRATION_MINUTE" >> /src/main/resources/env.yml
+      env:
+        ACCESS_TOKEN_EXPIRATION_MINUTE: ${{secrets.ACCESS_TOKEN_EXPIRATION_MINUTE}}
+    - name: refresh minute   
+      run: echo "REFRESH_TOKEN_EXPIRATION_MINUTE=$REFRESH_TOKEN_EXPIRATION_MINUTE" >> /src/main/resources/env.yml
+      env:
+        REFRESH_TOKEN_EXPIRATION_MINUTE: ${{secrets.REFRESH_TOKEN_EXPIRATION_MINUTE}}
     - uses: actions/checkout@v3
     - name: Set up JDK 11
       uses: actions/setup-java@v3
