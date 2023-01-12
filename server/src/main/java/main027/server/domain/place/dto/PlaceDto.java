@@ -47,8 +47,8 @@ public class PlaceDto extends BaseTime {
 
         private Long kakaoId;
         private String category;
-        private Long latitude;
-        private Long longitude;
+        private String latitude;
+        private String longitude;
     }
 
     @Data

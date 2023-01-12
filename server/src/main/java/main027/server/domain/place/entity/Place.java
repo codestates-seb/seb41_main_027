@@ -38,13 +38,13 @@ public class Place extends BaseTime {
      * 위도
      */
     @Column(nullable = false)
-    private Long latitude;
+    private String latitude;
 
     /**
      * 경도
      */
     @Column(nullable = false)
-    private Long longitude;
+    private String longitude;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

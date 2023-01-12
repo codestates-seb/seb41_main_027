@@ -55,8 +55,8 @@ class PlaceControllerTest {
                                                                               "사람이많아요",
                                                                               0L,
                                                                               "공방",
-                                                                              37L,
-                                                                              127L);
+                                                                              "37",
+                                                                              "37");
 
         given(placeMapper.placePostDtoToPlace(Mockito.any(PlaceDto.PlacePostDto.class))).willReturn(new Place());
         given(placeService.createPlace(Mockito.any(Place.class))).willReturn(new Place());
@@ -90,8 +90,8 @@ class PlaceControllerTest {
                                                                               "존나 맛없어요",
                                                                               0L,
                                                                               "공방",
-                                                                              37L,
-                                                                              127L);
+                                                                              "37",
+                                                                              "127");
 
         given(placeMapper.placePatchDtoToPlace(Mockito.any(PlaceDto.PlacePatchDto.class))).willReturn(new Place());
         given(placeUpdateService.updatePlace(Mockito.any(Place.class))).willReturn(new Place());
@@ -119,8 +119,8 @@ class PlaceControllerTest {
                                                                               "사람이많아요",
                                                                               0L,
                                                                               "공방",
-                                                                              37L,
-                                                                              127L);
+                                                                              "37",
+                                                                              "127");
         given(placeService.findPlace(Mockito.anyLong())).willReturn(new Place());
         given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class))).willReturn(responseDto);
 
