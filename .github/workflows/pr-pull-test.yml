@@ -25,25 +25,17 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: write ADMIN EMAIL
-      run: echo "ADMIN_EMAIL=$ADMIN_EMAIL" >> env.yml
+      run: echo "ADMIN_EMAIL=${{secrets.ADMIN_EMAIL}}" >> env.yml
       working-directory: ./server/src/main/resources
-      env:
-        ADMIN_EMAIL: ${{secrets.ADMIN_EMAIL}}
     - name: write KEY
-      run: echo "JWT_SECRET_KEY=$JWT_SECRET_KEY" >> env.yml
+      run: echo "JWT_SECRET_KEY=${{secrets.JWT_SECRET_KEY}}" >> env.yml
       working-directory: ./server/src/main/resources
-      env:
-        JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
     - name: access minute
-      run: echo "ACCESS_TOKEN_EXPIRATION_MINUTE=$ACCESS_TOKEN_EXPIRATION_MINUTE" >> env.yml
+      run: echo "ACCESS_TOKEN_EXPIRATION_MINUTE=${{secrets.ACCESS_TOKEN_EXPIRATION_MINUTE}}" >> env.yml
       working-directory: ./server/src/main/resources
-      env:
-        ACCESS_TOKEN_EXPIRATION_MINUTE: ${{secrets.ACCESS_TOKEN_EXPIRATION_MINUTE}}
     - name: refresh minute
-      run: echo "REFRESH_TOKEN_EXPIRATION_MINUTE=$REFRESH_TOKEN_EXPIRATION_MINUTE" >> env.yml
-      working-directory: ./server/src/main/resources
-      env:
-        REFRESH_TOKEN_EXPIRATION_MINUTE: ${{secrets.REFRESH_TOKEN_EXPIRATION_MINUTE}}       
+      run: echo "REFRESH_TOKEN_EXPIRATION_MINUTE=${{secrets.REFRESH_TOKEN_EXPIRATION_MINUTE}}" >> env.yml
+      working-directory: ./server/src/main/resources     
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Test with Gradle
