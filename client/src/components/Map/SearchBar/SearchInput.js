@@ -43,7 +43,13 @@ const SearchInput = () => {
     <Wrapper>
       <form>
         <div className="SearchBar">
-          <input className="SearchQueryInput" type="text" name="" placeholder="장소를 검색해주세요." onChange="" />
+          <input
+            className="SearchQueryInput"
+            type="text"
+            name=""
+            placeholder="장소를 검색해주세요."
+            defaultValue={''}
+          />
           <button className="SearchQuerySubmit" type="submit" name="">
             <StyleFontAwesomeIcon icon={faSearch} />
           </button>

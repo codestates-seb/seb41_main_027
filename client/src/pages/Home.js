@@ -6,15 +6,19 @@ import Main from '../components/Map/Map'
 
 const Wrapper = styled.section`
   width: 100%;
+  > div {
+    padding: 16px;
+  }
 `
-
 const Home = () => {
   return (
     <>
       <Nav />
       <Wrapper>
         <Header />
-        <Main />
+        <>
+          <Main />
+        </>
       </Wrapper>
     </>
   )

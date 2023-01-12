@@ -5,7 +5,9 @@ import RadioButton from './RadioButton'
 import SearchInput from './SearchInput'
 
 const Wrapper = styled.div`
-  // Position 🫡
+  // Position 🫡\
+  position: absolute;
+  z-index: 9000;
   display: flex;
   margin-top: 16px;
   gap: 16px;
