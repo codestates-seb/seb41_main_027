@@ -6,7 +6,7 @@ import SearchBar from './SearchBar/SearchBar'
 
 const Container = styled.section`
   position: relative;
-  z-index: 1000;
+  z-index: 500;
   overflow: hidden;
   /* padding: 32px; // Demo Position 🫡 */
   box-sizing: border-box;

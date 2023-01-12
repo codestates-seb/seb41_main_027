@@ -17,7 +17,7 @@ const StyleFontAwesomeIcon = styled(FontAwesomeIcon)`
   }
 `
 const Wrapper = styled.nav`
-  z-index: 500;
+  z-index: 1000;
   display: flex;
   align-items: flex-start;
   justify-content: center;
