@@ -21,7 +21,7 @@ const Main = styled.main`
   display: flex;
   width: 100%;
   height: 100vh;
-  background-color: #13c57c;
+  background-color: #17ac52; // CI컬러 테스트용
   box-sizing: border-box;
 `
 

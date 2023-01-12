@@ -9,13 +9,14 @@ const HeaderW = styled.header`
   justify-content: space-between;
   margin: 0 32px;
   width: calc(100% - 64px);
-  height: 94px;
+  height: 5.875rem; // 88px
   color: #fff;
   h1 {
     font-size: 28px;
     font-weight: 400;
+    letter-spacing: -0.5px;
     span {
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 
