@@ -46,12 +46,12 @@ const Wrapper = styled.div`
 const SearchBar = () => {
   return (
     <Wrapper className="select-wrapper">
-      <select className="select">
-        <option value="category0">전체보기</option>
-        <option value="category2">제로웨이스트샵</option>
-        <option value="category3">공방</option>
-        <option value="category4">푸드</option>
-        <option value="category5">카페</option>
+      <select className="select" defaultValue={'전체보기'}>
+        <option>전체보기</option>
+        <option>제로웨이스트샵</option>
+        <option>공방</option>
+        <option>푸드</option>
+        <option>카페</option>
       </select>
     </Wrapper>
   )
