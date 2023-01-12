@@ -28,7 +28,7 @@ const Wrapper = styled.nav`
     cursor: pointer;
     position: relative;
     left: 5px;
-    top: 11px;
+    top: 5px;
     width: 57px;
     height: 61px;
     margin-bottom: 80px;
