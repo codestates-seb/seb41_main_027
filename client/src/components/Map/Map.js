@@ -68,23 +68,6 @@ const Main = () => {
       <SearchBar />
       <div className="site-list">
         <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
-        <SiteInfoCard />
       </div>
       <Map // 지도를 표시할 Container
         center={{ lat: 37.542668, lng: 126.976395 }}
