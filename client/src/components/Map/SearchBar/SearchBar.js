@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   left: 50%;
   transform: translate(-50%, 0%);
   display: flex;
-  margin-top: 16px;
+  margin-top: 40px;
   gap: 16px;
   justify-content: center;
 `
