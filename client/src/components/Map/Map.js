@@ -2,10 +2,14 @@ import styled from 'styled-components'
 import { MapMarker, Map } from 'react-kakao-maps-sdk'
 import { useRef, useMemo, useState, useEffect } from 'react'
 
+import SearchBar from './SearchBar/SearchBar'
+
 const Container = styled.section`
   z-index: 1000;
   overflow: hidden;
-  height: calc(100% - 100px);
+  padding: 32px; // Demo Position 🫡
+  box-sizing: border-box;
+  height: calc(100% - 94px);
   border-radius: 32px 0px 0px 0px;
   box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.4);
   background-color: #fff;
@@ -35,6 +39,7 @@ const Main = () => {
 
   return (
     <Container>
+      <SearchBar />
       <Map // 지도를 표시할 Container
         center={{ lat: 37.542668, lng: 126.976395 }}
         style={{

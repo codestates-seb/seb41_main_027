@@ -1,7 +1,10 @@
 import styled from 'styled-components'
 import GlobalStyle from '../src/styles/GlobalStyle'
-// import { faPagelines } from '@fortawesome/free-brands-svg-icons'
-// import { faMap, faComment, faBug, faUser } from '@fortawesome/free-solid-svg-icons'
+import { Reset } from 'styled-reset'
+import { Routes, Route } from 'react-router-dom'
+
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Nav from './components/Nav/Nav'
 import Map from './components/Map/Map'
@@ -22,7 +25,7 @@ const Wrapper = styled.section`
 function App() {
   return (
     <section className="App">
-      <reset />
+      <Reset />
       <GlobalStyle />
       <Main>
         <Nav />
