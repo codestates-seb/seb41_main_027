@@ -1,2 +1,3 @@
 ### macOS ###
 .DS_Store
+server/src/main/resources/env.yml
