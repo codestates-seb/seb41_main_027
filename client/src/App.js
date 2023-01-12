@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import GlobalStyle from '../src/styles/GlobalStyle'
+import { Reset } from 'styled-reset'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -34,7 +35,7 @@ function App() {
 
   return (
     <section className="App">
-      <reset />
+      <Reset />
       <GlobalStyle />
       <ScrollToTop />
       <StyleToastContainer position="top-center" pauseOnFocusLoss draggable pauseOnHover />
