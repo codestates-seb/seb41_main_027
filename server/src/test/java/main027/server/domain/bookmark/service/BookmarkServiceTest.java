@@ -28,31 +28,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class BookmarkServiceTest {
 
     @Autowired
-    BookmarkRepository bookmarkRepository;
-    @Autowired
-    MemberRepository memberRepository;
-    @Autowired
-    PlaceRepository placeRepository;
-    @Autowired
     BookmarkService bookmarkService;
 
-    @BeforeAll
-    void beforeAll() {
-        addMember("hgd@gmail.com", "홍길동");
-        addMember("kkd@gmail.com", "김코딩");
-        addPlace("길이식당", 1L, 1L);
-        addPlace("미분당 건대점", 1L, 2L);
-        addBookmark(1L, 1L);
-        addBookmark(1L, 2L);
-    }
-
-    @Transactional
-    @Test
-    void isSaved() {
-        Bookmark bookmark = bookmarkRepository.findById(2L).get();
-        log.info("bookmark.memberId={}, placeId={}", bookmark.getMember().getNickName(),
-                 bookmark.getPlace().getName());
-    }
 
     @Transactional
     @Test
@@ -65,40 +42,11 @@ class BookmarkServiceTest {
         Bookmark bookmark = new Bookmark(member, place);
         Boolean isBookmarked = bookmarkService.changeBookmarkStatus(bookmark);
 
-        assertThat(isBookmarked).isFalse();
+        assertThat(isBookmarked).isTrue();
 
         Boolean isBookmarked2 = bookmarkService.changeBookmarkStatus(bookmark);
 
-        assertThat(isBookmarked2).isTrue();
-    }
-
-    private void addMember(String email, String name) {
-        Member member = new Member();
-        member.setEmail(email);
-        member.setNickName(name);
-        memberRepository.save(member);
-    }
-
-    private void addPlace(String name, Long memberId, Long kakaoId) {
-        Place place = new Place();
-        place.setName(name);
-        place.setMember(new Member());
-        place.getMember().setMemberId(memberId);
-        place.setKakaoId(kakaoId);
-        place.setAddress("주소입니다.");
-        place.setDescription("설명입니다.");
-        place.setLatitude("1111");
-        place.setLongitude("2222");
-        placeRepository.save(place);
-    }
-
-    private void addBookmark(Long memberId, Long placeId) {
-        Bookmark bookmark = new Bookmark();
-        bookmark.setMember(new Member());
-        bookmark.setPlace(new Place());
-        bookmark.getMember().setMemberId(memberId);
-        bookmark.getPlace().setPlaceId(placeId);
-        bookmarkRepository.save(bookmark);
+        assertThat(isBookmarked2).isFalse();
     }
 
 }
