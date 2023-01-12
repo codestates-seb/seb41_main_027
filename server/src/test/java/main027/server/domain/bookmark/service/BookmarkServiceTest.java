@@ -87,8 +87,8 @@ class BookmarkServiceTest {
         place.setKakaoId(kakaoId);
         place.setAddress("주소입니다.");
         place.setDescription("설명입니다.");
-        place.setLatitude(1111L);
-        place.setLongitude(2222L);
+        place.setLatitude("1111");
+        place.setLongitude("2222");
         placeRepository.save(place);
     }
 
