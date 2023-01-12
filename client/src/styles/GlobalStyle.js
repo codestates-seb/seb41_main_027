@@ -7,10 +7,12 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
   /* 필요한 부분 추가해주셔요 🥹 */
   
-  body{
+  html, body{
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    font-size: 62.5%;
+    line-height: 1.285;
     background-color: #ffffff;
     color: #232629;
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;  }
@@ -56,6 +58,15 @@ const GlobalStyle = createGlobalStyle`
     border: none;
     cursor: pointer;
   }
+
+  // 💄 CI set 
+  --ecogreen-01: #17AC52;
+  --ecogreen-02: #31B679;
+  --ecogreen-03: #13C57C;
+  --ecored-01:#FF3838;
+  --ecored-02:#FF1F1F;
+  --border-01: #B8BCCF;
+  --border-02: #D9D9D9; 
 
   //----------------- toastify css start -----------------
   :root {  
