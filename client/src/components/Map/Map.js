@@ -10,10 +10,9 @@ const Container = styled.section`
   overflow: hidden;
   /* padding: 32px; // Demo Position 🫡 */
   box-sizing: border-box;
-  height: calc(100% - 88px);
+  height: calc(100% - 94px);
   border-radius: 32px 0px 0px 0px;
-  box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.6);
-  /* box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.4); */
+  box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.4);
   background-color: #fff;
 `
 
@@ -112,7 +111,7 @@ const Main = () => {
         center={{ lat: bounds.qa, lng: bounds.ha }}
         style={{
           width: '100%',
-          height: '80%',
+          height: '100%',
         }}
         level={8} // 지도의 확대 레벨
         ref={mapRef}
