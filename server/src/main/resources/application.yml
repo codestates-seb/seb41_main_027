@@ -1,0 +1,78 @@
+spring:
+  profiles:
+    active: dev-db
+
+    # 활성화할 Profile의 그룹을 지정할 수 있습니다. 해당 그룹명으로 Profile을 설정하면 그룹에 포함되어 있는 Profile이 같이 실행됩니다.
+    # Local 개발 환경에서는 Intellij의 Active Profile을 local로 설정하면 됩니다.
+    # Local 그룹 에서는 inmemory DB를 이용하며, 스프링부트 실행시에 StubData가 자동으로 DB에 넣어집니다.
+    group:
+      local: h2-inMemory, StubData
+      # dev 그룹 에서는 db 설정을 mysql로 변경합니다.
+      # DB의 usrename, password, URL은 외부에 노출시키면 안되기 때문에 EC2에 환경변수를 따로 생성해, 실행 시 불러오도록 합니다.
+      dev: dev-db
+#      prod:
+
+#    include:
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: h2-inMemory
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+  # 부트 실행시 테이블 자동 생성
+  jpa:
+    hibernate:
+      ddl-auto: create
+    # SQL문 확인 기능
+    show-sql: true
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: stubData
+
+  sql:
+    init:
+      # Stub Data를 위해 실행할 sql 파일 경로 설정
+      data-locations: classpath:sql/data.sql
+  jpa:
+    # ddl-auto 후에 Stub Data가 실행
+    defer-datasource-initialization: true
+    # sql 포맷 예쁘게 보기
+    properties:
+      hibernate:
+        format_sql: true
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev-db
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  datasource:
+    url: ${MYSQL_DATABASE_URL}
+    username: ${MYSQL_DATABASE_USERNAME}
+    password: ${MYSQL_DATABASE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver

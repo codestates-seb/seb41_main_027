@@ -8,19 +8,22 @@ import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.repository.MemberRepository;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.repository.PlaceRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @RequiredArgsConstructor
 @Slf4j
-@TestPropertySource(locations = "/application-jpaLog.properties")
+// @TestPropertySource(locations = "/application-jpaLog.properties")
+@ActiveProfiles("stub")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class BookmarkServiceTest {
 
