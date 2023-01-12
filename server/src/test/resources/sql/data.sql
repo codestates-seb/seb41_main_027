@@ -14,27 +14,27 @@ values ('제로웨이스트샵'),
        ('푸드'),
        ('카페');
 
-insert into member (nick_name, email)
-values ('새좋아요', 'mjehu1@upenn.edu'),
-       ('에코홀릭', 'smcevay2@tinypic.com'),
-       ('서울바이크', 'ehamly3@dagondesign.com'),
-       ('공방매니아', 'rbeckingham4@jigsy.com'),
-       ('환경보호가', 'bearey0@furl.net'),
-       ('카페매니아', 'rkensington5@myspace.com'),
-       ('스벅만감', 'wfortin6@tiny.cc'),
-       ('바이크', 'ititman7@github.io'),
-       ('에코서울좋아요', 'hcaen8@so-net.ne.jp'),
-       ('가죽공방가보고싶음', 'dhuckfield9@macromedia.com'),
-       ('너구리', 'pfrancesa@hugedomains.com'),
-       ('도깨비', 'jwickwarthb@china.com'),
-       ('토끼앞니', 'kstrodderc@artisteer.com'),
-       ('스컹크방귀', 'lconnorsd@comcast.net'),
-       ('기린목기린', 'amiliffee@discovery.com'),
-       ('어흥호랑이', 'mtimblettf@naver.com'),
-       ('고양이야옹', 'vrajchertg@wufoo.com'),
-       ('나만고양이없어', 'cbalkh@typepad.com'),
-       ('해쉬태그', 'vkernesi@odnoklassniki.ru'),
-       ('웨이브', 'rvesquej@japanpost.jp');
+insert into member (nick_name, email, password)
+values ('새좋아요', 'mjehu1@upenn.edu', '11111111'),
+       ('에코홀릭', 'smcevay2@tinypic.com', '22222222'),
+       ('서울바이크', 'ehamly3@dagondesign.com', '33333333'),
+       ('공방매니아', 'rbeckingham4@jigsy.com', '44444444'),
+       ('환경보호가', 'bearey0@furl.net', '55555555'),
+       ('카페매니아', 'rkensington5@myspace.com', '66666666'),
+       ('스벅만감', 'wfortin6@tiny.cc', '77777777'),
+       ('바이크', 'ititman7@github.io', '88888888'),
+       ('에코서울좋아요', 'hcaen8@so-net.ne.jp', '99999999'),
+       ('가죽공방가보고싶음', 'dhuckfield9@macromedia.com', '11111111'),
+       ('너구리', 'pfrancesa@hugedomains.com', '22222222'),
+       ('도깨비', 'jwickwarthb@china.com', '33333333'),
+       ('토끼앞니', 'kstrodderc@artisteer.com', '44444444'),
+       ('스컹크방귀', 'lconnorsd@comcast.net', '55555555'),
+       ('기린목기린', 'amiliffee@discovery.com', '66666666'),
+       ('어흥호랑이', 'mtimblettf@naver.com', '77777777'),
+       ('고양이야옹', 'vrajchertg@wufoo.com', '88888888'),
+       ('나만고양이없어', 'cbalkh@typepad.com', '99999999'),
+       ('해쉬태그', 'vkernesi@odnoklassniki.ru', '11111111'),
+       ('웨이브', 'rvesquej@japanpost.jp', '22222222');
 
 insert into place (member_id, category_id, name, address, description, kakao_id, latitude, longitude)
 values (1, 1, '두레생협(미아점)', '서울특별시 강북구 삼양로27길 46', '친환경 생필품, 리필세제, 과일등을 판매합니다', 27351994, 0, 0),
@@ -74,7 +74,7 @@ values (1, 1, '두레생협(미아점)', '서울특별시 강북구 삼양로27�
        (3, 3, '리틀갱스터', '서울 용산구 새창로12길 11-3 1층', '효창공원역에 있는 수제 비건 퓨전요리점 입니다.', 35, 0, 0),
        (4, 3, '가치한끼', '서울 동대문구 고산자로36길 3 경동시장 신관 3층', '비건 떡볶이를 판매하는 음식점입니다.', 36, 0, 0);
 
-insert into review (memberId, placeId, emojiId, content)
+insert into review (member_id, place_id, emoji_id, content)
 values (1, 1, 1, '애용합니다.'),
        (2, 1, 2, '콩을 샀는데 담백하고 고소해서 좋아요.'),
        (3, 1, 3, '어린잎을 샀는데 가격도 착하고 양도 많아서 가성비 대박'),
@@ -94,7 +94,7 @@ values (1, 1, 1, '애용합니다.'),
        (1, 2, 5, '꼭 가보고 싶네요'),
        (1, 2, 6, '공방은 다 좋은데 너무 비싸요 ㅠ');
 
-insert into bookmark (memberId, placeId)
+insert into bookmark (member_id, place_id)
 values (1, 36),
        (1, 3),
        (1, 5),
@@ -117,5 +117,4 @@ values (1, 36),
        (1, 4),
        (1, 6),
        (1, 27);
-
 
