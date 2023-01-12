@@ -21,7 +21,7 @@ const Wrapper = styled.nav`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  width: 5.875rem !important; // 88px;
+  width: 88px !important;
   height: 100%;
 
   .logo {
