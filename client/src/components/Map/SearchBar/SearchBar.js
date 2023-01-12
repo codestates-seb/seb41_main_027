@@ -8,6 +8,8 @@ const Wrapper = styled.div`
   // Position 🫡
   position: absolute;
   z-index: 9000;
+  left: 50%;
+  transform: translate(-50%, 0%);
   display: flex;
   margin-top: 16px;
   gap: 16px;
