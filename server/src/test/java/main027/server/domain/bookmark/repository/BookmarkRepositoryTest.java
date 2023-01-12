@@ -54,6 +54,7 @@ class BookmarkRepositoryTest {
         Member member = new Member();
         member.setEmail(email);
         member.setNickName(name);
+        member.setPassword("1111");
         memberRepository.save(member);
     }
 
