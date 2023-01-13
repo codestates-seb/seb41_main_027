@@ -35,11 +35,6 @@ public class ReviewServiceSliceTest {
     @InjectMocks
     ReviewServiceImpl reviewService;
 
-    @BeforeEach
-    void beforeAll() {
-
-    }
-
     @Test
     @DisplayName("리뷰 저장")
     void saveReview() {
@@ -57,9 +52,6 @@ public class ReviewServiceSliceTest {
         assertThat(savedReview.getContent()).isEqualTo(review.getContent());
         assertThat(savedReview.getEmoji()).isEqualTo(review.getEmoji());
     }
-
-
-
 
 
     private Emoji createEmoji() {

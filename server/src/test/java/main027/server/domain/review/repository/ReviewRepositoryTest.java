@@ -1,6 +1,8 @@
 package main027.server.domain.review.repository;
 
 import lombok.extern.slf4j.Slf4j;
+import main027.server.domain.member.entity.Member;
+import main027.server.domain.place.entity.Place;
 import main027.server.domain.review.entity.Emoji;
 import main027.server.domain.review.entity.Review;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +26,7 @@ class ReviewRepositoryTest {
 
     @Test
     @DisplayName("리뷰 저장")
-    public void saveReview() {
+    void saveReview() {
         //given
         Review review = new Review();
         review.setContent("추천합니다");
