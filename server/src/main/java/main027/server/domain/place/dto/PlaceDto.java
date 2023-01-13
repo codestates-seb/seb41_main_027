@@ -3,6 +3,7 @@ package main027.server.domain.place.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import main027.server.domain.place.entity.Category;
 import main027.server.global.audit.BaseTime;
 
 import javax.validation.constraints.NotBlank;
@@ -23,6 +24,11 @@ public class PlaceDto extends BaseTime {
         private String address;
         @NotBlank
         private String description;
+        private Long kakaoId;
+        private Long categoryId;
+        private String latitude;
+        private String longitude;
+
     }
 
     @Data
