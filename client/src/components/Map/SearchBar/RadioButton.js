@@ -88,7 +88,7 @@ const RadioButton = () => {
   return (
     <Wrapper>
       <div className="tabs">
-        <input type="radio" id="Newest" name="tabs" checked />
+        <input type="radio" id="Newest" name="tabs" defaultChecked />
         <label className="tab" htmlFor="Newest">
           등록 순
         </label>
