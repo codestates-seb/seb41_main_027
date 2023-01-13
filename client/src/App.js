@@ -1,20 +1,22 @@
 import styled from 'styled-components'
 import GlobalStyle from '../src/styles/GlobalStyle'
 import { Reset } from 'styled-reset'
-
 import { Routes, Route } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Suspense, lazy } from 'react'
 
 import ScrollToTop from './utils/ScrollToTop'
+import useToastPopup from './hooks/useToastPopup'
 
-import Home from './pages/Home'
-import Place from './pages/Place'
-import Mypage from './pages/Mypage'
-import Aboutus from './pages/AboutUs'
-import SignUp from './pages/SignUp'
-import SignIn from './pages/SignIn'
-import { useEffect } from 'react'
+const Home = lazy(() => import('./pages/Home'))
+const Place = lazy(() => import('./pages/Place'))
+const Mypage = lazy(() => import('./pages/Mypage'))
+const AboutUs = lazy(() => import('./pages/AboutUs'))
+const SignUp = lazy(() => import('./pages/SignUp'))
+const SignIn = lazy(() => import('./pages/SignIn'))
+const NotFound = lazy(() => import('./pages/NotFound'))
+const Loading = lazy(() => import('./components/Loading/Loading'))
 
 const Main = styled.main`
   display: flex;
@@ -25,14 +27,19 @@ const Main = styled.main`
 `
 
 const StyleToastContainer = styled(ToastContainer)`
-  z-index: 9999;
+  z-index: 9500;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 `
 
 function App() {
-  // 전역 상태 추가되면 나중에 뺄게요.
-  useEffect(() => {
-    toast('App reload', { autoClose: 500 })
-  }, [])
+  useToastPopup()
 
   return (
     <section className="App">
@@ -40,16 +47,19 @@ function App() {
       <GlobalStyle />
       <ScrollToTop />
       <StyleToastContainer position="top-center" pauseOnFocusLoss draggable pauseOnHover />
-      <Main>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/place" element={<Place />} />
-          <Route path="/mypage" element={<Mypage />} />
-          <Route path="/aboutus" element={<Aboutus />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-        </Routes>
-      </Main>
+      <Suspense fallback={<Loading />}>
+        <Main>
+          <Routes>
+            <Route path="/" element={<NotFound />} />
+            <Route path="/place" element={<Place />} />
+            <Route path="/mypage" element={<Mypage />} />
+            <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Main>
+      </Suspense>
       {/* 주석 샘플 다쓰고 나중에 날릴게요🥹 */}
     </section>
   )
