@@ -41,8 +41,23 @@ public class ReviewDto {
         private Long reviewId;
         private Long memberId;
         private Long placeId;
-        private String content;
         private Long emojiId;
+        private String content;
         private LocalDateTime createdAt;
+    }
+
+    /**
+     * Place에 저장된 Review 리스트를 제공하기 위한 ResponseDto
+     * @totalPage 전체 페이지 수
+     * @presentPage 현재 페이지
+     * @totalElements Place에 저장된 Review의 총 개수
+     */
+    @Getter
+    @Setter
+    public static class ListResponse {
+        private List<ReviewDto.Response> reviewList;
+        private Long totalPages;
+        private Long presentPage;
+        private Long totalElements;
     }
 }

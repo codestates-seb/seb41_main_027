@@ -8,6 +8,7 @@ import main027.server.domain.review.entity.Emoji;
 import main027.server.domain.review.entity.Review;
 import main027.server.domain.review.repository.ReviewRepository;
 import main027.server.domain.review.verifier.EmojiVerifier;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -51,9 +52,6 @@ public class ReviewServiceSliceTest {
         assertThat(savedReview.getContent()).isEqualTo(review.getContent());
         assertThat(savedReview.getEmoji()).isEqualTo(review.getEmoji());
     }
-
-
-
 
 
     private Emoji createEmoji() {
