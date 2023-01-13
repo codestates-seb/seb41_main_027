@@ -4,7 +4,11 @@ on:
   push:
     branches: [ "backend" ]
   pull_request:
-    branches: [ "backend" ]
+    branches:
+    - 'backend'
+    - 'dev'
+    paths:
+    - 'server/**'
 
 permissions:
   contents: read
@@ -40,4 +44,3 @@ jobs:
       run: chmod +x gradlew
     - name: Test with Gradle
       run: ./gradlew build
-      
