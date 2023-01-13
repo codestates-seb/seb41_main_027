@@ -3,7 +3,7 @@ import axios from 'axios'
 const API_PLACE_ENDPOINT = process.env.REACT_APP_API + process.env.REACT_APP_API_PLACE_ENDPOINT
 const API_CONNECT_TIMEOUT = process.env.REACT_APP_API_CONNECT_TIMEOUT
 
-// create
+// create create
 export const createPlace = body => {
   axios.post(API_PLACE_ENDPOINT, body, {
     timeout: API_CONNECT_TIMEOUT,

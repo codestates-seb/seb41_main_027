@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
+import { API_MEMBER_ENDPOINT } from '../api/member'
+import useFetch from '../hooks/useFetch'
+import toastPopupState from '../store/state/toastPopupState'
+import { useRecoilState } from 'recoil'
+
 import Nav from '../components/Nav/Nav'
 import Header from '../components/Header/Header'
 
@@ -17,12 +22,23 @@ const Container = styled.section`
 `
 
 const Mypage = () => {
+  const [data, isLoading, error] = useFetch(API_MEMBER_ENDPOINT + '/1')
+  const [toastPopup, setToastPopup] = useRecoilState(toastPopupState)
+
+  const handleClick = () => {
+    console.log('mypage toast', toastPopup)
+    setToastPopup({ type: 'success', msg: 'OK!' })
+  }
+
   return (
     <>
       <Nav />
       <Wrapper>
         <Header />
-        <Container>MyPage</Container>
+        <Container>
+          MyPage
+          <button onClick={handleClick}>토스트 팝업</button>
+        </Container>
       </Wrapper>
     </>
   )
