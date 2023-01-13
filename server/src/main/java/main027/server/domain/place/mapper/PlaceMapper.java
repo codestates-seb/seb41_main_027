@@ -12,6 +12,9 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PlaceMapper {
+
+    @Mapping(source = "memberId", target = "member.memberId")
+    @Mapping(source = "categoryId", target = "category.categoryId")
     Place placePostDtoToPlace(PlaceDto.PlacePostDto placePostDto);
 
     Place placePatchDtoToPlace(PlaceDto.PlacePatchDto placePatchDto);

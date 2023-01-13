@@ -26,7 +26,6 @@ public class PlaceController {
 
     @PostMapping
     public ResponseEntity postPlace(@Validated @RequestBody PlaceDto.PlacePostDto placePostDto) {
-        placePostDto.setMemberId(placePostDto.getMemberId());
         Place place = placeService.createPlace(placeMapper.placePostDtoToPlace(placePostDto));
         return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place), HttpStatus.CREATED);
     }
