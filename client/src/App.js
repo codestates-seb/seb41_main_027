@@ -9,13 +9,14 @@ import { Suspense, lazy } from 'react'
 import ScrollToTop from './utils/ScrollToTop'
 import useToastPopup from './hooks/useToastPopup'
 
-const Loading = lazy(() => import('./components/Loading/Loading'))
 const Home = lazy(() => import('./pages/Home'))
 const Place = lazy(() => import('./pages/Place'))
 const Mypage = lazy(() => import('./pages/Mypage'))
 const AboutUs = lazy(() => import('./pages/AboutUs'))
 const SignUp = lazy(() => import('./pages/SignUp'))
 const SignIn = lazy(() => import('./pages/SignIn'))
+const NotFound = lazy(() => import('./pages/NotFound'))
+const Loading = lazy(() => import('./components/Loading/Loading'))
 
 const Main = styled.main`
   display: flex;
@@ -49,12 +50,13 @@ function App() {
       <Suspense fallback={<Loading />}>
         <Main>
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/place" element={<Place />} />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Main>
       </Suspense>
