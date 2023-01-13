@@ -6,6 +6,8 @@ import main027.server.domain.place.verifier.PlaceVerifier;
 import main027.server.domain.review.entity.Review;
 import main027.server.domain.review.repository.ReviewRepository;
 import main027.server.domain.review.verifier.EmojiVerifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,4 +28,10 @@ public class ReviewServiceImpl implements ReviewService{
         return reviewRepository.save(review);
     }
 
+    @Override
+    public Page<Review> findReviews(Long placeId, Pageable pageable) {
+        placeVerifier.findVerifiedPlace(placeId);
+
+        return reviewRepository.findReviews(placeId, pageable);
+    }
 }

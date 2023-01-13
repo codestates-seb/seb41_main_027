@@ -4,6 +4,9 @@ import main027.server.domain.review.dto.ReviewDto;
 import main027.server.domain.review.entity.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
@@ -17,5 +20,15 @@ public interface ReviewMapper {
     @Mapping(source = "member.memberId", target = "memberId")
     @Mapping(source = "place.placeId", target = "placeId")
     ReviewDto.Response entityToResponse(Review review);
+
+    default ReviewDto.ListResponse pageToList(Page<Review> pages) {
+        ReviewDto.ListResponse response = pageToResponseListChild(pages);
+        response.setPresentPage(Long.valueOf(pages.getPageable().getPageNumber() + 1));
+
+        return response;
+    }
+
+    @Mapping(source = "content", target = "reviewList")
+    ReviewDto.ListResponse pageToResponseListChild(Page<Review> reviews);
     
 }

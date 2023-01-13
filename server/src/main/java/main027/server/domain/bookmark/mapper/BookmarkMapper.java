@@ -52,9 +52,6 @@ public interface BookmarkMapper {
     @Mapping(source = "content", target = "placeList")
     BookmarkDto.Response pageToListChild(Page<Place> places);
 
-    List<PlaceDto.PlaceResponseDto> placeListToResponseDto(List<Place> places);
-
-
     @Mapping(source = "member.memberId", target = "memberId")
     @Mapping(source = "category.name", target = "category")
         // TODO: categoryId로 변경 해야 함
