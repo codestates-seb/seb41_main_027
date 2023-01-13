@@ -50,7 +50,7 @@ function App() {
       <Suspense fallback={<Loading />}>
         <Main>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<NotFound />} />
             <Route path="/place" element={<Place />} />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/aboutus" element={<AboutUs />} />

@@ -3,14 +3,24 @@ import styled from 'styled-components'
 const Wrapper = styled.section`
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 3rem;
+
+  p {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
 `
 
 const NotFound = () => {
-  return <Wrapper>404 Not Found</Wrapper>
+  return (
+    <Wrapper>
+      <p>Welcome To Eco Green Seoul</p>
+      <div>comming soon</div>
+    </Wrapper>
+  )
 }
 
 export default NotFound
