@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { API_MEMBER_ENDPOINT } from '../api/Member'
+import { API_MEMBER_ENDPOINT } from '../api/member'
 import useFetch from '../hooks/useFetch'
 import toastPopupState from '../store/state/toastPopupState'
 import { useRecoilState } from 'recoil'
