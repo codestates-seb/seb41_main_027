@@ -17,11 +17,11 @@ const StyleFontAwesomeIcon = styled(FontAwesomeIcon)`
   }
 `
 const Wrapper = styled.nav`
-  z-index: 500;
+  z-index: 1000;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  width: 5.875rem !important; // 88px;
+  width: 88px !important;
   height: 100%;
 
   .logo {

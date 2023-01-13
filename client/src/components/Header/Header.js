@@ -9,7 +9,7 @@ const HeaderW = styled.header`
   justify-content: space-between;
   margin: 0 32px;
   width: calc(100% - 64px);
-  height: 5.875rem; // 88px
+  height: 88px;
   color: #fff;
   h1 {
     font-size: 28px;
