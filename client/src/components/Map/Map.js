@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { MapMarker, Map, useMap } from 'react-kakao-maps-sdk'
 import { useRef, useMemo, useState, useEffect } from 'react'
+import { useRecoilState } from 'recoil'
+import { listClick } from '../../recoil/atoms'
 
 import SearchBar from './SearchBar/SearchBar'
 import SiteInfoCard from './SiteInfoCard/SiteInfoCard'
@@ -58,9 +60,9 @@ const Main = () => {
   const mapRef = useRef()
 
   const [points, setPoints] = useState([
-    { lat: 33.452278, lng: 126.567803 },
-    { lat: 33.452671, lng: 126.574792 },
-    { lat: 33.451744, lng: 126.572441 },
+    { title: '맛집', latlng: { lat: 33.452278, lng: 126.567803 }, isPanto: false },
+    { title: '카카오집', latlng: { lat: 33.452671, lng: 126.574792 }, isPanto: false },
+    { title: '카페', latlng: { lat: 33.451744, lng: 126.572441 }, isPanto: false },
   ])
 
   // const [bound, setBound] = useState([])
@@ -69,7 +71,7 @@ const Main = () => {
     const bounds = new kakao.maps.LatLngBounds()
 
     points.forEach(point => {
-      bounds.extend(new kakao.maps.LatLng(point.lat, point.lng))
+      bounds.extend(new kakao.maps.LatLng(point.latlng.lat, point.latlng.lng))
     })
     return bounds
   }, [points])
@@ -80,6 +82,19 @@ const Main = () => {
     if (map) map.setBounds(bounds)
     // console.log('bound : ' + bounds)
   }, [])
+  const [clickPoint, setClickPoint] = useRecoilState(listClick)
+
+  useEffect(() => {
+    function panTo() {
+      const map = mapRef.current
+      // 이동할 위도 경도 위치를 생성합니다
+      var moveLatLon = new kakao.maps.LatLng(clickPoint)
+
+      // 지도 중심을 부드럽게 이동시킵니다
+      // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+      map.panTo(moveLatLon)
+    }
+  }, [clickPoint])
 
   // 마커 모양 Click 변경 구현
   const EventMarkerContainer = ({ position, index, onClick, isClicked }) => {
@@ -131,10 +146,22 @@ const Main = () => {
     <Container>
       <SearchBar />
       <div className="site-list">
-        <SiteInfoCard />
+        {points.map((point, index) => (
+          <SiteInfoCard
+            index={index}
+            key={index}
+            positions={point}
+            // onClick={() => {
+            //   console.log('click')
+            //   map.setCenter()
+            // }}
+          />
+        ))}
       </div>
       <Map // 지도를 표시할 Container
-        center={{ lat: bounds.qa, lng: bounds.ha }}
+        // center={{ lat: bounds.qa, lng: bounds.ha }}
+        center={clickPoint}
+        // isPanto={clickPoint.isPanto}
         style={{
           width: '100%',
           height: '100%',
@@ -145,8 +172,8 @@ const Main = () => {
         {points.map((point, index) => (
           <EventMarkerContainer
             index={index}
-            key={`EventMarkerContainer-${point.lat}-${point.lng}`}
-            position={point}
+            key={`EventMarkerContainer-${point.latlng.lat}-${point.latlng.lng}`}
+            position={point.latlng}
             onClick={() => setSeleteMarker(index)}
             isClicked={selectedMarker === index}
           />

@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { useRecoilState } from 'recoil'
+import { listClick } from '../../../recoil/atoms'
 
 const Wrapper = styled.div`
   // Style 💄
@@ -76,11 +78,19 @@ const Wrapper = styled.div`
     color: #909499;
   }
 `
-const SiteInfoCard = () => {
+
+const SiteInfoCard = ({ positions }) => {
+  const [clickPoint, setClickPoint] = useRecoilState(listClick)
+
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => {
+        setClickPoint(positions.latlng)
+        console.log(clickPoint)
+      }}
+    >
       <p className="card-title">
-        <h1 className="site-name">타이틀을 기재해주세요.타이틀을 기재해주세요.</h1>
+        <h1 className="site-name">{positions.title}</h1>
         <div className="view-like">
           <span className="ico-like">♥️</span>
           <span className="count-like">000</span>
