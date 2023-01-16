@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="main027.server.domain.review.service.ReviewServiceSliceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-16T01:44:14" hostname="itsowavy.local" time="0.015">
+  <properties/>
+  <testcase name="리뷰 저장" classname="main027.server.domain.review.service.ReviewServiceSliceTest" time="0.015"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
