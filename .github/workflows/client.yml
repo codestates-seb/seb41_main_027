@@ -1,11 +1,13 @@
 name: client CI/CD
+
 on:
   push:
     paths:
      - 'client/**'
-    branches: [ "dev" ]
+    branches: ["dev"]
+    
 jobs:
-  build-client:
+  build:
     runs-on: ubuntu-20.04
     defaults:
       run: 
