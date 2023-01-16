@@ -1,0 +1,30 @@
+# .gitignore 파일 규칙
+# - 표준 glob 패턴을 사용
+# - / 를 사용하면 규칙이 프로젝트 전체에 적용되지 않음 (recursivity)
+# - / 로 끝나는 것은 폴더로 인식
+# - ! 를 사용하면 해당 패턴의 파일은 무시 되지 않음
+#  (단, 한번 제외된 폴더의 내의 파일들은 다시 추가 할 수가 없음)
+# ------------------------------------
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

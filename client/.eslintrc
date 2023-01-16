@@ -1,0 +1,44 @@
+// npm 내려받은 후, eslint extension 다운 부탁드립니다!
+// npm pack 세팅 완료된 상황
+// npm install -D eslint
+// npm install --save-dev eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
+// plugins 종류 ------------------------
+//
+// eslint-config-airbnb-base: 에어비엔비 린트 플러그인
+// eslint-config-next: Next.js 전용 린트 플러그인
+// eslint-plugin-react: 리액트 전용 플러그인
+// eslint-plugin-prettier: 린트 위에 사용할 프리티어 플러그인
+// eslint-config-prettier: 요건 린트 설정과 중복되는 부분이 있으면 프리티어 룰에서 제외하는 플러그인
+// @typescript-eslint/eslint-plugin: : 타입스크립트 전용 린트
+// ------------------------------------
+// 추가로 돌리고 싶은 플러그인 있으시다면 원하시는 추가 후 채널에 공유 부탁드립니다~!
+// 🔗ref: https://helloinyong.tistory.com/325
+// .eslintrc 기본 셋
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:import/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-uses-react": 0,
+    "react/prop-types": "off",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "no-unused-vars": "off"
+  }
+}

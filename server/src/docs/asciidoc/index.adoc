@@ -1,0 +1,37 @@
+= 에코그린 서울 애플리케이션
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+Choi Ji Min <chlwlals8708@gmail.com>
+
+v1.0.0, 2023.01.13
+
+***
+== PlaceController
+=== 장소 등록
+.curl-request
+include::{snippets}/post-place/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-place/http-request.adoc[]
+
+.http-response
+include::{snippets}/post-place/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/post-place/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/post-place/request-body.adoc[]
+
+.request-fields
+include::{snippets}/post-place/request-fields.adoc[]
+
+.response-body
+include::{snippets}/post-place/response-body.adoc[]
+
+.response-fields
+include::{snippets}/post-place/response-fields.adoc[]

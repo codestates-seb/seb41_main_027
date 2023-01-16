@@ -31,19 +31,19 @@ public class Place extends BaseTime {
     /**
      * 카카오 API ID
      */
-    @Column(nullable = false, unique = true)
+    @Column
     private Long kakaoId;
 
     /**
      * 위도
      */
-    @Column(nullable = false)
+    @Column
     private String latitude;
 
     /**
      * 경도
      */
-    @Column(nullable = false)
+    @Column
     private String longitude;
 
     @ManyToOne
