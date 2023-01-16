@@ -28,6 +28,10 @@ public class ReviewServiceImpl implements ReviewService{
         return reviewRepository.save(review);
     }
 
+    /**
+     * 페이징 처리 된 Review를 리턴하는 서비스 메서드
+     * @return 페이징 처리 된 Review
+     */
     @Override
     public Page<Review> findReviews(Long placeId, Pageable pageable) {
         placeVerifier.findVerifiedPlace(placeId);
