@@ -3,7 +3,7 @@ on:
   push:
     paths:
      - 'client/**'
-    branches: [ "dev" ]
+    branches: ["dev"]
 jobs:
   build:
     runs-on: ubuntu-20.04
