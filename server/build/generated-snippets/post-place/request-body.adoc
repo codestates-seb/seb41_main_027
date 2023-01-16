@@ -1,0 +1,13 @@
+[source,options="nowrap"]
+----
+{
+  "memberId" : 1,
+  "name" : "강남역7번출구맥도날드",
+  "address" : "서울시 강남구",
+  "description" : "사람이많아요",
+  "kakaoId" : 0,
+  "categoryId" : 1,
+  "latitude" : "37",
+  "longitude" : "37"
+}
+----

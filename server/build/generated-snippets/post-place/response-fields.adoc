@@ -1,0 +1,40 @@
+|===
+|Path|Type|Description
+
+|`+placeId+`
+|`+Number+`
+|장소 식별자
+
+|`+memberId+`
+|`+Number+`
+|회원 식별자
+
+|`+name+`
+|`+String+`
+|장소 이름
+
+|`+address+`
+|`+String+`
+|장소 주소
+
+|`+description+`
+|`+String+`
+|장소 설명
+
+|`+kakaoId+`
+|`+Number+`
+|카카오맵 식별자
+
+|`+category+`
+|`+String+`
+|카테고리
+
+|`+latitude+`
+|`+String+`
+|위도
+
+|`+longitude+`
+|`+String+`
+|경도
+
+|===

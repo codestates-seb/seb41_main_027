@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - ReviewControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>ReviewControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/main027.server.domain.review.controller.html">main027.server.domain.review.controller</a> &gt; ReviewControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.022s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">postReview()</td>
+<td class="success">0.022s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2023-01-16 10:44:14.058  INFO 6137 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [main027.server.domain.review.controller.ReviewControllerTest], using SpringBootContextLoader
+2023-01-16 10:44:14.058  INFO 6137 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [main027.server.domain.review.controller.ReviewControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2023-01-16 10:44:14.058  INFO 6137 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [main027.server.domain.review.controller.ReviewControllerTest]: ReviewControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-01-16 10:44:14.062  INFO 6137 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration main027.server.ServerApplication for test class main027.server.domain.review.controller.ReviewControllerTest
+2023-01-16 10:44:14.062  INFO 6137 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2023-01-16 10:44:14.062  INFO 6137 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@22d522d4, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6409a2e4, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@54e24511, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7c95440d, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@77dd0ac9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5eea8854, org.springframework.test.context.transaction.TransactionalTestExecutionListener@18e69455, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4e850e68, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@5111de33, org.springframework.test.context.event.EventPublishingTestExecutionListener@5b33446d, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@775b3762, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@114b81af, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@4ef435f3, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@f25106c, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@216bd6cd, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@6ce07db6, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@3d48674]
+2023-01-16 10:44:14.070 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(464887203&lt;open&gt;)] for JPA transaction
+2023-01-16 10:44:14.070 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-01-16 10:44:14.070 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@6cee6eb7]
+2023-01-16 10:44:14.070 TRACE 6137 --- [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2023-01-16 10:44:14.070 DEBUG 6137 --- [    Test worker] org.hibernate.SQL                        : select emoji0_.emoji_id as emoji_id1_2_0_, emoji0_.name as name2_2_0_ from emoji emoji0_ where emoji0_.emoji_id=?
+2023-01-16 10:44:14.071 TRACE 6137 --- [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2023-01-16 10:44:14.071 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-01-16 10:44:14.071 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(464887203&lt;open&gt;)]
+2023-01-16 10:44:14.071 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-01-16 10:44:14.071 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(464887203&lt;open&gt;)] for JPA transaction
+2023-01-16 10:44:14.071 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-01-16 10:44:14.071 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@314e2b4b]
+2023-01-16 10:44:14.071 TRACE 6137 --- [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2023-01-16 10:44:14.072 DEBUG 6137 --- [    Test worker] org.hibernate.SQL                        : select member0_.member_id as member_i1_3_0_, member0_.created_at as created_2_3_0_, member0_.modified_at as modified3_3_0_, member0_.email as email4_3_0_, member0_.member_status as member_s5_3_0_, member0_.nick_name as nick_nam6_3_0_, member0_.password as password7_3_0_, roles1_.member_member_id as member_m1_4_1_, roles1_.roles as roles2_4_1_ from member member0_ left outer join member_roles roles1_ on member0_.member_id=roles1_.member_member_id where member0_.member_id=?
+2023-01-16 10:44:14.072 TRACE 6137 --- [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2023-01-16 10:44:14.072 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-01-16 10:44:14.072 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(464887203&lt;open&gt;)]
+2023-01-16 10:44:14.072 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-01-16 10:44:14.072 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(464887203&lt;open&gt;)] for JPA transaction
+2023-01-16 10:44:14.072 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-01-16 10:44:14.072 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4d94b0af]
+2023-01-16 10:44:14.073 TRACE 6137 --- [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2023-01-16 10:44:14.073 DEBUG 6137 --- [    Test worker] org.hibernate.SQL                        : select place0_.place_id as place_id1_5_0_, place0_.created_at as created_2_5_0_, place0_.modified_at as modified3_5_0_, place0_.address as address4_5_0_, place0_.category_id as categor10_5_0_, place0_.description as descript5_5_0_, place0_.kakao_id as kakao_id6_5_0_, place0_.latitude as latitude7_5_0_, place0_.longitude as longitud8_5_0_, place0_.member_id as member_11_5_0_, place0_.name as name9_5_0_, category1_.category_id as category1_1_1_, category1_.name as name2_1_1_, member2_.member_id as member_i1_3_2_, member2_.created_at as created_2_3_2_, member2_.modified_at as modified3_3_2_, member2_.email as email4_3_2_, member2_.member_status as member_s5_3_2_, member2_.nick_name as nick_nam6_3_2_, member2_.password as password7_3_2_, roles3_.member_member_id as member_m1_4_3_, roles3_.roles as roles2_4_3_ from place place0_ left outer join category category1_ on place0_.category_id=category1_.category_id left outer join member member2_ on place0_.member_id=member2_.member_id left outer join member_roles roles3_ on member2_.member_id=roles3_.member_member_id where place0_.place_id=?
+2023-01-16 10:44:14.073 TRACE 6137 --- [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2023-01-16 10:44:14.073 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-01-16 10:44:14.074 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(464887203&lt;open&gt;)]
+2023-01-16 10:44:14.074 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-01-16 10:44:14.074 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(464887203&lt;open&gt;)] for JPA transaction
+2023-01-16 10:44:14.074 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2023-01-16 10:44:14.074 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@b92cdf9]
+2023-01-16 10:44:14.074 TRACE 6137 --- [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2023-01-16 10:44:14.078 DEBUG 6137 --- [    Test worker] org.hibernate.SQL                        : insert into review (review_id, created_at, modified_at, content, emoji_id, member_id, place_id) values (default, ?, ?, ?, ?, ?, ?)
+2023-01-16 10:44:14.079 TRACE 6137 --- [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2023-01-16 10:44:14.079 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-01-16 10:44:14.079 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(464887203&lt;open&gt;)]
+2023-01-16 10:44:14.079 DEBUG 6137 --- [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.5.1</a> at 2023. 1. 16. 오전 10:44:14</p>
+</div>
+</div>
+</body>
+</html>
