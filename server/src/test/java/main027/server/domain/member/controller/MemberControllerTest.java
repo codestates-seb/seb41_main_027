@@ -6,7 +6,6 @@ import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.mapper.MemberMapper;
 import main027.server.domain.member.service.MemberService;
 import main027.server.domain.member.service.MemberUpdateService;
-import main027.server.domain.place.controller.PlaceController;
 import org.apache.catalina.security.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -21,6 +20,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +30,14 @@ import java.util.List;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -92,7 +99,28 @@ class MemberControllerTest {
         actions
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.email").value(post.getEmail()))
-                .andExpect(jsonPath("$.nickName").value(post.getNickName()));
+                .andExpect(jsonPath("$.nickName").value(post.getNickName()))
+                .andDo(document("post-member",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                requestFields(
+                                        List.of(
+                                                fieldWithPath("email").type(JsonFieldType.STRING).description("회원 email"),
+                                                fieldWithPath("nickName").type(JsonFieldType.STRING).description("회원 닉네임"),
+                                                fieldWithPath("password").type(JsonFieldType.STRING).description("회원 비밀번호")
+                                        )
+                                ),
+                                responseFields(
+                                        List.of(
+                                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
+                                                fieldWithPath("email").type(JsonFieldType.STRING).description("회원 email"),
+                                                fieldWithPath("nickName").type(JsonFieldType.STRING).description("회원 닉네임"),
+                                                fieldWithPath("memberStatus").type(JsonFieldType.STRING).description("회원 상태"),
+                                                fieldWithPath("roles").type(JsonFieldType.ARRAY).description("회원 역할"),
+                                                fieldWithPath("createdAt").type(JsonFieldType.STRING).description("생성 시간"),
+                                                fieldWithPath("modifiedAt").type(JsonFieldType.STRING).description("수정 시간")
+                                        )
+                                )));
     }
 
     @Test
@@ -128,7 +156,29 @@ class MemberControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.memberId").value(patch.getMemberId()))
                 .andExpect(jsonPath("$.nickName").value(patch.getNickName()))
-                .andExpect(jsonPath("$.memberStatus").value(patch.getMemberStatus().toString()));
+                .andExpect(jsonPath("$.memberStatus").value(patch.getMemberStatus().toString()))
+                .andDo(document("patch-member",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                requestFields(
+                                        List.of(
+                                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
+                                                fieldWithPath("nickName").type(JsonFieldType.STRING).description("회원 닉네임"),
+                                                fieldWithPath("password").type(JsonFieldType.STRING).description("회원 비밀번호"),
+                                                fieldWithPath("memberStatus").type(JsonFieldType.STRING).description("회원 상태")
+                                        )
+                                ),
+                                responseFields(
+                                        List.of(
+                                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
+                                                fieldWithPath("email").type(JsonFieldType.STRING).description("회원 email"),
+                                                fieldWithPath("nickName").type(JsonFieldType.STRING).description("회원 닉네임"),
+                                                fieldWithPath("memberStatus").type(JsonFieldType.STRING).description("회원 상태"),
+                                                fieldWithPath("roles").type(JsonFieldType.ARRAY).description("회원 역할"),
+                                                fieldWithPath("createdAt").type(JsonFieldType.STRING).description("생성 시간"),
+                                                fieldWithPath("modifiedAt").type(JsonFieldType.STRING).description("수정 시간")
+                                        )
+                                )));
 
     }
 
@@ -142,6 +192,13 @@ class MemberControllerTest {
         );
 
         actions
-                .andExpect(status().isNoContent());
+                .andExpect(status().isNoContent())
+                .andDo(document("delete-member",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                pathParameters(
+                                        parameterWithName("memberId").description("회원 식별자")
+                                )
+                ));
     }
 }

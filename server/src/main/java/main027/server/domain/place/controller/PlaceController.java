@@ -50,9 +50,6 @@ public class PlaceController {
         return new ResponseEntity<>(placeMapper.pageToList(placeService.findPlaces(pageable)),HttpStatus.OK);
     }
 
-//    @GetMapping("/{categoryId}")
-//    public ResponseEntity getPlaceByCategory(R)
-
     @DeleteMapping("/{placeId}")
     public ResponseEntity deletePlace(@PathVariable("placeId") Long placeId) {
         placeService.deletePlace(placeId);

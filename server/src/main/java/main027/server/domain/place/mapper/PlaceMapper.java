@@ -3,6 +3,8 @@ package main027.server.domain.place.mapper;
 import main027.server.domain.bookmark.dto.BookmarkDto;
 import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
+import main027.server.domain.review.dto.ReviewDto;
+import main027.server.domain.review.entity.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;

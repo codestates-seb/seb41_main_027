@@ -5,6 +5,10 @@
 :toc-title: Table of Contents
 :source-highlighter: prettify
 
+Sung Seung Hun <qndldtmsl3138@gmail.com>
+
+Hwaing Won Yong <kakaohwy@gmail.com>
+
 Choi Ji Min <chlwlals8708@gmail.com>
 
 v1.0.0, 2023.01.13
@@ -35,3 +39,54 @@ include::{snippets}/post-place/response-body.adoc[]
 
 .response-fields
 include::{snippets}/post-place/response-fields.adoc[]
+
+=== 장소 수정
+.curl-request
+include::{snippets}/patch-place/curl-request.adoc[]
+
+.http-request
+include::{snippets}/patch-place/http-request.adoc[]
+
+.http-response
+include::{snippets}/patch-place/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/patch-place/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/patch-place/request-body.adoc[]
+
+.request-fields
+include::{snippets}/patch-place/request-fields.adoc[]
+
+.response-body
+include::{snippets}/patch-place/response-body.adoc[]
+
+.response-fields
+include::{snippets}/patch-place/response-fields.adoc[]
+
+=== 장소 1개 조회
+.curl.request
+include::{snippets}/get-place/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-place/http-request.adoc[]
+
+.http-response
+include::{snippets}/get-place/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/get-place/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/get-place/request-body.adoc[]
+
+.response-body
+include::{snippets}/get-place/response-body.adoc[]
+
+.response-fields
+include::{snippets}/get-place/response-fields.adoc[]
+
+=== 장소 전체 조회
+
+
