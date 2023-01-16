@@ -35,6 +35,18 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+    - name: write ADMIN EMAIL
+      run: echo "ADMIN_EMAIL=${{secrets.ADMIN_EMAIL}}" >> env.yml
+      working-directory: ./server/src/main/resources
+    - name: write KEY
+      run: echo "JWT_SECRET_KEY=${{secrets.JWT_SECRET_KEY}}" >> env.yml
+      working-directory: ./server/src/main/resources
+    - name: access minute
+      run: echo "ACCESS_TOKEN_EXPIRATION_MINUTE=${{secrets.ACCESS_TOKEN_EXPIRATION_MINUTE}}" >> env.yml
+      working-directory: ./server/src/main/resources
+    - name: refresh minute
+      run: echo "REFRESH_TOKEN_EXPIRATION_MINUTE=${{secrets.REFRESH_TOKEN_EXPIRATION_MINUTE}}" >> env.yml
+      working-directory: ./server/src/main/resources   
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
