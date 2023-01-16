@@ -148,15 +148,7 @@ const Main = () => {
       <SearchBar />
       <div className="site-list">
         {points.map((point, index) => (
-          <SiteInfoCard
-            index={index}
-            key={index}
-            positions={point}
-            // onClick={() => {
-            //   console.log('click')
-            //   map.setCenter()
-            // }}
-          />
+          <SiteInfoCard index={index} key={index} positions={point} />
         ))}
       </div>
       <Map // 지도를 표시할 Container
@@ -180,16 +172,6 @@ const Main = () => {
           />
         ))}
       </Map>
-      {/* <button
-        onClick={() => {
-          const map = mapRef.current
-          if (map) map.setBounds(bounds)
-          console.log(map.getBounds(bounds))
-          console.log(bounds)
-        }}
-      >
-        지도 범위 재설정 하기
-      </button> */}
     </Container>
   )
 }
