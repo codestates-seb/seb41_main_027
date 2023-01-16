@@ -84,6 +84,7 @@ const Main = () => {
   }, [])
   const [clickPoint, setClickPoint] = useRecoilState(listClick)
 
+  // listItem 클릭시 해당위치 지도에서 정중앙으로 이동!!!! 추가로 마커색 변환 및 인포필요할듯.
   useEffect(() => {
     function panTo() {
       const map = mapRef.current
