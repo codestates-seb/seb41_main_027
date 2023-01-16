@@ -1,0 +1,33 @@
+name: client CI/CD
+on:
+  push:
+    paths:
+     - 'client/**'
+    branches: [ "dev" ]
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    defaults:
+      run: 
+        working-directory: ./client
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_CLIENT }}
+          AWS_EC2_METADATA_DISABLED: true
+        run: |
+          aws s3 sync \
+            --region ap-northeast-2 \
+            build s3://$AWS_S3_BUCKET_NAME \
+            --delete
