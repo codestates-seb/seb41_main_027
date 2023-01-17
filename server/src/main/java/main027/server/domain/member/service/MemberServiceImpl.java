@@ -29,11 +29,15 @@ public class MemberServiceImpl implements MemberService{
     public Member createMember(Member member) {
         memberVerifier.verifyExistsEmail(member.getEmail());
 
-        // 패스워드 암호화
+        /**
+         * 패스워드 암호화
+         */
         String encryptedPassword = passwordEncoder.encode(member.getPassword());
         member.setPassword(encryptedPassword);
 
-        // DB에 User Role 저장
+        /**
+         * User Role 생성
+         */
         List<String> roles = authorityUtils.createRoles(member.getEmail());
         member.setRoles(roles);
 
