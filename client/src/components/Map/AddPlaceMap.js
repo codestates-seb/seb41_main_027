@@ -43,7 +43,7 @@ const Container = styled.section`
 
 const { kakao } = window
 
-const Main = () => {
+const AddPlaceMap = () => {
   const MARKER_WIDTH = 33 // 기본, 클릭 마커의 너비
   const MARKER_HEIGHT = 36 // 기본, 클릭 마커의 높이
   const OFFSET_X = 12 // 기본, 클릭 마커의 기준 X좌표
@@ -98,49 +98,49 @@ const Main = () => {
   }, [clickPoint])
 
   // 마커 모양 Click 변경 구현
-  const EventMarkerContainer = ({ position, index, onClick, isClicked }) => {
-    const map = useMap()
-    const [isOver, setIsOver] = useState(false)
-    const gapX = MARKER_WIDTH + SPRITE_GAP // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
-    const originY = (MARKER_HEIGHT + SPRITE_GAP) * index // 스프라이트 이미지에서 기본, 클릭 마커로 사용할 Y좌표 값
-    const overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP) * index // 스프라이트 이미지에서 오버 마커로 사용할 Y좌표 값
-    const normalOrigin = { x: 0, y: originY } // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
-    const clickOrigin = { x: gapX, y: originY } // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
-    const overOrigin = { x: gapX * 2, y: overOriginY } // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
+  // const EventMarkerContainer = ({ position, index, onClick, isClicked }) => {
+  //   const map = useMap()
+  //   const [isOver, setIsOver] = useState(false)
+  //   const gapX = MARKER_WIDTH + SPRITE_GAP // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
+  //   const originY = (MARKER_HEIGHT + SPRITE_GAP) * index // 스프라이트 이미지에서 기본, 클릭 마커로 사용할 Y좌표 값
+  //   const overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP) * index // 스프라이트 이미지에서 오버 마커로 사용할 Y좌표 값
+  //   const normalOrigin = { x: 0, y: originY } // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
+  //   const clickOrigin = { x: gapX, y: originY } // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
+  //   const overOrigin = { x: gapX * 2, y: overOriginY } // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
 
-    let spriteOrigin = isOver ? overOrigin : normalOrigin
+  //   let spriteOrigin = isOver ? overOrigin : normalOrigin
 
-    if (isClicked) {
-      spriteOrigin = clickOrigin
-    }
+  //   if (isClicked) {
+  //     spriteOrigin = clickOrigin
+  //   }
 
-    return (
-      <MapMarker
-        position={position} // 마커를 표시할 위치
-        onClick={onClick}
-        onMouseOver={() => setIsOver(true)}
-        onMouseOut={() => setIsOver(false)}
-        image={{
-          src: SPRITE_MARKER_URL,
-          size: {
-            width: MARKER_WIDTH,
-            height: MARKER_HEIGHT,
-          },
-          options: {
-            offset: {
-              x: OFFSET_X,
-              y: OFFSET_Y,
-            },
-            spriteSize: {
-              width: SPRITE_WIDTH,
-              height: SPRITE_HEIGHT,
-            },
-            spriteOrigin: spriteOrigin,
-          },
-        }}
-      ></MapMarker>
-    )
-  }
+  //   return (
+  //     <MapMarker
+  //       position={position} // 마커를 표시할 위치
+  //       onClick={onClick}
+  //       onMouseOver={() => setIsOver(true)}
+  //       onMouseOut={() => setIsOver(false)}
+  //       image={{
+  //         src: SPRITE_MARKER_URL,
+  //         size: {
+  //           width: MARKER_WIDTH,
+  //           height: MARKER_HEIGHT,
+  //         },
+  //         options: {
+  //           offset: {
+  //             x: OFFSET_X,
+  //             y: OFFSET_Y,
+  //           },
+  //           spriteSize: {
+  //             width: SPRITE_WIDTH,
+  //             height: SPRITE_HEIGHT,
+  //           },
+  //           spriteOrigin: spriteOrigin,
+  //         },
+  //       }}
+  //     ></MapMarker>
+  //   )
+  // }
   const [selectedMarker, setSeleteMarker] = useState()
 
   return (
@@ -175,4 +175,4 @@ const Main = () => {
     </Container>
   )
 }
-export default Main
+export default AddPlaceMap
