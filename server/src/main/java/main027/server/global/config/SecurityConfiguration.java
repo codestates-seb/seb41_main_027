@@ -81,6 +81,10 @@ public class SecurityConfiguration {
         return source;
     }
 
+    /**
+     * <p>JWT 생성 + 로그인 인증 + 자격 증명 및 검증 필터</p>
+     * <p>addFilterAfter : JwtAuthenticationFilter 다음에 바로 JwtVerificationFilter가 동작하도록 설정</p>
+     */
     public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {

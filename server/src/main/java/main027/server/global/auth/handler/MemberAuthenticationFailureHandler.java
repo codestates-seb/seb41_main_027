@@ -12,15 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 로그인 인증 실패 시 추가 작업을 할 수 있는 실패 핸들러
+ * 인증 실패 시, 에러 로그를 기록하거나 error response를 전송
+ */
 @Slf4j
 public class MemberAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response,
                                         AuthenticationException exception) throws IOException {
-        /**
-         * 인증 실패 시, 에러 로그를 기록하거나 error response를 전송할 수 있다.
-         */
         log.error("# Authentication failed: {}", exception.getMessage());
 
         sendErrorResponse(response);

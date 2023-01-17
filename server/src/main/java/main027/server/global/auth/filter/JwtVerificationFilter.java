@@ -18,6 +18,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * JWT 검증 필터
+ * OncePerRequestFilter는 request 당 한 번만 수행됨
+ * 성공이냐 실패냐 한 번만 판단하면 되기 때문.
+ */
 public class JwtVerificationFilter extends OncePerRequestFilter {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
@@ -27,6 +32,11 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         this.authorityUtils = authorityUtils;
     }
 
+    /**
+     * <p>Claims가 정상적으로 파싱되면 서명 검증 역시 자연스럽게 성공한 것임(별도의 검증 메서드가 필요 없음)</p>
+     * <p>setAuthenticationToContext()는 Authentication 객체를 SecurityContext에 저장하기 위한 메서드임</p>
+     * <p>JWT에 대한 서명 검증에 실패한 경우 발생하는 Exception을 처리할 수 있는 예외처리 로직 포함</p>
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -43,6 +53,12 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    /**
+     * <p>OncePerRequestFilter의 shouldNotFilter를 오버라이드 한 것.</p>
+     * <p>특정 조건에 부합하면(true) 해당 Filter의 동작을 수행하지 않고 건너뜀</p>
+     * <p>JWT가 Authorization header에 포함되지 않았다면, JWT 자격 증명이 필요하지 않은 리로스에 대한 요청이라고 판단하여 다음 Filter로 처리를 넘김</p>
+     * @return true or false
+     */
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String authorization = request.getHeader("Authorization");
@@ -50,6 +66,12 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         return authorization == null || !authorization.startsWith("Bearer");
     }
 
+    /**
+     * <p>jws는 JWT Signed의 줄임말.</p>
+     * <p>Bearer는 JWT의 토큰 타입을 의미</p>
+     * @param request
+     * @return claims(Token에 포함된 정보)
+     */
     private Map<String, Object> verifyJws(HttpServletRequest request) {
         String jws = request.getHeader("Authorization").replace("Bearer", "");
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
@@ -58,10 +80,17 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         return claims;
     }
 
+    /**
+     * <p>JWT에서 파싱한 Claims를 통해 username(email)을 얻음</p>
+     * <p>JWT의 Claims에서 얻은 권한 정보를 기반으로 List<GrantedAuthority>를 생성</p>
+     * <p>username과 List<GrantedAuthority>를 포함한 Authentication 객체를 생성</p>
+     * <p>SecurityContext에 Authentication 객체를 저장</p>
+     * @param claims
+     */
     private void setAuthenticationToContext(Map<String, Object> claims) {
-        String username = (String) claims.get("username");
+        String email = (String) claims.get("email");
         List<GrantedAuthority> authorities = authorityUtils.createAuthorities((List)claims.get("roles"));
-        Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
