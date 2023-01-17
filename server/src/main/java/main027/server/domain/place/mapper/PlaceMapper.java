@@ -21,6 +21,8 @@ public interface PlaceMapper {
 
     Place placePatchDtoToPlace(PlaceDto.PlacePatchDto placePatchDto);
 
+    Place placeLikeDtoToPlace(PlaceDto.PlaceLikeDto placeLikeDto);
+
     default PlaceDto.PageResponseDto pageToList(Page<Place> pages) {
         PlaceDto.PageResponseDto response = pageToListChild(pages);
         response.setPresentPage(Long.valueOf(pages.getPageable().getPageNumber() + 1));
