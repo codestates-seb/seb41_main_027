@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="main027.server.domain.bookmark.service.BookmarkServiceSliceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-01-16T01:44:12" hostname="itsowavy.local" time="0.073">
-  <properties/>
-  <testcase name="북마크 제거 기능" classname="main027.server.domain.bookmark.service.BookmarkServiceSliceTest" time="0.07"/>
-  <testcase name="북마크 추가 기능" classname="main027.server.domain.bookmark.service.BookmarkServiceSliceTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
