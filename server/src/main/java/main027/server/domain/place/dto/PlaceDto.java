@@ -44,13 +44,21 @@ public class PlaceDto extends BaseTime {
 
     @Data
     @AllArgsConstructor
+    public static class PlaceLikeDto {
+        private Long memberId;
+        private Long placeId;
+    }
+
+    @Data
+    @AllArgsConstructor
     public static class PlaceResponseDto {
         private Long placeId;
         private Long memberId;
         private String name;
         private String address;
         private String description;
-
+        private List placeLikeUserList;
+        private Boolean isBookMarked;
         private Long kakaoId;
         private String category;
         private String latitude;

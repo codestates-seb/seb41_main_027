@@ -9,13 +9,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@RequiredArgsConstructor
 @Transactional
+@Service
 public class PlaceServiceImpl implements PlaceService {
 
     private final PlaceRepository placeRepository;
     private final PlaceVerifier placeVerifier;
+
+    public PlaceServiceImpl (PlaceRepository placeRepository, PlaceVerifier placeVerifier) {
+        this.placeRepository = placeRepository;
+        this.placeVerifier = placeVerifier;
+    }
 
     public Place createPlace(Place place) {
         placeVerifier.verifyExistsPlace(place.getName());

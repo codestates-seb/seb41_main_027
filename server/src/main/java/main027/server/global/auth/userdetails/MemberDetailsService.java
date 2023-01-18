@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * <p>사용자의 크리덴셜을 DB에서 조회한 후 AuthenricationManager에게 사용자의 MemberDetails를 전달</p>
+ */
 @Component
 public class MemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
@@ -24,6 +27,11 @@ public class MemberDetailsService implements UserDetailsService {
         this.authorityUtils = authorityUtils;
     }
 
+    /**
+     * (3) 사용자의 정보를 DB에서 조회
+     * @param username 이메일
+     * @return MemberDetails 생성
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Member> optionalMember = memberRepository.findByEmail(username);
@@ -33,9 +41,10 @@ public class MemberDetailsService implements UserDetailsService {
     }
 
     /**
-     * <p>MemberDetails는 UserDetails를 구현하고 Member 엔티티 클래스를 상속함.</p>
-     * <p>데이터베이스에서 조회한 회원 정보를 Spring Security의 User 정보로 변환하는 과정과</p>
-     * <p>User의 권한 정보를 생성하는 과정을 캡슐화할 수 있다.</p>
+     * (4)
+     * <p>추가 설명 : MemberDetails는 UserDetails를 구현하고 Member 엔티티 클래스를 상속함.</p>
+     * <p>데이터베이스에서 조회한 회원 정보를 Spring Security의 유저 정보로 변환하는 과정과</p>
+     * <p>유저의 권한 정보를 생성하는 과정을 캡슐화할 수 있다.</p>
      */
     private final class MemberDetails extends Member implements UserDetails {
         MemberDetails(Member member) {

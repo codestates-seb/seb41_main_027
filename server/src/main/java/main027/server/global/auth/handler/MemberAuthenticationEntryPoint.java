@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <p>Exception 발생으로 인해 SecurityContext에 Authentication이 저장이 되지 않는 경우 등 AuthenticationException이 발생할 때 호출되는 핸들러 같은 역할을 함</p>
+ */
 @Slf4j
 @Component
 public class MemberAuthenticationEntryPoint implements AuthenticationEntryPoint {

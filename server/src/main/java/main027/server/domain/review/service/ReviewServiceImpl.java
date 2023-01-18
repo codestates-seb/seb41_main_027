@@ -19,8 +19,10 @@ public class ReviewServiceImpl implements ReviewService{
     private final PlaceVerifier placeVerifier;
     private final MemberVerifier memberVerifier;
 
+    /**
+     *  리뷰의 Emoji, Place, Member가 유효한지 검사 후 저장
+     */
     public Review save(Review review) {
-        // emoji, member, place가 존재하는지 검증
         emojiVerifier.findVerifiedEmoji(review.getEmoji().getEmojiId());
         memberVerifier.findVerifiedMember(review.getMember().getMemberId());
         placeVerifier.findVerifiedPlace(review.getPlace().getPlaceId());
@@ -28,6 +30,11 @@ public class ReviewServiceImpl implements ReviewService{
         return reviewRepository.save(review);
     }
 
+    /**
+     * 페이징 처리 된 Review를 리턴하는 서비스 메서드
+     *
+     * @return 페이징 처리 된 Review
+     */
     @Override
     public Page<Review> findReviews(Long placeId, Pageable pageable) {
         placeVerifier.findVerifiedPlace(placeId);

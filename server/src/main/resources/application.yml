@@ -53,9 +53,9 @@ spring:
     # ddl-auto 후에 Stub Data가 실행
     defer-datasource-initialization: true
     # sql 포맷 예쁘게 보기
-    properties:
-      hibernate:
-        format_sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
 
 
 ---
