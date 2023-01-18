@@ -54,12 +54,12 @@ public class SecurityConfiguration {
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .antMatchers(HttpMethod.POST, "/members").permitAll()
-                        .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER")
-                        .antMatchers(HttpMethod.DELETE,"/members/**").hasAnyRole( "USER")
-                        .antMatchers(HttpMethod.POST,"/places").hasRole("USER")
-                        .antMatchers(HttpMethod.PATCH, "/places/**").hasRole("USER")
-                        .antMatchers(HttpMethod.DELETE, "/places/**").hasRole("USER")
+                        // .antMatchers(HttpMethod.POST, "/members").permitAll()
+                        // .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER")
+                        // .antMatchers(HttpMethod.DELETE,"/members/**").hasAnyRole( "USER")
+                        // .antMatchers(HttpMethod.POST,"/places").hasRole("USER")
+                        // .antMatchers(HttpMethod.PATCH, "/places/**").hasRole("USER")
+                        // .antMatchers(HttpMethod.DELETE, "/places/**").hasRole("USER")
                         .anyRequest().permitAll()
                 );
         return http.build();
