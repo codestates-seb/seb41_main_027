@@ -57,5 +57,4 @@ public interface BookmarkMapper {
     @Mapping(target = "likeCount", expression = "java(place.getPlaceLikeUserList().size())")
         // TODO: categoryId로 변경 해야 함
     PlaceDto.PlaceResponseDto placeToResponse(Place place);
-
 }
