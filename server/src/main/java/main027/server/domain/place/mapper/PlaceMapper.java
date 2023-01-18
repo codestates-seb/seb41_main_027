@@ -37,5 +37,6 @@ public interface PlaceMapper {
 
     @Mapping(source = "member.memberId", target = "memberId")
     @Mapping(source = "category.name", target = "category")
+    @Mapping(target = "likeCount", expression = "java(place.getPlaceLikeUserList().size())")
     PlaceDto.PlaceResponseDto placeToPlaceResponseDto(Place place);
 }
