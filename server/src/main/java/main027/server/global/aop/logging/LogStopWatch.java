@@ -15,8 +15,14 @@ import java.util.UUID;
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class LogStopWatch extends StopWatch {
 
+    /**
+     * 해당 HTTP의 요청을 인식할 id (request가 종료될 때 까지 유지)
+     */
     private String uuid;
 
+    /**
+     * 해당 클래스가 생성되어질 때 StopWatch 시작 후 로깅
+     */
     @PostConstruct
     private void init() {
         this.start();
@@ -24,6 +30,9 @@ public class LogStopWatch extends StopWatch {
         log.info("========uuid={}'s REQUEST START========", uuid);
     }
 
+    /**
+     * 해당 클래스가 없어지기 전 StopWatch 종료 후 생성되어 있던 시간 로깅 후 destroy
+     */
     @PreDestroy
     private void destroy() {
         this.stop();
