@@ -2,7 +2,6 @@ package main027.server.domain.bookmark.controller;
 
 import lombok.RequiredArgsConstructor;
 import main027.server.domain.bookmark.dto.BookmarkDto;
-import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.bookmark.mapper.BookmarkMapper;
 import main027.server.domain.bookmark.service.BookmarkService;
 import main027.server.domain.place.entity.Place;
@@ -25,25 +24,22 @@ public class BookmarkController {
     @TimeTrace
     @PostMapping
     public ResponseEntity post(@Validated @RequestBody BookmarkDto.Post postDto) {
-        Bookmark bookmark = mapper.PostToEntity(postDto);
-        Boolean finalBookmarkStatus = bookmarkService.changeBookmarkStatus(bookmark);
+        Boolean finalBookmarkStatus = bookmarkService.changeBookmarkStatus(mapper.PostToEntity(postDto));
         return new ResponseEntity(finalBookmarkStatus, HttpStatus.OK);
     }
 
     /**
-     *
      * @param memberId 의 북마크 리스트를 요청
-     * @param page 클라이언트가 요청할 페이지 수
-     * @return  {@link BookmarkDto.Response} 페이징 처리 된 북마크리스 트 리턴 Book
+     * @param page     클라이언트가 요청할 페이지 수
+     * @return {@link BookmarkDto.Response} 페이징 처리 된 북마크리스 트 리턴 Book
      */
     @TimeTrace
     @GetMapping("/{memberId}")
     public ResponseEntity getList(@PathVariable Long memberId,
                                   @RequestParam(defaultValue = "1") int page) {
 
-        Page<Place> pagingList = bookmarkService.findPlaceMemberBookmarked(memberId, PageRequest.of(page-1, 10));
-
-        BookmarkDto.Response response = mapper.pageToList(pagingList);
+        BookmarkDto.Response response = mapper.pageToList(
+                bookmarkService.findPlaceMemberBookmarked(memberId, PageRequest.of(page - 1, 10)));
 
         return new ResponseEntity(response, HttpStatus.OK);
     }

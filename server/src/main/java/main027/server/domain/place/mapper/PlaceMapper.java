@@ -21,19 +21,9 @@ public interface PlaceMapper {
 
     Place placePatchDtoToPlace(PlaceDto.PlacePatchDto placePatchDto);
 
-    Place placeLikeDtoToPlace(PlaceDto.PlaceLikeDto placeLikeDto);
-
-    default PlaceDto.PageResponseDto pageToList(Page<Place> pages) {
-        PlaceDto.PageResponseDto response = pageToListChild(pages);
-        response.setPresentPage(Long.valueOf(pages.getPageable().getPageNumber() + 1));
-
-        return response;
-    }
-
     @Mapping(source = "content", target = "placeList")
-    PlaceDto.PageResponseDto pageToListChild(Page<Place> places);
-
-    List<PlaceDto.PlaceResponseDto> placeListToResponseDto(List<Place> places);
+    @Mapping(target = "presentPage", expression = "java(Long.valueOf(pages.getPageable().getPageNumber() + 1))")
+    PlaceDto.PageResponseDto pageToList(Page<Place> pages);
 
     @Mapping(source = "member.memberId", target = "memberId")
     @Mapping(source = "category.name", target = "category")
