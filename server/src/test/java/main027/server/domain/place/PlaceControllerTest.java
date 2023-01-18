@@ -92,6 +92,8 @@ class PlaceControllerTest {
                                                                               "서울시 강남구",
                                                                               "사람이많아요",
                                                                               3,
+                                                                              3,
+                                                                              true,
                                                                               true,
                                                                               0L,
                                                                               "공방",
@@ -144,7 +146,9 @@ class PlaceControllerTest {
                                                 fieldWithPath("description").type(JsonFieldType.STRING).description(
                                                         "장소 설명"),
                                                 fieldWithPath("likeCount").type(JsonFieldType.NUMBER).description("좋아요 숫자"),
+                                                fieldWithPath("reviewCount").type(JsonFieldType.NUMBER).description("리뷰 갯수"),
                                                 fieldWithPath("isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
+                                                fieldWithPath("isLiked").type(JsonFieldType.BOOLEAN).description("좋아요 여부 확인"),
                                                 fieldWithPath("kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
                                                 fieldWithPath("category").type(JsonFieldType.STRING).description(
                                                         "카테고리"),
@@ -169,6 +173,8 @@ class PlaceControllerTest {
                                                                               "서울시 강남구",
                                                                               "존나 맛없어요",
                                                                               3,
+                                                                              3,
+                                                                              true,
                                                                               true,
                                                                               0L,
                                                                               "공방",
@@ -206,7 +212,9 @@ class PlaceControllerTest {
                                                 fieldWithPath("description").type(JsonFieldType.STRING).description(
                                                         "장소 설명"),
                                                 fieldWithPath("likeCount").type(JsonFieldType.NUMBER).description("좋아요 숫자"),
+                                                fieldWithPath("reviewCount").type(JsonFieldType.NUMBER).description("리뷰 갯수"),
                                                 fieldWithPath("isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
+                                                fieldWithPath("isLiked").type(JsonFieldType.BOOLEAN).description("좋아요 여부 확인"),
                                                 fieldWithPath("kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
                                                 fieldWithPath("category").type(JsonFieldType.STRING).description(
                                                         "카테고리"),
@@ -225,6 +233,8 @@ class PlaceControllerTest {
                                                                               "서울시 강남구",
                                                                               "사람이많아요",
                                                                               3,
+                                                                              3,
+                                                                              true,
                                                                               true,
                                                                               0L,
                                                                               "공방",
@@ -253,7 +263,9 @@ class PlaceControllerTest {
                                                 fieldWithPath("description").type(JsonFieldType.STRING).description(
                                                         "장소 설명"),
                                                 fieldWithPath("likeCount").type(JsonFieldType.NUMBER).description("좋아요 숫자"),
+                                                fieldWithPath("reviewCount").type(JsonFieldType.NUMBER).description("리뷰 갯수"),
                                                 fieldWithPath("isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
+                                                fieldWithPath("isLiked").type(JsonFieldType.BOOLEAN).description("좋아요 여부 확인"),
                                                 fieldWithPath("kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
                                                 fieldWithPath("category").type(JsonFieldType.STRING).description(
                                                         "카테고리"),
@@ -274,6 +286,8 @@ class PlaceControllerTest {
                                               "서울시 강남구",
                                               "존나 맛없어요",
                                               3,
+                                              3,
+                                              true,
                                               true,
                                               0L,
                                               "햄버거",
@@ -286,6 +300,8 @@ class PlaceControllerTest {
                                               "서울시 광진구",
                                               "존나 맛있어요",
                                               4,
+                                              3,
+                                              true,
                                               true,
                                               0L,
                                               "햄버거",
@@ -335,7 +351,9 @@ class PlaceControllerTest {
                                                 fieldWithPath("placeList[].description").type(JsonFieldType.STRING).description(
                                                         "장소 설명"),
                                                 fieldWithPath("placeList[].likeCount").type(JsonFieldType.NUMBER).description("좋아요 숫자"),
-                                                fieldWithPath("placeList[]isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
+                                                fieldWithPath("placeList[].reviewCount").type(JsonFieldType.NUMBER).description("리뷰 갯수"),
+                                                fieldWithPath("placeList[].isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
+                                                fieldWithPath("placeList[].isLiked").type(JsonFieldType.BOOLEAN).description("좋아요 여부 확인"),
                                                 fieldWithPath("placeList[].kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
                                                 fieldWithPath("placeList[].category").type(JsonFieldType.STRING).description(
                                                         "카테고리"),

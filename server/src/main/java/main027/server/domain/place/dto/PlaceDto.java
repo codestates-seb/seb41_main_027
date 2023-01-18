@@ -61,7 +61,9 @@ public class PlaceDto extends BaseTime {
         private String address;
         private String description;
         private int likeCount;
+        private int reviewCount;
         private Boolean isBookMarked;
+        private Boolean isLiked;
         private Long kakaoId;
         private String category;
         private String latitude;
