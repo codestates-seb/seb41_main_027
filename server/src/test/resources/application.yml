@@ -1,11 +1,11 @@
 spring:
   profiles:
     group:
-      stub: stub, transactionLog
+      stubLog: stub, transactionLog
 
 
-logging.level.org:
-  .hibernate.SQL: debug
+#logging.level.org:
+#  .hibernate.SQL: debug
 
 ---
 
