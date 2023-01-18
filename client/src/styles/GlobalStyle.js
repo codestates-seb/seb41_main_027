@@ -6,6 +6,10 @@ import { reset } from 'styled-reset'
 const GlobalStyle = createGlobalStyle`
   ${reset}
   /* 필요한 부분 추가해주셔요 🥹 */
+  * {
+    box-sizing: border-box;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  }
   
   html, body{
     margin: 0;
@@ -13,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     background-color: #ffffff;
     color: #232629;
-    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;  }
+  }
 
   a {
     text-decoration: none;
@@ -22,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
   }
 
-  input, button {
+  input, button, textarea {
     background-color: transparent;
     border: none;
     outline: none;
@@ -57,69 +61,99 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  // 💄 CI set 
-  --ecogreen-01: #17AC52;
-  --ecogreen-02: #31B679;
-  --ecogreen-03: #13C57C;
-  --ecored-01:#FF3838;
-  --ecored-02:#FF1F1F;
-  --border-01: #B8BCCF;
-  --border-02: #D9D9D9; 
+  // animation
+  @keyframes fadeout {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @-moz-keyframes fadeout {
+    /* Firefox */
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @-webkit-keyframes fadeout {
+    /* Safari and Chrome */
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @-o-keyframes fadeout {
+    /* Opera */
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
-  //----------------- toastify css start -----------------
-  :root {  
-  /* 테마별 색상 바꾸기 */
-  --toastify-color-light: #fff;
-  --toastify-color-dark: #121212;
-  --toastify-color-info: #3498db;
-  --toastify-color-success: #07bc0c;
-  --toastify-color-warning: #f1c40f;
-  --toastify-color-error: #e74c3c;
-  --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+  @keyframes fadein {
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @-moz-keyframes fadein {
+    /* Firefox */
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes fadein {
+    /* Safari and Chrome */
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @-o-keyframes fadein {
+    /* Opera */
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
-  /* 테마별 아이콘 색상 바꾸기 */
-  --toastify-icon-color-info: var(--toastify-color-info);
-  --toastify-icon-color-success: var(--toastify-color-success);
-  --toastify-icon-color-warning: var(--toastify-color-warning);
-  --toastify-icon-color-error: var(--toastify-color-error);
+  // root
+  :root { 
+    // 💄 CI set 
+    --ecogreen-01: #17AC52;
+    /* --ecogreen-02: #31B679;
+    --ecogreen-03: #13C57C;
+    --ecored-01:#FF3838;
+    --ecored-02:#FF1F1F; */
+    --border-01: #B8BCCF;
+    /* --border-02: #D9D9D9; */
 
-  /* 기본 적용 스타일 바꾸기 */
-  --toastify-toast-width: 320px;
-  --toastify-toast-background: #fff;
-  --toastify-toast-min-height: 100px; // 64px
-  --toastify-toast-max-height: 800px;
-  --toastify-font-family: sans-serif;
-  --toastify-z-index: 9500;
-  --toastify-text-color-light: #757575;
-  --toastify-text-color-dark: #fff;
+    // input focus
+    --border-input-focus: 1px solid #76B5F2;
+    --outline-input-focus: 4px solid #D8E4F1;
+    --outline-btn-press: 4px solid #E0EAF6;
 
-  /* Used only for colored theme */
-  --toastify-text-color-info: #fff;
-  --toastify-text-color-success: #fff;
-  --toastify-text-color-warning: #fff;
-  --toastify-text-color-error: #fff;
-  --toastify-spinner-color: #616161;
-  --toastify-spinner-color-empty-area: #e0e0e0;
-
-  /* Used when no type is provided */
-  /* toast("**hello**") */
-  --toastify-color-progress-light: linear-gradient(
-    to right,
-    #4cd964,
-    #5ac8fa,
-    #007aff,
-    #34aadc,
-    #5856d6,
-    #ff2d55
-  );
-
-  /* Used when no type is provided */
-  --toastify-color-progress-dark: #bb86fc;
-  --toastify-color-progress-info: var(--toastify-color-info);
-  --toastify-color-progress-success: var(--toastify-color-success);
-  --toastify-color-progress-warning: var(--toastify-color-warning);
-  --toastify-color-progress-error: var(--toastify-color-error);
-  //----------------- toastify css end -----------------
+    // box shadow
+    --box-shadow-base: 0px 4px 10px rgba(25, 1, 52, 0.4);
+    --box-shadow-list: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    --box-shadow-item: 1px 1px 2px rgb(0 0 0 / 10%);
   }
 `
 

@@ -8,8 +8,14 @@ const Wrapper = styled.section`
   align-items: center;
   color: white;
 
-  p {
+  h1 {
     font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+
+  p {
+    font-size: 1.5rem;
     margin-bottom: 20px;
   }
 `
@@ -17,8 +23,8 @@ const Wrapper = styled.section`
 const NotFound = () => {
   return (
     <Wrapper>
-      <p>Welcome To Eco Green Seoul</p>
-      <div>comming soon</div>
+      <h1>404 Not Found</h1>
+      <p>This is not the web page you are looking for.</p>
     </Wrapper>
   )
 }
