@@ -3,6 +3,7 @@ package main027.server.domain.member.service;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.repository.MemberRepository;
 import main027.server.domain.member.verifier.MemberVerifier;
+import main027.server.global.aop.logging.annotation.TimeTrace;
 import main027.server.global.auth.utils.CustomAuthorityUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class MemberServiceImpl implements MemberService{
         this.memberVerifier = memberVerifier;
     }
 
+    @TimeTrace
     public Member createMember(Member member) {
         memberVerifier.verifyExistsEmail(member.getEmail());
 
@@ -44,6 +46,7 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.save(member);
     }
 
+    @TimeTrace
     public void deleteMember(long memberId) {
         Member verifiedMember = memberVerifier.findVerifiedMember(memberId);
         memberRepository.delete(verifiedMember);
