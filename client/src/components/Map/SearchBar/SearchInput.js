@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { searchValue } from '../../../recoil/atoms'
 
 // li사이즈만 빼둠 Nav css 셋업 안된 상태 -> 추후 Acitve 스타일링 필요
 // <a href="/" className={type.page === "home" ? "selected" : ""}>
@@ -39,17 +42,23 @@ const Wrapper = styled.div`
 `
 
 const SearchInput = () => {
+  const [keyword, setKeyword] = useRecoilState(searchValue)
+  const onChangeSearch = e => {
+    e.preventDefault()
+    setKeyword(e.target.value)
+    console.log(keyword)
+  }
   return (
     <Wrapper>
       <form>
         <div className="SearchBar">
           <input
-            id="keyword"
+            value={keyword}
             className="SearchQueryInput"
             type="text"
             name=""
             placeholder="장소를 검색해주세요."
-            defaultValue={''}
+            onChange={onChangeSearch}
           />
           <button className="SearchQuerySubmit" type="submit" name="">
             <StyleFontAwesomeIcon icon={faSearch} />

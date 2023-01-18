@@ -7,3 +7,8 @@ export const listClick = atom({
     lng: 126.570888,
   },
 })
+
+export const searchValue = atom({
+  key: 'searchValue',
+  default: '',
+})

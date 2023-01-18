@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { MapMarker, Map, useMap } from 'react-kakao-maps-sdk'
 import { useRef, useMemo, useState, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
-import { listClick } from '../../recoil/atoms'
+import { listClick, searchValue } from '../../recoil/atoms'
 
 import SearchBar from './SearchBar/SearchBar'
 import SiteInfoCard from './SiteInfoCard/SiteInfoCard'
@@ -60,11 +60,16 @@ const AddPlaceMap = () => {
   const [map, setMap] = useState()
 
   const mapRef = useRef()
+  const [keyword, setKeyword] = useRecoilState(searchValue)
   useEffect(() => {
     if (!map) return
+    // if (!keyword.replace(/^\s+|\s+$/g, '')) {
+    //   alert('키워드를 입력해주세요!')
+    //   return false
+    // }
     const ps = new kakao.maps.services.Places()
-
-    ps.keywordSearch('서울역', (data, status, _pagination) => {
+    ps.keywordSearch(keyword, (data, status, _pagination) => {
+      console.log(keyword)
       if (status === kakao.maps.services.Status.OK) {
         const bounds = new kakao.maps.LatLngBounds()
         let markers = []
@@ -87,7 +92,7 @@ const AddPlaceMap = () => {
         // console.log(markers)
       }
     })
-  }, [map])
+  }, [keyword])
 
   const [clickPoint, setClickPoint] = useRecoilState(listClick)
 
@@ -124,7 +129,7 @@ const AddPlaceMap = () => {
           width: '100%',
           height: '100%',
         }}
-        level={3} // 지도의 확대 레벨
+        level={5} // 지도의 확대 레벨
         ref={mapRef}
         onCreate={setMap}
       >

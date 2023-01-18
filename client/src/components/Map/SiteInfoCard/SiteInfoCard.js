@@ -94,6 +94,7 @@ const SiteInfoCard = ({ positions }) => {
         <div className="view-like">
           <span className="ico-like">♥️</span>
           {/* {삼항연산자를 사용해서 display:none 속성?} */}
+          {/* {islike ? <span className="count-like">000</span> : null} */}
           <span className="count-like">000</span>
         </div>
       </p>
