@@ -44,6 +44,7 @@ const SearchInput = () => {
       <form>
         <div className="SearchBar">
           <input
+            id="keyword"
             className="SearchQueryInput"
             type="text"
             name=""

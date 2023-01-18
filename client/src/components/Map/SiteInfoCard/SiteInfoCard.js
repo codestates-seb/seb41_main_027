@@ -85,20 +85,21 @@ const SiteInfoCard = ({ positions }) => {
   return (
     <Wrapper
       onClick={() => {
-        setClickPoint(positions.latlng)
+        setClickPoint(positions.latlng || positions.position)
         console.log(clickPoint)
       }}
     >
       <p className="card-title">
-        <h1 className="site-name">{positions.title}</h1>
+        <h1 className="site-name">{positions.name}</h1>
         <div className="view-like">
           <span className="ico-like">♥️</span>
+          {/* {삼항연산자를 사용해서 display:none 속성?} */}
           <span className="count-like">000</span>
         </div>
       </p>
       <p>
         <span className="tag-category">카페</span>
-        <p className="site-addr">주소명을 기재해주세요.</p>
+        <p className="site-addr">{positions.address}</p>
       </p>
     </Wrapper>
   )

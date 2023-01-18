@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import Nav from '../components/Nav/Nav'
 import Header from '../components/Header/Header'
-import MainMap from '../components/Map/Map'
+import MainMap from '../components/Map/MainMap'
 
 const Wrapper = styled.section`
   width: 100%;
