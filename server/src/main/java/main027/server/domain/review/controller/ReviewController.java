@@ -37,6 +37,7 @@ public class ReviewController {
      * 장소에 등록되어 있는 리뷰 목록을 페이징처리로 가져오는 컨트롤러
      * @param placeId 리뷰 목록을 가져올 장소의 id
      * @param page 가져오고 싶은 페이지 (default: 1)
+     * @return {@link ReviewDto.ListResponse}
      */
     @GetMapping("/{placeId}")
     public ResponseEntity getPlaceReviews(@PathVariable Long placeId,

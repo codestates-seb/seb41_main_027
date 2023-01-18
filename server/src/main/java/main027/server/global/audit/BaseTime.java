@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 /**
- * Entity에 공통으로 포함 되어 있는 생성시간, 수정시간을 매핑해주는 클래스 <br>
+ * Entity에 공통으로 포함 되어 있는 생성시간, 수정시간을 매핑해주는 클래스. <br>
  * 적용시키고 싶은 Entity에 상속하면 된다.
  */
 @Data
