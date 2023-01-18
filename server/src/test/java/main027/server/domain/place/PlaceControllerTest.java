@@ -252,8 +252,8 @@ class PlaceControllerTest {
                                                 fieldWithPath("address").type(JsonFieldType.STRING).description("장소 주소"),
                                                 fieldWithPath("description").type(JsonFieldType.STRING).description(
                                                         "장소 설명"),
-                                                fieldWithPath("placeLikeUserList").type(JsonFieldType.ARRAY).description("좋아요 회원 리스트"),
                                                 fieldWithPath("likeCount").type(JsonFieldType.NUMBER).description("좋아요 숫자"),
+                                                fieldWithPath("isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
                                                 fieldWithPath("kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
                                                 fieldWithPath("category").type(JsonFieldType.STRING).description(
                                                         "카테고리"),
