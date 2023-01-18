@@ -7,6 +7,7 @@ import main027.server.domain.member.verifier.MemberVerifier;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.service.PlaceService;
 import main027.server.domain.place.verifier.PlaceVerifier;
+import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class BookmarkServiceImpl implements BookmarkService{
      * @return 북마킹이 되어 있지 않았고 해당 로직을 통해 북마킹이 되었다면 true 리턴 <br>
      *         북마킹이 되어 있었고 해당 로직을 통해 북마킹이 해제되었다면 false 리턴
      */
+    @TimeTrace
     public Boolean changeBookmarkStatus(Bookmark bookmark) {
         // 해당 member와 place가 있는지 조회 -> 없으면 해당 메서드의 Exception 발생
         memberVerifier.findVerifiedMember(bookmark.getMember().getMemberId());
@@ -51,6 +53,7 @@ public class BookmarkServiceImpl implements BookmarkService{
 
     }
 
+    @TimeTrace
     public Page<Place> findPlaceMemberBookmarked(Long memberId, Pageable pageable) {
         // 존재하는 memberId인지 검증
         memberVerifier.findVerifiedMember(memberId);
