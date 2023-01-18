@@ -16,7 +16,7 @@ public class Emoji {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long emojiId;
 
-    // 이모지의 이름
+    /** 이모지의 별칭 */
     @Column(unique = true, nullable = false)
     private String name;
 
