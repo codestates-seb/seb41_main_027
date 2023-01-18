@@ -6,6 +6,7 @@ import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.bookmark.mapper.BookmarkMapper;
 import main027.server.domain.bookmark.service.BookmarkService;
 import main027.server.domain.place.entity.Place;
+import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ public class BookmarkController {
         return new ResponseEntity(finalBookmarkStatus, HttpStatus.OK);
     }
 
+    @TimeTrace
     @GetMapping("/{memberId}")
     public ResponseEntity getList(@PathVariable Long memberId,
                                   @RequestParam(defaultValue = "1") int page) {
