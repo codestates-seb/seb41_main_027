@@ -1,8 +1,8 @@
 package main027.server.global.advice;
 
 import lombok.extern.slf4j.Slf4j;
-import main027.server.global.dto.ErrorResponse;
-import main027.server.global.exception.BusinessLogicException;
+import main027.server.global.advice.dto.ErrorResponse;
+import main027.server.global.advice.exception.BusinessLogicException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;

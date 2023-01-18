@@ -12,8 +12,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TimeTrace {
 
-    String value() default isInitial.DEFAULT;
-
     /**
      *  Aspect에서 log.WARN을 표시할 시간 기준 ms
      */

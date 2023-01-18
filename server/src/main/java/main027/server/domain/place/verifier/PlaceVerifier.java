@@ -3,8 +3,8 @@ package main027.server.domain.place.verifier;
 import lombok.RequiredArgsConstructor;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.repository.PlaceRepository;
-import main027.server.global.exception.BusinessLogicException;
-import main027.server.global.exception.ExceptionCode;
+import main027.server.global.advice.exception.BusinessLogicException;
+import main027.server.global.advice.exception.ExceptionCode;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
