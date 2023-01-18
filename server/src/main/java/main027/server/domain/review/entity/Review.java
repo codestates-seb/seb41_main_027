@@ -24,15 +24,15 @@ public class Review extends BaseTime {
     private String content;
 
     //review -> emoji 단방향 연관관계 매핑 (양방향 X)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emoji_id")
     private Emoji emoji;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id")
     private Place place;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

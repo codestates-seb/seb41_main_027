@@ -5,7 +5,7 @@ on:
      - 'client/**'
     branches: [ "dev" ]
 jobs:
-  build:
+  build-client:
     runs-on: ubuntu-20.04
     defaults:
       run: 
