@@ -12,9 +12,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
 
-    @Mapping(source = "emojiId", target = "emoji.emojiId")
+    @Mapping(source = "postDto.emojiId", target = "emoji.emojiId")
     @Mapping(source = "memberId", target = "member.memberId")
-    @Mapping(source = "placeId", target = "place.placeId")
+    @Mapping(source = "postDto.placeId", target = "place.placeId")
     Review PostToEntity(ReviewDto.Post postDto, Long memberId);
 
     @Mapping(source = "emoji.emojiId", target = "emojiId")

@@ -16,8 +16,6 @@ public class MemberHolder {
 
     private Long memberId;
 
-    private MemberHolder() {}
-
     public Long getMemberId() {
         return memberId;
     }
