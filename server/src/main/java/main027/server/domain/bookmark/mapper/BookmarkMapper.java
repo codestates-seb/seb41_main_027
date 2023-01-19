@@ -16,7 +16,7 @@ public interface BookmarkMapper {
 
     @Mapping(source = "memberId", target = "member.memberId")
     @Mapping(source = "placeId", target = "place.placeId")
-    Bookmark PostToEntity(BookmarkDto.Post postDto);
+    Bookmark PostToEntity(Long placeId, Long memberId);
 
     /**
      * Page<Place>를 받아서 Response로 바꿔주는 customMapper 메서드 <br>

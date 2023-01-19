@@ -25,9 +25,9 @@ public class BookmarkController {
     private final MemberHolder memberHolder;
 
     @TimeTrace
-    @PostMapping
-    public ResponseEntity post(@Validated @RequestBody BookmarkDto.Post postDto) {
-        Bookmark bookmark = mapper.PostToEntity(postDto);
+    @PostMapping("/{placeId}")
+    public ResponseEntity post(@PathVariable Long placeId) {
+        Bookmark bookmark = mapper.PostToEntity(placeId, memberHolder.getMemberId());
         Boolean finalBookmarkStatus = bookmarkService.changeBookmarkStatus(bookmark);
         return new ResponseEntity(finalBookmarkStatus, HttpStatus.OK);
     }
