@@ -34,8 +34,6 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     public static class Patch {
-        @Setter
-        private Long memberId;
 
         @Size(min = 2, max = 12)
         @Pattern(regexp = "^[a-zA-Zㄱ-힣]+$",
