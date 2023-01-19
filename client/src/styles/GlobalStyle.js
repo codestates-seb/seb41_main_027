@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  // animation
+  // animation(fadeout)
   @keyframes fadeout {
     0% {
       opacity: 1;
@@ -98,6 +98,7 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  // animation(fadein)
   @keyframes fadein {
     0% {
       opacity: 0.5;
@@ -134,6 +135,75 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  // animation(twinkle)
+  @keyframes border-twinkle {
+    0% {
+      opacity: 1;
+      border: 2px solid var(--ecogreen-01);
+    }
+    25% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+      border: 2px solid var(--ecogreen-01);
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @-moz-keyframes border-twinkle {
+    /* Firefox */
+    0% {
+      opacity: 1;
+      border: 2px solid var(--ecogreen-01);
+    }
+    25% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+      border: 2px solid var(--ecogreen-01);
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes border-twinkle {
+    /* Safari and Chrome */
+    0% {
+      opacity: 1;
+      border: 2px solid var(--ecogreen-01);
+    }
+    25% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+      border: 2px solid var(--ecogreen-01);
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @-o-keyframes border-twinkle {
+    /* Opera */
+    0% {
+      opacity: 1;
+      border: 2px solid var(--ecogreen-01);
+    }
+    25% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+      border: 2px solid var(--ecogreen-01);
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
   // root
   :root { 
     // 💄 CI set 
@@ -154,6 +224,9 @@ const GlobalStyle = createGlobalStyle`
     --box-shadow-base: 0px 4px 10px rgba(25, 1, 52, 0.4);
     --box-shadow-list: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     --box-shadow-item: 1px 1px 2px rgb(0 0 0 / 10%);
+
+    // toast
+    --toastify-toast-min-height: 100px;
   }
 `
 

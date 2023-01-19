@@ -14,7 +14,7 @@ const Mypage = lazy(() => import('./pages/Mypage'))
 const AboutUs = lazy(() => import('./pages/AboutUs'))
 const SignUp = lazy(() => import('./pages/SignUp'))
 const SignIn = lazy(() => import('./pages/SignIn'))
-const InfoModal = lazy(() => import('./pages/InfoModal'))
+const InfoModal = lazy(() => import('./pages/InfoModal/InfoModal'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const Loading = lazy(() => import('./components/Loading/Loading'))
 
@@ -49,13 +49,12 @@ function App() {
       <ScrollToTop />
       <StyleToastContainer
         position="top-center"
-        autoClose={1000}
+        autoClose={500}
         closeOnClick
         hideProgressBar
-        pauseOnHover
+        pauseOnHover={false}
         pauseOnFocusLoss={false}
         draggable={false}
-        limit={2}
       />
       <Suspense fallback={<Loading />}>
         <Main>
