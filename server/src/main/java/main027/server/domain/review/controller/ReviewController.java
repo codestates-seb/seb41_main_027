@@ -5,6 +5,7 @@ import main027.server.domain.review.dto.ReviewDto;
 import main027.server.domain.review.mapper.ReviewMapper;
 import main027.server.domain.review.service.ReviewService;
 import main027.server.domain.review.verifier.ReviewVerifier;
+import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ public class ReviewController {
     /**
      * 장소에 리뷰를 등록하는 컨트롤러
      */
+    @TimeTrace
     @PostMapping
     public ResponseEntity post(@Validated @RequestBody ReviewDto.Post postDto) {
         ReviewDto.Response response = mapper.entityToResponse(reviewService.save(mapper.PostToEntity(postDto)));
@@ -38,6 +40,7 @@ public class ReviewController {
      * @param page    가져오고 싶은 페이지 (default: 1)
      * @return {@link ReviewDto.ListResponse}
      */
+    @TimeTrace
     @GetMapping("/{placeId}")
     public ResponseEntity getPlaceReviews(@PathVariable Long placeId,
                                           @RequestParam(defaultValue = "1") int page) {

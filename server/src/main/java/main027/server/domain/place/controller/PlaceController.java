@@ -21,6 +21,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
+
 
 @RestController
 @RequestMapping("/places")
@@ -61,10 +64,25 @@ public class PlaceController {
     }
 
     @TimeTrace
-    @GetMapping
-    public ResponseEntity getPlaces(@RequestParam(defaultValue = "1") Integer page) {
-        Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("PlaceLikeUser"));
+    @GetMapping("/likes")
+    public ResponseEntity getPlacesByLikes(@RequestParam(defaultValue = "1") Integer page) {
+        Pageable pageable = PageRequest.of(page - 1, 10);
+        return new ResponseEntity<>(placeMapper.pageToList(placeService.findPlacesByLikes(pageable)), HttpStatus.OK);
+    }
+
+    @TimeTrace
+    @GetMapping("/createdAt")
+    public ResponseEntity getPlacesByCreated(@RequestParam(defaultValue = "1") Integer page) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+        Pageable pageable = PageRequest.of(page - 1, 10, sort);
         return new ResponseEntity<>(placeMapper.pageToList(placeService.findPlaces(pageable)), HttpStatus.OK);
+    }
+
+    @TimeTrace
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity getPlacesByCategory(@PathVariable("categoryId") Long categoryId ,@RequestParam(defaultValue = "1") Integer page) {
+        Pageable pageable = PageRequest.of(page - 1, 10);
+        return new ResponseEntity<>(placeMapper.pageToList(placeService.findPlacesByCategory(pageable,categoryId)), HttpStatus.OK);
     }
 
     @TimeTrace
