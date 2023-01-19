@@ -1,8 +1,8 @@
-package main027.server.global.advice.dto;
+package main027.server.global.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import main027.server.global.advice.exception.ExceptionCode;
+import main027.server.global.exception.ExceptionCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 

@@ -118,8 +118,4 @@ values (1, 36),
        (1, 6),
        (1, 27);
 
-insert into place_like_user (member_id, place_id)
-values (1, 1),
-       (2, 1);
-
 

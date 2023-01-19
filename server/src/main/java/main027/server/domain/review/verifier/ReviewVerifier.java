@@ -3,8 +3,9 @@ package main027.server.domain.review.verifier;
 import lombok.RequiredArgsConstructor;
 import main027.server.domain.review.entity.Review;
 import main027.server.domain.review.repository.ReviewRepository;
-import main027.server.global.advice.exception.BusinessLogicException;
-import main027.server.global.advice.exception.ExceptionCode;
+import main027.server.global.exception.BusinessLogicException;
+import main027.server.global.exception.ExceptionCode;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
