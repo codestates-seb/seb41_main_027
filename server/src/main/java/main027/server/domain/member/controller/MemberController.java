@@ -1,10 +1,12 @@
 package main027.server.domain.member.controller;
 
+import lombok.RequiredArgsConstructor;
 import main027.server.domain.member.dto.MemberDto;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.mapper.MemberMapper;
 import main027.server.domain.member.service.MemberService;
 import main027.server.domain.member.service.MemberUpdateService;
+import main027.server.global.aop.logging.MemberHolder;
 import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,21 +14,16 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/members")
 @Validated
+@RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
     private final MemberUpdateService memberUpdateService;
     private final MemberMapper mapper;
-
-    public MemberController(MemberService memberService, MemberUpdateService memberUpdateService, MemberMapper mapper) {
-        this.memberService = memberService;
-        this.memberUpdateService = memberUpdateService;
-        this.mapper = mapper;
-    }
+    private final MemberHolder memberHolder;
 
     @TimeTrace
     @PostMapping
@@ -37,20 +34,17 @@ public class MemberController {
     }
 
     @TimeTrace
-    @PatchMapping("/{memberId}")
-    public ResponseEntity patchMember(@Valid @RequestBody MemberDto.Patch requestBody,
-                                      @Positive @PathVariable("memberId") Long memberId) {
-        requestBody.setMemberId(memberId);
-        Member updatedMember = memberUpdateService.updateMember(mapper.memberPatchDtoToMember(requestBody));
-
+    @PatchMapping
+    public ResponseEntity patchMember(@Valid @RequestBody MemberDto.Patch requestBody) {
+        Member updatedMember = memberUpdateService.updateMember(mapper.memberPatchDtoToMember(requestBody,
+                                                                                              memberHolder.getMemberId()));
         return new ResponseEntity<>(mapper.memberToMemberResponseDto(updatedMember), HttpStatus.OK);
     }
 
     @TimeTrace
-    @DeleteMapping("/{memberId}")
-    public ResponseEntity deleteMember(@Positive @PathVariable("memberId") Long memberId) {
-        memberService.deleteMember(memberId);
-
+    @DeleteMapping
+    public ResponseEntity deleteMember() {
+        memberService.deleteMember(memberHolder.getMemberId());
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

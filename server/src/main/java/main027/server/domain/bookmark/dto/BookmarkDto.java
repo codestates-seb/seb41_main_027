@@ -18,8 +18,6 @@ public class BookmarkDto {
     public static class Post {
 
         @NotNull
-        private Long memberId;
-        @NotNull
         private Long placeId;
     }
 
