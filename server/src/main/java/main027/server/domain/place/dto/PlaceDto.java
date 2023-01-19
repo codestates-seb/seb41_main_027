@@ -8,6 +8,7 @@ import main027.server.global.audit.BaseTime;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PlaceDto extends BaseTime {
@@ -54,20 +55,21 @@ public class PlaceDto extends BaseTime {
 
     @Data
     @AllArgsConstructor
-    public static class PlaceResponseDto extends BaseTime {
+    @NoArgsConstructor
+    public static class PlaceResponseDto {
         private Long placeId;
         private Long memberId;
         private String name;
         private String address;
         private String description;
         private int likeCount;
-        private int reviewCount;
         private Boolean isBookMarked;
         private Boolean isLiked;
         private Long kakaoId;
         private String category;
         private String latitude;
         private String longitude;
+        private LocalDateTime createdAt;
     }
 
     @Data

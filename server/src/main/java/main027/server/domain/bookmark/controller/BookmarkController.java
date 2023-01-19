@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import main027.server.domain.bookmark.dto.BookmarkDto;
 import main027.server.domain.bookmark.mapper.BookmarkMapper;
 import main027.server.domain.bookmark.service.BookmarkService;
+import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
+import main027.server.domain.place.mapper.PlaceMapper;
 import main027.server.global.aop.logging.MemberHolder;
 import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.Page;
@@ -20,20 +22,22 @@ import org.springframework.web.bind.annotation.*;
 public class BookmarkController {
 
     private final BookmarkService bookmarkService;
-    private final BookmarkMapper mapper;
+    private final BookmarkMapper bookmarkMapper;
     private final MemberHolder memberHolder;
+    private final PlaceMapper placeMapper;
 
     @TimeTrace
     @PostMapping("/{placeId}")
     public ResponseEntity post(@PathVariable Long placeId) {
         Boolean finalBookmarkStatus = bookmarkService.changeBookmarkStatus(
-                mapper.PostToEntity(placeId, memberHolder.getMemberId()));
+                bookmarkMapper.PostToEntity(memberHolder.getMemberId(), placeId));
+
         return new ResponseEntity(finalBookmarkStatus, HttpStatus.OK);
     }
 
     /**
      * @param page     클라이언트가 요청할 페이지 수
-     * @return {@link BookmarkDto.Response} 페이징 처리 된 북마크리스 트 리턴 Book
+     * @return {@link BookmarkDto.Response} 페이징 처리 된 북마크리스트 리턴 Book
      */
     @TimeTrace
     @GetMapping
@@ -41,8 +45,7 @@ public class BookmarkController {
         Long memberId = memberHolder.getMemberId();
         Page<Place> pagingList = bookmarkService.findPlaceMemberBookmarked(memberId, PageRequest.of(page-1, 10));
 
-        BookmarkDto.Response response = mapper.pageToList(pagingList);
-
+        PlaceDto.PageResponseDto response = placeMapper.pageToList(pagingList, memberId);
 
         return new ResponseEntity(response, HttpStatus.OK);
     }

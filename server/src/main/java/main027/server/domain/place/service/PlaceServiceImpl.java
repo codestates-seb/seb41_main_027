@@ -1,6 +1,5 @@
 package main027.server.domain.place.service;
 
-import lombok.RequiredArgsConstructor;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.repository.PlaceRepository;
 import main027.server.domain.place.verifier.PlaceVerifier;
@@ -17,7 +16,7 @@ public class PlaceServiceImpl implements PlaceService {
     private final PlaceRepository placeRepository;
     private final PlaceVerifier placeVerifier;
 
-    public PlaceServiceImpl (PlaceRepository placeRepository, PlaceVerifier placeVerifier) {
+    public PlaceServiceImpl(PlaceRepository placeRepository, PlaceVerifier placeVerifier) {
         this.placeRepository = placeRepository;
         this.placeVerifier = placeVerifier;
     }
@@ -34,19 +33,33 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @TimeTrace
+    public Page<Place> findPlaces(Pageable pageable, Long categoryId, String sortBy) {
+        if (categoryId == null) {
+            if (sortBy.equals("time"))
+                return placeRepository.findAllCreatedAt(pageable);
+            else return placeRepository.findAllLikeCount(pageable);
+        }
+
+        if (sortBy.equals("time"))
+            return placeRepository.findByCategoryCreatedAt(pageable, categoryId);
+        else return placeRepository.findByCategoryLikeCount(pageable, categoryId);
+
+    }
+
+    /* @TimeTrace
     public Page<Place> findPlacesByLikes(Pageable pageable) {
-        return placeRepository.likeDesc(pageable);
+        return placeRepository.findAll(pageable);
     }
 
     @TimeTrace
     public Page<Place> findPlacesByCategory(Pageable pageable, Long categoryId) {
-        return placeRepository.CategoryId(pageable,categoryId);
+        return placeRepository.CategoryId(pageable, categoryId);
     }
 
     @TimeTrace
     public Page<Place> findPlaces(Pageable pageable) {
         return placeRepository.findAll(pageable);
-    }
+    } */
 
     @TimeTrace
     public void deletePlace(Long placeId) {

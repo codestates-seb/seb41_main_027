@@ -19,4 +19,8 @@ public interface PlaceLikeUserRepository extends JpaRepository<PlaceLikeUser, Lo
     @TimeTrace
     @Query("select b.place from PlaceLikeUser b where b.member.memberId = :memberId")
     Page<Place> findLikes(@Param("memberId") Long memberId, Pageable pageable);
+
+    @TimeTrace
+    @Query("select p from PlaceLikeUser p where p.member.memberId = :memberId and p.place.placeId = :placeId")
+    Boolean isMemberLikePlace(@Param("memberId") Long memberId, @Param("placeId") Long placeId);
 }

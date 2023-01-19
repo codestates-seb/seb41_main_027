@@ -9,4 +9,6 @@ public interface PlaceLikeService {
     Boolean changeLikeUserStatus(PlaceLikeUser placeLikeUser);
 
     Page<Place> findPlaceMemberLiked(Long memberId, Pageable pageable);
+
+    Boolean isLike(Long memberId, Long placeId);
 }

@@ -16,15 +16,6 @@ public interface BookmarkMapper {
 
     @Mapping(source = "memberId", target = "member.memberId")
     @Mapping(source = "placeId", target = "place.placeId")
-    Bookmark PostToEntity(Long placeId, Long memberId);
+    Bookmark PostToEntity(Long memberId, Long placeId);
 
-
-    @Mapping(source = "content", target = "placeList")
-    @Mapping(target = "presentPage", expression = "java(Long.valueOf(pages.getPageable().getPageNumber() + 1))")
-    BookmarkDto.Response pageToList(Page<Place> pages);
-
-    @Mapping(source = "member.memberId", target = "memberId")
-    @Mapping(source = "category.name", target = "category")
-    @Mapping(target = "likeCount", expression = "java(place.getPlaceLikeUserList().size())")
-    PlaceDto.PlaceResponseDto placeToResponse(Place place);
 }

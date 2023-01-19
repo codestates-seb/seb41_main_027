@@ -36,12 +36,13 @@ public class PlaceController {
     private final PlaceService placeService;
     private final PlaceUpdateService placeUpdateService;
     private final PlaceMapper placeMapper;
+    private final MemberHolder memberHolder;
 
     @TimeTrace
     @PostMapping
     public ResponseEntity postPlace(@Validated @RequestBody PlaceDto.PlacePostDto placePostDto) {
         Place place = placeService.createPlace(placeMapper.placePostDtoToPlace(placePostDto));
-        return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place), HttpStatus.CREATED);
+        return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place, memberHolder.getMemberId()), HttpStatus.CREATED);
     }
 
     @TimeTrace
@@ -50,17 +51,28 @@ public class PlaceController {
                                      @Validated @RequestBody PlaceDto.PlacePatchDto placePatchDto) {
         placePatchDto.setPlaceId(placeId);
         Place place = placeUpdateService.updatePlace(placeMapper.placePatchDtoToPlace(placePatchDto));
-        return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place), HttpStatus.OK);
+        return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place, memberHolder.getMemberId()), HttpStatus.OK);
     }
 
     @TimeTrace
     @GetMapping("/{placeId}")
     public ResponseEntity getPlace(@PathVariable("placeId") Long placeId) {
         Place place = placeService.findPlace(placeId);
-        return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place), HttpStatus.OK);
+
+        return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place, memberHolder.getMemberId()), HttpStatus.OK);
     }
 
-    @TimeTrace
+    @GetMapping
+    public ResponseEntity getPlaces(@RequestParam(value = "id", required = false) Long categoryId,
+                                    @RequestParam(value = "sortby", defaultValue = "") String sortBy,
+                                    @RequestParam(defaultValue = "1") int page) {
+        Pageable pageable = PageRequest.of(page -1, 10);
+        return new ResponseEntity(placeMapper.pageToList(placeService.findPlaces(pageable, categoryId, sortBy),
+                                                         memberHolder.getMemberId()),
+                                  HttpStatus.OK);
+    }
+
+   /*  @TimeTrace
     @GetMapping("/likes")
     public ResponseEntity getPlacesByLikes(@RequestParam(defaultValue = "1") Integer page) {
         Pageable pageable = PageRequest.of(page - 1, 10);
@@ -81,7 +93,7 @@ public class PlaceController {
         Pageable pageable = PageRequest.of(page - 1, 10);
         return new ResponseEntity<>(placeMapper.pageToList(placeService.findPlacesByCategory(pageable,categoryId)), HttpStatus.OK);
     }
-
+ */
     // TODO: 삭제하려는 place의 작성자가 memberId와 같은지 확인한 후 지우는 로직 필요
     @TimeTrace
     @DeleteMapping("/{placeId}")
