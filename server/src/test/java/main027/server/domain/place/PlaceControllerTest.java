@@ -91,7 +91,9 @@
 //                                                                              "강남역7번출구맥도날드",
 //                                                                              "서울시 강남구",
 //                                                                              "사람이많아요",
-//                                                                              null,
+//                                                                              3,
+//                                                                              3,
+//                                                                              true,
 //                                                                              true,
 //                                                                              0L,
 //                                                                              "공방",
@@ -100,7 +102,7 @@
 //
 //        given(placeMapper.placePostDtoToPlace(Mockito.any(PlaceDto.PlacePostDto.class))).willReturn(new Place());
 //        given(placeService.createPlace(Mockito.any(Place.class))).willReturn(new Place());
-//        given(placeLikeService.)
+//        given(placeLikeService.changeLikeUserStatus(Mockito.any())).willReturn(true);
 //        given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class))).willReturn(responseDto);
 //
 //        //when
@@ -128,8 +130,6 @@
 //                                                fieldWithPath("address").type(JsonFieldType.STRING).description("장소 주소"),
 //                                                fieldWithPath("description").type(JsonFieldType.STRING).description(
 //                                                        "장소 설명"),
-//                                                fieldWithPath("placeLikeUserList").type(JsonFieldType.OBJECT).description("좋아요 회원 리스트"),
-//                                                fieldWithPath("isBookMarkde").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
 //                                                fieldWithPath("kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
 //                                                fieldWithPath("categoryId").type(JsonFieldType.NUMBER).description(
 //                                                        "카테고리 식별자"),
@@ -145,6 +145,10 @@
 //                                                fieldWithPath("address").type(JsonFieldType.STRING).description("장소 주소"),
 //                                                fieldWithPath("description").type(JsonFieldType.STRING).description(
 //                                                        "장소 설명"),
+//                                                fieldWithPath("likeCount").type(JsonFieldType.NUMBER).description("좋아요 숫자"),
+//                                                fieldWithPath("reviewCount").type(JsonFieldType.NUMBER).description("리뷰 갯수"),
+//                                                fieldWithPath("isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
+//                                                fieldWithPath("isLiked").type(JsonFieldType.BOOLEAN).description("좋아요 여부 확인"),
 //                                                fieldWithPath("kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
 //                                                fieldWithPath("category").type(JsonFieldType.STRING).description(
 //                                                        "카테고리"),
@@ -168,7 +172,9 @@
 //                                                                              "강남역7번출구맥도날드",
 //                                                                              "서울시 강남구",
 //                                                                              "존나 맛없어요",
-//                                                                              null,
+//                                                                              3,
+//                                                                              3,
+//                                                                              true,
 //                                                                              true,
 //                                                                              0L,
 //                                                                              "공방",
@@ -205,6 +211,10 @@
 //                                                fieldWithPath("address").type(JsonFieldType.STRING).description("장소 주소"),
 //                                                fieldWithPath("description").type(JsonFieldType.STRING).description(
 //                                                        "장소 설명"),
+//                                                fieldWithPath("likeCount").type(JsonFieldType.NUMBER).description("좋아요 숫자"),
+//                                                fieldWithPath("reviewCount").type(JsonFieldType.NUMBER).description("리뷰 갯수"),
+//                                                fieldWithPath("isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
+//                                                fieldWithPath("isLiked").type(JsonFieldType.BOOLEAN).description("좋아요 여부 확인"),
 //                                                fieldWithPath("kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
 //                                                fieldWithPath("category").type(JsonFieldType.STRING).description(
 //                                                        "카테고리"),
@@ -222,7 +232,9 @@
 //                                                                              "강남역7번출구맥도날드",
 //                                                                              "서울시 강남구",
 //                                                                              "사람이많아요",
-//                                                                              null,
+//                                                                              3,
+//                                                                              3,
+//                                                                              true,
 //                                                                              true,
 //                                                                              0L,
 //                                                                              "공방",
@@ -250,6 +262,10 @@
 //                                                fieldWithPath("address").type(JsonFieldType.STRING).description("장소 주소"),
 //                                                fieldWithPath("description").type(JsonFieldType.STRING).description(
 //                                                        "장소 설명"),
+//                                                fieldWithPath("likeCount").type(JsonFieldType.NUMBER).description("좋아요 숫자"),
+//                                                fieldWithPath("reviewCount").type(JsonFieldType.NUMBER).description("리뷰 갯수"),
+//                                                fieldWithPath("isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
+//                                                fieldWithPath("isLiked").type(JsonFieldType.BOOLEAN).description("좋아요 여부 확인"),
 //                                                fieldWithPath("kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
 //                                                fieldWithPath("category").type(JsonFieldType.STRING).description(
 //                                                        "카테고리"),
@@ -269,7 +285,9 @@
 //                                              "강남역7번출구맥도날드",
 //                                              "서울시 강남구",
 //                                              "존나 맛없어요",
-//                                              null,
+//                                              3,
+//                                              3,
+//                                              true,
 //                                              true,
 //                                              0L,
 //                                              "햄버거",
@@ -281,7 +299,9 @@
 //                                              "건대역2번출구맥도날드",
 //                                              "서울시 광진구",
 //                                              "존나 맛있어요",
-//                                              null,
+//                                              4,
+//                                              3,
+//                                              true,
 //                                              true,
 //                                              0L,
 //                                              "햄버거",
@@ -330,6 +350,10 @@
 //                                                fieldWithPath("placeList[].address").type(JsonFieldType.STRING).description("장소 주소"),
 //                                                fieldWithPath("placeList[].description").type(JsonFieldType.STRING).description(
 //                                                        "장소 설명"),
+//                                                fieldWithPath("placeList[].likeCount").type(JsonFieldType.NUMBER).description("좋아요 숫자"),
+//                                                fieldWithPath("placeList[].reviewCount").type(JsonFieldType.NUMBER).description("리뷰 갯수"),
+//                                                fieldWithPath("placeList[].isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
+//                                                fieldWithPath("placeList[].isLiked").type(JsonFieldType.BOOLEAN).description("좋아요 여부 확인"),
 //                                                fieldWithPath("placeList[].kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
 //                                                fieldWithPath("placeList[].category").type(JsonFieldType.STRING).description(
 //                                                        "카테고리"),

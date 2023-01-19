@@ -36,6 +36,7 @@ public class PlaceDto extends BaseTime {
     @NoArgsConstructor
     public static class PlacePatchDto {
 
+        @NotNull
         private  Long placeId;
                 @NotBlank
         private String description;
@@ -45,20 +46,24 @@ public class PlaceDto extends BaseTime {
     @Data
     @AllArgsConstructor
     public static class PlaceLikeDto {
+        @NotNull
         private Long memberId;
+        @NotNull
         private Long placeId;
     }
 
     @Data
     @AllArgsConstructor
-    public static class PlaceResponseDto {
+    public static class PlaceResponseDto extends BaseTime {
         private Long placeId;
         private Long memberId;
         private String name;
         private String address;
         private String description;
-        private List placeLikeUserList;
+        private int likeCount;
+        private int reviewCount;
         private Boolean isBookMarked;
+        private Boolean isLiked;
         private Long kakaoId;
         private String category;
         private String latitude;
