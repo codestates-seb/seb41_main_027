@@ -2,7 +2,6 @@ package main027.server.domain.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import main027.server.domain.member.entity.Member;
 
 import javax.validation.constraints.Email;

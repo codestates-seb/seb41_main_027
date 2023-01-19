@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 public interface PlaceMapper {
 
     @Mapping(source = "memberId", target = "member.memberId")
-    @Mapping(source = "categoryId", target = "category.categoryId")
-    Place placePostDtoToPlace(PlaceDto.PlacePostDto placePostDto);
+    @Mapping(source = "placePostDto.categoryId", target = "category.categoryId")
+    Place placePostDtoToPlace(PlaceDto.PlacePostDto placePostDto, Long memberId);
 
     Place placePatchDtoToPlace(PlaceDto.PlacePatchDto placePatchDto);
 

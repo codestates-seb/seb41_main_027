@@ -17,8 +17,6 @@ public class PlaceDto extends BaseTime {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class PlacePostDto {
-        @NotNull
-        private Long memberId;
         @NotBlank
         private String name;
         @NotBlank

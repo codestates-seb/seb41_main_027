@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class MemberUpdateServiceImpl implements MemberUpdateService{
+public class MemberUpdateServiceImpl implements MemberUpdateService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthorityUtils authorityUtils;

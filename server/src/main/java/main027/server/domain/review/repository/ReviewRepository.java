@@ -11,8 +11,8 @@ import org.springframework.data.repository.query.Param;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     /**
-     * @param placeId  리뷰 리스트를 가져올 Place의 Id
-     * @return  Place에 속해 있는 Paging 처리된 Review 리스트
+     * @param placeId 리뷰 리스트를 가져올 Place의 Id
+     * @return Place에 속해 있는 Paging 처리된 Review 리스트
      */
     @TimeTrace
     @Query("select r from review r where r.place.placeId = :placeId")

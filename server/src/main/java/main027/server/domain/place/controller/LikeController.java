@@ -37,7 +37,7 @@ public class LikeController {
     @GetMapping()
     public ResponseEntity getLikedList(@RequestParam(defaultValue = "1") Integer page) {
         Page<Place> pagingList = placeLikeService.findPlaceMemberLiked(memberHolder.getMemberId(),
-                                                                       PageRequest.of(page-1, 10));
+                                                                       PageRequest.of(page - 1, 10));
         PlaceDto.PageResponseDto responseDto = placeMapper.pageToList(pagingList, memberHolder.getMemberId());
         return new ResponseEntity(responseDto, HttpStatus.OK);
     }

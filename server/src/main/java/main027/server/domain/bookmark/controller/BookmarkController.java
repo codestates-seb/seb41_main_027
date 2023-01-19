@@ -13,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -36,14 +35,14 @@ public class BookmarkController {
     }
 
     /**
-     * @param page     클라이언트가 요청할 페이지 수
+     * @param page 클라이언트가 요청할 페이지 수
      * @return {@link BookmarkDto.Response} 페이징 처리 된 북마크리스트 리턴 Book
      */
     @TimeTrace
     @GetMapping
     public ResponseEntity getList(@RequestParam(defaultValue = "1") int page) {
         Long memberId = memberHolder.getMemberId();
-        Page<Place> pagingList = bookmarkService.findPlaceMemberBookmarked(memberId, PageRequest.of(page-1, 10));
+        Page<Place> pagingList = bookmarkService.findPlaceMemberBookmarked(memberId, PageRequest.of(page - 1, 10));
 
         PlaceDto.PageResponseDto response = placeMapper.pageToList(pagingList, memberId);
 
