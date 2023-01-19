@@ -2,6 +2,7 @@ package main027.server.global.auth.filter;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.extern.slf4j.Slf4j;
 import main027.server.global.auth.jwt.JwtTokenizer;
 import main027.server.global.auth.utils.CustomAuthorityUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +24,7 @@ import java.util.Map;
  * OncePerRequestFilter는 request 당 한 번만 수행됨
  * 성공이냐 실패냐 한 번만 판단하면 되기 때문.
  */
+@Slf4j
 public class JwtVerificationFilter extends OncePerRequestFilter {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
@@ -92,6 +94,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         List<GrantedAuthority> authorities = authorityUtils.createAuthorities((List)claims.get("roles"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        log.info("securityContext에 email ={}, authorities ={} 저장 완료", email, authorities);
     }
 
 }

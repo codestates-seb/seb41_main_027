@@ -76,6 +76,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String accessToken = delegateAccessToken(member);
         String refreshToken = delegateRefreshToken(member);
 
+        /**
+         * 레디스에 key :refreshToken, value email, duration expirationMinutes으로 refreshToken 저장
+         */
         redisService.setRefreshToken(refreshToken, member.getEmail(), jwtTokenizer.getRefreshTokenExpirationMinutes());
 
         response.setHeader("Authorization", "Bearer" + accessToken);
