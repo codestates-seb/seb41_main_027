@@ -6,6 +6,7 @@ import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.bookmark.mapper.BookmarkMapper;
 import main027.server.domain.bookmark.service.BookmarkService;
 import main027.server.domain.place.entity.Place;
+import main027.server.global.aop.logging.MemberHolder;
 import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +22,9 @@ public class BookmarkController {
 
     private final BookmarkService bookmarkService;
     private final BookmarkMapper mapper;
+    private final MemberHolder memberHolder;
 
+    @TimeTrace
     @PostMapping
     public ResponseEntity post(@Validated @RequestBody BookmarkDto.Post postDto) {
         Bookmark bookmark = mapper.PostToEntity(postDto);
@@ -30,10 +33,9 @@ public class BookmarkController {
     }
 
     @TimeTrace
-    @GetMapping("/{memberId}")
-    public ResponseEntity getList(@PathVariable Long memberId,
-                                  @RequestParam(defaultValue = "1") int page) {
-
+    @GetMapping
+    public ResponseEntity getList(@RequestParam(defaultValue = "1") int page) {
+        Long memberId = memberHolder.getMemberId();
         Page<Place> pagingList = bookmarkService.findPlaceMemberBookmarked(memberId, PageRequest.of(page-1, 10));
 
         BookmarkDto.Response response = mapper.pageToList(pagingList);
