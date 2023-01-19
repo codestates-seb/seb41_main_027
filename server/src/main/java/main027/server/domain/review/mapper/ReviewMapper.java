@@ -22,14 +22,8 @@ public interface ReviewMapper {
     @Mapping(source = "place.placeId", target = "placeId")
     ReviewDto.Response entityToResponse(Review review);
 
-    default ReviewDto.ListResponse pageToList(Page<Review> pages) {
-        ReviewDto.ListResponse response = pageToResponseListChild(pages);
-        response.setPresentPage(Long.valueOf(pages.getPageable().getPageNumber() + 1));
-
-        return response;
-    }
-
     @Mapping(source = "content", target = "reviewList")
-    ReviewDto.ListResponse pageToResponseListChild(Page<Review> reviews);
+    @Mapping(target = "presentPage", expression = "java(Long.valueOf(reviews.getPageable().getPageNumber() + 1))")
+    ReviewDto.ListResponse pageToList(Page<Review> reviews);
     
 }

@@ -2,8 +2,8 @@ package main027.server.domain.member.verifier;
 
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.repository.MemberRepository;
-import main027.server.global.exception.BusinessLogicException;
-import main027.server.global.exception.ExceptionCode;
+import main027.server.global.advice.exception.BusinessLogicException;
+import main027.server.global.advice.exception.ExceptionCode;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

@@ -2,7 +2,6 @@ package main027.server.domain.bookmark.controller;
 
 import lombok.RequiredArgsConstructor;
 import main027.server.domain.bookmark.dto.BookmarkDto;
-import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.bookmark.mapper.BookmarkMapper;
 import main027.server.domain.bookmark.service.BookmarkService;
 import main027.server.domain.place.entity.Place;
@@ -27,11 +26,15 @@ public class BookmarkController {
     @TimeTrace
     @PostMapping("/{placeId}")
     public ResponseEntity post(@PathVariable Long placeId) {
-        Bookmark bookmark = mapper.PostToEntity(placeId, memberHolder.getMemberId());
-        Boolean finalBookmarkStatus = bookmarkService.changeBookmarkStatus(bookmark);
+        Boolean finalBookmarkStatus = bookmarkService.changeBookmarkStatus(
+                mapper.PostToEntity(placeId, memberHolder.getMemberId()));
         return new ResponseEntity(finalBookmarkStatus, HttpStatus.OK);
     }
 
+    /**
+     * @param page     클라이언트가 요청할 페이지 수
+     * @return {@link BookmarkDto.Response} 페이징 처리 된 북마크리스 트 리턴 Book
+     */
     @TimeTrace
     @GetMapping
     public ResponseEntity getList(@RequestParam(defaultValue = "1") int page) {
@@ -39,6 +42,7 @@ public class BookmarkController {
         Page<Place> pagingList = bookmarkService.findPlaceMemberBookmarked(memberId, PageRequest.of(page-1, 10));
 
         BookmarkDto.Response response = mapper.pageToList(pagingList);
+
 
         return new ResponseEntity(response, HttpStatus.OK);
     }

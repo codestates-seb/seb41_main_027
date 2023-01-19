@@ -1,4 +1,4 @@
-package main027.server.global.exception;
+package main027.server.global.advice.exception;
 
 import lombok.Getter;
 

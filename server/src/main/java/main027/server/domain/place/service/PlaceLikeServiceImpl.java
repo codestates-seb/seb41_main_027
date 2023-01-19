@@ -6,6 +6,7 @@ import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.entity.PlaceLikeUser;
 import main027.server.domain.place.repository.PlaceLikeUserRepository;
 import main027.server.domain.place.verifier.PlaceVerifier;
+import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class PlaceLikeServiceImpl implements PlaceLikeService {
     private final MemberVerifier memberVerifier;
     private final PlaceVerifier placeVerifier;
 
+    @TimeTrace
     public Boolean changeLikeUserStatus(PlaceLikeUser placeLikeUser) {
         memberVerifier.findVerifiedMember(placeLikeUser.getMember().getMemberId());
         placeVerifier.findVerifiedPlace(placeLikeUser.getPlace().getPlaceId());
@@ -41,6 +43,7 @@ public class PlaceLikeServiceImpl implements PlaceLikeService {
         }
     }
 
+    @TimeTrace
     public Page<Place> findPlaceMemberLiked(Long memberId, Pageable pageable) {
         memberVerifier.findVerifiedMember(memberId);
         return placeLikeUserRepository.findLikes(memberId, pageable);
