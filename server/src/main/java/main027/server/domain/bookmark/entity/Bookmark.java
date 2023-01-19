@@ -33,7 +33,6 @@ public class Bookmark {
 
     public void setPlace(Place place) {
         this.place = place;
-        member.getBookmarkList().add(this);
     }
 
     public Bookmark(Member member, Place place) {

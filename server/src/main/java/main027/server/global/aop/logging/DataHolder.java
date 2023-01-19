@@ -27,7 +27,7 @@ import java.util.UUID;
 public class DataHolder extends StopWatch {
 
     private Long memberId;
-    private String url;
+    private String uri;
     /**
      * 해당 HTTP의 요청을 인식할 id (request가 종료될 때 까지 유지)
      */
@@ -40,12 +40,11 @@ public class DataHolder extends StopWatch {
     private void init() {
         this.start();
         this.uuid = UUID.randomUUID().toString().substring(0, 8);
-        log.info("========uuid={}'s REQUEST START========", uuid);
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-        log.info("url={}", url);
+    public void setUri(String uri) {
+        this.uri = uri;
+        log.info("======== REQUEST START URI={} ========", uri);
     }
 
     /**
@@ -54,7 +53,7 @@ public class DataHolder extends StopWatch {
     @PreDestroy
     private void destroy() {
         this.stop();
-        log.info("========uuid={}'s REQUEST END========[TOTAL TIME={}ms]", uuid, this.getTotalTimeMillis());
+        log.info("======== REQUEST END URI={} ========[TOTAL TIME={}ms]", uri, this.getTotalTimeMillis());
     }
 
 }
