@@ -48,4 +48,9 @@ public class PlaceLikeServiceImpl implements PlaceLikeService {
         memberVerifier.findVerifiedMember(memberId);
         return placeLikeUserRepository.findLikes(memberId, pageable);
     }
+
+    @TimeTrace
+    public Boolean isLike(Long memberId, Long placeId) {
+        return placeLikeUserRepository.isMemberLikePlace(memberId, placeId);
+    }
 }

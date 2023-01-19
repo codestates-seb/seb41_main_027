@@ -55,6 +55,8 @@ public class PlaceController {
     @GetMapping("/{placeId}")
     public ResponseEntity getPlace(@PathVariable("placeId") Long placeId) {
         Place place = placeService.findPlace(placeId);
+        //TODO: JWT 토큰에서 memberId 꺼내서 모든 Request에 memberId 값 넘겨주는 것 필요
+        // placeLikeService.isLike(memberId);
         return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place), HttpStatus.OK);
     }
 
