@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import main027.server.domain.review.dto.ReviewDto;
 import main027.server.domain.review.mapper.ReviewMapper;
 import main027.server.domain.review.service.ReviewService;
-import main027.server.domain.review.verifier.ReviewVerifier;
 import main027.server.global.aop.logging.MemberHolder;
 import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.PageRequest;

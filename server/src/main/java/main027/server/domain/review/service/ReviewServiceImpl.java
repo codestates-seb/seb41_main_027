@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ReviewServiceImpl implements ReviewService{
+public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final EmojiVerifier emojiVerifier;
@@ -21,7 +21,7 @@ public class ReviewServiceImpl implements ReviewService{
     private final MemberVerifier memberVerifier;
 
     /**
-     *  리뷰의 Emoji, Place, Member가 유효한지 검사 후 저장
+     * 리뷰의 Emoji, Place, Member가 유효한지 검사 후 저장
      */
     @TimeTrace
     public Review save(Review review) {

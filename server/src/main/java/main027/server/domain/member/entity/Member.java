@@ -3,10 +3,10 @@ package main027.server.domain.member.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import main027.server.global.audit.BaseTime;
 import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.review.entity.Review;
+import main027.server.global.audit.BaseTime;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class Member extends BaseTime {
     private List<Bookmark> bookmarkList = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles =new ArrayList<>();
+    private List<String> roles = new ArrayList<>();
 
     public Member(String email, String password, String nickName) {
         this.email = email;

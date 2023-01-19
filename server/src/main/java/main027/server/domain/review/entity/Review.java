@@ -1,9 +1,9 @@
 package main027.server.domain.review.entity;
 
 import lombok.*;
-import main027.server.global.audit.BaseTime;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.place.entity.Place;
+import main027.server.global.audit.BaseTime;
 
 import javax.persistence.*;
 
