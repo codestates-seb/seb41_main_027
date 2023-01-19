@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { useRecoilState } from 'recoil'
+import { listClick } from '../../../recoil/atoms'
 
 const Wrapper = styled.div`
   // Style 💄
@@ -76,19 +78,34 @@ const Wrapper = styled.div`
     color: #909499;
   }
 `
-const SiteInfoCard = () => {
+
+const SiteInfoCard = ({ positions }) => {
+  const [clickPoint, setClickPoint] = useRecoilState(listClick)
+
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => {
+        setClickPoint(positions.latlng || positions.position)
+        console.log(clickPoint)
+      }}
+    >
       <p className="card-title">
-        <h1 className="site-name">타이틀을 기재해주세요.타이틀을 기재해주세요.</h1>
-        <div className="view-like">
-          <span className="ico-like">♥️</span>
-          <span className="count-like">000</span>
-        </div>
+        <h1 className="site-name">{positions.name}</h1>
+
+        {positions && positions.islike ? (
+          <div className="view-like">
+            <span className="ico-like">♥️</span>
+            <span className="count-like">000</span>
+          </div>
+        ) : (
+          <div className="add-place">
+            <span>등록하기</span>
+          </div>
+        )}
       </p>
       <p>
         <span className="tag-category">카페</span>
-        <p className="site-addr">주소명을 기재해주세요.</p>
+        <p className="site-addr">{positions.address}</p>
       </p>
     </Wrapper>
   )
