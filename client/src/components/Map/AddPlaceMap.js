@@ -105,8 +105,8 @@ const AddPlaceMap = () => {
       // 지도 중심을 부드럽게 이동시킵니다
       // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
       map.panTo(moveLatLon)
-      console.log(clickPoint)
-      console.log(typeof clickPoint)
+      // console.log(clickPoint)
+      // console.log(typeof clickPoint)
     }
   }, [clickPoint])
 
@@ -137,7 +137,11 @@ const AddPlaceMap = () => {
           <MapMarker
             key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
             position={marker.position}
-            onClick={() => setInfo(marker)}
+            onClick={marker => {
+              setInfo(marker)
+              map.panTo(marker.getPosition())
+            }}
+            // onClick={(marker) => map.panTo(marker.getPosition())}
           >
             {info && info.name === marker.name && <div style={{ color: '#000' }}>{marker.name}</div>}
           </MapMarker>

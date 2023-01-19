@@ -117,7 +117,11 @@ const MainMap = () => {
     return (
       <MapMarker
         position={position} // 마커를 표시할 위치
-        onClick={onClick}
+        // onClick={onClick}
+        onClick={point => {
+          // setSeleteMarker(index)
+          map.panTo(point.getPosition())
+        }}
         onMouseOver={() => setIsOver(true)}
         onMouseOut={() => setIsOver(false)}
         image={{
