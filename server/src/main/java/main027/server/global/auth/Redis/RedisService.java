@@ -5,14 +5,16 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+
 @Service
 @RequiredArgsConstructor
 public class RedisService {
     private final RedisTemplate<String, String> redisTemplate;
 
-    public void setRefreshToken(String key, String value, long timeout) {
+    public void setRefreshToken(String key, String value, long expirationMinutes) {
         ValueOperations<String, String> values = redisTemplate.opsForValue();
-        values.set(key, value, timeout);
+        values.set(key, value, Duration.ofMinutes(expirationMinutes));
     }
 
     public String getRefreshToken(String key) {

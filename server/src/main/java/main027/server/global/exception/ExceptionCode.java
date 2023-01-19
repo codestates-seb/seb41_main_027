@@ -3,6 +3,8 @@ package main027.server.global.exception;
 import static org.springframework.http.HttpStatus.*;
 
 import lombok.Getter;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpClientErrorException.*;
 
 public enum ExceptionCode {
     MEMBER_NOT_FOUND(NOT_FOUND.value(), "Member Not Found"),
@@ -10,7 +12,8 @@ public enum ExceptionCode {
     PLACE_NOT_FOUND(NOT_FOUND.value(), "Place Not Found"),
     PLACE_ALREADY_EXISTS(CONFLICT.value(), "Place Already Exists"),
     EMOJI_NOT_FOUND(NOT_FOUND.value(), "Emoji Not Found"),
-    REVIEW_NOT_FOUND(NOT_FOUND.value(), "Review Not Found");
+    REVIEW_NOT_FOUND(NOT_FOUND.value(), "Review Not Found"),
+    INVALID_TOKEN(UNAUTHORIZED.value(), "Invalid Token Value");
 
     @Getter
     private int status;
