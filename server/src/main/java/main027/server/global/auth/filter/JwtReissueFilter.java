@@ -1,11 +1,11 @@
 package main027.server.global.auth.filter;
 
 import lombok.RequiredArgsConstructor;
+import main027.server.global.advice.exception.BusinessLogicException;
+import main027.server.global.advice.exception.ExceptionCode;
 import main027.server.global.auth.Redis.RedisService;
 import main027.server.global.auth.jwt.JwtTokenizer;
 import main027.server.global.auth.userdetails.MemberDetailsService;
-import main027.server.global.exception.BusinessLogicException;
-import main027.server.global.exception.ExceptionCode;
 import org.springframework.http.MediaType;
 import org.springframework.web.filter.OncePerRequestFilter;
 

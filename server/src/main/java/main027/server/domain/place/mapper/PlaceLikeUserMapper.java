@@ -10,7 +10,7 @@ public interface PlaceLikeUserMapper {
 
     @Mapping(source = "memberId", target = "member.memberId")
     @Mapping(source = "placeId", target = "place.placeId")
-    PlaceLikeUser placeLikeDtoToPlace(PlaceDto.PlaceLikeDto placeLikeDto);
+    PlaceLikeUser placeLikeDtoToPlace(Long memberId, Long placeId);
 
 
 }

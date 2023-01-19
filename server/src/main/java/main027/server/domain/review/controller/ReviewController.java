@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 public class ReviewController {
 
     private final ReviewService reviewService;
-    private final ReviewVerifier reviewVerifier;
     private final ReviewMapper mapper;
     private final MemberHolder memberHolder;
 
