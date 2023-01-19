@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import main027.server.domain.review.dto.ReviewDto;
 import main027.server.domain.review.mapper.ReviewMapper;
 import main027.server.domain.review.service.ReviewService;
-import main027.server.global.aop.logging.MemberHolder;
+import main027.server.global.aop.logging.DataHolder;
 import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +20,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final ReviewMapper mapper;
-    private final MemberHolder memberHolder;
+    private final DataHolder dataHolder;
 
     /**
      * 장소에 리뷰를 등록하는 컨트롤러
@@ -29,7 +29,7 @@ public class ReviewController {
     @PostMapping
     public ResponseEntity post(@Validated @RequestBody ReviewDto.Post postDto) {
         ReviewDto.Response response = mapper.entityToResponse(reviewService.save(
-                mapper.PostToEntity(postDto, memberHolder.getMemberId())));
+                mapper.PostToEntity(postDto, dataHolder.getMemberId())));
 
         return new ResponseEntity(response, HttpStatus.CREATED);
     }

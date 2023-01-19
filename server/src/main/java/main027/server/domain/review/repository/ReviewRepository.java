@@ -15,6 +15,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
      * @return Place에 속해 있는 Paging 처리된 Review 리스트
      */
     @TimeTrace
-    @Query("select r from review r where r.place.placeId = :placeId")
+    @Query("select r from review r where r.place.placeId = :placeId order by r.createdAt desc")
     Page<Review> findReviews(@Param("placeId") Long placeId, Pageable pageable);
 }

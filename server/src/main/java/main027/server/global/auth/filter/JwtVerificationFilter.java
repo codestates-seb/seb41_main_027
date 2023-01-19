@@ -2,7 +2,7 @@ package main027.server.global.auth.filter;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
-import main027.server.global.aop.logging.MemberHolder;
+import main027.server.global.aop.logging.DataHolder;
 import lombok.extern.slf4j.Slf4j;
 import main027.server.global.auth.jwt.JwtTokenizer;
 import main027.server.global.auth.utils.CustomAuthorityUtils;
@@ -29,13 +29,13 @@ import java.util.Map;
 public class JwtVerificationFilter extends OncePerRequestFilter {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
-    private final MemberHolder memberHolder;
+    private final DataHolder dataHolder;
 
     public JwtVerificationFilter(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils,
-                                 MemberHolder memberHolder) {
+                                 DataHolder dataHolder) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
-        this.memberHolder = memberHolder;
+        this.dataHolder = dataHolder;
     }
 
     /**
@@ -48,7 +48,8 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
             Map<String, Object> claims = verifyJws(request);
-            memberHolder.setMemberId(Long.valueOf((Integer) claims.get("memberId")));
+            dataHolder.setMemberId(Long.valueOf((Integer) claims.get("memberId")));
+            System.out.println(request.getRequestURI());
             setAuthenticationToContext(claims);
         } catch (SignatureException se) {
             request.setAttribute("exception", se);

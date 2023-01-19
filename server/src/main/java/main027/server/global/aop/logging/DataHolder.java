@@ -1,9 +1,12 @@
 package main027.server.global.aop.logging;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
 import javax.annotation.PostConstruct;
@@ -19,8 +22,12 @@ import java.util.UUID;
 @Slf4j
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class LogStopWatch extends StopWatch {
+@Getter
+@Setter
+public class DataHolder extends StopWatch {
 
+    private Long memberId;
+    private String uri;
     /**
      * 해당 HTTP의 요청을 인식할 id (request가 종료될 때 까지 유지)
      */
@@ -33,7 +40,11 @@ public class LogStopWatch extends StopWatch {
     private void init() {
         this.start();
         this.uuid = UUID.randomUUID().toString().substring(0, 8);
-        log.info("========uuid={}'s REQUEST START========", uuid);
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+        log.info("======== REQUEST START URI={} ========", uri);
     }
 
     /**
@@ -42,11 +53,7 @@ public class LogStopWatch extends StopWatch {
     @PreDestroy
     private void destroy() {
         this.stop();
-        log.info("========uuid={}'s REQUEST END========[TOTAL TIME={}ms]", uuid, this.getTotalTimeMillis());
-    }
-
-    public String getUuid() {
-        return uuid;
+        log.info("======== REQUEST END URI={} ========[TOTAL TIME={}ms]", uri, this.getTotalTimeMillis());
     }
 
 }

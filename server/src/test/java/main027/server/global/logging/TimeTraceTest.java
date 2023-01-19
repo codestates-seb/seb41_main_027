@@ -1,7 +1,6 @@
 package main027.server.global.logging;
 
 import lombok.extern.slf4j.Slf4j;
-import main027.server.domain.bookmark.controller.BookmarkController;
 import main027.server.domain.bookmark.service.BookmarkService;
 import main027.server.global.aop.logging.LogStopWatch;
 import org.junit.jupiter.api.DisplayName;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.util.StopWatch;
 
 @Slf4j
 @SpringBootTest
