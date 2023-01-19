@@ -1,30 +1,27 @@
 import styled from 'styled-components'
 
-import Nav from '../components/Nav/Nav'
-import Header from '../components/Header/Header'
+import Register from '../components/Sign/Register'
+// import Register from '../components/Sign/RegisterDemo'
 
-const Wrapper = styled.section`
-  width: 100%;
-`
+// import { Link } from 'react-router-dom'
+import Logo from '../assets/LogoTypeSignature.svg'
 
 const Container = styled.section`
-  z-index: 1000;
-  overflow: hidden;
-  height: calc(100% - 100px);
-  border-radius: 32px 0px 0px 0px;
-  box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.4);
-  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 const SignUp = () => {
   return (
-    <>
-      <Nav />
-      <Wrapper>
-        <Header />
-        <Container>SignUp</Container>
-      </Wrapper>
-    </>
+    <Container>
+      <h1>
+        <img src={Logo} className="Logo" alt="EcoGreenSeoul Logo TypeSignature" />
+      </h1>
+      <Register />
+    </Container>
   )
 }
 
