@@ -6,7 +6,6 @@ import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.mapper.PlaceMapper;
 import main027.server.domain.place.service.PlaceService;
 import main027.server.domain.place.service.PlaceUpdateService;
-import main027.server.global.aop.logging.MemberHolder;
 import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

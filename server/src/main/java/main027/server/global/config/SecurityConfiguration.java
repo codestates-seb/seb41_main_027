@@ -1,6 +1,6 @@
 package main027.server.global.config;
 
-import main027.server.global.aop.logging.MemberHolder;
+import main027.server.global.aop.logging.DataHolder;
 import main027.server.global.auth.Redis.RedisService;
 import main027.server.global.auth.filter.JwtAuthenticationFilter;
 import main027.server.global.auth.filter.JwtReissueFilter;
@@ -36,16 +36,16 @@ public class SecurityConfiguration {
     private final CustomAuthorityUtils authorityUtils;
     private final RedisService redisService;
     private final MemberDetailsService memberDetailsService;
-    private final MemberHolder memberHolder;
+    private final DataHolder dataHolder;
 
     public SecurityConfiguration(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils,
                                  RedisService redisService,
-                                 MemberDetailsService memberDetailsService, MemberHolder memberHolder) {
+                                 MemberDetailsService memberDetailsService, DataHolder dataHolder) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
         this.redisService = redisService;
         this.memberDetailsService = memberDetailsService;
-        this.memberHolder = memberHolder;
+        this.dataHolder = dataHolder;
     }
 
     @Bean
@@ -110,7 +110,7 @@ public class SecurityConfiguration {
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils,
-                                                                                    memberHolder);
+                                                                                    dataHolder);
 
             JwtReissueFilter jwtReissueFilter = new JwtReissueFilter(jwtTokenizer, redisService, memberDetailsService);
 
