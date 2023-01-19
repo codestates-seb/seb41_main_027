@@ -2,7 +2,7 @@ package main027.server.global.auth.handler;
 
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
-import main027.server.global.advice.dto.ErrorResponse;
+import main027.server.global.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;

@@ -36,7 +36,7 @@ spring:
     hibernate:
       ddl-auto: create
     # SQL문 확인 기능
-#    show-sql: true
+    show-sql: true
 
 ---
 

@@ -1,7 +1,7 @@
 package main027.server.global.auth.utils;
 
 import com.google.gson.Gson;
-import main027.server.global.advice.dto.ErrorResponse;
+import main027.server.global.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 

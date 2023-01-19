@@ -1,4 +1,4 @@
-package main027.server.global.advice.exception;
+package main027.server.global.exception;
 
 import static org.springframework.http.HttpStatus.*;
 

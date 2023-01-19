@@ -9,8 +9,6 @@ public interface PlaceService {
     Place createPlace(Place place);
     Place findPlace(Long placeId);
     Page<Place> findPlaces(Pageable pageable);
-    Page<Place> findPlacesByLikes(Pageable pageable);
-    Page<Place> findPlacesByCategory(Pageable pageable, Long categoryId);
     void deletePlace(Long placeId);
 
 

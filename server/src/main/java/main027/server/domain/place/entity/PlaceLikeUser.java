@@ -16,12 +16,12 @@ public class PlaceLikeUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long placeLikerUserId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "place_id")
     private Place place;
