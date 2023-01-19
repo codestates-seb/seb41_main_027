@@ -1,5 +1,6 @@
 package main027.server.global.config;
 
+import main027.server.global.aop.logging.MemberHolder;
 import main027.server.global.auth.Redis.RedisService;
 import main027.server.global.auth.filter.JwtAuthenticationFilter;
 import main027.server.global.auth.filter.JwtReissueFilter;
@@ -35,14 +36,16 @@ public class SecurityConfiguration {
     private final CustomAuthorityUtils authorityUtils;
     private final RedisService redisService;
     private final MemberDetailsService memberDetailsService;
+    private final MemberHolder memberHolder;
 
     public SecurityConfiguration(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils,
                                  RedisService redisService,
-                                 MemberDetailsService memberDetailsService) {
+                                 MemberDetailsService memberDetailsService, MemberHolder memberHolder) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
         this.redisService = redisService;
         this.memberDetailsService = memberDetailsService;
+        this.memberHolder = memberHolder;
     }
 
     @Bean
@@ -65,8 +68,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers(HttpMethod.POST, "/members").permitAll()
                         .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER")
-                        .antMatchers(HttpMethod.DELETE,"/members/**").hasAnyRole( "USER")
-                        .antMatchers(HttpMethod.POST,"/places").hasRole("USER")
+                        .antMatchers(HttpMethod.DELETE, "/members/**").hasAnyRole("USER")
+                        .antMatchers(HttpMethod.POST, "/places").hasRole("USER")
                         .antMatchers(HttpMethod.PATCH, "/places/**").hasRole("USER")
                         .antMatchers(HttpMethod.DELETE, "/places/**").hasRole("USER")
                         .anyRequest().permitAll()
@@ -98,12 +101,14 @@ public class SecurityConfiguration {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer, redisService);
+            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager,
+                                                                                          jwtTokenizer, redisService);
             jwtAuthenticationFilter.setFilterProcessesUrl("/auth/login");
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 
-            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
+            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils,
+                                                                                    memberHolder);
 
             JwtReissueFilter jwtReissueFilter = new JwtReissueFilter(jwtTokenizer, redisService, memberDetailsService);
 
