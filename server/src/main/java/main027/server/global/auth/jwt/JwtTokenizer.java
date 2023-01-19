@@ -86,7 +86,7 @@ public class JwtTokenizer {
     public String getSubject(String token) {
         String subject = Jwts
                 .parserBuilder()
-                .setSigningKey(getKeyFromBase64EncodedKey(getSecretKey()))
+                .setSigningKey(getKeyFromBase64EncodedKey(encodeBase64SecretKey(getSecretKey())))
                 .build()
                 .parseClaimsJws(token)
                 .getBody()

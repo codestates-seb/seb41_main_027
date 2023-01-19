@@ -28,9 +28,8 @@ public class JwtReissueFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String requestRefreshToken = request.getHeader("Refresh");
-            System.out.println(redisService.getRefreshToken(requestRefreshToken));
             MemberDetailsService.MemberDetails memberDetails = memberDetailsService.loadUserByUsername(
-                    redisService.getRefreshToken(requestRefreshToken));
+                    redisService.getToken(requestRefreshToken));
 
             String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
             jwtTokenizer.getClaims(requestRefreshToken, base64EncodedSecretKey);
