@@ -45,8 +45,9 @@ public class ReviewController {
     @TimeTrace
     @GetMapping("/{placeId}")
     public ResponseEntity getPlaceReviews(@PathVariable Long placeId,
-                                          @RequestParam(defaultValue = "1") int page) {
-        Pageable pageable = PageRequest.of(page - 1, 10);
+                                          @RequestParam(defaultValue = "1") int page,
+                                          @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
 
         ReviewDto.ListResponse response = mapper.pageToList(reviewService.findReviews(placeId, pageable));
 
