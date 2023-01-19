@@ -16,7 +16,7 @@ public interface BookmarkMapper {
 
     @Mapping(source = "memberId", target = "member.memberId")
     @Mapping(source = "placeId", target = "place.placeId")
-    Bookmark PostToEntity(BookmarkDto.Post postDto);
+    Bookmark PostToEntity(Long placeId, Long memberId);
 
 
     @Mapping(source = "content", target = "placeList")

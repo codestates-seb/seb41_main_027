@@ -20,8 +20,6 @@ public class ReviewDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Post {
-        @NotNull
-        private Long memberId;
 
         @NotNull
         private Long placeId;
@@ -61,4 +59,5 @@ public class ReviewDto {
         /** Review의 총 개수 */
         private Long totalElements;
     }
+
 }
