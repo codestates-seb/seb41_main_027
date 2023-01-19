@@ -6,6 +6,7 @@ import main027.server.domain.review.entity.Review;
 import main027.server.domain.review.mapper.ReviewMapper;
 import main027.server.domain.review.service.ReviewService;
 import main027.server.domain.review.verifier.ReviewVerifier;
+import main027.server.global.aop.logging.MemberHolder;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -21,13 +22,14 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final ReviewVerifier reviewVerifier;
     private final ReviewMapper mapper;
+    private final MemberHolder memberHolder;
 
     /**
      * 장소에 리뷰를 등록하는 컨트롤러
      */
     @PostMapping
     public ResponseEntity post(@Validated @RequestBody ReviewDto.Post postDto) {
-        Review review = mapper.PostToEntity(postDto);
+        Review review = mapper.PostToEntity(postDto, memberHolder.getMemberId());
         ReviewDto.Response response = mapper.entityToResponse(reviewService.save(review));
 
         return new ResponseEntity(response, HttpStatus.CREATED);
