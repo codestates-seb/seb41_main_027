@@ -12,9 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class JwtTokenizer {
@@ -84,4 +82,17 @@ public class JwtTokenizer {
         Key key = Keys.hmacShaKeyFor(decodedKey);
         return key;
     }
+
+    public String getSubject(String token) {
+        String subject = Jwts
+                .parserBuilder()
+                .setSigningKey(getKeyFromBase64EncodedKey(getSecretKey()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+
+        return subject;
+    }
 }
+
