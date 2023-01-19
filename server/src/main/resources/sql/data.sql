@@ -119,7 +119,12 @@ values (1, 36),
        (1, 27);
 
 insert into place_like_user (member_id, place_id)
-values (1, 1),
-       (2, 1);
+values (1, 5),
+       (2, 5),
+       (3, 20),
+       (4, 30),
+       (5, 30),
+       (6, 30);
+
 
 
