@@ -91,12 +91,17 @@ const SiteInfoCard = ({ positions }) => {
     >
       <p className="card-title">
         <h1 className="site-name">{positions.name}</h1>
-        <div className="view-like">
-          <span className="ico-like">♥️</span>
-          {/* {삼항연산자를 사용해서 display:none 속성?} */}
-          {/* {islike ? <span className="count-like">000</span> : null} */}
-          <span className="count-like">000</span>
-        </div>
+
+        {positions && positions.islike ? (
+          <div className="view-like">
+            <span className="ico-like">♥️</span>
+            <span className="count-like">000</span>
+          </div>
+        ) : (
+          <div className="add-place">
+            <span>등록하기</span>
+          </div>
+        )}
       </p>
       <p>
         <span className="tag-category">카페</span>

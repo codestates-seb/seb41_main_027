@@ -60,7 +60,7 @@ const MainMap = () => {
   const mapRef = useRef()
 
   const [points, setPoints] = useState([
-    { title: '맛집', latlng: { lat: 33.452278, lng: 126.567803 }, isPanto: false },
+    { title: '맛집', latlng: { lat: 33.452278, lng: 126.567803 }, isPanto: false, address: '제주도', islikeCnt: 100 },
     { title: '카카오집', latlng: { lat: 33.452671, lng: 126.574792 }, isPanto: false },
     { title: '카페', latlng: { lat: 33.451744, lng: 126.572441 }, isPanto: false },
   ])
