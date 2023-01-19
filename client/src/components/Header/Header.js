@@ -1,9 +1,8 @@
 import styled from 'styled-components'
-
 import { Link } from 'react-router-dom'
 
 const HeaderW = styled.header`
-  z-index: 500;
+  z-index: 400;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,7 +10,8 @@ const HeaderW = styled.header`
   width: calc(100% - 64px);
   height: 88px;
   color: #fff;
-  h1 {
+
+  & > h1 {
     font-size: 28px;
     font-weight: 400;
     letter-spacing: -0.5px;
@@ -20,11 +20,12 @@ const HeaderW = styled.header`
     }
   }
 
-  ul {
+  & > ul {
     display: flex;
     font-weight: 400;
     font-size: 18px;
-    li {
+
+    & > li {
       margin-left: 32px;
     }
   }

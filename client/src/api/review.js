@@ -1,25 +1,24 @@
-import axios from 'axios'
+import { customAxios } from '../utils/customAxios'
+import { toast } from 'react-toastify'
 
-const API_REVIEW_ENDPOINT = process.env.REACT_APP_API + process.env.REACT_APP_API_REVIEW_ENDPOINT
-const API_CONNECT_TIMEOUT = process.env.REACT_APP_API_CONNECT_TIMEOUT
+const REVIEW_ENDPOINT = process.env.REACT_APP_API_REVIEW_ENDPOINT
 
-// create
-export const createReview = body => {
-  axios.post(API_REVIEW_ENDPOINT, body, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
+// 리뷰 리스트 조회
+export const getReviewList = async (pId, page) => {
+  console.log('getReviewList')
+  console.log(`${REVIEW_ENDPOINT}/${pId}?page=${page}`)
+  const result = await customAxios.get(`${REVIEW_ENDPOINT}/${pId}?page=${page}`)
+  return result.data
 }
 
-// update
-export const updateReview = body => {
-  axios.patch(API_REVIEW_ENDPOINT, body, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
-}
-
-// delete
-export const deleteReview = () => {
-  axios.delete(API_REVIEW_ENDPOINT, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
+// 리뷰 등록
+export const createReviewInfo = async body => {
+  try {
+    const result = await customAxios.post(REVIEW_ENDPOINT, body)
+    toast.success('정상적으로 등록되었습니다')
+    return result.data
+  } catch (error) {
+    console.error(error)
+    toast.error(error.message)
+  }
 }

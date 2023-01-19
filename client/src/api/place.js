@@ -1,25 +1,30 @@
-import axios from 'axios'
+import { customAxios } from '../utils/customAxios'
+import { toast } from 'react-toastify'
 
-const API_PLACE_ENDPOINT = process.env.REACT_APP_API + process.env.REACT_APP_API_PLACE_ENDPOINT
-const API_CONNECT_TIMEOUT = process.env.REACT_APP_API_CONNECT_TIMEOUT
+const PLACE_ENDPOINT = process.env.REACT_APP_API_PLACE_ENDPOINT
 
-// create
-export const createPlace = body => {
-  axios.post(API_PLACE_ENDPOINT, body, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
+// ----- 장소 관련 axios CURD 정의 -----
+
+// 장소 상세보기 단건 조회
+export const getPlaceInfo = async pId => {
+  console.log('getPlaceInfo')
+  const result = await customAxios.get(`${PLACE_ENDPOINT}/${pId}`)
+  return result.data
 }
 
-// update
-export const updatePlace = body => {
-  axios.patch(API_PLACE_ENDPOINT, body, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
+// 장소 설명 수정
+export const updatePlaceDescription = async (pId, body) => {
+  try {
+    const result = await customAxios.patch(`${PLACE_ENDPOINT}/${pId}`, body)
+    toast.success('정상적으로 수정되었습니다')
+    return result.data
+  } catch (error) {
+    console.error(error)
+    toast.error(error.message)
+  }
 }
 
-// delete
-export const deletePlace = () => {
-  axios.delete(API_PLACE_ENDPOINT, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
+// 장소 추천 정보 수정
+export const updatePlaceLikes = body => {
+  customAxios.patch(PLACE_ENDPOINT, body)
 }
