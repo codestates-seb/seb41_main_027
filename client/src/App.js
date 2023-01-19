@@ -58,11 +58,7 @@ function App() {
       />
       <Suspense fallback={<Loading />}>
         <Main>
-<<<<<<< HEAD
-          <Routes>
-=======
           <Routes location={bgLocation || location}>
->>>>>>> 1b09553f6f0beb64c4b5b700c3ce91837ec4bb2b
             <Route path="/" element={<Home />} />
             <Route path="/place" element={<Place />} />
             <Route path="/mypage" element={<Mypage />} />
