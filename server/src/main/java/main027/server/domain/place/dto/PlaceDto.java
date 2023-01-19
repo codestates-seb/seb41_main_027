@@ -54,7 +54,7 @@ public class PlaceDto extends BaseTime {
 
     @Data
     @AllArgsConstructor
-    public static class PlaceResponseDto {
+    public static class PlaceResponseDto extends BaseTime {
         private Long placeId;
         private Long memberId;
         private String name;

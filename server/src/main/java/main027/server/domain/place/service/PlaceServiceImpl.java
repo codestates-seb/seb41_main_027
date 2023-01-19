@@ -34,6 +34,16 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @TimeTrace
+    public Page<Place> findPlacesByLikes(Pageable pageable) {
+        return placeRepository.likeDesc(pageable);
+    }
+
+    @TimeTrace
+    public Page<Place> findPlacesByCategory(Pageable pageable, Long categoryId) {
+        return placeRepository.CategoryId(pageable,categoryId);
+    }
+
+    @TimeTrace
     public Page<Place> findPlaces(Pageable pageable) {
         return placeRepository.findAll(pageable);
     }
