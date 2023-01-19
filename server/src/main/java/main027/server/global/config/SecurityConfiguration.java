@@ -3,12 +3,10 @@ package main027.server.global.config;
 import main027.server.global.aop.logging.DataHolder;
 import main027.server.global.auth.Redis.RedisService;
 import main027.server.global.auth.filter.JwtAuthenticationFilter;
+import main027.server.global.auth.filter.JwtLogoutFilter;
 import main027.server.global.auth.filter.JwtReissueFilter;
 import main027.server.global.auth.filter.JwtVerificationFilter;
-import main027.server.global.auth.handler.MemberAccessDeniedHandler;
-import main027.server.global.auth.handler.MemberAuthenticationEntryPoint;
-import main027.server.global.auth.handler.MemberAuthenticationFailureHandler;
-import main027.server.global.auth.handler.MemberAuthenticationSuccessHandler;
+import main027.server.global.auth.handler.*;
 import main027.server.global.auth.jwt.JwtTokenizer;
 import main027.server.global.auth.userdetails.MemberDetailsService;
 import main027.server.global.auth.utils.CustomAuthorityUtils;
@@ -114,10 +112,15 @@ public class SecurityConfiguration {
 
             JwtReissueFilter jwtReissueFilter = new JwtReissueFilter(jwtTokenizer, redisService, memberDetailsService);
 
+            JwtLogoutFilter jwtLogoutFilter = new JwtLogoutFilter(jwtTokenizer, redisService);
+
+
+
             builder
                     .addFilter(jwtAuthenticationFilter)
                     .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class)
-                    .addFilterAfter(jwtReissueFilter, JwtVerificationFilter.class);
+                    .addFilterAfter(jwtReissueFilter, JwtVerificationFilter.class)
+                    .addFilterAfter(jwtLogoutFilter, JwtVerificationFilter.class);
         }
     }
 }
