@@ -33,6 +33,7 @@ public class MemberController {
         return new ResponseEntity<>(mapper.memberToMemberResponseDto(createdMember), HttpStatus.CREATED);
     }
 
+    @TimeTrace
     @PatchMapping
     public ResponseEntity patchMember(@Valid @RequestBody MemberDto.Patch requestBody) {
         Member updatedMember = memberUpdateService.updateMember(mapper.memberPatchDtoToMember(requestBody,
@@ -40,7 +41,7 @@ public class MemberController {
         return new ResponseEntity<>(mapper.memberToMemberResponseDto(updatedMember), HttpStatus.OK);
     }
 
-
+    @TimeTrace
     @DeleteMapping
     public ResponseEntity deleteMember() {
         memberService.deleteMember(memberHolder.getMemberId());
