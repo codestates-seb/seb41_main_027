@@ -1,15 +1,17 @@
 import React from 'react'
 import DrawStaticMap from '../Map/StaticMap'
 
-const LocationMap = ({ title, lat, lng }) => {
-  console.log('-- (5)LocationMap Render --')
+const LocationMap = props => {
+  // console.log('-- (5)LocationMap Render --')
+
+  const { name, latitude, longitude } = props.item
 
   const staticMapInfo = {
     w: '100%',
     h: '100%',
-    lat: lat,
-    lng: lng,
-    label: title,
+    lat: latitude,
+    lng: longitude,
+    label: name,
     level: 4,
   }
 
