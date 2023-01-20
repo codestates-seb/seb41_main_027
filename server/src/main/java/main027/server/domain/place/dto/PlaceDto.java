@@ -35,9 +35,8 @@ public class PlaceDto extends BaseTime {
     @NoArgsConstructor
     public static class PlacePatchDto {
 
-        @NotNull
         private  Long placeId;
-                @NotBlank
+        @NotBlank
         private String description;
 
     }
