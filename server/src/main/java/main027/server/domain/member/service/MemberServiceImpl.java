@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
 
     @TimeTrace
     public Member createMember(Member member) {
-        memberVerifier.verifyExistsEmail(member.getEmail());
+        memberVerifier.verifyExistsEmailAndNickName(member);
 
         /**
          * 패스워드 암호화
