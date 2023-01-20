@@ -74,7 +74,6 @@ class MemberControllerTest {
         MemberDto.Response responseDto = new MemberDto.Response(1L,
                                                                 "hgd@gmail.com",
                                                                 "HongGilDong",
-                                                                Member.MemberStatus.ACTIVE,
                                                                 List.of("ROLE_USER"),
                                                                 LocalDateTime.now(),
                                                                 LocalDateTime.now());
@@ -114,8 +113,6 @@ class MemberControllerTest {
                                                 fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
                                                 fieldWithPath("email").type(JsonFieldType.STRING).description("회원 email"),
                                                 fieldWithPath("nickName").type(JsonFieldType.STRING).description("회원 닉네임"),
-                                                fieldWithPath("memberStatus").type(JsonFieldType.STRING).description(
-                                                        "회원 상태"),
                                                 fieldWithPath("roles").type(JsonFieldType.ARRAY).description("회원 역할"),
                                                 fieldWithPath("createdAt").type(JsonFieldType.STRING).description("생성 시간"),
                                                 fieldWithPath("modifiedAt").type(JsonFieldType.STRING).description(
@@ -127,14 +124,13 @@ class MemberControllerTest {
     @Test
     void patchMember() throws Exception {
         // given
-        MemberDto.Patch patch = new MemberDto.Patch("HongGilDong", "12345678", Member.MemberStatus.ACTIVE);
+        MemberDto.Patch patch = new MemberDto.Patch("HongGilDong", "12345678");
 
         String content = gson.toJson(patch);
 
         MemberDto.Response responseDto = new MemberDto.Response(1L,
                                                                 "hgd@gmail.com",
                                                                 "HongGilDong",
-                                                                Member.MemberStatus.ACTIVE,
                                                                 List.of("ROLE_USER"),
                                                                 LocalDateTime.now(),
                                                                 LocalDateTime.now());
@@ -155,16 +151,13 @@ class MemberControllerTest {
         actions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nickName").value(patch.getNickName()))
-                .andExpect(jsonPath("$.memberStatus").value(patch.getMemberStatus().toString()))
                 .andDo(document("patch-member",
                                 preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint()),
                                 requestFields(
                                         List.of(
                                                 fieldWithPath("nickName").type(JsonFieldType.STRING).description("회원 닉네임"),
-                                                fieldWithPath("password").type(JsonFieldType.STRING).description("회원 비밀번호"),
-                                                fieldWithPath("memberStatus").type(JsonFieldType.STRING).description(
-                                                        "회원 상태")
+                                                fieldWithPath("password").type(JsonFieldType.STRING).description("회원 비밀번호")
                                         )
                                 ),
                                 responseFields(
@@ -172,8 +165,6 @@ class MemberControllerTest {
                                                 fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
                                                 fieldWithPath("email").type(JsonFieldType.STRING).description("회원 email"),
                                                 fieldWithPath("nickName").type(JsonFieldType.STRING).description("회원 닉네임"),
-                                                fieldWithPath("memberStatus").type(JsonFieldType.STRING).description(
-                                                        "회원 상태"),
                                                 fieldWithPath("roles").type(JsonFieldType.ARRAY).description("회원 역할"),
                                                 fieldWithPath("createdAt").type(JsonFieldType.STRING).description("생성 시간"),
                                                 fieldWithPath("modifiedAt").type(JsonFieldType.STRING).description(
@@ -189,7 +180,6 @@ class MemberControllerTest {
         MemberDto.Response responseDto = new MemberDto.Response(1L,
                                                                 "hgd@gmail.com",
                                                                 "HongGilDong",
-                                                                Member.MemberStatus.ACTIVE,
                                                                 List.of("ROLE_USER"),
                                                                 LocalDateTime.now(),
                                                                 LocalDateTime.now());
@@ -212,8 +202,6 @@ class MemberControllerTest {
                                                 fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
                                                 fieldWithPath("email").type(JsonFieldType.STRING).description("회원 email"),
                                                 fieldWithPath("nickName").type(JsonFieldType.STRING).description("회원 닉네임"),
-                                                fieldWithPath("memberStatus").type(JsonFieldType.STRING).description(
-                                                        "회원 상태"),
                                                 fieldWithPath("roles").type(JsonFieldType.ARRAY).description("회원 역할"),
                                                 fieldWithPath("createdAt").type(JsonFieldType.STRING).description("생성 시간"),
                                                 fieldWithPath("modifiedAt").type(JsonFieldType.STRING).description(
