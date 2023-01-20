@@ -13,7 +13,8 @@ public enum ExceptionCode {
     PLACE_ALREADY_EXISTS(CONFLICT.value(), "Place Already Exists"),
     EMOJI_NOT_FOUND(NOT_FOUND.value(), "Emoji Not Found"),
     REVIEW_NOT_FOUND(NOT_FOUND.value(), "Review Not Found"),
-    INVALID_TOKEN(UNAUTHORIZED.value(), "Invalid Token Value");
+    INVALID_TOKEN(UNAUTHORIZED.value(), "Invalid Token Value"),
+    PERMISSION_DENIED(FORBIDDEN.value(), "Permission Denied");
 
     @Getter
     private int status;

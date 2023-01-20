@@ -53,6 +53,14 @@ public class ReviewController {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
+    @TimeTrace
+    @DeleteMapping("/{reviewId}")
+    public ResponseEntity deleteReview(@PathVariable Long reviewId) {
+        reviewService.remove(dataHolder.getMemberId(), reviewId);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
     /**
      * 사용하지 않는 로직
      */
