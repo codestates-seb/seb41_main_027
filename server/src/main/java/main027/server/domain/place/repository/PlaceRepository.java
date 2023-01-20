@@ -34,7 +34,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     Page<Place> findByCategoryLikeCount(Pageable pageable, @Param("categoryId") Long categoryId);
 
     @TimeTrace
-    @Query("select p from Place p where p.category.categoryId = :categoryId order by p.createdAt")
+    @Query("select p from Place p where p.category.categoryId = :categoryId order by p.createdAt desc")
     Page<Place> findByCategoryCreatedAt(Pageable pageable, @Param("categoryId") Long categoryId);
 
 }
