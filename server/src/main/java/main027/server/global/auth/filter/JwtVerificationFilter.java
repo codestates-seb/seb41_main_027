@@ -48,8 +48,6 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
             Map<String, Object> claims = verifyJws(request);
-            dataHolder.setMemberId(Long.valueOf((Integer) claims.get("memberId")));
-            System.out.println(request.getRequestURI());
             setAuthenticationToContext(claims);
         } catch (SignatureException se) {
             request.setAttribute("exception", se);
@@ -73,7 +71,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String authorization = request.getHeader("Authorization");
 
-        return authorization == null || !authorization.startsWith("Bearer") || request.getHeader("Refresh") != null;
+        return authorization == null || !authorization.startsWith("Bearer");
     }
 
     /**

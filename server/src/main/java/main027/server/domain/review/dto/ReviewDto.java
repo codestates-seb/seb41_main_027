@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewDto {
@@ -49,7 +50,7 @@ public class ReviewDto {
     @Getter
     @Setter
     public static class ListResponse {
-        private List<ReviewDto.Response> reviewList;
+        private List<ReviewDto.Response> reviewList = new ArrayList<>();
         /** 페이지의 전체 페이지 수 */
         private Long totalPages;
         /** 현재 페이지 */
