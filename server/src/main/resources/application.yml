@@ -9,7 +9,7 @@ spring:
       local: h2-inMemory, stubData, redis
       # dev 그룹 에서는 db 설정을 mysql로 변경합니다.
       # DB의 usrename, password, URL은 외부에 노출시키면 안되기 때문에 EC2에 환경변수를 따로 생성해, 실행 시 불러오도록 합니다.
-      dev: dev-db, redis
+      dev: dev-db, redis, stubData
 #      prod:
 
 #    include:

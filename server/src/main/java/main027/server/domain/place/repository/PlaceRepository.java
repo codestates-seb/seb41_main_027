@@ -19,15 +19,11 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     Page<Place> CategoryId(Pageable pageable, @Param("categoryId") Long categoryId);
 
     @TimeTrace
-    @Query("select p from Place p order by :sortBy")
-    Page<Place> findAll(Pageable pageable, @Param("sortBy") String sortBy);
-
-    @TimeTrace
     @Query("select p from Place p order by p.placeLikeUserList.size desc")
     Page<Place> findAllLikeCount(Pageable pageable);
 
     @TimeTrace
-    @Query("select p from Place p order by p.createdAt")
+    @Query("select p from Place p order by p.createdAt desc")
     Page<Place> findAllCreatedAt(Pageable pageable);
 
     /**
