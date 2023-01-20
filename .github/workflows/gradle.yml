@@ -47,6 +47,15 @@ jobs:
     - name: refresh minute
       run: echo "REFRESH_TOKEN_EXPIRATION_MINUTE=${{secrets.REFRESH_TOKEN_EXPIRATION_MINUTE}}" >> env.yml
       working-directory: ./server/src/main/resources   
+    - name: database username
+      run: echo "MYSQL_DATABASE_USERNAME=${{secrets.MYSQL_DATABASE_USERNAME}}" >> env.yml
+      working-directory: ./server/src/main/resources
+    - name: database password
+      run: echo "MYSQL_DATABASE_PASSWORD=${{secrets.MYSQL_DATABASE_PASSWORD}}" >> env.yml
+      working-directory: ./server/src/main/resources
+    - name: database url
+      run: echo "MYSQL_DATABASE_URL=${{secrets.MYSQL_DATABASE_URL}}" >> env.yml
+      working-directory: ./server/src/main/resources   
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle

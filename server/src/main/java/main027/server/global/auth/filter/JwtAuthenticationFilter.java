@@ -3,6 +3,7 @@ package main027.server.global.auth.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import main027.server.domain.member.entity.Member;
+import main027.server.global.auth.Redis.RedisService;
 import main027.server.global.auth.dto.LoginDto;
 import main027.server.global.auth.jwt.JwtTokenizer;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,9 +28,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final AuthenticationManager authenticationManager;
     private final JwtTokenizer jwtTokenizer;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenizer jwtTokenizer) {
+    private final RedisService redisService;
+
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenizer jwtTokenizer,
+                                   RedisService redisService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenizer = jwtTokenizer;
+        this.redisService = redisService;
     }
 
     /**
@@ -70,6 +75,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String accessToken = delegateAccessToken(member);
         String refreshToken = delegateRefreshToken(member);
+
+        /**
+         * 레디스에 key :refreshToken, value email, duration expirationMinutes으로 refreshToken 저장
+         */
+        redisService.setRefreshToken(refreshToken, member.getEmail(), jwtTokenizer.getRefreshTokenExpirationMinutes());
 
         response.setHeader("Authorization", "Bearer" + accessToken);
         response.setHeader("Refresh", refreshToken);

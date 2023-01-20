@@ -2,6 +2,8 @@ package main027.server.global.auth.filter;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.extern.slf4j.Slf4j;
+import main027.server.global.aop.logging.DataHolder;
 import main027.server.global.auth.jwt.JwtTokenizer;
 import main027.server.global.auth.utils.CustomAuthorityUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,13 +25,17 @@ import java.util.Map;
  * OncePerRequestFilter는 request 당 한 번만 수행됨
  * 성공이냐 실패냐 한 번만 판단하면 되기 때문.
  */
+@Slf4j
 public class JwtVerificationFilter extends OncePerRequestFilter {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
+    private final DataHolder dataHolder;
 
-    public JwtVerificationFilter(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils) {
+    public JwtVerificationFilter(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils,
+                                 DataHolder dataHolder) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
+        this.dataHolder = dataHolder;
     }
 
     /**
@@ -38,7 +44,8 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
      * <p>JWT에 대한 서명 검증에 실패한 경우 발생하는 Exception을 처리할 수 있는 예외처리 로직 포함</p>
      */
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
         try {
             Map<String, Object> claims = verifyJws(request);
             setAuthenticationToContext(claims);
@@ -57,6 +64,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
      * <p>OncePerRequestFilter의 shouldNotFilter를 오버라이드 한 것.</p>
      * <p>특정 조건에 부합하면(true) 해당 Filter의 동작을 수행하지 않고 건너뜀</p>
      * <p>JWT가 Authorization header에 포함되지 않았다면, JWT 자격 증명이 필요하지 않은 리로스에 대한 요청이라고 판단하여 다음 Filter로 처리를 넘김</p>
+     *
      * @return true or false
      */
     @Override
@@ -69,6 +77,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     /**
      * <p>jws는 JWT Signed의 줄임말.</p>
      * <p>Bearer는 JWT의 토큰 타입을 의미</p>
+     *
      * @param request
      * @return claims(Token에 포함된 정보)
      */
@@ -85,13 +94,15 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
      * <p>JWT의 Claims에서 얻은 권한 정보를 기반으로 List<GrantedAuthority>를 생성</p>
      * <p>username과 List<GrantedAuthority>를 포함한 Authentication 객체를 생성</p>
      * <p>SecurityContext에 Authentication 객체를 저장</p>
+     *
      * @param claims
      */
     private void setAuthenticationToContext(Map<String, Object> claims) {
         String email = (String) claims.get("email");
-        List<GrantedAuthority> authorities = authorityUtils.createAuthorities((List)claims.get("roles"));
+        List<GrantedAuthority> authorities = authorityUtils.createAuthorities((List) claims.get("roles"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        log.info("securityContext에 email ={}, authorities ={} 저장 완료", email, authorities);
     }
 
 }

@@ -1,15 +1,15 @@
 spring:
   profiles:
-    active: local
+    active: dev
 
     # 활성화할 Profile의 그룹을 지정할 수 있습니다. 해당 그룹명으로 Profile을 설정하면 그룹에 포함되어 있는 Profile이 같이 실행됩니다.
     # Local 개발 환경에서는 Intellij의 Active Profile을 local로 설정하면 됩니다.
     # Local 그룹 에서는 inmemory DB를 이용하며, 스프링부트 실행시에 StubData가 자동으로 DB에 넣어집니다.
     group:
-      local: h2-inMemory, stubData
+      local: h2-inMemory, stubData, redis
       # dev 그룹 에서는 db 설정을 mysql로 변경합니다.
       # DB의 usrename, password, URL은 외부에 노출시키면 안되기 때문에 EC2에 환경변수를 따로 생성해, 실행 시 불러오도록 합니다.
-      dev: dev-db
+      dev: dev-db, redis, stubData
 #      prod:
 
 #    include:
@@ -36,7 +36,7 @@ spring:
     hibernate:
       ddl-auto: create
     # SQL문 확인 기능
-    show-sql: true
+#    show-sql: true
 
 ---
 
@@ -67,7 +67,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
@@ -78,3 +78,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 ---
+
+spring:
+  config:
+    activate:
+      on-profile: redis
+
+  redis:
+    host: localhost
+    port: 6379

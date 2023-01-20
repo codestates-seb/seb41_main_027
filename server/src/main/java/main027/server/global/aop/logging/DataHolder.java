@@ -1,5 +1,7 @@
 package main027.server.global.aop.logging;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -10,11 +12,22 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.UUID;
 
+/**
+ * 여러 사용자의 요청이 동시에 들어왔을 때, LogStopWatch가 싱글톤일 경우 uuid 필드를 공유하는 문제가 생김
+ * 따라서 사용자의 요청마다 새로운 new LogStopWatch() 객체를 생성해서 지정해줘야 함.
+ * 그래서 @Scope(value = "request, ~) 애너테이션을 통해
+ * 해당 LogStopWatch 클래스를 싱글톤 객체가 아닌 HTTP 요청마다 새로운 객체를 생성해서 주는 것으로 설정
+ */
 @Slf4j
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class LogStopWatch extends StopWatch {
+@Getter
+@Setter
+public class DataHolder extends StopWatch {
 
+    private Long memberId;
+    private String uri;
+    private String method;
     /**
      * 해당 HTTP의 요청을 인식할 id (request가 종료될 때 까지 유지)
      */
@@ -27,7 +40,11 @@ public class LogStopWatch extends StopWatch {
     private void init() {
         this.start();
         this.uuid = UUID.randomUUID().toString().substring(0, 8);
-        log.info("========uuid={}'s REQUEST START========", uuid);
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+        log.info("======== START [{}][{}] ========", uri, method);
     }
 
     /**
@@ -36,11 +53,7 @@ public class LogStopWatch extends StopWatch {
     @PreDestroy
     private void destroy() {
         this.stop();
-        log.info("========uuid={}'s REQUEST END========[TOTAL TIME={}ms]", uuid, this.getTotalTimeMillis());
-    }
-
-    public String getUuid() {
-        return uuid;
+        log.info("======== END [{}][{}] ========[TOTAL TIME={}ms]", uri, method, this.getTotalTimeMillis());
     }
 
 }

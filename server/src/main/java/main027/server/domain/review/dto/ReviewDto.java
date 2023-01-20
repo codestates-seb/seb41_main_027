@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewDto {
@@ -20,8 +19,6 @@ public class ReviewDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Post {
-        @NotNull
-        private Long memberId;
 
         @NotNull
         private Long placeId;
@@ -53,7 +50,7 @@ public class ReviewDto {
     @Getter
     @Setter
     public static class ListResponse {
-        private List<ReviewDto.Response> reviewList;
+        private List<Response> reviewList = new ArrayList<>();
         /** 페이지의 전체 페이지 수 */
         private Long totalPages;
         /** 현재 페이지 */
@@ -61,4 +58,5 @@ public class ReviewDto {
         /** Review의 총 개수 */
         private Long totalElements;
     }
+
 }

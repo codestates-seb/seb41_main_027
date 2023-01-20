@@ -1,19 +1,11 @@
 package main027.server.domain.review.repository;
 
 import lombok.extern.slf4j.Slf4j;
-import main027.server.domain.member.entity.Member;
-import main027.server.domain.place.entity.Place;
-import main027.server.domain.review.entity.Emoji;
 import main027.server.domain.review.entity.Review;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.TestPropertySource;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
