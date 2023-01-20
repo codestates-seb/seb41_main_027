@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local
+    active: dev
 
     # 활성화할 Profile의 그룹을 지정할 수 있습니다. 해당 그룹명으로 Profile을 설정하면 그룹에 포함되어 있는 Profile이 같이 실행됩니다.
     # Local 개발 환경에서는 Intellij의 Active Profile을 local로 설정하면 됩니다.
@@ -67,7 +67,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
