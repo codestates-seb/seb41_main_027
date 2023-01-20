@@ -14,6 +14,7 @@ import main027.server.domain.place.service.PlaceLikeService;
 import main027.server.domain.place.service.PlaceService;
 import main027.server.domain.place.service.PlaceUpdateService;
 import main027.server.global.aop.logging.DataHolder;
+import main027.server.global.config.InterceptorConfig;
 import org.apache.catalina.security.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -54,9 +55,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(
         controllers = PlaceController.class,
-        excludeAutoConfiguration = SecurityAutoConfiguration.class, // 추가
+        excludeAutoConfiguration = SecurityAutoConfiguration.class,// 추가
         excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)}
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {SecurityConfig.class,
+                        InterceptorConfig.class})}
 )
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs

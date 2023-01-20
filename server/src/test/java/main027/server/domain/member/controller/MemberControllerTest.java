@@ -7,6 +7,7 @@ import main027.server.domain.member.mapper.MemberMapper;
 import main027.server.domain.member.service.MemberService;
 import main027.server.domain.member.service.MemberUpdateService;
 import main027.server.global.aop.logging.DataHolder;
+import main027.server.global.config.InterceptorConfig;
 import org.apache.catalina.security.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -39,7 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         controllers = MemberController.class,
         excludeAutoConfiguration = SecurityAutoConfiguration.class,
         excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)}
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {SecurityConfig.class,
+                InterceptorConfig.class})}
 )
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
