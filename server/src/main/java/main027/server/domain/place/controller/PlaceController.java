@@ -41,7 +41,7 @@ public class PlaceController {
     public ResponseEntity patchPlace(@PathVariable("placeId") Long placeId,
                                      @Validated @RequestBody PlaceDto.PlacePatchDto placePatchDto) {
         placePatchDto.setPlaceId(placeId);
-        Place place = placeUpdateService.updatePlace(placeMapper.placePatchDtoToPlace(placePatchDto));
+        Place place = placeUpdateService.updatePlace(dataHolder.getMemberId(), placeMapper.placePatchDtoToPlace(placePatchDto));
         return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place, dataHolder.getMemberId()),
                                     HttpStatus.OK);
     }
@@ -66,11 +66,10 @@ public class PlaceController {
                                   HttpStatus.OK);
     }
 
-    // TODO: 삭제하려는 place의 작성자가 memberId와 같은지 확인한 후 지우는 로직 필요
     @TimeTrace
     @DeleteMapping("/{placeId}")
     public ResponseEntity deletePlace(@PathVariable("placeId") Long placeId) {
-        placeService.deletePlace(placeId);
+        placeService.deletePlace(dataHolder.getMemberId(), placeId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
