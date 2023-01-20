@@ -2,7 +2,6 @@ package main027.server.global.logging;
 
 import lombok.extern.slf4j.Slf4j;
 import main027.server.domain.bookmark.service.BookmarkService;
-import main027.server.global.aop.logging.LogStopWatch;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
