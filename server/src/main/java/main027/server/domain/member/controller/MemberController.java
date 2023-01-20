@@ -42,6 +42,16 @@ public class MemberController {
     }
 
     @TimeTrace
+    @GetMapping
+    public ResponseEntity getMyInfo(){
+        Member getMember = memberService.findMember(dataHolder.getMemberId());
+        return new ResponseEntity<>(mapper.memberToMemberResponseDto(getMember),HttpStatus.OK);
+
+    }
+
+
+
+    @TimeTrace
     @DeleteMapping
     public ResponseEntity deleteMember() {
         memberService.deleteMember(dataHolder.getMemberId());

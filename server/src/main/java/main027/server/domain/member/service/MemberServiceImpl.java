@@ -47,6 +47,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @TimeTrace
+    public Member findMember(long memberId) {
+        return memberVerifier.findVerifiedMember(memberId);
+    }
+
+    @TimeTrace
     public void deleteMember(long memberId) {
         Member verifiedMember = memberVerifier.findVerifiedMember(memberId);
         memberRepository.delete(verifiedMember);

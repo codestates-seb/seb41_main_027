@@ -66,30 +66,6 @@ public class PlaceController {
                                   HttpStatus.OK);
     }
 
-    /*  @TimeTrace
-     @GetMapping("/likes")
-     public ResponseEntity getPlacesByLikes(@RequestParam(defaultValue = "1") Integer page) {
-         Pageable pageable = PageRequest.of(page - 1, 10);
-         return new ResponseEntity<>(placeMapper.pageToList(placeService.findPlacesByLikes(pageable)), HttpStatus.OK);
-     }
-
-     @TimeTrace
-     @GetMapping("/createdAt")
-     public ResponseEntity getPlacesByCreated(@RequestParam(defaultValue = "1") Integer page) {
-         Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
-         Pageable pageable = PageRequest.of(page - 1, 10, sort);
-         return new ResponseEntity<>(placeMapper.pageToList(placeService.findPlaces(pageable)), HttpStatus.OK);
-     }
-
-     @TimeTrace
-     @GetMapping("/category/{categoryId}")
-     public ResponseEntity getPlacesByCategory(@PathVariable("categoryId") Long categoryId ,@RequestParam
-     (defaultValue = "1") Integer page) {
-         Pageable pageable = PageRequest.of(page - 1, 10);
-         return new ResponseEntity<>(placeMapper.pageToList(placeService.findPlacesByCategory(pageable,categoryId)),
-         HttpStatus.OK);
-     }
-  */
     // TODO: 삭제하려는 place의 작성자가 memberId와 같은지 확인한 후 지우는 로직 필요
     @TimeTrace
     @DeleteMapping("/{placeId}")
