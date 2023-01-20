@@ -10,4 +10,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @TimeTrace
     Optional<Member> findByEmail(String email);
+
+    @TimeTrace
+    Optional<Member> findByNickName(String nickName);
 }

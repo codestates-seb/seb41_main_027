@@ -35,6 +35,9 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
 
         Member updatedMember = beanUtils.copyNonNullProperties(member, verifiedMember);
 
+        if (member.getNickName() != null) {
+            memberVerifier.verifyExistsNickName(updatedMember.getNickName());
+        }
         return memberRepository.save(updatedMember);
     }
 }

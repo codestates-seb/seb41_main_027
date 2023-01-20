@@ -8,7 +8,9 @@ import org.springframework.web.client.HttpClientErrorException.*;
 
 public enum ExceptionCode {
     MEMBER_NOT_FOUND(NOT_FOUND.value(), "Member Not Found"),
-    MEMBER_ALREADY_EXISTS(CONFLICT.value(), "Member Already Exists"),
+    EMAIL_ALREADY_EXISTS(CONFLICT.value(), "This Email Already Exists"),
+    NICKNAME_ALREADY_EXISTS(CONFLICT.value(), "This NickName Already Exists"),
+    EMAIL_NICKNAME_ALREADY_EXISTS(CONFLICT.value(), "Email and NickName Already Exists"),
     PLACE_NOT_FOUND(NOT_FOUND.value(), "Place Not Found"),
     PLACE_ALREADY_EXISTS(CONFLICT.value(), "Place Already Exists"),
     EMOJI_NOT_FOUND(NOT_FOUND.value(), "Emoji Not Found"),

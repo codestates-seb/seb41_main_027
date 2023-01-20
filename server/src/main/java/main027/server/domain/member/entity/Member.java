@@ -31,9 +31,6 @@ public class Member extends BaseTime {
     @Column(nullable = false, unique = true)
     private String nickName;
 
-    @Enumerated(EnumType.STRING)
-    private MemberStatus memberStatus = MemberStatus.ACTIVE;
-
     // member가 삭제 될 때 place정보는 남겨둬야하는 것이 필요하므로, 해당 로직 작성 필요
     @OneToMany(mappedBy = "member")
     private List<Place> placeList = new ArrayList<>();
@@ -54,18 +51,4 @@ public class Member extends BaseTime {
         this.password = password;
         this.nickName = nickName;
     }
-
-    public enum MemberStatus {
-        ACTIVE("활동중"),
-        SLEEP("휴면 계정"),
-        QUIT("탈퇴");
-
-        @Getter
-        private String memberStatus;
-
-        MemberStatus(String memberStatus) {
-            this.memberStatus = memberStatus;
-        }
-    }
-
 }

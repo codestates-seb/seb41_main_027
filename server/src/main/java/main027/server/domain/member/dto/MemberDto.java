@@ -16,7 +16,7 @@ public class MemberDto {
     @AllArgsConstructor
     public static class Post {
         @Email
-        @NotBlank
+        @NotBlank(message = "이메일은 공백일 수 없습니다.")
         private String email;
 
         @NotBlank
@@ -41,7 +41,6 @@ public class MemberDto {
 
         @Size(min = 8, max = 16, message = "비밀번호는 최소 8자 이상, 최대 16자 이하여야 합니다.")
         private String password;
-        private Member.MemberStatus memberStatus;
 
         public Patch(String nickName) {
             this.nickName = nickName;
@@ -54,7 +53,6 @@ public class MemberDto {
         private Long memberId;
         private String email;
         private String nickName;
-        private Member.MemberStatus memberStatus;
         public List<String> roles;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;

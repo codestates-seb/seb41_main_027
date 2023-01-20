@@ -26,9 +26,23 @@ public class MemberVerifier {
         return findMember;
     }
 
-    public void verifyExistsEmail(String email) {
-        Optional<Member> member = memberRepository.findByEmail(email);
-        if (member.isPresent())
-            throw new BusinessLogicException(ExceptionCode.MEMBER_ALREADY_EXISTS);
+    public void verifyExistsEmailAndNickName(Member member) {
+        String email = member.getEmail();
+        String nickName = member.getNickName();
+
+        Optional<Member> memberByEmail = memberRepository.findByEmail(email);
+        Optional<Member> memberByNickName = memberRepository.findByNickName(nickName);
+        if (memberByEmail.isPresent() && memberByNickName.isPresent())
+            throw new BusinessLogicException(ExceptionCode.EMAIL_NICKNAME_ALREADY_EXISTS);
+        if (memberByEmail.isPresent())
+            throw new BusinessLogicException(ExceptionCode.EMAIL_ALREADY_EXISTS);
+        if (memberByNickName.isPresent())
+            throw new BusinessLogicException(ExceptionCode.NICKNAME_ALREADY_EXISTS);
+    }
+
+    public void verifyExistsNickName(String nickName) {
+        Optional<Member> memberByNickName = memberRepository.findByNickName(nickName);
+        if (memberByNickName.isPresent())
+            throw new BusinessLogicException(ExceptionCode.NICKNAME_ALREADY_EXISTS);
     }
 }
