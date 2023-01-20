@@ -35,13 +35,13 @@ public class TimeTraceAspect {
     public Object doTimeTrace(ProceedingJoinPoint joinPoint, TimeTrace timeTrace) throws Throwable {
 
         String name = joinPoint.getSignature().toShortString().split("\\(")[0] + "()";
-        String uuid = dataHolder.getUuid();
+        String uri = dataHolder.getUri();
         int millis = timeTrace.millis();
         final int limitMillis = 300;
 
         dataHolder.stop();
 
-        doLogTime("-->", uuid, name, dataHolder.getLastTaskTimeMillis(), millis, limitMillis);
+        doLogTime("-->", uri, name, dataHolder.getLastTaskTimeMillis(), millis, limitMillis);
 
         dataHolder.start();
 
@@ -49,7 +49,7 @@ public class TimeTraceAspect {
 
         dataHolder.stop();
 
-        doLogTime("<--", uuid, name, dataHolder.getLastTaskTimeMillis(), millis, limitMillis);
+        doLogTime("<--", uri, name, dataHolder.getLastTaskTimeMillis(), millis, limitMillis);
 
         dataHolder.start();
 

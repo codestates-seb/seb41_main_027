@@ -28,6 +28,7 @@ public class DataHolder extends StopWatch {
 
     private Long memberId;
     private String uri;
+    private String method;
     /**
      * 해당 HTTP의 요청을 인식할 id (request가 종료될 때 까지 유지)
      */
@@ -44,7 +45,7 @@ public class DataHolder extends StopWatch {
 
     public void setUri(String uri) {
         this.uri = uri;
-        log.info("======== REQUEST START URI={} ========", uri);
+        log.info("======== START [{}][{}] ========", uri, method);
     }
 
     /**
@@ -53,7 +54,7 @@ public class DataHolder extends StopWatch {
     @PreDestroy
     private void destroy() {
         this.stop();
-        log.info("======== REQUEST END URI={} ========[TOTAL TIME={}ms]", uri, this.getTotalTimeMillis());
+        log.info("======== END [{}][{}] ========[TOTAL TIME={}ms]", uri, method, this.getTotalTimeMillis());
     }
 
 }
