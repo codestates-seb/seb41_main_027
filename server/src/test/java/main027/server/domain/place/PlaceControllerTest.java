@@ -202,7 +202,7 @@ class PlaceControllerTest {
                                                                               LocalDateTime.now());
 
         given(placeMapper.placePatchDtoToPlace(Mockito.any(PlaceDto.PlacePatchDto.class))).willReturn(new Place());
-        given(placeUpdateService.updatePlace(Mockito.any(Place.class))).willReturn(new Place());
+        given(placeUpdateService.updatePlace(Mockito.anyLong(), Mockito.any(Place.class))).willReturn(new Place());
         given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class),Mockito.anyLong())).willReturn(responseDto);
 
         // when

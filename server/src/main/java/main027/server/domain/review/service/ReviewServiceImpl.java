@@ -58,5 +58,6 @@ public class ReviewServiceImpl implements ReviewService {
         if (findReview.getMember().getMemberId() != memberId) {
             throw new PermissionDeniedException(ExceptionCode.PERMISSION_DENIED);
         }
+        reviewRepository.deleteById(reviewId);
     }
 }

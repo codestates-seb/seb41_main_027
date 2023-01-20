@@ -3,6 +3,8 @@ package main027.server.domain.place.service;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.repository.PlaceRepository;
 import main027.server.domain.place.verifier.PlaceVerifier;
+import main027.server.global.advice.exception.ExceptionCode;
+import main027.server.global.advice.exception.PermissionDeniedException;
 import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -62,9 +64,12 @@ public class PlaceServiceImpl implements PlaceService {
     } */
 
     @TimeTrace
-    public void deletePlace(Long placeId) {
-        Place verifiedPlace = placeVerifier.findVerifiedPlace(placeId);
-        placeRepository.delete(verifiedPlace);
+    public void deletePlace(Long memberId, Long placeId) {
+        Place findPlace = placeVerifier.findVerifiedPlace(placeId);
+        if (findPlace.getMember().getMemberId() != memberId) {
+            throw new PermissionDeniedException(ExceptionCode.PERMISSION_DENIED);
+        }
+        placeRepository.delete(findPlace);
     }
 
 }

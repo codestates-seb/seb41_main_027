@@ -14,6 +14,6 @@ public interface PlaceService {
 
     // Page<Place> findPlacesByLikes(Pageable pageable);
     // Page<Place> findPlacesByCategory(Pageable pageable, Long categoryId);
-    void deletePlace(Long placeId);
+    void deletePlace(Long memberId, Long placeId);
 
 }
