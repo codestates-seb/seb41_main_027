@@ -3,6 +3,7 @@ package main027.server.global.advice;
 import lombok.extern.slf4j.Slf4j;
 import main027.server.global.advice.dto.ErrorResponse;
 import main027.server.global.advice.exception.BusinessLogicException;
+import main027.server.global.advice.exception.PermissionDeniedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -23,6 +24,17 @@ public class GlobalExceptionAdvice {
      */
     @ExceptionHandler
     public ResponseEntity handleBusinessLogicException(BusinessLogicException e) {
+        final ErrorResponse response = ErrorResponse.of(e.getExceptionCode());
+        return new ResponseEntity(response, HttpStatus.valueOf(e.getExceptionCode().getStatus()));
+    }
+
+    /**
+     * 권한이 없는 사용자가 place를 수정, 삭제 review를 삭제 하려고 할 경우
+     * @param e
+     * @return
+     */
+    @ExceptionHandler
+    public ResponseEntity handlePermissionDeniedException(PermissionDeniedException e) {
         final ErrorResponse response = ErrorResponse.of(e.getExceptionCode());
         return new ResponseEntity(response, HttpStatus.valueOf(e.getExceptionCode().getStatus()));
     }
