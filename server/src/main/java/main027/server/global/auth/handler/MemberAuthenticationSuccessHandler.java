@@ -12,10 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
-/**
- * (7) 로그인 인증 성공 시 추가작업을 할 수 있는 성공 핸들러
- * 인증 성공 후, 로그를 기록하거나 사용자 정보를 response로 전송
- */
 @Slf4j
 public class MemberAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Override

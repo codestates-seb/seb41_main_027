@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import main027.server.global.advice.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
@@ -12,10 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * 로그인 인증 실패 시 추가 작업을 할 수 있는 실패 핸들러
- * 인증 실패 시, 에러 로그를 기록하거나 error response를 전송
- */
 @Slf4j
 public class MemberAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
@@ -24,14 +22,27 @@ public class MemberAuthenticationFailureHandler implements AuthenticationFailure
                                         AuthenticationException exception) throws IOException {
         log.error("# Authentication failed: {}", exception.getMessage());
 
-        sendErrorResponse(response);
+        sendErrorResponse(response, exception);
     }
 
-    private void sendErrorResponse(HttpServletResponse response) throws IOException {
+    private void sendErrorResponse(HttpServletResponse response, AuthenticationException exception) throws IOException {
         Gson gson = new Gson();
-        ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.UNAUTHORIZED);
+        ErrorResponse errorResponse;
+
+        if (exception.getClass().equals(BadCredentialsException.class)) {
+            String cause = "password do not match";
+            errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, cause);
+            response.setStatus(HttpStatus.BAD_REQUEST.value());
+        } else if (exception.getClass().equals(InternalAuthenticationServiceException.class)){
+            errorResponse = ErrorResponse.of(HttpStatus.NOT_FOUND, exception.getMessage());
+            response.setStatus(HttpStatus.NOT_FOUND.value());
+        } else {
+            errorResponse = ErrorResponse.of(HttpStatus.UNAUTHORIZED);
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        }
+
+
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.getWriter().write(gson.toJson(errorResponse, ErrorResponse.class));
     }
 }

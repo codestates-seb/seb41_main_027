@@ -57,15 +57,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     /**
      * <p>인증에 성공할 경우 호출이 된다.</p>
-     * (6) authResult(Authentication)에는 인증에 성공한 사용자 정보(Principal, Credential, GrantedAuthorities)가 있음.
-     * <p>authResult.getPrincipal()로 Member 객체를 생성한다.</p>
-     * <p>Member 객체를 이용해 accessToken과 RefreshToken을 생성한다.</p>
-     * <p>응답 헤더에 accessToken과 RefreshToken을 추가한다.</p>
-     * <p>[추가설명]</p>
-     * <p>AccessToken은 클라이언트 측에서 백엔드 애플리케이션 측에 요청을 보낼때마다 request header에 추가해서 클라이언트 측의 자격을 증명하는게 사용된다.</p>
-     * <p>RefreshToken은 AccessToken이 만료될 경우, 클라이언트 측이 AccessToken을 새로 발급받기 위해 클라이언트측에게 추가적으로 제공될 수 있다.</p>
      */
-
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,

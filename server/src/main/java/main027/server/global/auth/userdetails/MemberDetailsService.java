@@ -2,6 +2,8 @@ package main027.server.global.auth.userdetails;
 
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.member.repository.MemberRepository;
+import main027.server.global.advice.exception.TokenException;
+import main027.server.global.auth.utils.CustomAuthorityUtils;
 import main027.server.global.advice.exception.BusinessLogicException;
 import main027.server.global.advice.exception.ExceptionCode;
 import main027.server.global.auth.utils.CustomAuthorityUtils;
@@ -35,7 +37,7 @@ public class MemberDetailsService implements UserDetailsService {
     @Override
     public MemberDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Member> optionalMember = memberRepository.findByEmail(email);
-        Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Member findMember = optionalMember.orElseThrow(() -> new TokenException(ExceptionCode.UNREGISTERED_MEMBER));
 
         return new MemberDetails(findMember);
     }
