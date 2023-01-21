@@ -19,7 +19,7 @@ public class ErrorResponder {
         Exception exception = (Exception) request.getAttribute("exception");
         ErrorResponse errorResponse;
 
-        if (exception.getMessage() != null) {
+        if (exception != null) {
             errorResponse = ErrorResponse.of(status, exception.getMessage());
         } else {
             errorResponse = ErrorResponse.of(status);
