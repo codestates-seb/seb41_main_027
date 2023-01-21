@@ -17,8 +17,13 @@ public class ErrorResponder {
     public static void sendErrorResponse(HttpServletRequest request, HttpServletResponse response, HttpStatus status) throws IOException {
         Gson gson = new Gson();
         Exception exception = (Exception) request.getAttribute("exception");
+        ErrorResponse errorResponse;
 
-        ErrorResponse errorResponse = ErrorResponse.of(status, exception.getMessage());
+        if (exception.getMessage() != null) {
+            errorResponse = ErrorResponse.of(status, exception.getMessage());
+        } else {
+            errorResponse = ErrorResponse.of(status);
+        }
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(status.value());
         response.getWriter().write(gson.toJson(errorResponse, ErrorResponse.class));
