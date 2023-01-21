@@ -52,6 +52,10 @@ const Wrapper = styled.div`
   gap: 16px;
   justify-content: center;
 `
+
+const MarkerInfoBox = styled.div`
+  color: black;
+`
 const { kakao } = window
 
 const AddPlaceMap = () => {
@@ -141,9 +145,9 @@ const AddPlaceMap = () => {
               setInfo(marker)
               map.panTo(marker.getPosition())
             }}
-            // onClick={(marker) => map.panTo(marker.getPosition())}
           >
-            {info && info.name === marker.name && <div style={{ color: '#000' }}>{marker.name}</div>}
+            {/* {info && info.name === marker.name && } */}
+            <MarkerInfoBox>{marker.name}</MarkerInfoBox>
           </MapMarker>
         ))}
       </Map>

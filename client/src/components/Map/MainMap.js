@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MapMarker, Map, useMap } from 'react-kakao-maps-sdk'
+import { MapMarker, Map, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk'
 import { useRef, useMemo, useState, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { listClick } from '../../recoil/atoms'
@@ -40,7 +40,6 @@ const Container = styled.section`
     border-radius: 12px;
   }
 `
-
 const { kakao } = window
 
 const MainMap = () => {
@@ -167,13 +166,31 @@ const MainMap = () => {
         ref={mapRef}
       >
         {points.map((point, index) => (
-          <EventMarkerContainer
-            index={index}
-            key={`EventMarkerContainer-${point.latlng.lat}-${point.latlng.lng}`}
-            position={point.latlng}
-            onClick={() => setSeleteMarker(index)}
-            isClicked={selectedMarker === index}
-          />
+          <>
+            <CustomOverlayMap position={point.latlng} yAnchor={2}>
+              <div
+                className="customoverlay"
+                style={{
+                  padding: '10px 20px',
+                  borderRadius: '18px',
+                  backgroundColor: 'white',
+                  color: '#0581BB',
+                }}
+              >
+                <a href=" " target="_blank" rel="noreferrer">
+                  <span className="title">{point.title}</span>
+                </a>
+              </div>
+            </CustomOverlayMap>
+
+            <EventMarkerContainer
+              index={index}
+              key={`EventMarkerContainer-${point.latlng.lat}-${point.latlng.lng}`}
+              position={point.latlng}
+              onClick={() => setSeleteMarker(index)}
+              isClicked={selectedMarker === index}
+            />
+          </>
         ))}
       </Map>
     </Container>
