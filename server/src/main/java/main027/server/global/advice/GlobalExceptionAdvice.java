@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import main027.server.global.advice.dto.ErrorResponse;
 import main027.server.global.advice.exception.BusinessLogicException;
 import main027.server.global.advice.exception.PermissionDeniedException;
+import main027.server.global.advice.exception.TokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -35,6 +36,12 @@ public class GlobalExceptionAdvice {
      */
     @ExceptionHandler
     public ResponseEntity handlePermissionDeniedException(PermissionDeniedException e) {
+        final ErrorResponse response = ErrorResponse.of(e.getExceptionCode());
+        return new ResponseEntity(response, HttpStatus.valueOf(e.getExceptionCode().getStatus()));
+    }
+
+    @ExceptionHandler
+    public ResponseEntity handleTokenException(TokenException e) {
         final ErrorResponse response = ErrorResponse.of(e.getExceptionCode());
         return new ResponseEntity(response, HttpStatus.valueOf(e.getExceptionCode().getStatus()));
     }
