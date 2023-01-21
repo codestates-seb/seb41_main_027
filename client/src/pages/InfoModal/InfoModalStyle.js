@@ -12,12 +12,13 @@ export const ModalDimmed = styled.div`
   right: 0px;
   bottom: 0px;
   background: rgba(0, 0, 0, 0.6);
+  overflow-y: auto;
 `
 
 export const ModalWrapper = styled.div`
   width: 750px;
-  height: calc(100vh - 18%) !important;
-  position: absolute;
+  height: calc(100vh - 18%);
+  position: relative;
   z-index: 9200;
   top: 50%;
   left: 50%;
@@ -26,13 +27,22 @@ export const ModalWrapper = styled.div`
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-
   color: #666666;
+  background-color: #f4f4f4;
   font-size: 1rem;
-  background-color: #f4f4f4; //#f8f8f8;
   box-shadow: 0px 4px 10px rgba(25, 1, 52, 0.4);
   border-radius: 16px;
   overflow: hidden;
+
+  @media (max-width: 750px) {
+    width: calc(100vw - 10%);
+    height: calc(100vh - 10%);
+  }
+
+  @media (max-width: 640px) and (max-height: 520px) {
+    width: calc(100vw - 5%);
+    height: calc(100vh - 40px);
+  }
 
   // common style
   & button:hover {
@@ -88,19 +98,10 @@ export const ModalWrapper = styled.div`
     -o-animation: border-twinkle 1s; /* Opera */
     animation-fill-mode: both;
   }
-
-  @media (max-width: 750px) {
-    width: calc(100vw - 10%);
-    height: calc(100vh - 5%);
-  }
-
-  @media (max-width: 640px) and (max-height: 520px) {
-    width: calc(100vw - 5%);
-    height: calc(100vh);
-  }
 `
 
 export const InfoContent = styled.div`
+  height: 100%;
   padding: 32px;
 `
 
@@ -199,13 +200,13 @@ export const InfoHead = styled.div`
 
 export const InfoBody = styled.div`
   width: 100%;
-  min-height: 150px;
-  max-height: 376px;
+  min-height: 200px;
+  max-height: calc(100% - 190px + 8px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  padding-bottom: 12px;
+  padding-bottom: 20px;
 
   // scroll bar hidden
   overflow-y: auto;
@@ -434,9 +435,9 @@ export const InfoBottom = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 16px 24px 24px 24px;
-  background-color: #f8f8f8;
+  background-color: #f4f4f4;
 
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 90px;
   bottom: 0px;

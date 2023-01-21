@@ -1,11 +1,12 @@
 import axios from 'axios'
+import { API_CONNECT_TIMEOUT } from './const'
 
-const { REACT_APP_API, REACT_APP_API_CONNECT_TIMEOUT } = process.env
+const { REACT_APP_API_URL } = process.env
 
 // token add header : Authorization: token
 export const customAxios = axios.create({
-  baseURL: REACT_APP_API,
+  baseURL: REACT_APP_API_URL,
   headers: { 'Content-Type': 'application/json' },
-  timeout: REACT_APP_API_CONNECT_TIMEOUT,
+  timeout: API_CONNECT_TIMEOUT,
   withCredentials: true,
 })

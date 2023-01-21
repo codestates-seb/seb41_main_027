@@ -6,9 +6,9 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
 const Title = props => {
-  console.log('-- (1)Title Render --')
+  // console.log('-- (1)Title Render --')
 
-  const { name, category, address, description } = props.item
+  const { name, category, address } = props.item
 
   // hook
   const refAddress = useRef(null)

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment } from '@fortawesome/free-solid-svg-icons'
 
 const KakaoShareBtn = props => {
-  const { title, description, likeCnt, reviewCnt } = props
+  const { title, description, likeCnt, reviewCnt, linkUrl } = props
 
   useEffect(() => {
     const script = document.createElement('script')
@@ -23,7 +23,7 @@ const KakaoShareBtn = props => {
   const sendKakaoShare = () => {
     if (!window.Kakao) return
     const kakao = window.Kakao
-    if (!kakao.isInitialized()) kakao.init(process.env.REACT_APP_KAKAOMAP_KEY)
+    if (!kakao.isInitialized()) kakao.init(process.env.REACT_APP_KAKAO_API_KEY)
 
     kakao.Share.sendDefault({
       objectType: 'feed',
@@ -32,8 +32,8 @@ const KakaoShareBtn = props => {
         description: description,
         imageUrl: 'https://cdn-icons-png.flaticon.com/512/3638/3638422.png',
         link: {
-          mobileWebUrl: window.location.href,
-          webUrl: window.location.href,
+          mobileWebUrl: linkUrl,
+          webUrl: linkUrl,
         },
       },
       social: {
@@ -45,8 +45,8 @@ const KakaoShareBtn = props => {
         {
           title: '상세 보기',
           link: {
-            mobileWebUrl: window.location.href,
-            webUrl: window.location.href,
+            mobileWebUrl: linkUrl,
+            webUrl: linkUrl,
           },
         },
       ],

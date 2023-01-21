@@ -7,24 +7,25 @@ import { toast } from 'react-toastify'
 import KakaoShareBtn from '../Button/KakaoShareBtn'
 
 const ShareBookmark = props => {
-  console.log('-- (7)ShareBookmark Render --')
+  // console.log('-- (7)ShareBookmark Render --')
 
   const { kakaoId, name, description, placeLikeCount, placeReviewCount, isBookMarked } = props.item
 
   // state, hook
   const [isBookmarkState, setIsBookmarkState] = useState(isBookMarked)
-  const [isCopied, setIsCopied] = useState(false)
 
   // handle
   const handleClickCopy = () => {
     ClipBoardCopy(window.location.href).then(() => toast.info('URL이 복사되었습니다.'))
   }
 
+  // kakaotalk share link info
   const kakaoShareInfo = {
     title: name,
     description: description,
     likeCnt: placeLikeCount,
     reviewCnt: placeReviewCount,
+    linkUrl: window.location.href,
   }
 
   // react query

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 import { updatePlaceDescription } from '../../api/place'
 
 const AboutEditForm = ({ item }) => {
-  console.log('-- (3)AboutEditForm Render --')
+  // console.log('-- (3)AboutEditForm Render --')
 
   const { placeId, description } = item
 

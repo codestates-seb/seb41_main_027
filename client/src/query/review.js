@@ -1,17 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
-import { getReviewList } from '../api/review'
+import { QUERY_STALETIME, QUERY_RETRY } from '../utils/const'
+import * as review from '../api/review'
 
 // ----- 리뷰 관련 쿼리 정의(only Get) -----
 
-const { REACT_APP_QUERY_STALETIME, REACT_APP_QUERY_RETRY } = process.env
-
 // 리뷰 리스트 조회
-export const getReviewListById = (pId, page, addReviewId) => {
-  const { isLoading, isFetching, isError, data, error } = useQuery(
-    ['getReviewListById', pId, page, addReviewId],
-    ({ queryKey }) => getReviewList(queryKey[1], queryKey[2]),
-    { enabled: !!pId, staleTime: REACT_APP_QUERY_STALETIME, retry: REACT_APP_QUERY_RETRY },
+export const useGetReviewListById = (pId, page, createdReivewId) => {
+  return useQuery(
+    ['getReviewListById', pId, page, createdReivewId],
+    ({ queryKey }) => review.getReviewList(queryKey[1], queryKey[2]),
+    { enabled: !!pId, staleTime: QUERY_STALETIME, retry: QUERY_RETRY },
   )
-
-  return { isLoading, isFetching, isError, data, error }
 }
