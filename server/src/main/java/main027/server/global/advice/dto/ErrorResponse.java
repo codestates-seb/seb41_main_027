@@ -53,7 +53,7 @@ public class ErrorResponse {
     }
 
     public static ErrorResponse of(HttpStatus httpStatus, String cause) {
-        return new ErrorResponse(httpStatus.value(), httpStatus.getReasonPhrase(), cause);
+        return new ErrorResponse(httpStatus.value(), cause);
     }
 
     @Getter
