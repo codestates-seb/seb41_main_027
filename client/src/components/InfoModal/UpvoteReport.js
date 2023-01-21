@@ -4,7 +4,7 @@ import { faFlag, faHeart as likeOn } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as likeOff } from '@fortawesome/free-regular-svg-icons'
 
 const UpvoteReport = props => {
-  console.log('-- (2)UpvoteReport Render --')
+  // console.log('-- (2)UpvoteReport Render --')
 
   const { placeLikeCount: likeCnt, isLiked } = props.item
 

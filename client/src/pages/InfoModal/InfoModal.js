@@ -1,3 +1,5 @@
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import {
@@ -21,12 +23,10 @@ import {
   MemoReviewList,
   MemoShareBookmark,
 } from '../../components/InfoModal'
-import { toast } from 'react-toastify'
-import { getPlaceInfoById } from '../../query'
-import { useState } from 'react'
+import { useGetPlaceInfoById } from '../../query/place'
 
 export const InfoModal = () => {
-  console.log('-- InfoModal Render --')
+  // console.log('-- InfoModal Render --')
 
   // id check
   const pId = useParams().infoId
@@ -38,13 +38,14 @@ export const InfoModal = () => {
   const [addReviewId, setAddReviewId] = useState(0) // review list
 
   // fetch data
-  const query = getPlaceInfoById(pId)
+  const query = useGetPlaceInfoById(pId)
   if (query.isLoading) return <Loading />
   if (query.isError) return toast.error(query.error.message)
   const item = query.data
 
   // dev exception(after delete)
   if (item.placeLikeCount === undefined) item.placeLikeCount = 149
+  if (item.placeReviewCount === undefined) item.placeReviewCount = 25
   if (item.isLiked === undefined) item.isLiked = false
   if (item.latitude === '0') item.latitude = '37.5160953'
   if (item.longitude === '0') item.longitude = '126.8906455'
@@ -62,33 +63,31 @@ export const InfoModal = () => {
   }
 
   return (
-    <>
-      <ModalDimmed onClick={() => navigate(-1)}>
-        <ModalWrapper onClick={e => e.stopPropagation()}>
-          <InfoContent>
-            <InfoHead>
-              <MemoTitle item={item} />
-              <MemoUpvoteReport item={item} />
-            </InfoHead>
-            <InfoBody>
-              <MemoAboutEditForm item={item} />
-              <InfoMapReview>
-                <InfoReviewList>
-                  <MemoReviewList pId={pId} page={page} goPage={goPage} addReviewId={addReviewId} />
-                </InfoReviewList>
-                <InfoMapReviewAdd>
-                  <MemoLocationMap title={item.name} lat={item.latitude} lng={item.longitude} />
-                  <MemoReviewAddForm pId={pId} createdReview={createdReview} />
-                </InfoMapReviewAdd>
-              </InfoMapReview>
-            </InfoBody>
-          </InfoContent>
-          <InfoBottom>
-            <MemoShareBookmark item={item} />
-          </InfoBottom>
-        </ModalWrapper>
-      </ModalDimmed>
-    </>
+    <ModalDimmed onClick={() => navigate(-1)}>
+      <ModalWrapper onClick={e => e.stopPropagation()}>
+        <InfoContent>
+          <InfoHead>
+            <MemoTitle item={item} />
+            <MemoUpvoteReport item={item} />
+          </InfoHead>
+          <InfoBody>
+            <MemoAboutEditForm item={item} />
+            <InfoMapReview>
+              <InfoReviewList>
+                <MemoReviewList pId={pId} page={page} goPage={goPage} addReviewId={addReviewId} />
+              </InfoReviewList>
+              <InfoMapReviewAdd>
+                <MemoLocationMap item={item} />
+                <MemoReviewAddForm pId={pId} createdReview={createdReview} />
+              </InfoMapReviewAdd>
+            </InfoMapReview>
+          </InfoBody>
+        </InfoContent>
+        <InfoBottom>
+          <MemoShareBookmark item={item} />
+        </InfoBottom>
+      </ModalWrapper>
+    </ModalDimmed>
   )
 }
 

@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { toast } from 'react-toastify'
 import Loading from '../Loading/Loading'
 import useMoveScroll from '../../hooks/useMoveScroll'
-import { getReviewListById } from '../../query'
+import { useGetReviewListById } from '../../query/review'
 import { EMOJI_LIST } from '../../utils/const'
 import { AmountDisplay, DateConvert } from '../../utils/common'
 
 const ReviewList = ({ pId, page, goPage, addReviewId }) => {
-  console.log('-- (4)ReviewList Render --')
+  // console.log('-- (4)ReviewList Render --')
 
   // hook
-  const { element, onMoveToElement } = useMoveScroll()
+  const { element: listTop, onMoveToElement } = useMoveScroll()
 
   // fetch data
-  const query = getReviewListById(pId, page, addReviewId)
+  const query = useGetReviewListById(pId, page, addReviewId)
   if (query.isLoading) return <Loading />
   if (query.isError) return toast.error(query.error.message)
   const { reviewList, totalElements, totalPages } = query.data
@@ -41,7 +41,7 @@ const ReviewList = ({ pId, page, goPage, addReviewId }) => {
 
   return (
     <>
-      <h3 ref={element}>
+      <h3 ref={listTop}>
         이 장소에 대한 리뷰 <span className="review-cnt">{AmountDisplay(totalElements)}</span>개
       </h3>
       <ul className="review-list">

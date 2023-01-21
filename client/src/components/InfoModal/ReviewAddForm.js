@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { EMOJI_LIST } from '../../utils/const'
 import useMoveScroll from '../../hooks/useMoveScroll'
-import { createReviewInfo } from '../../api/review'
+import * as review from '../../api/review'
 
 const ReviewAddForm = ({ pId, createdReview }) => {
-  console.log('-- (6)ReviewAddForm Render --')
+  // console.log('-- (6)ReviewAddForm Render --')
 
   // state, hook
+  const refComment = useRef(null)
   const [selectedEmoji, setSelectedEmoji] = useState(null)
-  const { element, onMoveToElement } = useMoveScroll()
+  const { element: formTop, onMoveToElement } = useMoveScroll()
 
   // emoji list setting
   const emojiList = []
@@ -32,17 +33,22 @@ const ReviewAddForm = ({ pId, createdReview }) => {
       content: comment,
       emojiId: selectedEmoji,
     }
-    createReviewInfo(body).then(data => {
-      console.log('created reviewId', data.reviewId)
-      createdReview(3)
+
+    review.createReviewInfo(body).then(data => {
+      // console.log('created reviewId', data.reviewId)
+      createdReview(Number(data.reviewId))
       setSelectedEmoji(null)
       e.target.comment_text.value = ''
     })
   }
 
+  useEffect(() => {
+    if (selectedEmoji && refComment) refComment.current.focus()
+  }, [selectedEmoji])
+
   return (
     <form className="review-add-form" onSubmit={handleSubmitReview}>
-      <section ref={element} className="review-add-emoji-box">
+      <section ref={formTop} className="review-add-emoji-box">
         <h3>이모지를 클릭해 리뷰를 남겨보세요!</h3>
         {emojiList.map((gItem, gIdx) => (
           <div className="emoji-list" key={gIdx}>
@@ -62,9 +68,10 @@ const ReviewAddForm = ({ pId, createdReview }) => {
           </div>
         ))}
       </section>
-      {selectedEmoji && (
+      {selectedEmoji !== null && (
         <section className="review-add-comment ani-fadein">
           <textarea
+            ref={refComment}
             className="comment_text"
             name="comment_text"
             maxLength={40}
