@@ -3,6 +3,8 @@ package main027.server.global.auth.utils;
 import com.google.gson.Gson;
 import io.jsonwebtoken.ExpiredJwtException;
 import main027.server.global.advice.dto.ErrorResponse;
+import main027.server.global.advice.exception.BusinessLogicException;
+import main027.server.global.advice.exception.ExceptionCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -19,12 +21,9 @@ public class ErrorResponder {
         Gson gson = new Gson();
         Exception exception = (Exception) request.getAttribute("exception");
         ErrorResponse errorResponse;
-        System.out.println("아몰랑");
-        if (exception != null) {
-            errorResponse = ErrorResponse.of(status, exception.getMessage());
-        }
-        if (exception instanceof Exception) {
-            errorResponse = ErrorResponse.of(status, "JWT Expired");
+
+        if (exception instanceof ExpiredJwtException) {
+            errorResponse = ErrorResponse.of(ExceptionCode.INVALID_ACCESS_TOKEN);
         } else errorResponse = ErrorResponse.of(status);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(status.value());
