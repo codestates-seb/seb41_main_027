@@ -2,6 +2,7 @@ package main027.server.domain.place.service;
 
 import lombok.RequiredArgsConstructor;
 import main027.server.domain.member.verifier.MemberVerifier;
+import main027.server.domain.place.dto.LikeDto;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.entity.PlaceLikeUser;
 import main027.server.domain.place.repository.PlaceLikeUserRepository;
@@ -24,7 +25,7 @@ public class PlaceLikeServiceImpl implements PlaceLikeService {
     private final PlaceVerifier placeVerifier;
 
     @TimeTrace
-    public Boolean changeLikeUserStatus(PlaceLikeUser placeLikeUser) {
+    public LikeDto.Response changeLikeUserStatus(PlaceLikeUser placeLikeUser) {
         memberVerifier.findVerifiedMember(placeLikeUser.getMember().getMemberId());
         placeVerifier.findVerifiedPlace(placeLikeUser.getPlace().getPlaceId());
 
@@ -36,11 +37,17 @@ public class PlaceLikeServiceImpl implements PlaceLikeService {
 
         if (isLiked) {
             placeLikeUserRepository.delete(findLikeUser.get());
-            return false;
+            isLiked = false;
         } else {
             placeLikeUserRepository.save(placeLikeUser);
-            return true;
+            isLiked = true;
         }
+
+        int likeCount = placeLikeUserRepository.PlaceLikeCount(placeLikeUser.getPlace().getPlaceId()).size();
+
+        LikeDto.Response response = new LikeDto.Response(isLiked, likeCount);
+
+        return response;
     }
 
     @TimeTrace
