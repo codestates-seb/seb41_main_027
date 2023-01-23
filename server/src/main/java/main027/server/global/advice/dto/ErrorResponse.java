@@ -15,19 +15,12 @@ import java.util.stream.Collectors;
 public class ErrorResponse {
     private int status;
     private String message;
-    private String cause;
     private List<FieldError> fieldBindingErrors;
     private List<ConstraintViolationError> constraintViolationErrors;
 
     public ErrorResponse(int status, String message) {
         this.status = status;
         this.message = message;
-    }
-
-    public ErrorResponse(int status, String message, String cause) {
-        this.status = status;
-        this.message = message;
-        this.cause = cause;
     }
 
     public ErrorResponse(List<FieldError> fieldBindingErrors,
@@ -52,8 +45,8 @@ public class ErrorResponse {
         return new ErrorResponse(httpStatus.value(), httpStatus.getReasonPhrase());
     }
 
-    public static ErrorResponse of(HttpStatus httpStatus, String cause) {
-        return new ErrorResponse(httpStatus.value(), cause);
+    public static ErrorResponse of(HttpStatus httpStatus, String message) {
+        return new ErrorResponse(httpStatus.value(), message);
     }
 
     @Getter

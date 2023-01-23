@@ -30,8 +30,8 @@ public class MemberAuthenticationFailureHandler implements AuthenticationFailure
         ErrorResponse errorResponse;
 
         if (exception.getClass().equals(BadCredentialsException.class)) {
-            String cause = "password do not match";
-            errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, cause);
+            String message = "password do not match";
+            errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, message);
             response.setStatus(HttpStatus.BAD_REQUEST.value());
         } else if (exception.getClass().equals(InternalAuthenticationServiceException.class)){
             errorResponse = ErrorResponse.of(HttpStatus.NOT_FOUND, exception.getMessage());
