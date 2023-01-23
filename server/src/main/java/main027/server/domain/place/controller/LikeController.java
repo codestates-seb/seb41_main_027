@@ -29,8 +29,7 @@ public class LikeController {
     @PostMapping("/{placeId}")
     public ResponseEntity likePlace(@PathVariable Long placeId) {
         PlaceLikeUser placeLikeUser = placeLikeUserMapper.placeLikeDtoToPlace(dataHolder.getMemberId(), placeId);
-        Boolean finalLikeStatus = placeLikeService.changeLikeUserStatus(placeLikeUser);
-        return new ResponseEntity(finalLikeStatus, HttpStatus.OK);
+        return new ResponseEntity(placeLikeService.changeLikeUserStatus(placeLikeUser), HttpStatus.OK);
     }
 
     @TimeTrace

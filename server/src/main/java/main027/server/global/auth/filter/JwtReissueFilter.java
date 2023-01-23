@@ -1,8 +1,8 @@
 package main027.server.global.auth.filter;
 
 import lombok.RequiredArgsConstructor;
-import main027.server.global.advice.exception.BusinessLogicException;
 import main027.server.global.advice.exception.ExceptionCode;
+import main027.server.global.advice.exception.TokenException;
 import main027.server.global.auth.Redis.RedisService;
 import main027.server.global.auth.jwt.JwtTokenizer;
 import main027.server.global.auth.userdetails.MemberDetailsService;
@@ -39,10 +39,10 @@ public class JwtReissueFilter extends OncePerRequestFilter {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.getWriter().write("Reissued Complete.");
 
-        } catch (BusinessLogicException e) {
+        } catch (TokenException e) {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.setStatus(ExceptionCode.INVALID_TOKEN.getStatus());
-            response.getWriter().write(ExceptionCode.INVALID_TOKEN.getMessage());
+            response.setStatus(ExceptionCode.INVALID_REFRESH_TOKEN.getStatus());
+            response.getWriter().write(ExceptionCode.INVALID_REFRESH_TOKEN.getMessage());
         }
     }
 

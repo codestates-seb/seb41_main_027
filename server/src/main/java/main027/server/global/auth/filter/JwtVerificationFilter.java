@@ -2,8 +2,12 @@ package main027.server.global.auth.filter;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.RequiredArgsConstructor;
+import main027.server.global.advice.exception.ExceptionCode;
 import lombok.extern.slf4j.Slf4j;
 import main027.server.global.aop.logging.DataHolder;
+import main027.server.global.advice.exception.TokenException;
+import main027.server.global.auth.Redis.RedisService;
 import main027.server.global.auth.jwt.JwtTokenizer;
 import main027.server.global.auth.utils.CustomAuthorityUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,17 +30,11 @@ import java.util.Map;
  * 성공이냐 실패냐 한 번만 판단하면 되기 때문.
  */
 @Slf4j
+@RequiredArgsConstructor
 public class JwtVerificationFilter extends OncePerRequestFilter {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
-    private final DataHolder dataHolder;
-
-    public JwtVerificationFilter(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils,
-                                 DataHolder dataHolder) {
-        this.jwtTokenizer = jwtTokenizer;
-        this.authorityUtils = authorityUtils;
-        this.dataHolder = dataHolder;
-    }
+    private final RedisService redisService;
 
     /**
      * <p>Claims가 정상적으로 파싱되면 서명 검증 역시 자연스럽게 성공한 것임(별도의 검증 메서드가 필요 없음)</p>
@@ -47,12 +45,17 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
+            String blackList = redisService.getToken(request.getHeader("Authorization"));
+            if (blackList != null) throw new TokenException(ExceptionCode.LOGOUT_MEMBER);
+
             Map<String, Object> claims = verifyJws(request);
             setAuthenticationToContext(claims);
         } catch (SignatureException se) {
             request.setAttribute("exception", se);
         } catch (ExpiredJwtException ee) {
-            request.setAttribute("exeption", ee);
+            request.setAttribute("exception", ee);
+        } catch (TokenException te){
+            request.setAttribute("exception", te);
         } catch (Exception e) {
             request.setAttribute("exception", e);
         }
@@ -70,7 +73,6 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String authorization = request.getHeader("Authorization");
-
         return authorization == null || !authorization.startsWith("Bearer");
     }
 
@@ -85,6 +87,8 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         String jws = request.getHeader("Authorization").replace("Bearer", "");
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
         Map<String, Object> claims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+
+
 
         return claims;
     }
