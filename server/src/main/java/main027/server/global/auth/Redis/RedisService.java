@@ -1,8 +1,8 @@
 package main027.server.global.auth.Redis;
 
 import lombok.RequiredArgsConstructor;
-import main027.server.global.advice.exception.BusinessLogicException;
 import main027.server.global.advice.exception.ExceptionCode;
+import main027.server.global.advice.exception.TokenException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class RedisService {
     private final RedisTemplate<String, String> redisTemplate;
 
     public void setRefreshToken(String key, String value, long expirationMinutes) {
-        if (key.startsWith("Bearer")) throw new BusinessLogicException(ExceptionCode.INVALID_TOKEN);
+        if (key.startsWith("Bearer")) throw new TokenException(ExceptionCode.INVALID_REFRESH_TOKEN);
         ValueOperations<String, String> values = redisTemplate.opsForValue();
         values.set(key, value, Duration.ofMinutes(expirationMinutes));
     }
@@ -26,7 +26,7 @@ public class RedisService {
     }
 
     public void setBlackList(String key, String value, long expirationMinutes) {
-        if (!key.startsWith("Bearer")) throw new BusinessLogicException(ExceptionCode.INVALID_TOKEN);
+        if (!key.startsWith("Bearer")) throw new TokenException(ExceptionCode.INVALID_ACCESS_TOKEN);
         ValueOperations<String, String> values = redisTemplate.opsForValue();
         values.set(key, value, Duration.ofMinutes(expirationMinutes));
     }

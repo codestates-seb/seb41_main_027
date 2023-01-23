@@ -33,11 +33,13 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
     public Member updateMember(Member member) {
         Member verifiedMember = memberVerifier.findVerifiedMember(member.getMemberId());
 
+        if (member.getNickName() != null) {
+            memberVerifier.verifyExistsNickName(member.getNickName());
+        }
+
         Member updatedMember = beanUtils.copyNonNullProperties(member, verifiedMember);
 
-        if (member.getNickName() != null) {
-            memberVerifier.verifyExistsNickName(updatedMember.getNickName());
-        }
+
         return memberRepository.save(updatedMember);
     }
 }

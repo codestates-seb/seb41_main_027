@@ -6,10 +6,7 @@ import main027.server.global.auth.filter.JwtAuthenticationFilter;
 import main027.server.global.auth.filter.JwtLogoutFilter;
 import main027.server.global.auth.filter.JwtReissueFilter;
 import main027.server.global.auth.filter.JwtVerificationFilter;
-import main027.server.global.auth.handler.MemberAccessDeniedHandler;
-import main027.server.global.auth.handler.MemberAuthenticationEntryPoint;
-import main027.server.global.auth.handler.MemberAuthenticationFailureHandler;
-import main027.server.global.auth.handler.MemberAuthenticationSuccessHandler;
+import main027.server.global.auth.handler.*;
 import main027.server.global.auth.jwt.JwtTokenizer;
 import main027.server.global.auth.userdetails.MemberDetailsService;
 import main027.server.global.auth.utils.CustomAuthorityUtils;
@@ -67,7 +64,7 @@ public class SecurityConfiguration {
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .antMatchers(HttpMethod.POST, "/places", "/reviews", "/likes", "/bookmarks").hasRole("USER")
+                        .antMatchers(HttpMethod.POST, "/places", "/reviews", "/likes/**", "/bookmarks/**").hasRole("USER")
                         .antMatchers(HttpMethod.PATCH, "/members/**", "/places/**").hasRole("USER")
                         .antMatchers(HttpMethod.DELETE, "/members/**", "/places/**", "/reviews/**").hasRole("USER")
                         .antMatchers(HttpMethod.GET, "/likes/**", "/bookmarks/**", "/members").hasRole("USER")
@@ -109,7 +106,7 @@ public class SecurityConfiguration {
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils,
-                                                                                    dataHolder);
+                                                                                    redisService);
 
             JwtReissueFilter jwtReissueFilter = new JwtReissueFilter(jwtTokenizer, redisService, memberDetailsService);
 
