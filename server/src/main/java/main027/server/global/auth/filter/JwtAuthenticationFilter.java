@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * <p>JWT 인증 필터</p>
- * <p>(1) JwtAuthenticationFilter가 클라이언트의 인증 정보를 수신</p>
+ * <p>JwtAuthenticationFilter가 클라이언트의 인증 정보를 수신</p>
  */
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     /**
-     * (2) 클라이언트로부터 받은 로그인 정보를 가지고 아직 인증되지 않은 토큰인 authenticationToken(UsernamePasswordAuthenticationToken) 객체를 생성한 후에 인증 처리를 위해 authenticationManager에게 전달
+     * 클라이언트로부터 받은 로그인 정보를 가지고 아직 인증되지 않은 토큰인 authenticationToken(UsernamePasswordAuthenticationToken) 객체를 생성한 후에 인증 처리를 위해 authenticationManager에게 전달
      * @param request 클라이언트가 로그인 시에 입력한 이메일과 비밀번호를 가지고 ObjectMapper를 이용하여 loginDto로 변환
      *                -> loginDto를 통해 authenticationToken(UsernamePasswordAuthenticationToken) 생성
      * @return authenticationToken을 authenricationManager에게 전달해 인증 위임 처리

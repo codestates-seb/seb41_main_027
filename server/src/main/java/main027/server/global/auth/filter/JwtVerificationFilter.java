@@ -44,6 +44,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
+            /** BlackList에 등록된 AccessToken인지 검증 */
             String blackList = redisService.getToken(request.getHeader("Authorization"));
             if (blackList != null) throw new TokenException(ExceptionCode.LOGOUT_MEMBER);
 
@@ -78,7 +79,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     /**
      * <p>jws는 JWT Signed의 줄임말.</p>
      * <p>Bearer는 JWT의 토큰 타입을 의미</p>
-     * 토큰에서 JWT Signed를 분리하고 claims를 추출하는 과정에서 검증(서버에서 발급했는지 여부, 만료기한 체크)까지 함.
+     * 토큰에서 Bearer를 분리하고 claims를 추출하는 과정에서 검증(서버에서 발급했는지 여부, 만료기한 체크)까지 함.
      * @param request
      * @return claims(Token에 포함된 정보)
      */

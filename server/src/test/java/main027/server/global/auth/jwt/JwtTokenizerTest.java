@@ -21,9 +21,7 @@ class JwtTokenizerTest {
         base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(secretKey);
     }
 
-    /**
-     * AccessToken 생성 테스트
-     */
+    /** AccessToken 생성 테스트 */
     @Test
     void generateAccessTokenTest() {
         Map<String, Object> claims = new HashMap<>();
