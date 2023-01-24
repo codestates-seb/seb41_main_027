@@ -78,7 +78,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     /**
      * <p>jws는 JWT Signed의 줄임말.</p>
      * <p>Bearer는 JWT의 토큰 타입을 의미</p>
-     *
+     * 토큰에서 JWT Signed를 분리하고 claims를 추출하는 과정에서 검증(서버에서 발급했는지 여부, 만료기한 체크)까지 함.
      * @param request
      * @return claims(Token에 포함된 정보)
      */
@@ -97,7 +97,6 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
      * <p>JWT의 Claims에서 얻은 권한 정보를 기반으로 List<GrantedAuthority>를 생성</p>
      * <p>username과 List<GrantedAuthority>를 포함한 Authentication 객체를 생성</p>
      * <p>SecurityContext에 Authentication 객체를 저장</p>
-     *
      * @param claims
      */
     private void setAuthenticationToContext(Map<String, Object> claims) {
