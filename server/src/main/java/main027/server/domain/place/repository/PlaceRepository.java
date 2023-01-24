@@ -17,7 +17,8 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     Optional<Place> findByName(String name);
 
     @TimeTrace
-    Place searchPlacesByKeyword(String keyword);
+    @Query("select p from Place p where p.name like %:keyword% order by p.placeLikeUserList.size desc")
+    Page<Place> searchPlacesByKeyword(Pageable pageable, @Param("keyword") String keyword);
 
     @TimeTrace
     @Query("select p from Place p where p.category.categoryId = :categoryId order by p.placeLikeUserList.size desc")
