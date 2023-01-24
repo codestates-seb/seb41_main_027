@@ -35,12 +35,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -72,12 +72,6 @@ class PlaceControllerTest {
     private PlaceService placeService;
     @MockBean
     private PlaceUpdateService placeUpdateService;
-    @MockBean
-    private PlaceLikeService placeLikeService;
-    @MockBean
-    private PlaceLikeUserMapper placeLikeUserMapper;
-    @MockBean
-    private BookmarkService bookmarkService;
     @MockBean
     private PlaceMapper placeMapper;
     @MockBean
@@ -114,8 +108,6 @@ class PlaceControllerTest {
 
         given(placeMapper.placePostDtoToPlace(Mockito.any(),Mockito.anyLong())).willReturn(new Place());
         given(placeService.createPlace(Mockito.any(Place.class))).willReturn(new Place());
-//        given(bookmarkService.changeBookmarkStatus(Mockito.any())).willReturn(true);
-//        given(placeLikeService.changeLikeUserStatus(Mockito.any())).willReturn(true);
         given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class),Mockito.anyLong())).willReturn(responseDto);
 
         //when
@@ -393,21 +385,21 @@ class PlaceControllerTest {
                                 )));
     }
 
-//    @Test
-//    void deletePlace() throws Exception {
-//        Long id = 1L;
-//        doNothing().when(placeService).deletePlace(Mockito.anyLong());
-//
-//        ResultActions actions =
-//                mockMvc.perform(delete("/places/{placeId}", id));
-//        actions
-//                .andExpect(status().isNoContent())
-//                .andDo(document("delete-place",
-//                                preprocessRequest(prettyPrint()),
-//                                preprocessResponse(prettyPrint()),
-//                                pathParameters(
-//                                        parameterWithName("placeId").description("장소 식별자")
-//                                )
-//                ));
-//    }
+    @Test
+    void deletePlace() throws Exception {
+        Long id = 1L;
+        doNothing().when(placeService).deletePlace(Mockito.anyLong(),Mockito.anyLong());
+
+        ResultActions actions =
+                mockMvc.perform(delete("/places/{placeId}", id));
+        actions
+                .andExpect(status().isNoContent())
+                .andDo(document("delete-place",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                pathParameters(
+                                        parameterWithName("placeId").description("장소 식별자")
+                                )
+                ));
+    }
 }

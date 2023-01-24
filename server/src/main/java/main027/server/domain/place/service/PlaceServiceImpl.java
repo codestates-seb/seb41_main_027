@@ -1,5 +1,6 @@
 package main027.server.domain.place.service;
 
+import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.repository.PlaceRepository;
 import main027.server.domain.place.verifier.PlaceVerifier;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Transactional
 @Service
@@ -27,6 +30,11 @@ public class PlaceServiceImpl implements PlaceService {
     public Place createPlace(Place place) {
         placeVerifier.verifyExistsPlace(place.getName());
         return placeRepository.save(place);
+    }
+
+    public Place searchPlace(String keyword) {
+
+        return placeRepository.searchPlacesByKeyword(keyword);
     }
 
     @TimeTrace
@@ -47,21 +55,6 @@ public class PlaceServiceImpl implements PlaceService {
         else return placeRepository.findByCategoryLikeCount(pageable, categoryId);
 
     }
-
-    /* @TimeTrace
-    public Page<Place> findPlacesByLikes(Pageable pageable) {
-        return placeRepository.findAll(pageable);
-    }
-
-    @TimeTrace
-    public Page<Place> findPlacesByCategory(Pageable pageable, Long categoryId) {
-        return placeRepository.CategoryId(pageable, categoryId);
-    }
-
-    @TimeTrace
-    public Page<Place> findPlaces(Pageable pageable) {
-        return placeRepository.findAll(pageable);
-    } */
 
     @TimeTrace
     public void deletePlace(Long memberId, Long placeId) {

@@ -1,6 +1,7 @@
 package main027.server.domain.place.repository;
 
 import io.lettuce.core.dynamic.annotation.Param;
+import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
 import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.data.domain.Page;
@@ -8,11 +9,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PlaceRepository extends JpaRepository<Place, Long> {
     @TimeTrace
     Optional<Place> findByName(String name);
+
+    @TimeTrace
+    Place searchPlacesByKeyword(String keyword);
 
     @TimeTrace
     @Query("select p from Place p where p.category.categoryId = :categoryId order by p.placeLikeUserList.size desc")
