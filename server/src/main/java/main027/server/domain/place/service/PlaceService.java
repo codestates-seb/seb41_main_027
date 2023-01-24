@@ -11,8 +11,7 @@ public interface PlaceService {
     Place createPlace(Place place);
 
     Place findPlace(Long placeId);
-
-    Place searchPlace(String keyword);
+    Page<Place> searchPlace(Pageable pageable, String keyword);
 
     Page<Place> findPlaces(Pageable pageable, Long categoryId, String sortBy);
 

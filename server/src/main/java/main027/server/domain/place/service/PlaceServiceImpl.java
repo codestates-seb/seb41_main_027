@@ -4,6 +4,7 @@ import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.repository.PlaceRepository;
 import main027.server.domain.place.verifier.PlaceVerifier;
+import main027.server.global.advice.exception.BusinessLogicException;
 import main027.server.global.advice.exception.ExceptionCode;
 import main027.server.global.advice.exception.PermissionDeniedException;
 import main027.server.global.aop.logging.annotation.TimeTrace;
@@ -32,9 +33,13 @@ public class PlaceServiceImpl implements PlaceService {
         return placeRepository.save(place);
     }
 
-    public Place searchPlace(String keyword) {
+    @TimeTrace
+    public Page<Place> searchPlace(Pageable pageable, String keyword) {
+       if (keyword.length() < 2) {
+           throw new BusinessLogicException(ExceptionCode.SHORT_KEYWORD);
+       }
 
-        return placeRepository.searchPlacesByKeyword(keyword);
+        return placeRepository.searchPlacesByKeyword(pageable, keyword);
     }
 
     @TimeTrace

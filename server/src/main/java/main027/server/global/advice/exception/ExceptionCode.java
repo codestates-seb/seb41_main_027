@@ -17,7 +17,8 @@ public enum ExceptionCode {
     INVALID_ACCESS_TOKEN(UNAUTHORIZED.value(), "Invalid Access Token"),
     PERMISSION_DENIED(FORBIDDEN.value(), "Permission Denied"),
     LOGOUT_MEMBER(UNAUTHORIZED.value(), "Logout Member"),
-    UNREGISTERED_MEMBER(NOT_FOUND.value(), "Unregistered Member");
+    UNREGISTERED_MEMBER(NOT_FOUND.value(), "Unregistered Member"),
+    SHORT_KEYWORD(BAD_REQUEST.value(), "검색어를 2글자 이상 입력하세요.");
 
     @Getter
     private int status;

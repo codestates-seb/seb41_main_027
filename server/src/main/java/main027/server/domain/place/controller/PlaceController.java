@@ -51,9 +51,11 @@ public class PlaceController {
 
     @TimeTrace
     @GetMapping("/search")
-    public ResponseEntity searchPlace(@RequestParam("keyword") String keyword) {
-        Place place = placeService.searchPlace(keyword);
-        return new ResponseEntity(placeMapper.searchToResponseDto(place), HttpStatus.OK);
+    public ResponseEntity searchPlace(@RequestParam("keyword") String keyword,
+                                      @RequestParam(defaultValue = "1") int page) {
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<Place> places = placeService.searchPlace(pageable, keyword);
+        return new ResponseEntity(placeMapper.searchPageToList(places), HttpStatus.OK);
 
     }
 
