@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { MapMarker, Map, useMap } from 'react-kakao-maps-sdk'
+import { MapMarker, Map, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk'
 import { useRef, useMemo, useState, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { listClick, searchValue } from '../../recoil/atoms'
 
-import SearchBar from './SearchBar/SearchBar'
 import SiteInfoCard from './SiteInfoCard/SiteInfoCard'
 import SearchInput from './SearchBar/SearchInput'
+import { Link, useLocation } from 'react-router-dom'
 
 const Container = styled.section`
   position: relative;
@@ -25,7 +25,7 @@ const Container = styled.section`
     top: 140px;
     right: 32px;
     width: inherit;
-    height: 100%;
+    height: 71.5%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -59,9 +59,10 @@ const MarkerInfoBox = styled.div`
 const { kakao } = window
 
 const AddPlaceMap = () => {
-  const [info, setInfo] = useState() //info 창 정보
+  // const [info, setInfo] = useState() //info 창 정보
   const [markers, setMarkers] = useState([])
   const [map, setMap] = useState()
+  const location = useLocation()
 
   const mapRef = useRef()
   const [keyword, setKeyword] = useRecoilState(searchValue)
@@ -73,27 +74,27 @@ const AddPlaceMap = () => {
     // }
     const ps = new kakao.maps.services.Places()
     ps.keywordSearch(keyword, (data, status, _pagination) => {
-      console.log(keyword)
+      console.log('keyword : ', keyword)
       if (status === kakao.maps.services.Status.OK) {
         const bounds = new kakao.maps.LatLngBounds()
         let markers = []
 
         for (let i = 0; i < data.length; i++) {
-          console.log(data[i])
+          console.log('data : ', data[i])
           markers.push({
             position: {
               lat: Number(data[i].y),
               lng: Number(data[i].x),
             },
             name: data[i].place_name,
-            address: data[i].address_name,
+            address: data[i].road_address_name || data[i].address_name,
             id: data[i].id,
           })
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
         }
         setMarkers(markers)
         map.setBounds(bounds)
-        // console.log(markers)
+        console.log('markers 정보 : ', markers)
       }
     })
   }, [keyword])
@@ -109,8 +110,6 @@ const AddPlaceMap = () => {
       // 지도 중심을 부드럽게 이동시킵니다
       // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
       map.panTo(moveLatLon)
-      // console.log(clickPoint)
-      // console.log(typeof clickPoint)
     }
   }, [clickPoint])
 
@@ -119,14 +118,7 @@ const AddPlaceMap = () => {
       <Wrapper>
         <SearchInput />
       </Wrapper>
-      <div className="site-list">
-        {markers.map((point, index) => (
-          <SiteInfoCard index={index} key={index} positions={point} />
-        ))}
-      </div>
       <Map // 지도를 표시할 Container
-        // center={{ lat: bounds.qa, lng: bounds.ha }}
-        // center={{ lat: 37.566826, lng: 126.9786567 }}
         center={clickPoint}
         // isPanto={clickPoint.isPanto}
         style={{
@@ -137,18 +129,57 @@ const AddPlaceMap = () => {
         ref={mapRef}
         onCreate={setMap}
       >
-        {markers.map(marker => (
-          <MapMarker
-            key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-            position={marker.position}
-            onClick={marker => {
-              setInfo(marker)
-              map.panTo(marker.getPosition())
-            }}
-          >
-            {/* {info && info.name === marker.name && } */}
-            <MarkerInfoBox>{marker.name}</MarkerInfoBox>
-          </MapMarker>
+        <div className="site-list">
+          {markers.map((point, index) => (
+            <SiteInfoCard index={index} key={point.id} positions={point} location={location} />
+          ))}
+        </div>
+
+        {markers.map((marker, index) => (
+          <>
+            <CustomOverlayMap position={marker.position} yAnchor={2.3}>
+              <div
+                className="customoverlay"
+                style={{
+                  padding: '10px 20px',
+                  borderRadius: '18px',
+                  backgroundColor: 'white',
+                  color: '#0581BB',
+                }}
+              >
+                {marker.name}
+                {/* <Link
+                  onClick={marker => {
+                    map.panTo(marker.getPosition())
+                  }}
+                  to="/addPlace"
+                  state={{ bgLocation: location, position: marker }}
+                >
+                  {marker.name}
+                </Link> */}
+                {/* <Link
+                  to="/addPlace"
+                  state={{ bgLocation: location }}
+                  // marker={marker}
+                  onClick={marker => {
+                    map.panTo(marker.getPosition())
+                  }}
+                ></Link> */}
+              </div>
+            </CustomOverlayMap>
+
+            <MapMarker
+              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+              position={marker.position}
+              onClick={marker => {
+                // setInfo(marker)
+                // console.log('info : ', info)
+                console.log('marker : ', marker.getTitle)
+                map.panTo(marker.getPosition())
+                // setClickPoint({ position: marker.position, isPanto: true })
+              }}
+            ></MapMarker>
+          </>
         ))}
       </Map>
     </Container>

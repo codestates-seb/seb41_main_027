@@ -2,10 +2,14 @@ import styled from 'styled-components'
 import { MapMarker, Map, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk'
 import { useRef, useMemo, useState, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
-import { listClick } from '../../recoil/atoms'
+import { listClick, placesAll } from '../../recoil/atoms'
 
 import SearchBar from './SearchBar/SearchBar'
 import SiteInfoCard from './SiteInfoCard/SiteInfoCard'
+
+import { useGetPlace } from '../../query/place'
+import Loading from '../Loading/Loading'
+import { toast } from 'react-toastify'
 
 const Container = styled.section`
   position: relative;
@@ -40,40 +44,15 @@ const Container = styled.section`
     border-radius: 12px;
   }
 `
+const MarkerInfoBox = styled.div`
+  color: black;
+`
 const { kakao } = window
 
-const MainMap = () => {
-  const MARKER_WIDTH = 33 // 기본, 클릭 마커의 너비
-  const MARKER_HEIGHT = 36 // 기본, 클릭 마커의 높이
-  const OFFSET_X = 12 // 기본, 클릭 마커의 기준 X좌표
-  const OFFSET_Y = MARKER_HEIGHT // 기본, 클릭 마커의 기준 Y좌표
-  const OVER_MARKER_WIDTH = 40 // 오버 마커의 너비
-  const OVER_MARKER_HEIGHT = 42 // 오버 마커의 높이
-  const OVER_OFFSET_X = 13 // 오버 마커의 기준 X좌표
-  const OVER_OFFSET_Y = OVER_MARKER_HEIGHT // 오버 마커의 기준 Y좌표
-  const SPRITE_MARKER_URL = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markers_sprites2.png' // 스프라이트 마커 이미지 URL
-  const SPRITE_WIDTH = 126 // 스프라이트 이미지 너비
-  const SPRITE_HEIGHT = 146 // 스프라이트 이미지 높이
-  const SPRITE_GAP = 10 // 스프라이트 이미지에서 마커간 간격
-
+const MainMap = ({ sort }) => {
   const mapRef = useRef()
-
-  const [points, setPoints] = useState([
-    { title: '맛집', latlng: { lat: 33.452278, lng: 126.567803 }, isPanto: false, address: '제주도', islikeCnt: 100 },
-    { title: '카카오집', latlng: { lat: 33.452671, lng: 126.574792 }, isPanto: false },
-    { title: '카페', latlng: { lat: 33.451744, lng: 126.572441 }, isPanto: false },
-  ])
-
-  // const [bound, setBound] = useState([])
-
-  const bounds = useMemo(() => {
-    const bounds = new kakao.maps.LatLngBounds()
-
-    points.forEach(point => {
-      bounds.extend(new kakao.maps.LatLng(point.latlng.lat, point.latlng.lng))
-    })
-    return bounds
-  }, [points])
+  const [map, setMap] = useState()
+  // state, hook
 
   // 중심 좌표로 랜더링 시작하기
   useEffect(() => {
@@ -90,60 +69,37 @@ const MainMap = () => {
       // 이동할 위도 경도 위치를 생성합니다
       var moveLatLon = new kakao.maps.LatLng(clickPoint)
 
-      // 지도 중심을 부드럽게 이동시킵니다
-      // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
       map.panTo(moveLatLon)
     }
   }, [clickPoint])
 
-  // 마커 모양 Click 변경 구현
-  const EventMarkerContainer = ({ position, index, onClick, isClicked }) => {
-    const map = useMap()
-    const [isOver, setIsOver] = useState(false)
-    const gapX = MARKER_WIDTH + SPRITE_GAP // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
-    const originY = (MARKER_HEIGHT + SPRITE_GAP) * index // 스프라이트 이미지에서 기본, 클릭 마커로 사용할 Y좌표 값
-    const overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP) * index // 스프라이트 이미지에서 오버 마커로 사용할 Y좌표 값
-    const normalOrigin = { x: 0, y: originY } // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
-    const clickOrigin = { x: gapX, y: originY } // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
-    const overOrigin = { x: gapX * 2, y: overOriginY } // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
+  // const [places, setPlaces] = useRecoilState(placesAll)
+  // fetch data
+  const query = useGetPlace(sort)
+  if (query.isLoading) return <Loading />
+  if (query.isError) return toast.error(query.error.message)
+  const item = query.data
+  console.log('되나? :', item)
+  // const query = useGetPlace()
+  // console.log('query : ', query)
 
-    let spriteOrigin = isOver ? overOrigin : normalOrigin
+  // 장소 list 가져오기 이상없음..
 
-    if (isClicked) {
-      spriteOrigin = clickOrigin
-    }
+  const [points, setPoints] = useState([
+    { title: '맛집', latlng: { lat: 33.452278, lng: 126.567803 }, isPanto: false, address: '제주도', islikeCnt: 100 },
+    { title: '카카오집', latlng: { lat: 33.452671, lng: 126.574792 }, isPanto: false },
+    { title: '카페', latlng: { lat: 33.451744, lng: 126.572441 }, isPanto: false },
+  ])
 
-    return (
-      <MapMarker
-        position={position} // 마커를 표시할 위치
-        // onClick={onClick}
-        onClick={point => {
-          // setSeleteMarker(index)
-          map.panTo(point.getPosition())
-        }}
-        onMouseOver={() => setIsOver(true)}
-        onMouseOut={() => setIsOver(false)}
-        image={{
-          src: SPRITE_MARKER_URL,
-          size: {
-            width: MARKER_WIDTH,
-            height: MARKER_HEIGHT,
-          },
-          options: {
-            offset: {
-              x: OFFSET_X,
-              y: OFFSET_Y,
-            },
-            spriteSize: {
-              width: SPRITE_WIDTH,
-              height: SPRITE_HEIGHT,
-            },
-            spriteOrigin: spriteOrigin,
-          },
-        }}
-      ></MapMarker>
-    )
-  }
+  const bounds = useMemo(() => {
+    const bounds = new kakao.maps.LatLngBounds()
+
+    points.forEach(point => {
+      bounds.extend(new kakao.maps.LatLng(point.latlng.lat, point.latlng.lng))
+    })
+    return bounds
+  }, [points])
+
   const [selectedMarker, setSeleteMarker] = useState()
 
   return (
@@ -155,19 +111,18 @@ const MainMap = () => {
         ))}
       </div>
       <Map // 지도를 표시할 Container
-        // center={{ lat: bounds.qa, lng: bounds.ha }}
         center={clickPoint}
-        // isPanto={clickPoint.isPanto}
         style={{
           width: '100%',
           height: '100%',
         }}
         level={8} // 지도의 확대 레벨
         ref={mapRef}
+        onCreate={setMap}
       >
         {points.map((point, index) => (
           <>
-            <CustomOverlayMap position={point.latlng} yAnchor={2}>
+            <CustomOverlayMap position={point.latlng} yAnchor={2.3}>
               <div
                 className="customoverlay"
                 style={{
@@ -183,13 +138,14 @@ const MainMap = () => {
               </div>
             </CustomOverlayMap>
 
-            <EventMarkerContainer
-              index={index}
-              key={`EventMarkerContainer-${point.latlng.lat}-${point.latlng.lng}`}
+            <MapMarker
+              key={`point-${point.content}-${point.latlng.lat},${point.latlng.lng}`}
               position={point.latlng}
-              onClick={() => setSeleteMarker(index)}
-              isClicked={selectedMarker === index}
-            />
+              onClick={point => {
+                setSeleteMarker(point)
+                map.panTo(point.getPosition())
+              }}
+            ></MapMarker>
           </>
         ))}
       </Map>

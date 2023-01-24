@@ -15,6 +15,7 @@ const AboutUs = lazy(() => import('./pages/AboutUs'))
 const SignUp = lazy(() => import('./pages/SignUp'))
 const SignIn = lazy(() => import('./pages/SignIn'))
 const InfoModal = lazy(() => import('./pages/InfoModal/InfoModal'))
+const AddPlaceModal = lazy(() => import('./pages/AddPlaceModal/AddPlaceModal'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const Loading = lazy(() => import('./components/Loading/Loading'))
 
@@ -74,6 +75,12 @@ function App() {
               <Route path="/:infoId" element={<InfoModal />} />
             </Routes>
           )}
+
+          {
+            <Routes>
+              <Route path="/addPlace" element={<AddPlaceModal />} />
+            </Routes>
+          }
         </Main>
       </Suspense>
     </section>
