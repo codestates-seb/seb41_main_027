@@ -3,6 +3,7 @@ package main027.server.domain.place;
 
 import com.google.gson.Gson;
 import main027.server.domain.place.controller.LikeController;
+import main027.server.domain.place.dto.LikeDto;
 import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.place.entity.PlaceLikeUser;
@@ -42,6 +43,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(
@@ -73,66 +75,30 @@ public class LikeControllerTest {
     void postLikeTest() throws Exception {
         //given
         Long id = 1L;
-        PlaceDto.PlaceLikeDto placeLikeDto = new PlaceDto.PlaceLikeDto(1L, 1L);
 
-        String content = gson.toJson(placeLikeDto);
+        Boolean isLiked = true;
+        int likeCount = 10;
 
-        PlaceDto.PlaceResponseDto responseDto = new PlaceDto.PlaceResponseDto(3L,
-                                                                              2L,
-                                                                              "건대 길이식당",
-                                                                              "서울특별시 광진구 화양동 광나루로24길 25-4",
-                                                                              "한 번 맛보면 잊을 수 없는 그 맛!!",
-                                                                              999,
-                                                                              false,
-                                                                              false,
-                                                                              0L,
-                                                                              "푸드",
-                                                                              "37",
-                                                                              "127",
-                                                                              LocalDateTime.of(2023, 01, 20, 19, 27));
-
-        given(placeLikeUserMapper.placeLikeDtoToPlace(1L, 1L)).willReturn(new PlaceLikeUser());
-        given(placeLikeService.changeLikeUserStatus(Mockito.any())).willReturn(true);
-        given(placeMapper.placeToPlaceResponseDto(Mockito.any(Place.class), Mockito.anyLong())).willReturn(responseDto);
+        LikeDto.Response response = new LikeDto.Response(isLiked, likeCount);
+        given(placeLikeService.changeLikeUserStatus(Mockito.any())).willReturn(response);
 
         //when
         ResultActions actions =
                 mockMvc.perform(post("/likes/{placeId}", id)
                                         .accept(MediaType.APPLICATION_JSON_UTF8)
-                                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                                        .content(content)
                 );
 
         //then
         actions
                 .andExpect(status().isOk())
+                .andExpect(content().string("{\"isLiked\":true,\"likeCount\":10}"))
                 .andDo(document("post-like",
                                 preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint()),
-                                requestFields(
-                                        List.of(
-                                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
-                                                fieldWithPath("placeId").type(JsonFieldType.NUMBER).description("장소 식별자")
-                                        )
-                                ),
                                 responseFields(
                                         List.of(
-                                                fieldWithPath("placeId").type(JsonFieldType.NUMBER).description("장소 식별자"),
-                                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
-                                                fieldWithPath("name").type(JsonFieldType.STRING).description("장소 이름"),
-                                                fieldWithPath("address").type(JsonFieldType.STRING).description("장소 주소"),
-                                                fieldWithPath("description").type(JsonFieldType.STRING).description(
-                                                        "장소 설명"),
-                                                fieldWithPath("likeCount").type(JsonFieldType.NUMBER).description(
-                                                        "좋아요 숫자"),
-                                                fieldWithPath("isBookMarked").type(JsonFieldType.BOOLEAN).description("북마크 여부 확인"),
                                                 fieldWithPath("isLiked").type(JsonFieldType.BOOLEAN).description("좋아요 여부 확인"),
-                                                fieldWithPath("kakaoId").type(JsonFieldType.NUMBER).description("카카오맵 식별자"),
-                                                fieldWithPath("category").type(JsonFieldType.STRING).description(
-                                                        "카테고리"),
-                                                fieldWithPath("latitude").type(JsonFieldType.STRING).description("위도"),
-                                                fieldWithPath("longitude").type(JsonFieldType.STRING).description("경도"),
-                                                fieldWithPath("createdAt").type(JsonFieldType.STRING).description("생성 시간")
+                                                fieldWithPath("likeCount").type(JsonFieldType.NUMBER).description("좋아요 개수 확인")
                                         )
                                 )));
 

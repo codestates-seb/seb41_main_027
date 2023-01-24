@@ -5,6 +5,7 @@ import main027.server.domain.place.entity.Place;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,8 @@ public interface PlaceMapper {
     Place placePostDtoToPlace(PlaceDto.PlacePostDto placePostDto, Long memberId);
 
     Place placePatchDtoToPlace(PlaceDto.PlacePatchDto placePatchDto);
+
+    Place searchToResponseDto (Place place);
 
     default PlaceDto.PageResponseDto pageToList(Page<Place> pages, Long memberId) {
         PlaceDto.PageResponseDto result = new PlaceDto.PageResponseDto();
