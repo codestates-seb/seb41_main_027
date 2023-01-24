@@ -55,9 +55,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         return authenticationManager.authenticate(authenticationToken);
     }
 
-    /**
-     * <p>인증에 성공할 경우 호출이 된다.</p>
-     */
+    /** 인증에 성공할 경우 호출이 된다. */
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
@@ -68,9 +66,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String accessToken = delegateAccessToken(member);
         String refreshToken = delegateRefreshToken(member);
 
-        /**
-         * 레디스에 key :refreshToken, value email, duration expirationMinutes으로 refreshToken 저장
-         */
+        /** 레디스에 key :refreshToken, value email, duration expirationMinutes으로 refreshToken 저장 */
         redisService.setRefreshToken(refreshToken, member.getEmail(), jwtTokenizer.getRefreshTokenExpirationMinutes());
 
         response.setHeader("Authorization", "Bearer" + accessToken);

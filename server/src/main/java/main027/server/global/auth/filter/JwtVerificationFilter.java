@@ -5,7 +5,6 @@ import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
 import main027.server.global.advice.exception.ExceptionCode;
 import lombok.extern.slf4j.Slf4j;
-import main027.server.global.aop.logging.DataHolder;
 import main027.server.global.advice.exception.TokenException;
 import main027.server.global.auth.Redis.RedisService;
 import main027.server.global.auth.jwt.JwtTokenizer;

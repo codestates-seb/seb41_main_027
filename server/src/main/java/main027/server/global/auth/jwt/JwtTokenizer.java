@@ -65,7 +65,7 @@ public class JwtTokenizer {
                 .compact();
     }
 
-    /** base64로 인코딩 된 SecretKey를 이용해 Jwt를 디코딩하는 메서드 */
+    /** base64로 인코딩 된 SecretKey를 이용해 Jwt를 디코딩하는 메서드(parseClaimsJws(jws)에서 Signature를 검증하고 만료 기한까지 체크를 함)*/
     public Jws<Claims> getClaims(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
@@ -91,6 +91,7 @@ public class JwtTokenizer {
         return key;
     }
 
+    /** 토큰을 가지고 토큰 안의 subject를 추출하는 메서드 */
     public String getSubject(String token) {
         String subject = Jwts
                 .parserBuilder()
