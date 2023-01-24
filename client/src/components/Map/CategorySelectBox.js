@@ -1,4 +1,7 @@
+import { useState } from 'react'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 import styled from 'styled-components'
+import { categoryValue } from '../../recoil/atoms'
 
 const Wrapper = styled.div`
   position: relative;
@@ -50,10 +53,24 @@ const Wrapper = styled.div`
 `
 
 const CategorySelectBox = () => {
+  // State
+  const [selectedValue, setSelectedValue] = useRecoilState(categoryValue)
+
+  // Handle
+  const handleChange = e => {
+    setSelectedValue(e.target.value)
+  }
   return (
     <Wrapper className="select-wrapper">
-      <select className="select" required>
-        <option value="" disabled selected>
+      <select
+        id="select"
+        className="select"
+        onChange={e => {
+          handleChange(e)
+        }}
+        required
+      >
+        <option value="기본" disabled selected>
           카테고리를 설정해 주세요
         </option>
         <option value="제로웨이스트샵">제로웨이스트샵</option>

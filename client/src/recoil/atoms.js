@@ -32,3 +32,8 @@ export const addPlaceInfo = atom({
   key: 'addPlaceInfo',
   default: [],
 })
+
+export const categoryValue = atom({
+  key: 'categoryValue',
+  default: '',
+})
