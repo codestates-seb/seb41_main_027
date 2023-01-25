@@ -1,12 +1,10 @@
 import styled from 'styled-components'
-import { MapMarker, Map, useMap, CustomOverlayMap } from 'react-kakao-maps-sdk'
-import { useRef, useMemo, useState, useEffect } from 'react'
+import { MapMarker, Map, CustomOverlayMap } from 'react-kakao-maps-sdk'
+import { useRef, useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { listClick, placesAll } from '../../recoil/atoms'
-
+import { listClick } from '../../recoil/atoms'
 import SearchBar from './SearchBar/SearchBar'
 import SiteInfoCard from './SiteInfoCard/SiteInfoCard'
-
 import { useGetPlace } from '../../query/place'
 import Loading from '../Loading/Loading'
 import { toast } from 'react-toastify'
@@ -52,55 +50,19 @@ const { kakao } = window
 const MainMap = ({ sort }) => {
   const mapRef = useRef()
   const [map, setMap] = useState()
-  // state, hook
 
-  // 중심 좌표로 랜더링 시작하기
-  useEffect(() => {
-    const map = mapRef.current
-    if (map) map.setBounds(bounds)
-    // console.log('bound : ' + bounds)
-  }, [])
+  // state, hook
   const [clickPoint, setClickPoint] = useRecoilState(listClick)
 
-  // listItem 클릭시 해당위치 지도에서 정중앙으로 이동!!!! 추가로 마커색 변환 및 인포필요할듯.
-  useEffect(() => {
-    function panTo() {
-      const map = mapRef.current
-      // 이동할 위도 경도 위치를 생성합니다
-      var moveLatLon = new kakao.maps.LatLng(clickPoint)
-
-      map.panTo(moveLatLon)
-    }
-  }, [clickPoint])
-
-  // const [places, setPlaces] = useRecoilState(placesAll)
   // fetch data
+
   const query = useGetPlace(sort)
   if (query.isLoading) return <Loading />
   if (query.isError) return toast.error(query.error.message)
-  const item = query.data
-  console.log('되나? :', item)
-  // const query = useGetPlace()
-  // console.log('query : ', query)
+  const items = query.data
+  const points = items.placeList
 
-  // 장소 list 가져오기 이상없음..
-
-  const [points, setPoints] = useState([
-    { title: '맛집', latlng: { lat: 33.452278, lng: 126.567803 }, isPanto: false, address: '제주도', islikeCnt: 100 },
-    { title: '카카오집', latlng: { lat: 33.452671, lng: 126.574792 }, isPanto: false },
-    { title: '카페', latlng: { lat: 33.451744, lng: 126.572441 }, isPanto: false },
-  ])
-
-  const bounds = useMemo(() => {
-    const bounds = new kakao.maps.LatLngBounds()
-
-    points.forEach(point => {
-      bounds.extend(new kakao.maps.LatLng(point.latlng.lat, point.latlng.lng))
-    })
-    return bounds
-  }, [points])
-
-  const [selectedMarker, setSeleteMarker] = useState()
+  console.log('points', points)
 
   return (
     <Container>
@@ -116,13 +78,13 @@ const MainMap = ({ sort }) => {
           width: '100%',
           height: '100%',
         }}
-        level={8} // 지도의 확대 레벨
+        level={7} // 지도의 확대 레벨
         ref={mapRef}
         onCreate={setMap}
       >
         {points.map((point, index) => (
           <>
-            <CustomOverlayMap position={point.latlng} yAnchor={2.3}>
+            <CustomOverlayMap position={{ lat: point.latitude, lng: point.longitude }} placeInfo={point} yAnchor={2.3}>
               <div
                 className="customoverlay"
                 style={{
@@ -133,16 +95,14 @@ const MainMap = ({ sort }) => {
                 }}
               >
                 <a href=" " target="_blank" rel="noreferrer">
-                  <span className="title">{point.title}</span>
+                  <span className="title">{point.name}</span>
                 </a>
               </div>
             </CustomOverlayMap>
-
             <MapMarker
-              key={`point-${point.content}-${point.latlng.lat},${point.latlng.lng}`}
-              position={point.latlng}
+              key={`point-${point.content}-${point.latitude},${point.longitude}`}
+              position={{ lat: point.latitude, lng: point.longitude }}
               onClick={point => {
-                setSeleteMarker(point)
                 map.panTo(point.getPosition())
               }}
             ></MapMarker>

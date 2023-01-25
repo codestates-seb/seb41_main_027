@@ -26,11 +26,9 @@ export const useGetPlaceInfoById = pId => {
 //   return data
 // }
 export const useGetPlace = sort => {
-  console.log('sort : ', sort)
   return useQuery(['getPlace', sort], ({ queryKey }) => place.getPlace(queryKey[1]), {
     enabled: !!sort,
     staleTime: QUERY_STALETIME,
-    notifyOnChangeProps: 'tracked',
     retry: false,
   })
 }

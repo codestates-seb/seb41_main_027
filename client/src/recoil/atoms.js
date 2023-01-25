@@ -5,6 +5,7 @@ export const listClick = atom({
   default: {
     lat: 37.553505782513895,
     lng: 126.97077939714491,
+    isPanto: false,
   },
 })
 
@@ -25,7 +26,7 @@ export const placePage = atom({
 
 export const placesAll = atom({
   key: 'placesAll',
-  default: '',
+  default: [],
 })
 
 export const addPlaceInfo = atom({

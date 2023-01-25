@@ -90,26 +90,26 @@ const Wrapper = styled.li`
 
 const SiteInfoCard = ({ positions, index }) => {
   const [clickPoint, setClickPoint] = useRecoilState(listClick)
-  // const [placeInfo, setPlaceInfo] = useRecoilState(addPlaceInfo)
+
   const location = useLocation()
   return (
     <Wrapper
       onClick={() => {
-        setClickPoint(positions.latlng || positions.position)
+        setClickPoint(positions.latlng || positions.position || { lat: positions.latitude, lng: positions.longitude })
         // setClickPoint(positions.position)
         // console.log('key:', key)
-        console.log(clickPoint)
-        console.log('position : ', positions)
-        console.log('index : ', index)
+        // console.log(clickPoint)
+        // console.log('position : ', positions)
+        // console.log('index : ', index)
       }}
     >
       <div className="card-title">
-        <h1 className="site-name">{positions.name}</h1>
+        <h1 className="site-name">{positions.name || positions.title}</h1>
 
-        {positions && positions.islike ? (
+        {positions && positions.likeCount >= 0 ? (
           <div className="view-like">
             <span className="ico-like">♥️</span>
-            <span className="count-like">000</span>
+            <span className="count-like">{positions.likeCount}</span>
           </div>
         ) : (
           <div className="add-place">
