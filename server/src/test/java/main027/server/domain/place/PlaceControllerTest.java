@@ -228,6 +228,67 @@ class PlaceControllerTest {
     }
 
     @Test
+    void searchPlaces() throws Exception{
+        //given
+        String Keyword = "맥도날드";
+        List<PlaceDto.SearchResponseDto> searchResponseDtos = List.of(
+                new PlaceDto.SearchResponseDto(1L,
+                                               "강남역7번출구맥도날드",
+                                               "서울시 강남구",
+                                               "존나 맛없어요",
+                                               10),
+                new PlaceDto.SearchResponseDto(2L,
+                                               "건대역7번출구맥도날드",
+                                               "서울시 광진구",
+                                               "존나 맛없어요",
+                                               3));
+
+        PlaceDto.SearchPageResponseDto searchPageResponseDto = new PlaceDto.SearchPageResponseDto();
+        searchPageResponseDto.setPlaceList(searchResponseDtos);
+        searchPageResponseDto.setPresentPage(1L);
+        searchPageResponseDto.setTotalPages(1L);
+        searchPageResponseDto.setTotalElements(2L);
+
+        Page<Place> placePage = new PageImpl<>(List.of());
+
+        given(placeService.searchPlace(Pageable.ofSize(5), Keyword)).willReturn(placePage);
+        given(placeMapper.searchPageToList(Mockito.any())).willReturn(searchPageResponseDto);
+
+        //when
+        ResultActions actions =
+                mockMvc.perform(
+                        get("/places/search")
+                                .param("keyword", "맥도날드")
+                                .param("page", "1")
+                                .accept(MediaType.APPLICATION_JSON_UTF8));
+
+        //then
+        actions
+                .andExpect(status().isOk())
+                .andDo(document("search-places",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()),
+                                requestParameters(
+                                        parameterWithName("keyword").description("검색어"),
+                                        parameterWithName("page").description("현재 페이지")
+                                ),
+                                responseFields(
+                                        List.of(
+                                                fieldWithPath("placeList").type(JsonFieldType.ARRAY).description("결과 데이터").optional(),
+                                                fieldWithPath("placeList[].placeId").type(JsonFieldType.NUMBER).description("장소 식별자"),
+                                                fieldWithPath("placeList[].name").type(JsonFieldType.STRING).description("장소 이름"),
+                                                fieldWithPath("placeList[].address").type(JsonFieldType.STRING).description("장소 주소"),
+                                                fieldWithPath("placeList[].description").type(JsonFieldType.STRING).description(
+                                                        "장소 설명"),
+                                                fieldWithPath("placeList[].likeCount").type(JsonFieldType.NUMBER).description("좋아요 숫자"),
+                                                fieldWithPath("totalPages").type(JsonFieldType.NUMBER).description("전체 페이지 수"),
+                                                fieldWithPath("presentPage").type(JsonFieldType.NUMBER).description("현재 페이지 수"),
+                                                fieldWithPath("totalElements").type(JsonFieldType.NUMBER).description("등록된 장소 수")
+                                        )
+                                )));
+    }
+
+    @Test
     void getPlace() throws Exception {
         Long placeId = 1L;
         PlaceDto.PlaceResponseDto responseDto = new PlaceDto.PlaceResponseDto(1L,
@@ -278,6 +339,8 @@ class PlaceControllerTest {
                                         )
                                 )));
     }
+
+
 
     @Test
     void getPlaces() throws Exception {
@@ -343,7 +406,6 @@ class PlaceControllerTest {
                 mockMvc.perform(
                         get("/places")
                                 .param("page", "1")
-                                .param("size", "10")
                                 .param("categoryId", "3")
                                 .param("sortBy","")
                                 .accept(MediaType.APPLICATION_JSON_UTF8)
@@ -355,8 +417,7 @@ class PlaceControllerTest {
                                 preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint()),
                                 requestParameters(
-                                        parameterWithName("page").description("페이지"),
-                                        parameterWithName("size").description("페이지 크기"),
+                                        parameterWithName("page").description("현재 페이지"),
                                         parameterWithName("categoryId").description("카테고리 식별자"),
                                         parameterWithName("sortBy").description("정렬 기준")
                                 ),
