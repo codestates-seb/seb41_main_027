@@ -5,13 +5,13 @@
 :toc-title: Table of Contents
 :source-highlighter: prettify
 
-Sung Seung Hun <qndldtmsl3138@gmail.com>
+Seong Seunghun <qndldtmsl3138@gmail.com>
 
-Hwaing Won Yong <kakaohwy@gmail.com>
+Hwang Wonyong <kakaohwy@gmail.com>
 
-Choi Ji Min <chlwlals8708@gmail.com>
+Choi Jimin <chlwlals8708@gmail.com>
 
-v1.0.0, 2023.01.13
+v1.0.1, 2023.01.25
 
 ***
 == PlaceController
@@ -40,7 +40,7 @@ include::{snippets}/post-place/response-body.adoc[]
 .response-fields
 include::{snippets}/post-place/response-fields.adoc[]
 
-=== 장소 수정
+=== 장소 정보 수정
 .curl-request
 include::{snippets}/patch-place/curl-request.adoc[]
 
@@ -65,8 +65,33 @@ include::{snippets}/patch-place/response-body.adoc[]
 .response-fields
 include::{snippets}/patch-place/response-fields.adoc[]
 
-=== 장소 1개 조회
-.curl.request
+=== 키워드로 장소 이름 검색
+.curl-request
+include::{snippets}/search-places/curl-request.adoc[]
+
+.http-request
+include::{snippets}/search-places/http-request.adoc[]
+
+.http-response
+include::{snippets}/search-places/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/search-places/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/search-places/request-body.adoc[]
+
+.request-parameters
+include::{snippets}/search-places/request-parameters.adoc[]
+
+.response-body
+include::{snippets}/search-places/response-body.adoc[]
+
+.response-fields
+include::{snippets}/search-places/response-fields.adoc[]
+
+=== 특정 장소 정보 조회
+.curl-request
 include::{snippets}/get-place/curl-request.adoc[]
 
 .http-request
@@ -87,6 +112,310 @@ include::{snippets}/get-place/response-body.adoc[]
 .response-fields
 include::{snippets}/get-place/response-fields.adoc[]
 
-=== 장소 전체 조회
+=== 장소 리스트 조회 (좋아요 순/ 생성 일자 순/ 카테고리 정렬)
+.curl-request
+include::{snippets}/get-places/curl-request.adoc[]
 
+.http-request
+include::{snippets}/get-places/http-request.adoc[]
 
+.http-response
+include::{snippets}/get-places/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/get-places/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/get-places/request-body.adoc[]
+
+.request-parameters
+include::{snippets}/get-places/request-parameters.adoc[]
+
+.response-body
+include::{snippets}/get-places/response-body.adoc[]
+
+.response-fields
+include::{snippets}/get-places/response-fields.adoc[]
+
+=== 장소 삭제
+.curl-request
+include::{snippets}/delete-place/curl-request.adoc[]
+
+.http-request
+include::{snippets}/delete-place/http-request.adoc[]
+
+.http-response
+include::{snippets}/delete-place/response-body.adoc[]
+
+.httpie-request
+include::{snippets}/delete-place/httpie-request.adoc[]
+
+.path-parameters
+include::{snippets}/delete-place/path-parameters.adoc[]
+
+.request-body
+include::{snippets}/delete-place/request-body.adoc[]
+
+.response-body
+include::{snippets}/delete-place/response-body.adoc[]
+
+== ReviewController
+=== 리뷰 등록
+.curl-request
+include::{snippets}/post-review/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-review/http-request.adoc[]
+
+.http-response
+include::{snippets}/post-review/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/post-review/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/post-review/request-body.adoc[]
+
+.request-fields
+include::{snippets}/post-review/request-fields.adoc[]
+
+.response-body
+include::{snippets}/post-review/response-body.adoc[]
+
+.response-fields
+include::{snippets}/post-review/response-fields.adoc[]
+
+=== 특정 장소 리뷰 리스트 조회
+.curl-request
+include::{snippets}/get-reviews/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-reviews/http-request.adoc[]
+
+.http-response
+include::{snippets}/get-reviews/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/get-reviews/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/get-reviews/request-body.adoc[]
+
+.request-parameters
+include::{snippets}/get-reviews/request-parameters.adoc[]
+
+.response-body
+include::{snippets}/get-reviews/response-body.adoc[]
+
+.response-fields
+include::{snippets}/get-reviews/response-fields.adoc[]
+
+=== 리뷰 삭제
+.curl-request
+include::{snippets}/delete-review/curl-request.adoc[]
+
+.http-request
+include::{snippets}/delete-review/http-request.adoc[]
+
+.http-response
+include::{snippets}/delete-review/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/delete-review/httpie-request.adoc[]
+
+.path-parameters
+include::{snippets}/delete-review/path-parameters.adoc[]
+
+.request-body
+include::{snippets}/delete-review/request-body.adoc[]
+
+.response-body
+include::{snippets}/delete-review/response-body.adoc[]
+
+== MemberController
+=== 회원 등록
+.curl-request
+include::{snippets}/post-member/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-member/http-request.adoc[]
+
+.http-response
+include::{snippets}/post-member/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/post-member/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/post-member/request-body.adoc[]
+
+.request-fields
+include::{snippets}/post-member/request-fields.adoc[]
+
+.response-body
+include::{snippets}/post-member/response-body.adoc[]
+
+.response-fields
+include::{snippets}/post-member/response-fields.adoc[]
+
+=== 회원 정보 수정
+.curl-request
+include::{snippets}/patch-member/curl-request.adoc[]
+
+.http-request
+include::{snippets}/patch-member/http-request.adoc[]
+
+.http-response
+include::{snippets}/patch-member/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/patch-member/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/patch-member/request-body.adoc[]
+
+.request-fields
+include::{snippets}/patch-member/request-fields.adoc[]
+
+.response-body
+include::{snippets}/patch-member/response-body.adoc[]
+
+.response-fields
+include::{snippets}/patch-member/response-fields.adoc[]
+
+=== 나의 정보 보기
+.curl-request
+include::{snippets}/get-myInfo/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-myInfo/http-request.adoc[]
+
+.http-response
+include::{snippets}/get-myInfo/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/get-myInfo/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/get-myInfo/request-body.adoc[]
+
+.response-body
+include::{snippets}/get-myInfo/response-body.adoc[]
+
+.response-fields
+include::{snippets}/get-myInfo/response-fields.adoc[]
+
+=== 회원 삭제
+.curl-request
+include::{snippets}/delete-member/curl-request.adoc[]
+
+.http-request
+include::{snippets}/delete-member/http-request.adoc[]
+
+.http-response
+include::{snippets}/delete-member/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/delete-member/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/delete-member/request-body.adoc[]
+
+.response-body
+include::{snippets}/delete-member/response-body.adoc[]
+
+== BookmarkController
+=== 북마크 등록/취소
+.curl-request
+include::{snippets}/post-bookmark/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-bookmark/http-request.adoc[]
+
+.http-response
+include::{snippets}/post-bookmark/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/post-bookmark/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/post-bookmark/request-body.adoc[]
+
+.request-fields
+include::{snippets}/post-bookmark/request-fields.adoc[]
+
+.response-body
+include::{snippets}/post-bookmark/response-body.adoc[]
+
+=== 나의 북마크 리스트 보기
+.curl-request
+include::{snippets}/get-bookmarkList/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-bookmarkList/http-request.adoc[]
+
+.http-response
+include::{snippets}/get-bookmarkList/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/get-bookmarkList/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/get-bookmarkList/request-body.adoc[]
+
+.request-parameters
+include::{snippets}/get-bookmarkList/request-parameters.adoc[]
+
+.response-body
+include::{snippets}/get-bookmarkList/response-body.adoc[]
+
+.response-fields
+include::{snippets}/get-bookmarkList/response-fields.adoc[]
+
+== LikeController
+=== 좋아요 등록/취소
+.curl-request
+include::{snippets}/post-like/curl-request.adoc
+
+.http-request
+include::{snippets}/post-like/http-request.adoc[]
+
+.http-response
+include::{snippets}/post-like/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/post-like/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/post-like/request-body.adoc[]
+
+.response-body
+include::{snippets}/post-like/response-body.adoc[]
+
+.response-fields
+include::{snippets}/post-like/response-fields.adoc[]
+
+=== 나의 좋아요 리스트 보기
+.curl-request
+include::{snippets}/get-placeLikedList/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-placeLikedList/http-request.adoc[]
+
+.http-response
+include::{snippets}/get-placeLikedList/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/get-placeLikedList/httpie-request.adoc[]
+
+.request-body
+include::{snippets}/get-placeLikedList/request-body.adoc[]
+
+.request-parameters
+include::{snippets}/get-placeLikedList/request-parameters.adoc[]
+
+.response-body
+include::{snippets}/get-placeLikedList/response-body.adoc[]
+
+.response-fiedls
+include::{snippets}/get-placeLikedList/response-fields.adoc[]

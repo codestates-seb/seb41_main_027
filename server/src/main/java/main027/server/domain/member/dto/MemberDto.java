@@ -20,7 +20,7 @@ public class MemberDto {
 
         @NotBlank
         @Size(min = 2, max = 12)
-        @Pattern(regexp = "^[a-zA-Zㄱ-힣]+$",
+        @Pattern(regexp = "^[a-zA-Zㄱ-힣0-9]+$",
                 message = "닉네임은 최소 2글자 이상 12글자 이하여야 합니다. 또, 특수문자 및 공백은 포함될 수 없습니다.")
         private String nickName;
 
@@ -34,7 +34,7 @@ public class MemberDto {
     public static class Patch {
 
         @Size(min = 2, max = 12)
-        @Pattern(regexp = "^[a-zA-Zㄱ-힣]+$",
+        @Pattern(regexp = "^[a-zA-Zㄱ-힣0-9]+$",
                 message = "닉네임은 최소 2글자 이상 12글자 이하여야 합니다. 또, 특수문자 및 공백은 포함될 수 없습니다.")
         private String nickName;
 

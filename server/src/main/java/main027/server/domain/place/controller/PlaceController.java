@@ -8,12 +8,15 @@ import main027.server.domain.place.service.PlaceService;
 import main027.server.domain.place.service.PlaceUpdateService;
 import main027.server.global.aop.logging.DataHolder;
 import main027.server.global.aop.logging.annotation.TimeTrace;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -44,6 +47,16 @@ public class PlaceController {
         Place place = placeUpdateService.updatePlace(dataHolder.getMemberId(), placeMapper.placePatchDtoToPlace(placePatchDto));
         return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place, dataHolder.getMemberId()),
                                     HttpStatus.OK);
+    }
+
+    @TimeTrace
+    @GetMapping("/search")
+    public ResponseEntity searchPlace(@RequestParam("keyword") String keyword,
+                                      @RequestParam(defaultValue = "1") int page) {
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<Place> places = placeService.searchPlace(pageable, keyword);
+        return new ResponseEntity(placeMapper.searchPageToList(places), HttpStatus.OK);
+
     }
 
     @TimeTrace
