@@ -73,7 +73,7 @@ public class PlaceController {
     public ResponseEntity getPlaces(@RequestParam(value = "id", required = false) Long categoryId,
                                     @RequestParam(value = "sortby", defaultValue = "") String sortBy,
                                     @RequestParam(defaultValue = "1") int page) {
-        Pageable pageable = PageRequest.of(page - 1, 10);
+        Pageable pageable = PageRequest.of(page - 1, 50);
         return new ResponseEntity(placeMapper.pageToList(placeService.findPlaces(pageable, categoryId, sortBy),
                                                          dataHolder.getMemberId()),
                                   HttpStatus.OK);
