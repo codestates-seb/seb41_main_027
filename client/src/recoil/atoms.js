@@ -19,9 +19,9 @@ export const placeSort = atom({
   default: 'default',
 })
 
-export const placePage = atom({
-  key: 'placePage',
-  default: 1,
+export const categoryId = atom({
+  key: 'categoryId',
+  default: '',
 })
 
 export const placesAll = atom({
