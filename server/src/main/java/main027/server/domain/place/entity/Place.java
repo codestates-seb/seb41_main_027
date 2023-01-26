@@ -8,6 +8,7 @@ import main027.server.domain.review.entity.Review;
 import main027.server.global.audit.BaseTime;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Set;
 
 @Data
 @Entity
-public class Place extends BaseTime {
+public class Place extends BaseTime implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
