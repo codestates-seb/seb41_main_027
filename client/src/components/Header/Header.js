@@ -39,7 +39,6 @@ const HeaderW = styled.header`
 
 const Header = () => {
   const [loginMemberId, setLoginMemberId] = useState(getLoginInfo().id)
-  console.log('header loginMemberId', loginMemberId)
 
   const HandleSignOut = async () => {
     /*
@@ -64,7 +63,6 @@ const Header = () => {
       // 로그인 상태 변경
       localStorage.clear()
       setLoginMemberId('')
-      console.log('success loginMemberId', loginMemberId)
       toast.success('로그아웃 되었습니다.')
       // 메뉴 상태 변경(todo)
     } catch (error) {

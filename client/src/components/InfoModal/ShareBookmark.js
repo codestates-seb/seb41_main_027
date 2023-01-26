@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareNodes, faBookmark as bookmarkOn } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as bookmarkOff } from '@fortawesome/free-regular-svg-icons'
-import { useRecoilValue } from 'recoil'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 

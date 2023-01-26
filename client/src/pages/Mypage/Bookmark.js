@@ -45,8 +45,8 @@ const Bookmark = () => {
   const { isLoading, isFetching, isError, error, data } = useGetBookmarkList(page, listSize)
   if (isLoading || isFetching) return <Loading />
   if (isError) {
-    // const errorCode = error.response.data.status
-    // if (errorCode === 401) return navigate('/signin')
+    const errorCode = error.response.data.status
+    if (errorCode === 401) return navigate('/signin')
     return toast.error(error.message)
   }
   if (!data) return null
