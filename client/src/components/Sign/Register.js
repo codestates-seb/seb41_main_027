@@ -261,7 +261,7 @@ const Register = () => {
       if (!err?.response) {
         setErrMsg('서버의 응답이 없습니다. 새로고침 후 다시 시도해주세요.😭')
       } else if (err.response?.status === 409) {
-        setErrMsg('이미 사용중인 닉네임과 비밀번호입니다. 변경해주세요.')
+        setErrMsg('이미 사용중인 닉네임입니다. 변경해주세요.')
       } else {
         setErrMsg('회원 가입에 실패했습니다.😭 다시 시도해주세요.')
       }
