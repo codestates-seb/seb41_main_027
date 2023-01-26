@@ -12,10 +12,11 @@ import { ClipBoardCopy } from '../../utils/common'
 import KakaoShareBtn from '../Button/KakaoShareBtn'
 import { reviewCnt } from '../../recoil/reviewState'
 import * as bookmarkApi from '../../api/bookmark'
+import { getLoginInfo } from '../../api/login'
 
 const ShareBookmark = ({ item, queryRefresh }) => {
-  console.log('-- (7)ShareBookmark Render --')
-  const loginMemberId = 1
+  // console.log('-- (7)ShareBookmark Render --')
+  const loginMemberId = getLoginInfo().id
 
   const { placeId: pId, kakaoId, name, description, likeCount, isBookMarked } = item
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import GlobalStyle from '../src/styles/GlobalStyle'
 import { Reset } from 'styled-reset'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Suspense, lazy } from 'react'
@@ -10,7 +10,10 @@ import ScrollToTop from './utils/ScrollToTop'
 
 const Home = lazy(() => import('./pages/Home'))
 const Place = lazy(() => import('./pages/Place'))
-const Mypage = lazy(() => import('./pages/Mypage'))
+const Mypage = lazy(() => import('./pages/Mypage/Mypage'))
+const MyInfo = lazy(() => import('./pages/Mypage/MyInfo'))
+const Bookmark = lazy(() => import('./pages/Mypage/Bookmark'))
+const PwdEditFormModal = lazy(() => import('./pages/Mypage/PwdEditFormModal'))
 const AboutUs = lazy(() => import('./pages/AboutUs'))
 const SignUp = lazy(() => import('./pages/SignUp'))
 const SignIn = lazy(() => import('./pages/SignIn'))
@@ -52,8 +55,8 @@ function App() {
         position="top-center"
         autoClose={500}
         closeOnClick
-        hideProgressBar
-        pauseOnHover={false}
+        hideProgressBar={false}
+        pauseOnHover
         pauseOnFocusLoss={false}
         draggable={false}
       />
@@ -62,7 +65,11 @@ function App() {
           <Routes location={bgLocation || location}>
             <Route path="/" element={<Home />} />
             <Route path="/place" element={<Place />} />
-            <Route path="/mypage" element={<Mypage />} />
+            <Route path="/mypage" element={<Mypage />}>
+              <Route index element={<Navigate to="/mypage/bookmark" />} />
+              <Route path="bookmark" element={<Bookmark />} />
+              <Route path="myinfo" element={<MyInfo />} />
+            </Route>
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
@@ -74,6 +81,7 @@ function App() {
             <Routes>
               <Route path="/:infoId" element={<InfoModal />} />
               <Route path="/addPlace" element={<AddPlaceModal />} />
+              <Route path="/mypage/myinfo/pwdedit" element={<PwdEditFormModal />} />
             </Routes>
           )}
         </Main>

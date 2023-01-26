@@ -9,11 +9,12 @@ import { AmountDisplay, DateConvert } from '../../utils/common'
 import { ConfirmModal } from '../../components/Modal/ConfirmModal'
 import { useGetReviewListById } from '../../query/review'
 import * as reviewApi from '../../api/review'
+import { getLoginInfo } from '../../api/login'
 
 const ReviewList = ({ pId, page, goPage, modifiedReviewId, reloadReviewList }) => {
-  console.log('-- (4)ReviewList Render --')
+  // console.log('-- (4)ReviewList Render --')
 
-  const loginMemberId = 2
+  const loginMemberId = getLoginInfo().id
   const listSize = 8
 
   // state, hook

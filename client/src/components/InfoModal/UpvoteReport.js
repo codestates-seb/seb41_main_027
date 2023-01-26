@@ -7,11 +7,12 @@ import { useNavigate } from 'react-router-dom'
 import * as likeAPi from '../../api/like'
 import { ConfirmModal } from '../../components/Modal/ConfirmModal'
 import { InfoUpvoteReport } from './UpvoteReportStyle'
+import { getLoginInfo } from '../../api/login'
 
 const UpvoteReport = ({ item, queryRefresh }) => {
-  console.log('-- (2)UpvoteReport Render --')
+  // console.log('-- (2)UpvoteReport Render --')
 
-  const loginMemberId = 1
+  const loginMemberId = getLoginInfo().id
   const { placeId: pId, likeCount: likeCnt, isLiked: isLiked } = item
 
   // state, hook

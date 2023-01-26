@@ -5,10 +5,11 @@ import { InfoReviewAddForm } from './ReviewAddFormStyle'
 import { EMOJI_LIST } from '../../utils/const'
 import useMoveScroll from '../../hooks/useMoveScroll'
 import * as review from '../../api/review'
+import { getLoginInfo } from '../../api/login'
 
 const ReviewAddForm = ({ pId, reloadReviewList }) => {
-  console.log('-- (6)ReviewAddForm Render --')
-  const loginMemberId = 1
+  // console.log('-- (6)ReviewAddForm Render --')
+  const loginMemberId = getLoginInfo().id
 
   // state, hook
   const refComment = useRef(null)

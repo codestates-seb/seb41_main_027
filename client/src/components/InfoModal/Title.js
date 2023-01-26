@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import { InfoTitle } from './TitleStyle'
 
 const Title = ({ item, modalClose }) => {
-  console.log('-- (1)Title Render --')
+  // console.log('-- (1)Title Render --')
 
   const { name, category, address } = item
 

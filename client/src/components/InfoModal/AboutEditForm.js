@@ -3,11 +3,12 @@ import { toast } from 'react-toastify'
 
 import { InfoAboutEditForm } from './AboutEditFormStyle'
 import * as placeApi from '../../api/place'
+import { getLoginInfo } from '../../api/login'
 
 const AboutEditForm = ({ item }) => {
-  console.log('-- (3)AboutEditForm Render --')
+  // console.log('-- (3)AboutEditForm Render --')
 
-  const loginMemberId = 1
+  const loginMemberId = getLoginInfo().id
   const { placeId, memberId, description } = item
 
   // state, hook
