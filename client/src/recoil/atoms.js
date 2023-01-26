@@ -3,8 +3,9 @@ import { atom } from 'recoil'
 export const listClick = atom({
   key: 'listClick',
   default: {
-    lat: 33.452613,
-    lng: 126.570888,
+    lat: 37.553505782513895,
+    lng: 126.97077939714491,
+    isPanto: false,
   },
 })
 
@@ -25,5 +26,15 @@ export const placePage = atom({
 
 export const placesAll = atom({
   key: 'placesAll',
+  default: [],
+})
+
+export const addPlaceInfo = atom({
+  key: 'addPlaceInfo',
+  default: [],
+})
+
+export const categoryValue = atom({
+  key: 'categoryValue',
   default: '',
 })

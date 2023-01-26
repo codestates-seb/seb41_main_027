@@ -1,8 +1,11 @@
 import styled from 'styled-components'
 import { useRecoilState } from 'recoil'
-import { listClick } from '../../../recoil/atoms'
+import { addPlaceInfo, listClick } from '../../../recoil/atoms'
+import { Link, useLocation } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
-const Wrapper = styled.div`
+const Wrapper = styled.li`
   // Style 💄
   width: 260px;
   height: 100px !important;
@@ -16,29 +19,35 @@ const Wrapper = styled.div`
   /* box-shadow: 0px 4px 10px rgba(25, 1, 52, 0.16); */
   border-radius: 12px;
   // Common
-  p {
+  div {
     display: flex;
     align-items: center;
     letter-spacing: -0.5px;
   }
-  p:first-child {
-    justify-content: space-between;
+  p {
+    display: flex;
+    align-items: center;
   }
-  p:nth-child(2) {
+  /* p {
     justify-content: flex-start;
     gap: 8px;
-  }
+  } */
 
   .card-title {
-    margin-bottom: 8px; // Demo Position 🫡
     align-items: flex-start;
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
 
     .site-name {
-      width: 168px;
+      font-weight: bold;
+      color: #0581bb;
+      width: 150px;
       height: 40px;
+    }
+
+    .add-place {
+      color: #ff3838;
     }
   }
 
@@ -72,6 +81,7 @@ const Wrapper = styled.div`
   }
 
   .site-addr {
+    padding: 10px;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -79,34 +89,41 @@ const Wrapper = styled.div`
   }
 `
 
-const SiteInfoCard = ({ positions }) => {
+const SiteInfoCard = ({ positions, index }) => {
   const [clickPoint, setClickPoint] = useRecoilState(listClick)
 
+  const location = useLocation()
   return (
     <Wrapper
       onClick={() => {
-        setClickPoint(positions.latlng || positions.position)
-        console.log(clickPoint)
+        setClickPoint(positions.latlng || positions.position || { lat: positions.latitude, lng: positions.longitude })
       }}
     >
-      <p className="card-title">
-        <h1 className="site-name">{positions.name}</h1>
+      <div className="card-title">
+        <h1 className="site-name">{positions.name || positions.title}</h1>
 
-        {positions && positions.islike ? (
+        {positions && positions.likeCount >= 0 ? (
           <div className="view-like">
             <span className="ico-like">♥️</span>
-            <span className="count-like">000</span>
+            <span className="count-like">{positions.likeCount}</span>
+            <div>
+              <Link to={`/` + positions.placeId} state={{ bgLocation: location }}>
+                <FontAwesomeIcon icon={faArrowUp} transform={{ rotate: 45 }} />
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="add-place">
-            <span>등록하기</span>
+            <Link to="/addPlace" state={{ bgLocation: location, position: positions }}>
+              등록하기
+            </Link>
           </div>
         )}
-      </p>
-      <p>
-        <span className="tag-category">카페</span>
+      </div>
+      <div>
+        <span className="tag-category">주소</span>
         <p className="site-addr">{positions.address}</p>
-      </p>
+      </div>
     </Wrapper>
   )
 }

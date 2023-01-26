@@ -1,4 +1,6 @@
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
+import { placeSort } from '../../../recoil/atoms'
 
 const Wrapper = styled.div`
   *,
@@ -52,7 +54,7 @@ const Wrapper = styled.div`
     }
   }
 
-  input[id='Newest'] {
+  input[id='time'] {
     &:checked {
       & ~ .glider {
         transform: translateX(0);
@@ -60,7 +62,7 @@ const Wrapper = styled.div`
     }
   }
 
-  input[id='Stars'] {
+  input[id='default'] {
     &:checked {
       & ~ .glider {
         transform: translateX(100%);
@@ -85,15 +87,21 @@ const Wrapper = styled.div`
 `
 
 const RadioButton = () => {
+  const [radioValue, setRadioValue] = useRecoilState(placeSort)
+  const handleChange = e => {
+    setRadioValue(e.target.id)
+    console.log('radio', e.target.id)
+    console.log('radioValue', radioValue)
+  }
   return (
     <Wrapper>
       <div className="tabs">
-        <input type="radio" id="Newest" name="tabs" defaultChecked />
-        <label className="tab" htmlFor="Newest">
+        <input type="radio" id="time" name="tabs" onClick={handleChange} />
+        <label className="tab" htmlFor="time">
           등록 순
         </label>
-        <input type="radio" id="Stars" name="tabs" />
-        <label className="tab" htmlFor="Stars">
+        <input type="radio" id="default" name="tabs" defaultChecked onClick={handleChange} />
+        <label className="tab" htmlFor="default">
           추천 순
         </label>
         <span className="glider"></span>
