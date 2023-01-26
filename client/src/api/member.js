@@ -19,7 +19,7 @@ export const updateMemberInfo = async body => {
     return result.data
   } catch (error) {
     console.error(error)
-    return toast.error(error.message)
+    return toast.error('데이터 처리에 실패했습니다.')
   }
 }
 
@@ -31,6 +31,6 @@ export const deleteMember = async () => {
     return result.data
   } catch (error) {
     console.error(error)
-    toast.error(error.message)
+    toast.error('데이터 처리에 실패했습니다.')
   }
 }

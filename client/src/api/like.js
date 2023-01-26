@@ -13,6 +13,6 @@ export const updateLike = async (pId, isLiked) => {
     return result.data
   } catch (error) {
     console.error(error)
-    toast.error(error.message)
+    toast.error('데이터 처리에 실패했습니다.')
   }
 }
