@@ -5,10 +5,10 @@ import * as review from '../api/review'
 // ----- 리뷰 관련 쿼리 정의(only Get) -----
 
 // 리뷰 리스트 조회
-export const useGetReviewListById = (pId, page, createdReivewId) => {
+export const useGetReviewListById = (pId, page, size, createdReivewId) => {
   return useQuery(
-    ['getReviewListById', pId, page, createdReivewId],
-    ({ queryKey }) => review.getReviewList(queryKey[1], queryKey[2]),
+    ['getReviewListById', pId, page, size, createdReivewId],
+    ({ queryKey }) => review.getReviewList(queryKey[1], queryKey[2], queryKey[3]),
     { enabled: !!pId, staleTime: QUERY_STALETIME, retry: QUERY_RETRY },
   )
 }

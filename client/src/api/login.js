@@ -1,5 +1,5 @@
 export const getLoginInfo = () => {
-  const id = localStorage.getItem('id')
+  const id = localStorage.getItem('id') ? Number(localStorage.getItem('id')) : undefined
   const aToken = localStorage.getItem('aToken')
   const rToken = localStorage.getItem('rToken')
 

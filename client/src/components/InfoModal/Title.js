@@ -3,16 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { ClipBoardCopy } from '../../utils/common'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
 
-const Title = props => {
+import { InfoTitle } from './TitleStyle'
+
+const Title = ({ item, modalClose }) => {
   // console.log('-- (1)Title Render --')
 
-  const { name, category, address } = props.item
+  const { name, category, address } = item
 
   // hook
   const refAddress = useRef(null)
-  const navigate = useNavigate()
 
   // handle
   const handleClickCopy = () => {
@@ -22,13 +22,13 @@ const Title = props => {
   }
 
   return (
-    <>
+    <InfoTitle>
       <div className="head-category-title">
         <div className="head-title">
           <span className="category">{category}</span>
           <p>{name}</p>
         </div>
-        <button onClick={() => navigate(-1)}>×</button>
+        <button onClick={modalClose}>×</button>
       </div>
       <div className="head-address">
         <p ref={refAddress}>{address}</p>
@@ -36,7 +36,7 @@ const Title = props => {
           <FontAwesomeIcon icon={faCopy} />
         </button>
       </div>
-    </>
+    </InfoTitle>
   )
 }
 

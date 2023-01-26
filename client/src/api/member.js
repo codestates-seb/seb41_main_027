@@ -1,25 +1,36 @@
-import axios from 'axios'
+import { customAxios } from '../utils/customAxios'
+import { toast } from 'react-toastify'
+import { API_MEMBER_ENDPOINT } from '../utils/const'
 
-export const API_MEMBER_ENDPOINT = process.env.REACT_APP_API + process.env.REACT_APP_API_MEMBER_ENDPOINT
-const API_CONNECT_TIMEOUT = process.env.REACT_APP_API_CONNECT_TIMEOUT
+// member axios CRUD
 
-// create
-export const createMember = body => {
-  axios.post(API_MEMBER_ENDPOINT, body, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
+// get member info
+export const getMemberInfo = async () => {
+  const result = await customAxios.get(API_MEMBER_ENDPOINT)
+  return result.data
 }
 
 // update
-export const updateMember = body => {
-  axios.patch(API_MEMBER_ENDPOINT, body, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
+export const updateMemberInfo = async body => {
+  try {
+    const resultMsg = body.nickName ? '닉네임이' : '비밀번호가'
+    const result = await customAxios.patch(API_MEMBER_ENDPOINT, body)
+    toast.success(resultMsg + ' 수정되었습니다.')
+    return result.data
+  } catch (error) {
+    console.error(error)
+    return toast.error(error.message)
+  }
 }
 
 // delete
-export const deleteMember = () => {
-  axios.delete(API_MEMBER_ENDPOINT, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
+export const deleteMember = async () => {
+  try {
+    const result = await customAxios.delete(API_MEMBER_ENDPOINT)
+    toast.success('탈퇴 처리되었습니다.')
+    return result.data
+  } catch (error) {
+    console.error(error)
+    toast.error(error.message)
+  }
 }
