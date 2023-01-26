@@ -73,14 +73,9 @@ function App() {
           {bgLocation && (
             <Routes>
               <Route path="/:infoId" element={<InfoModal />} />
-            </Routes>
-          )}
-
-          {
-            <Routes>
               <Route path="/addPlace" element={<AddPlaceModal />} />
             </Routes>
-          }
+          )}
         </Main>
       </Suspense>
     </section>

@@ -8,6 +8,7 @@ import SiteInfoCard from './SiteInfoCard/SiteInfoCard'
 import { useGetPlace } from '../../query/place'
 import Loading from '../Loading/Loading'
 import { toast } from 'react-toastify'
+import { Link, useLocation } from 'react-router-dom'
 
 const Container = styled.section`
   position: relative;
@@ -26,7 +27,7 @@ const Container = styled.section`
     top: 140px;
     right: 32px;
     width: inherit;
-    height: 100%;
+    height: 71.5%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -50,6 +51,7 @@ const { kakao } = window
 const MainMap = ({ sort }) => {
   const mapRef = useRef()
   const [map, setMap] = useState()
+  const location = useLocation()
 
   // state, hook
   const [clickPoint, setClickPoint] = useRecoilState(listClick)
@@ -94,9 +96,9 @@ const MainMap = ({ sort }) => {
                   color: '#0581BB',
                 }}
               >
-                <a href=" " target="_blank" rel="noreferrer">
+                <Link to={`/` + point.placeId} state={{ bgLocation: location }}>
                   <span className="title">{point.name}</span>
-                </a>
+                </Link>
               </div>
             </CustomOverlayMap>
             <MapMarker
