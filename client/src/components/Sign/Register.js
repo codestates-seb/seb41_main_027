@@ -1,7 +1,8 @@
 import axios from '../../api/sign'
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-
+// import { customAxios } from '../utils/customAxios'
+// import { API_MEMBER_ENDPOINT } from '../utils/const'
 // import '../Sign/Register.css'
 import styled from 'styled-components'
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
@@ -238,6 +239,7 @@ const Register = () => {
       return
     }
     try {
+      // const response = await customAxios.post(API_MEMBER_ENDPOINT, { username: email, nickName, password })
       const response = await axios.post(
         REGISTER_URL,
         { email, nickName, password },
