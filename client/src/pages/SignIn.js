@@ -3,13 +3,15 @@ import { faThumbTack } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 // import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-// import { API_LOGIN_ENDPOINT } from '../utils/const'
-// import { customAxios } from '../utils/customAxios'
+import { API_LOGIN_ENDPOINT } from '../utils/const'
+import { customAxios } from '../utils/customAxios'
 
 import styled from 'styled-components'
 import Logo from '../assets/LogoTypeSignature.svg'
+import { setLoginInfo } from '../api/login'
+// import { API_LOGIN_ENDPOINT } from '../utils/const'
 
 //💄 Demo Styles --------------------------------
 const Wrapper = styled.div`
@@ -178,15 +180,20 @@ const Container = styled.div`
 `
 
 // 🤖  Regex set ----------------------------------------
-const LOGIN_URL = 'http://52.78.152.135:8080/auth/login'
+// const LOGIN_URL = 'http://52.78.152.135:8080/auth/login'
 
 const EMAIL_REGEX = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
 const PWD_REGEX = /(?=.*[0-9])(?=.*[a-z]).{8,20}/
 // 8자 이상 20자 이하, 숫자와 영문의 조합으로 구성
 
 const SignIn = () => {
+  localStorage.clear()
+
   const userRef = useRef()
   const errRef = useRef()
+  const location = useLocation()
+  const callbackUrl = location.state?.callbackUrl || '/'
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [validEmail, setValidEmail] = useState(false)
@@ -225,29 +232,18 @@ const SignIn = () => {
       return
     }
     try {
-      // const response = await customAxios.post(API_LOGIN_ENDPOINT, { username: email, password })
-
-      const response = await axios
-        .post(
-          LOGIN_URL,
-          { username: email, password },
-          {
-            headers: { 'Content-Type': 'application/json', withCredentials: true },
-          },
-        )
-        .then(response => {
-          // console.log(response?.data)
-          // console.log(response?.accessToken)
-          // console.log(JSON.stringify(response))
-          localStorage.clear()
-          localStorage.setItem('accessToken', response.headers.authorization)
-          localStorage.setItem('refresh', response.headers.refresh)
-          setSuccess(true)
-          // 상태 및 인풋 날리기 clean!
-          // 입력을 위한 대한 속성 값 필요
-          setEmail('')
-          setpassword('')
-        })
+      const response = await customAxios.post(API_LOGIN_ENDPOINT, { username: email, password }).then(response => {
+        // console.log(response?.data)
+        // console.log(response?.accessToken)
+        // console.log(JSON.stringify(response))
+        setLoginInfo(response.data.memberId, response.headers.authorization, response.headers.refresh)
+        setSuccess(true)
+        navigate(callbackUrl)
+        // 상태 및 인풋 날리기 clean!
+        // 입력을 위한 대한 속성 값 필요
+        setEmail('')
+        setpassword('')
+      })
     } catch (err) {
       if (!err?.response) {
         setErrMsg('서버의 응답이 없습니다. 새로고침을 해주세요.')
