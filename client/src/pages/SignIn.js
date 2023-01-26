@@ -1,11 +1,12 @@
-import axios from 'axios'
+import { faThumbTack } from '@fortawesome/free-solid-svg-icons'
 // import { useForm } from 'react-hook-form';
+import axios from 'axios'
 // import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
-// import { customAxios } from '../utils/customAxios'
 // import { API_LOGIN_ENDPOINT } from '../utils/const'
+// import { customAxios } from '../utils/customAxios'
 
 import styled from 'styled-components'
 import Logo from '../assets/LogoTypeSignature.svg'
@@ -226,21 +227,27 @@ const SignIn = () => {
     try {
       // const response = await customAxios.post(API_LOGIN_ENDPOINT, { username: email, password })
 
-      const response = await axios.post(
-        LOGIN_URL,
-        { email, password },
-        {
-          headers: { 'Content-Type': 'application/json', withCredentials: true },
-        },
-      )
-      console.log(response?.data)
-      console.log(response?.accessToken)
-      console.log(JSON.stringify(response))
-      setSuccess(true)
-      // 상태 및 인풋 날리기 clean!
-      // 입력을 위한 대한 속성 값 필요
-      setEmail('')
-      setpassword('')
+      const response = await axios
+        .post(
+          LOGIN_URL,
+          { username: email, password },
+          {
+            headers: { 'Content-Type': 'application/json', withCredentials: true },
+          },
+        )
+        .then(response => {
+          // console.log(response?.data)
+          // console.log(response?.accessToken)
+          // console.log(JSON.stringify(response))
+          localStorage.clear()
+          localStorage.setItem('accessToken', response.headers.authorization)
+          localStorage.setItem('refresh', response.headers.refresh)
+          setSuccess(true)
+          // 상태 및 인풋 날리기 clean!
+          // 입력을 위한 대한 속성 값 필요
+          setEmail('')
+          setpassword('')
+        })
     } catch (err) {
       if (!err?.response) {
         setErrMsg('서버의 응답이 없습니다. 새로고침을 해주세요.')
