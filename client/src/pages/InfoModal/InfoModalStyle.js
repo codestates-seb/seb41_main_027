@@ -148,7 +148,7 @@ export const InfoMapReviewAdd = styled.div`
   flex-direction: column;
   align-items: flex-start;
   flex-grow: 1;
-  gap: 26px;
+  gap: 40px;
 `
 
 export const InfoBottom = styled.div`

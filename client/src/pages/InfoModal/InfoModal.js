@@ -28,7 +28,7 @@ import useMoveScroll from '../../hooks/useMoveScroll'
 import { useGetPlaceInfoById } from '../../query/place'
 
 export const InfoModal = () => {
-  console.log('-- InfoModal Render --')
+  // console.log('-- InfoModal Render --')
 
   // id check
   const pId = useParams().infoId
