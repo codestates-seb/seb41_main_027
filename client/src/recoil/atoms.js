@@ -12,3 +12,18 @@ export const searchValue = atom({
   key: 'searchValue',
   default: '',
 })
+
+export const placeSort = atom({
+  key: 'placeSort',
+  default: 'default',
+})
+
+export const placePage = atom({
+  key: 'placePage',
+  default: 1,
+})
+
+export const placesAll = atom({
+  key: 'placesAll',
+  default: '',
+})
