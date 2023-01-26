@@ -30,12 +30,3 @@ export const getPlace = async sort => {
   // console.log('result.data : ', result.data)
   return result.data
 }
-
-// 장소 list 가져오기 이상없음..
-export const getPlace = async sort => {
-  const result = await customAxios.get(`${API_PLACE_ENDPOINT}?sortby=${sort}`)
-  // console.log(`${API_PLACE_ENDPOINT}?sortby=${sort}`)
-  // console.log('sort : ' + sort)
-  // console.log('result.data : ', result.data)
-  return result.data
-}
