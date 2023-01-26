@@ -44,7 +44,7 @@ public class DataHolder extends StopWatch {
 
     public void setUri(String uri) {
         this.uri = uri;
-        log.info("======== START [{}][{}] ========", uri, method);
+        log.info("START [{}] [{}]", uri, method);
     }
 
     /**
@@ -53,7 +53,7 @@ public class DataHolder extends StopWatch {
     @PreDestroy
     private void destroy() {
         this.stop();
-        log.info("======== END [{}][{}] ========[TOTAL TIME={}ms]", uri, method, this.getTotalTimeMillis());
+        log.info("END [{}] [{}] [{}ms]", uri, method, this.getTotalTimeMillis());
     }
 
 }
