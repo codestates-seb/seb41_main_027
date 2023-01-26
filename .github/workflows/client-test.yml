@@ -24,11 +24,9 @@ jobs:
         run: |
           echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env.production
           echo "REACT_APP_KAKAO_API_KEY=$REACT_APP_KAKAO_API_KEY" >> .env.production
-          echo "PUBLIC_URL=$PUBLIC_URL" >> .env.production
         env:
           REACT_APP_API_URL: ${{ secrets.APP_API_URL }} 
           REACT_APP_KAKAO_API_KEY: ${{ secrets.APP_KAKAO_API_KEY }}
-          PUBLIC_URL: ${{ secrets.APP_PUBLIC_URL }}                   
 
       - name: Build
         run: npm run build

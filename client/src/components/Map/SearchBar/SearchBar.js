@@ -7,7 +7,7 @@ import SearchInput from './SearchInput'
 const Wrapper = styled.div`
   // Position 🫡
   position: absolute;
-  z-index: 9000;
+  z-index: 1500;
   left: 50%;
   transform: translate(-50%, 0%);
   display: flex;

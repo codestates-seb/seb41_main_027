@@ -90,8 +90,8 @@ const RadioButton = () => {
   const [radioValue, setRadioValue] = useRecoilState(placeSort)
   const handleChange = e => {
     setRadioValue(e.target.id)
-    console.log('radio', e.target.id)
-    console.log('radioValue', radioValue)
+    // console.log('radio', e.target.id)
+    // console.log('radioValue', radioValue)
   }
   return (
     <Wrapper>
