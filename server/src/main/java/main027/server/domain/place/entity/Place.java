@@ -2,10 +2,10 @@ package main027.server.domain.place.entity;
 
 
 import lombok.Data;
-import main027.server.global.audit.BaseTime;
 import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.review.entity.Review;
+import main027.server.global.audit.BaseTime;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -46,11 +46,11 @@ public class Place extends BaseTime {
     @Column
     private String longitude;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

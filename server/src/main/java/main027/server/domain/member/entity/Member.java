@@ -3,10 +3,10 @@ package main027.server.domain.member.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import main027.server.global.audit.BaseTime;
 import main027.server.domain.bookmark.entity.Bookmark;
 import main027.server.domain.place.entity.Place;
 import main027.server.domain.review.entity.Review;
+import main027.server.global.audit.BaseTime;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -31,9 +31,6 @@ public class Member extends BaseTime {
     @Column(nullable = false, unique = true)
     private String nickName;
 
-    @Enumerated(EnumType.STRING)
-    private MemberStatus memberStatus = MemberStatus.ACTIVE;
-
     // member가 삭제 될 때 place정보는 남겨둬야하는 것이 필요하므로, 해당 로직 작성 필요
     @OneToMany(mappedBy = "member")
     private List<Place> placeList = new ArrayList<>();
@@ -47,25 +44,11 @@ public class Member extends BaseTime {
     private List<Bookmark> bookmarkList = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles =new ArrayList<>();
+    private List<String> roles = new ArrayList<>();
 
     public Member(String email, String password, String nickName) {
         this.email = email;
         this.password = password;
         this.nickName = nickName;
     }
-
-    public enum MemberStatus {
-        ACTIVE("활동중"),
-        SLEEP("휴면 계정"),
-        QUIT("탈퇴");
-
-        @Getter
-        private String memberStatus;
-
-        MemberStatus(String memberStatus) {
-            this.memberStatus = memberStatus;
-        }
-    }
-
 }
