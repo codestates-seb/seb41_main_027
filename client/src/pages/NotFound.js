@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useGetPlace } from '../query/place'
 
 const Wrapper = styled.section`
   width: 100%;
@@ -21,6 +22,11 @@ const Wrapper = styled.section`
 `
 
 const NotFound = () => {
+  const query = useGetPlace('default')
+  if (query.isLoading === false) {
+    console.log('dada : ', query.data)
+  }
+  console.log('되나? :', query)
   return (
     <Wrapper>
       <h1>404 Not Found</h1>

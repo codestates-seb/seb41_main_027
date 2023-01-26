@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { QUERY_STALETIME, QUERY_RETRY } from '../utils/const'
 import * as place from '../api/place'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { placeSort } from '../recoil/atoms'
 
 // ----- 장소 관련 쿼리 정의(only Get) -----
 
@@ -13,10 +15,20 @@ export const useGetPlaceInfoById = pId => {
   })
 }
 
+// 여기가 잘못된거 같음... 확인바람...
+// 장소 list 모두 조회
+// export const useGetPlaceList = () => {
+//   const { data } = useQuery(['getPlace', page, sort], () => place.getPlaceList(), {
+//     staleTime: QUERY_STALETIME,
+//     notifyOnChangeProps: 'tracked',
+//     retry: false,
+//   })
+//   return data
+// }
 export const useGetPlace = sort => {
-  return useQuery(['getPlaceList', sort], ({ queryKey }) => place.getPlace(queryKey[1]), {
+  return useQuery(['getPlace', sort], ({ queryKey }) => place.getPlace(queryKey[1]), {
     enabled: !!sort,
     staleTime: QUERY_STALETIME,
-    retry: QUERY_RETRY,
+    retry: false,
   })
 }
