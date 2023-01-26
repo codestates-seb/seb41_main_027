@@ -50,7 +50,6 @@ const AddPlaceInfo = () => {
         placeholder="장소에 대한 Comment를 입력해 주세요."
         required
       />
-      <div>Tag</div>
       <button type="submit" className="placeInfo-save-btn" disabled={false}>
         등록하기
       </button>

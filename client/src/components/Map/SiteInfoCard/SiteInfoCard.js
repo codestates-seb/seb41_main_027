@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { useRecoilState } from 'recoil'
 import { addPlaceInfo, listClick } from '../../../recoil/atoms'
 import { Link, useLocation } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 const Wrapper = styled.li`
   // Style 💄
@@ -32,7 +34,6 @@ const Wrapper = styled.li`
   } */
 
   .card-title {
-    margin-bottom: 8px; // Demo Position 🫡
     align-items: flex-start;
     font-weight: 500;
     font-size: 16px;
@@ -41,7 +42,7 @@ const Wrapper = styled.li`
     .site-name {
       font-weight: bold;
       color: #0581bb;
-      width: 168px;
+      width: 150px;
       height: 40px;
     }
 
@@ -96,11 +97,6 @@ const SiteInfoCard = ({ positions, index }) => {
     <Wrapper
       onClick={() => {
         setClickPoint(positions.latlng || positions.position || { lat: positions.latitude, lng: positions.longitude })
-        // setClickPoint(positions.position)
-        // console.log('key:', key)
-        // console.log(clickPoint)
-        // console.log('position : ', positions)
-        // console.log('index : ', index)
       }}
     >
       <div className="card-title">
@@ -110,6 +106,11 @@ const SiteInfoCard = ({ positions, index }) => {
           <div className="view-like">
             <span className="ico-like">♥️</span>
             <span className="count-like">{positions.likeCount}</span>
+            <div>
+              <Link to={`/` + positions.placeId} state={{ bgLocation: location }}>
+                <FontAwesomeIcon icon={faArrowUp} transform={{ rotate: 45 }} />
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="add-place">
