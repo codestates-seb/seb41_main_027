@@ -1,25 +1,24 @@
-import axios from 'axios'
+import { customAxios } from '../utils/customAxios'
+import { toast } from 'react-toastify'
+import { API_BOOKMARK_ENDPOINT } from '../utils/const'
 
-const API_BOOKMARK_ENDPOINT = process.env.REACT_APP_API + process.env.REACT_APP_API_BOOKMARK_ENDPOINT
-const API_CONNECT_TIMEOUT = process.env.REACT_APP_API_CONNECT_TIMEOUT
+// bookmark axios CRUD
 
-// create
-export const createBookmark = body => {
-  axios.post(API_BOOKMARK_ENDPOINT, body, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
+// get bookmark list
+export const getBookmarkList = async (page, size) => {
+  const result = await customAxios.get(`${API_BOOKMARK_ENDPOINT}?page=${page}&size=${size}`)
+  return result.data
 }
 
 // update
-export const updateBookmark = body => {
-  axios.patch(API_BOOKMARK_ENDPOINT, body, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
-}
-
-// delete
-export const deleteBookmark = () => {
-  axios.delete(API_BOOKMARK_ENDPOINT, {
-    timeout: API_CONNECT_TIMEOUT,
-  })
+export const updateBookmark = async (pId, isBookmark) => {
+  try {
+    const resultMsg = isBookmark ? '북마크에 등록되었습니다.' : '북마크가 삭제되었습니다.'
+    const result = await customAxios.post(`${API_BOOKMARK_ENDPOINT}/${pId}`)
+    toast.success(resultMsg)
+    return result.data
+  } catch (error) {
+    console.error(error)
+    toast.error(error.message)
+  }
 }

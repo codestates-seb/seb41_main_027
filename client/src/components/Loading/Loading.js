@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 const LoadingBar = styled.div`
   width: 100%;
+  z-index: 9600;
   display: flex;
   justify-content: center;
   position: fixed;

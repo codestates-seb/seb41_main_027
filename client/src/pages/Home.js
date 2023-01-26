@@ -1,8 +1,9 @@
 import styled from 'styled-components'
-
 import Nav from '../components/Nav/Nav'
 import Header from '../components/Header/Header'
-import Main from '../components/Map/Map'
+import MainMap from '../components/Map/MainMap'
+import { useRecoilValue } from 'recoil'
+import { placeSort } from '../recoil/atoms'
 
 const Wrapper = styled.section`
   width: 100%;
@@ -11,13 +12,14 @@ const Wrapper = styled.section`
   }
 `
 const Home = () => {
+  const sort = useRecoilValue(placeSort)
   return (
     <>
       <Nav />
       <Wrapper>
         <Header />
         <>
-          <Main />
+          <MainMap sort={sort} />
         </>
       </Wrapper>
     </>
