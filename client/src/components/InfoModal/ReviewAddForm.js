@@ -1,13 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { InfoReviewAddForm } from './ReviewAddFormStyle'
 import { EMOJI_LIST } from '../../utils/const'
 import useMoveScroll from '../../hooks/useMoveScroll'
 import * as review from '../../api/review'
 
-const ReviewAddForm = ({ pId, createdReview }) => {
-  // console.log('-- (6)ReviewAddForm Render --')
+const ReviewAddForm = ({ pId, reloadReviewList }) => {
+  console.log('-- (6)ReviewAddForm Render --')
+  const loginMemberId = 1
 
   // state, hook
   const refComment = useRef(null)
+  const navigate = useNavigate()
   const [selectedEmoji, setSelectedEmoji] = useState(null)
   const { element: formTop, onMoveToElement } = useMoveScroll()
 
@@ -28,26 +33,23 @@ const ReviewAddForm = ({ pId, createdReview }) => {
 
     // db create
     const body = {
-      memberId: 1,
       placeId: Number(pId),
       content: comment,
       emojiId: selectedEmoji,
     }
-
     review.createReviewInfo(body).then(data => {
-      // console.log('created reviewId', data.reviewId)
-      createdReview(Number(data.reviewId))
+      reloadReviewList(Number(data.reviewId))
       setSelectedEmoji(null)
       e.target.comment_text.value = ''
     })
   }
 
   useEffect(() => {
-    if (selectedEmoji && refComment) refComment.current.focus()
+    if (selectedEmoji && refComment.current) refComment.current.focus()
   }, [selectedEmoji])
 
   return (
-    <form className="review-add-form" onSubmit={handleSubmitReview}>
+    <InfoReviewAddForm onSubmit={handleSubmitReview}>
       <section ref={formTop} className="review-add-emoji-box">
         <h3>이모지를 클릭해 리뷰를 남겨보세요!</h3>
         {emojiList.map((gItem, gIdx) => (
@@ -70,20 +72,32 @@ const ReviewAddForm = ({ pId, createdReview }) => {
       </section>
       {selectedEmoji !== null && (
         <section className="review-add-comment ani-fadein">
-          <textarea
-            ref={refComment}
-            className="comment_text"
-            name="comment_text"
-            maxLength={40}
-            placeholder="여기에 리뷰를 입력해 주세요."
-            required
-          />
-          <button type="submit" className="comment-save-btn" disabled={false}>
-            저장하기
-          </button>
+          {!loginMemberId && (
+            <div className="login-comment">
+              <p>리뷰 등록은 로그인 후 이용할 수 있어요. </p>
+              <button type="button" onClick={() => navigate('/signin')}>
+                로그인 페이지로 이동
+              </button>
+            </div>
+          )}
+          {loginMemberId && (
+            <>
+              <textarea
+                ref={refComment}
+                className="comment_text"
+                name="comment_text"
+                maxLength={40}
+                placeholder="여기에 리뷰를 입력해 주세요."
+                required
+              />
+              <button type="submit" className="comment-save-btn" disabled={false}>
+                저장하기
+              </button>
+            </>
+          )}
         </section>
       )}
-    </form>
+    </InfoReviewAddForm>
   )
 }
 

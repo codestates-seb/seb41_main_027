@@ -12,3 +12,11 @@ export const useGetPlaceInfoById = pId => {
     retry: QUERY_RETRY,
   })
 }
+
+export const useGetPlace = sort => {
+  return useQuery(['getPlaceList', sort], ({ queryKey }) => place.getPlace(queryKey[1]), {
+    enabled: !!sort,
+    staleTime: QUERY_STALETIME,
+    retry: QUERY_RETRY,
+  })
+}

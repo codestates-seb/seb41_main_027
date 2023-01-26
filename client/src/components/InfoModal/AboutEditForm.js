@@ -1,17 +1,22 @@
 import React, { useRef, useState } from 'react'
 import { toast } from 'react-toastify'
-import { updatePlaceDescription } from '../../api/place'
+
+import { InfoAboutEditForm } from './AboutEditFormStyle'
+import * as placeApi from '../../api/place'
 
 const AboutEditForm = ({ item }) => {
-  // console.log('-- (3)AboutEditForm Render --')
+  console.log('-- (3)AboutEditForm Render --')
 
-  const { placeId, description } = item
+  const loginMemberId = 1
+  const { placeId, memberId, description } = item
 
+  // state, hook
   const [isEdit, setIsEdit] = useState(false)
   const [prevAbout, setPrevAbout] = useState(description)
   const refAbout = useRef(null)
 
-  const handleClickEdit = () => {
+  // handle
+  const handleClickEditBtn = () => {
     setIsEdit(true)
     refAbout.current.focus()
   }
@@ -22,14 +27,14 @@ const AboutEditForm = ({ item }) => {
     // no change
     const aboutText = e.target.about_text.value
     if (aboutText === prevAbout) {
-      toast.info('수정된 내용이 없습니다.')
+      toast.info('변경된 내용이 없습니다.')
       refAbout.current.focus()
       return
     }
 
     // db update
     refAbout.current.classList.remove('ani-border-twinkle')
-    updatePlaceDescription(placeId, { placeId, description: aboutText }).then(data => {
+    placeApi.updatePlaceDescription(placeId, { placeId, description: aboutText }).then(data => {
       setPrevAbout(data.description)
       refAbout.current.classList.add('ani-border-twinkle')
       setIsEdit(false)
@@ -37,7 +42,7 @@ const AboutEditForm = ({ item }) => {
   }
 
   return (
-    <form className="info-about-form" onSubmit={handleSubmit}>
+    <InfoAboutEditForm onSubmit={handleSubmit}>
       <textarea
         ref={refAbout}
         name="about_text"
@@ -46,18 +51,20 @@ const AboutEditForm = ({ item }) => {
         defaultValue={description}
         required
       />
-      <div className="body-about-modify">
-        {!isEdit && <button onClick={handleClickEdit}>Edit</button>}
-        {isEdit && (
-          <>
-            <button className="cancel-btn" onClick={() => setIsEdit(false)}>
-              Cancel
-            </button>
-            <button type="submit">Save</button>
-          </>
-        )}
-      </div>
-    </form>
+      {loginMemberId === memberId && (
+        <div className="body-about-modify">
+          {!isEdit && <button onClick={handleClickEditBtn}>Edit</button>}
+          {isEdit && (
+            <>
+              <button className="cancel-btn" onClick={() => setIsEdit(false)}>
+                Cancel
+              </button>
+              <button type="submit">Save</button>
+            </>
+          )}
+        </div>
+      )}
+    </InfoAboutEditForm>
   )
 }
 
