@@ -10,7 +10,6 @@ import { InfoShareBookmark } from './ShareBookmarkStyle'
 import { ConfirmModal } from '../../components/Modal/ConfirmModal'
 import { ClipBoardCopy } from '../../utils/common'
 import KakaoShareBtn from '../Button/KakaoShareBtn'
-import { reviewCnt } from '../../recoil/reviewState'
 import * as bookmarkApi from '../../api/bookmark'
 import { getLoginInfo } from '../../api/login'
 
@@ -30,7 +29,7 @@ const ShareBookmark = ({ item, queryRefresh }) => {
     title: name,
     description: description,
     likeCnt: likeCount,
-    reviewCnt: useRecoilValue(reviewCnt),
+    reviewCnt: 0,
     linkUrl: window.location.href,
   }
 
