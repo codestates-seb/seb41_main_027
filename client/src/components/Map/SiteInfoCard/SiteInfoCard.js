@@ -28,45 +28,55 @@ const Wrapper = styled.li`
     display: flex;
     align-items: center;
   }
-  /* p {
-    justify-content: flex-start;
-    gap: 8px;
-  } */
+  // CTA btn
+  .add-place {
+    color: #ff3838;
+  }
 
   .card-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: flex-start;
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
 
     .site-name {
-      font-weight: bold;
-      color: #0581bb;
-      width: 150px;
+      width: 100%;
       height: 40px;
+      color: #5f697d;
+      font-weight: 600;
     }
 
-    .add-place {
-      color: #ff3838;
+    .view-like {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 16px;
+      gap: 2px;
+      .ico-like {
+        color: #ff3838;
+        font-size: 16px;
+      }
+      .count-like {
+        font-size: 14px;
+        font-weight: 500;
+      }
     }
-  }
 
-  .view-like {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .ico-like {
-      color: #ff3838;
-      margin-right: 4px;
-    }
-    .count-like {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 17px;
+    .more-info {
+      margin-left: 8px;
+      font-size: 16px;
+      color: #909499;
+      :hover {
+        color: #13c57c;
+      }
     }
   }
 
   .tag-category {
+    margin-right: 4px;
     width: 40px;
     height: 20px;
     box-sizing: border-box;
@@ -74,6 +84,7 @@ const Wrapper = styled.li`
     color: #ffffff;
     font-weight: 400;
     font-size: 14px;
+    letter-spacing: -0.8px;
     line-height: 17px;
     background: #13c57c;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
@@ -81,11 +92,11 @@ const Wrapper = styled.li`
   }
 
   .site-addr {
-    padding: 10px;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #909499;
+    letter-spacing: -0.8px;
   }
 `
 
@@ -103,10 +114,12 @@ const SiteInfoCard = ({ positions, index }) => {
         <h1 className="site-name">{positions.name || positions.title}</h1>
 
         {positions && positions.likeCount >= 0 ? (
-          <div className="view-like">
-            <span className="ico-like">♥️</span>
-            <span className="count-like">{positions.likeCount}</span>
-            <div>
+          <div>
+            <div className="view-like">
+              <span className="ico-like">♥️</span>
+              <span className="count-like">{positions.likeCount}</span>
+            </div>
+            <div className="more-info">
               <Link to={`/` + positions.placeId} state={{ bgLocation: location }}>
                 <FontAwesomeIcon icon={faArrowUp} transform={{ rotate: 45 }} />
               </Link>
@@ -121,7 +134,7 @@ const SiteInfoCard = ({ positions, index }) => {
         )}
       </div>
       <div>
-        <span className="tag-category">주소</span>
+        <span className="tag-category">카페</span>
         <p className="site-addr">{positions.address}</p>
       </div>
     </Wrapper>

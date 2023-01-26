@@ -6,7 +6,7 @@ import { categoryValue } from '../../recoil/atoms'
 
 const AddPlaceInfo = () => {
   const location = useLocation()
-  console.log('location', location)
+  // console.log('location', location)
 
   // state, hook
   const [selectedCategory, setSelectedCategory] = useState(null)
@@ -27,8 +27,8 @@ const AddPlaceInfo = () => {
       latitude: `${location.state.position.position.lat}`,
       longitude: `${location.state.position.position.lng}`,
     }
-    console.log('body : ', body)
-    console.log('event : ', e)
+    // console.log('body : ', body)
+    // console.log('event : ', e)
 
     // review.createReviewInfo(body).then(data => {
     //   // console.log('created reviewId', data.reviewId)

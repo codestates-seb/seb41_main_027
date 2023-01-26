@@ -1,9 +1,9 @@
 package main027.server.domain.review.entity;
 
 import lombok.*;
-import main027.server.global.audit.BaseTime;
 import main027.server.domain.member.entity.Member;
 import main027.server.domain.place.entity.Place;
+import main027.server.global.audit.BaseTime;
 
 import javax.persistence.*;
 
@@ -23,16 +23,16 @@ public class Review extends BaseTime {
     @Column(length = 40)
     private String content;
 
-    //review -> emoji 단방향 연관관계 매핑 (양방향 X)
-    @ManyToOne
+    /** review -> emoji 단방향 연관관계 매핑 */
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emoji_id")
     private Emoji emoji;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id")
     private Place place;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

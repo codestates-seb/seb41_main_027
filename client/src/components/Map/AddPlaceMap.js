@@ -74,13 +74,13 @@ const AddPlaceMap = () => {
     // }
     const ps = new kakao.maps.services.Places()
     ps.keywordSearch(keyword, (data, status, _pagination) => {
-      console.log('keyword : ', keyword)
+      // console.log('keyword : ', keyword)
       if (status === kakao.maps.services.Status.OK) {
         const bounds = new kakao.maps.LatLngBounds()
         let markers = []
 
         for (let i = 0; i < data.length; i++) {
-          console.log('data : ', data[i])
+          // console.log('data : ', data[i])
           markers.push({
             position: {
               lat: Number(data[i].y),
@@ -94,7 +94,7 @@ const AddPlaceMap = () => {
         }
         setMarkers(markers)
         map.setBounds(bounds)
-        console.log('markers 정보 : ', markers)
+        // console.log('markers 정보 : ', markers)
       }
     })
   }, [keyword])
@@ -174,7 +174,7 @@ const AddPlaceMap = () => {
               onClick={marker => {
                 // setInfo(marker)
                 // console.log('info : ', info)
-                console.log('marker : ', marker.getTitle)
+                // console.log('marker : ', marker.getTitle)
                 map.panTo(marker.getPosition())
                 // setClickPoint({ position: marker.position, isPanto: true })
               }}

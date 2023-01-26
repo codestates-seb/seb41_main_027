@@ -1,8 +1,8 @@
-package main027.server.global.dto;
+package main027.server.global.advice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import main027.server.global.exception.ExceptionCode;
+import main027.server.global.advice.exception.ExceptionCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 
@@ -43,6 +43,10 @@ public class ErrorResponse {
 
     public static ErrorResponse of(HttpStatus httpStatus) {
         return new ErrorResponse(httpStatus.value(), httpStatus.getReasonPhrase());
+    }
+
+    public static ErrorResponse of(HttpStatus httpStatus, String message) {
+        return new ErrorResponse(httpStatus.value(), message);
     }
 
     @Getter

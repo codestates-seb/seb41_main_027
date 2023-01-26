@@ -12,12 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 인증에는 성공했지만 해당 리소스에 대한 권한이 없을 경우 호출됨
+ */
 @Slf4j
 @Component
 public class MemberAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        ErrorResponder.sendErrorResponse(response, HttpStatus.FORBIDDEN);
+        ErrorResponder.sendErrorResponse(request, response, HttpStatus.FORBIDDEN);
         log.warn("Forbidden error happened: {}", accessDeniedException.getMessage());
     }
 }

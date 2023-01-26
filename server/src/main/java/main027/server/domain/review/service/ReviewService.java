@@ -9,4 +9,6 @@ public interface ReviewService {
     Review save(Review review);
 
     Page<Review> findReviews(Long placeId, Pageable pageable);
+
+    void remove(Long memberId, Long reviewId);
 }
