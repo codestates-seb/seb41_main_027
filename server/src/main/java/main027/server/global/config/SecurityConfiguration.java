@@ -52,7 +52,7 @@ public class SecurityConfiguration {
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .csrf().disable()
-                .cors(withDefaults())
+                .cors().configurationSource(corsConfigurationSource()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .formLogin().disable()
@@ -85,6 +85,7 @@ public class SecurityConfiguration {
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         configuration.setExposedHeaders(Arrays.asList("Authorization", "Refresh"));
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
