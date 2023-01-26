@@ -46,7 +46,7 @@ const SearchInput = () => {
   const onChangeSearch = e => {
     e.preventDefault()
     setKeyword(e.target.value)
-    console.log(keyword)
+    // console.log(keyword)
   }
   return (
     <Wrapper>

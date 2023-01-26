@@ -64,7 +64,7 @@ const MainMap = ({ sort }) => {
   const items = query.data
   const points = items.placeList
 
-  console.log('points', points)
+  // console.log('points', points)
 
   return (
     <Container>
