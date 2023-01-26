@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
 import {
   ModalDimmed,
@@ -10,10 +11,9 @@ import {
   InfoHead,
   InfoBody,
   InfoMapReview,
-  InfoReviewList,
+  InfoReviewListWrap,
   InfoMapReviewAdd,
 } from './InfoModalStyle'
-import Loading from '../../components/Loading/Loading'
 import {
   MemoTitle,
   MemoUpvoteReport,
@@ -23,68 +23,94 @@ import {
   MemoReviewList,
   MemoShareBookmark,
 } from '../../components/InfoModal'
+import Loading from '../../components/Loading/Loading'
+import useMoveScroll from '../../hooks/useMoveScroll'
 import { useGetPlaceInfoById } from '../../query/place'
 
 export const InfoModal = () => {
-  // console.log('-- InfoModal Render --')
+  console.log('-- InfoModal Render --')
 
   // id check
   const pId = useParams().infoId
-  if (!Number(pId)) return null
+  if (!Number(pId)) {
+    console.log('infomodal null')
+    return null
+  }
 
   // state, hook
   const navigate = useNavigate()
+  const location = useLocation()
+  const queryClient = useQueryClient()
+  const { element: reviewListTop, onMoveToElement } = useMoveScroll()
   const [page, setPage] = useState(1) // review list
-  const [addReviewId, setAddReviewId] = useState(0) // review list
-
-  // fetch data
-  const query = useGetPlaceInfoById(pId)
-  if (query.isLoading) return <Loading />
-  if (query.isError) return toast.error(query.error.message)
-  const item = query.data
-
-  // dev exception(after delete)
-  if (item.placeLikeCount === undefined) item.placeLikeCount = 149
-  if (item.placeReviewCount === undefined) item.placeReviewCount = 25
-  if (item.isLiked === undefined) item.isLiked = false
-  if (item.latitude === '0') item.latitude = '37.5160953'
-  if (item.longitude === '0') item.longitude = '126.8906455'
+  const [modifiedReviewId, setModifiedReviewId] = useState(0) // review list
 
   // func
-  const goPage = pageNum => {
-    setAddReviewId(0)
-    setPage(pageNum)
-  }
+  const goPage = useCallback(
+    pageNum => {
+      if (reviewListTop.current) onMoveToElement()
+      setModifiedReviewId(0)
+      setPage(pageNum)
+    },
+    [pId],
+  )
 
   // review create > review list call
-  const createdReview = newReviewId => {
-    setAddReviewId(newReviewId)
-    setPage(1)
-  }
+  const reloadReviewList = useCallback(
+    reviewId => {
+      if (reviewListTop.current) onMoveToElement()
+      setModifiedReviewId(reviewId)
+      setPage(1)
+    },
+    [pId],
+  )
+
+  const queryRefresh = useCallback(() => {
+    queryClient.invalidateQueries({ queryKey: ['getPlaceInfoById'] })
+  }, [pId])
+
+  const handleModalClose = useCallback(() => {
+    const bgLocation = location.state && location.state.bgLocation
+    if (!bgLocation) navigate('/')
+    if (bgLocation) navigate(bgLocation.pathname)
+  }, [pId])
+
+  // fetch data
+  const { isLoading, isFetching, isError, error, data } = useGetPlaceInfoById(pId)
+  if (isLoading || isFetching) return <Loading />
+  if (isError) return toast.error(error.message)
+  if (!data) return null
+  const item = data
 
   return (
-    <ModalDimmed onClick={() => navigate(-1)}>
+    <ModalDimmed onClick={handleModalClose}>
       <ModalWrapper onClick={e => e.stopPropagation()}>
         <InfoContent>
           <InfoHead>
-            <MemoTitle item={item} />
-            <MemoUpvoteReport item={item} />
+            <MemoTitle item={item} modalClose={handleModalClose} />
+            <MemoUpvoteReport item={item} queryRefresh={queryRefresh} />
           </InfoHead>
           <InfoBody>
             <MemoAboutEditForm item={item} />
             <InfoMapReview>
-              <InfoReviewList>
-                <MemoReviewList pId={pId} page={page} goPage={goPage} addReviewId={addReviewId} />
-              </InfoReviewList>
+              <InfoReviewListWrap ref={reviewListTop}>
+                <MemoReviewList
+                  pId={pId}
+                  page={page}
+                  goPage={goPage}
+                  modifiedReviewId={modifiedReviewId}
+                  reloadReviewList={reloadReviewList}
+                />
+              </InfoReviewListWrap>
               <InfoMapReviewAdd>
                 <MemoLocationMap item={item} />
-                <MemoReviewAddForm pId={pId} createdReview={createdReview} />
+                <MemoReviewAddForm pId={pId} reloadReviewList={reloadReviewList} />
               </InfoMapReviewAdd>
             </InfoMapReview>
           </InfoBody>
         </InfoContent>
         <InfoBottom>
-          <MemoShareBookmark item={item} />
+          <MemoShareBookmark item={item} queryRefresh={queryRefresh} />
         </InfoBottom>
       </ModalWrapper>
     </ModalDimmed>

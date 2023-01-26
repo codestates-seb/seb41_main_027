@@ -2,29 +2,59 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFlag, faHeart as likeOn } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as likeOff } from '@fortawesome/free-regular-svg-icons'
+import { useNavigate } from 'react-router-dom'
 
-const UpvoteReport = props => {
+import * as likeAPi from '../../api/like'
+import { ConfirmModal } from '../../components/Modal/ConfirmModal'
+import { InfoUpvoteReport } from './UpvoteReportStyle'
+import { getLoginInfo } from '../../api/login'
+
+const UpvoteReport = ({ item, queryRefresh }) => {
   // console.log('-- (2)UpvoteReport Render --')
 
-  const { placeLikeCount: likeCnt, isLiked } = props.item
+  const loginMemberId = getLoginInfo().id
+  const { placeId: pId, likeCount: likeCnt, isLiked: isLiked } = item
 
-  const [likeState, setLikeInfo] = useState({
-    isLike: isLiked,
+  // state, hook
+  const navigate = useNavigate()
+  const [confirmModal, setConfirmModal] = useState({})
+  const [likeState, setLikeState] = useState({
+    isLiked: isLiked,
     likeCnt: likeCnt,
   })
 
-  // 장소 추천 등록/취소
-  const editLikes = () => {
-    // db 정보 받아오기
-    const likeCnt = !likeState.isChecked ? likeState.likeCnt + 1 : likeState.likeCnt - 1
-    setLikeInfo({ isChecked: !likeState.isChecked, likeCnt: likeCnt })
+  // handle
+  const handleLikeEdit = () => {
+    if (!loginMemberId) {
+      setConfirmModal({
+        msg: '로그인이 필요합니다.\n로그인 하시겠습니까?',
+        fnConfirm: () => navigate('/signin'),
+      })
+    } else if (loginMemberId) {
+      // db update
+      likeAPi.updateLike(pId, !likeState.isLiked).then(data => {
+        setLikeState({ isLiked: data.isLiked, likeCnt: data.likeCount })
+        queryRefresh()
+      })
+    }
+  }
+
+  const confirmModalClose = () => {
+    setConfirmModal({})
   }
 
   return (
-    <div className="head-like-report">
+    <InfoUpvoteReport>
+      <ConfirmModal
+        msg={confirmModal.msg}
+        fnCancel={confirmModalClose}
+        fnConfirm={confirmModal.fnConfirm}
+        position={confirmModal.position}
+      />
       <div className="head-like">
-        <button onClick={editLikes}>
-          {likeState.isChecked ? <FontAwesomeIcon icon={likeOn} /> : <FontAwesomeIcon icon={likeOff} />}
+        <button onClick={handleLikeEdit}>
+          {likeState.isLiked && <FontAwesomeIcon icon={likeOn} />}
+          {!likeState.isLiked && <FontAwesomeIcon icon={likeOff} />}
         </button>
         <span>{likeState.likeCnt}</span>
       </div>
@@ -32,7 +62,7 @@ const UpvoteReport = props => {
         <FontAwesomeIcon icon={faFlag} />
         <button onClick={() => window.open('')}>장소 오류 제보하기</button>
       </div>
-    </div>
+    </InfoUpvoteReport>
   )
 }
 

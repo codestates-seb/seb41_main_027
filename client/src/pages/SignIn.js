@@ -233,12 +233,8 @@ const SignIn = () => {
     }
     try {
       const response = await customAxios.post(API_LOGIN_ENDPOINT, { username: email, password }).then(response => {
-        // console.log(response?.data)
-        // console.log(response?.accessToken)
-        // console.log(JSON.stringify(response))
         setLoginInfo(response.data.memberId, response.headers.authorization, response.headers.refresh)
-        setSuccess(true)
-        navigate(callbackUrl)
+        navigate(callbackUrl, { replace: true })
         // 상태 및 인풋 날리기 clean!
         // 입력을 위한 대한 속성 값 필요
         setEmail('')
@@ -262,66 +258,57 @@ const SignIn = () => {
         <img src={Logo} className="Logo" alt="EcoGreenSeoul Logo TypeSignature" />
       </h1>
       <Container>
-        {success ? (
-          <section className="cmm-form">
-            <h1>로그인을 환영합니다 🥰</h1>
-            <p>
-              <Link to="/">메인 화면으로 이동하기</Link>
+        <section className="cmm-form">
+          <form onSubmit={handleSubmit}>
+            <legend>로그인</legend>
+            <p className="sign-about">
+              회원가입을 하신 적이 없으신가요?
+              <span className="line">
+                <Link to="/signup">회원가입 하기</Link>
+              </span>
             </p>
-          </section>
-        ) : (
-          <section className="cmm-form">
-            <form onSubmit={handleSubmit}>
-              <legend>로그인</legend>
-              <p className="sign-about">
-                회원가입을 하신 적이 없으신가요?
-                <span className="line">
-                  <Link to="/signup">회원가입 하기</Link>
-                </span>
-              </p>
-              <div className="input-wrap">
-                <input
-                  placeholder="이메일을 입력해주세요."
-                  type="text"
-                  id="email"
-                  ref={userRef}
-                  autoComplete="off"
-                  onChange={e => setEmail(e.target.value)}
-                  value={email}
-                  required
-                  aria-invalid={validEmail ? 'false' : 'true'}
-                  aria-describedby="uidnote"
-                  onFocus={() => setEmailFocus(true)}
-                  onBlur={() => setEmailFocus(false)}
-                />
-              </div>
-              <p id="uidnote" className={emailFocus && email && !validEmail ? 'instructions' : 'offscreen'}>
-                이메일 형태로 입력해주세요.
-              </p>
-              <div className="input-wrap">
-                <input
-                  placeholder="비밀번호를 입력해주세요."
-                  type="password"
-                  id="password"
-                  onChange={e => setpassword(e.target.value)}
-                  value={password}
-                  required
-                  aria-invalid={validPassword ? 'false' : 'true'}
-                  aria-describedby="passwordnote"
-                  onFocus={() => setPasswordFocus(true)}
-                  onBlur={() => setPasswordFocus(false)}
-                />
-              </div>
-              <p id="passwordnote" className={passwordFocus && !validPassword ? 'instructions' : 'offscreen'}>
-                8글자에서 24글자 이내로 입력해주세요.
-              </p>
-              <button className={!validEmail || !validPassword ? 'btn-disabled' : 'btn-submit'}>로그인</button>
-              <div ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live="assertive">
-                {errMsg}
-              </div>
-            </form>
-          </section>
-        )}
+            <div className="input-wrap">
+              <input
+                placeholder="이메일을 입력해주세요."
+                type="text"
+                id="email"
+                ref={userRef}
+                autoComplete="off"
+                onChange={e => setEmail(e.target.value)}
+                value={email}
+                required
+                aria-invalid={validEmail ? 'false' : 'true'}
+                aria-describedby="uidnote"
+                onFocus={() => setEmailFocus(true)}
+                onBlur={() => setEmailFocus(false)}
+              />
+            </div>
+            <p id="uidnote" className={emailFocus && email && !validEmail ? 'instructions' : 'offscreen'}>
+              이메일 형태로 입력해주세요.
+            </p>
+            <div className="input-wrap">
+              <input
+                placeholder="비밀번호를 입력해주세요."
+                type="password"
+                id="password"
+                onChange={e => setpassword(e.target.value)}
+                value={password}
+                required
+                aria-invalid={validPassword ? 'false' : 'true'}
+                aria-describedby="passwordnote"
+                onFocus={() => setPasswordFocus(true)}
+                onBlur={() => setPasswordFocus(false)}
+              />
+            </div>
+            <p id="passwordnote" className={passwordFocus && !validPassword ? 'instructions' : 'offscreen'}>
+              8글자에서 24글자 이내로 입력해주세요.
+            </p>
+            <button className={!validEmail || !validPassword ? 'btn-disabled' : 'btn-submit'}>로그인</button>
+            <div ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live="assertive">
+              {errMsg}
+            </div>
+          </form>
+        </section>
       </Container>
     </Wrapper>
   )

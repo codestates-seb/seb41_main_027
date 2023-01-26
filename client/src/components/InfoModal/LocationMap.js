@@ -1,5 +1,7 @@
 import React from 'react'
+
 import DrawStaticMap from '../Map/StaticMap'
+import { InfoLocationMap } from './LocationMapStyle'
 
 const LocationMap = props => {
   // console.log('-- (5)LocationMap Render --')
@@ -12,14 +14,14 @@ const LocationMap = props => {
     lat: latitude,
     lng: longitude,
     label: name,
-    level: 4,
+    level: 3,
   }
 
   return (
-    <section className="map">
+    <InfoLocationMap>
       <h3>여기에 있어요</h3>
       <div className="map-static">{DrawStaticMap(staticMapInfo)}</div>
-    </section>
+    </InfoLocationMap>
   )
 }
 

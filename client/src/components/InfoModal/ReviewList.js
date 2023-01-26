@@ -1,71 +1,88 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify'
+
 import Loading from '../Loading/Loading'
-import useMoveScroll from '../../hooks/useMoveScroll'
-import { useGetReviewListById } from '../../query/review'
+import { InfoReviewList, List, Item } from './ReviewListStyle'
+import { MemoPagination } from '../../components/Pagination/Pagination'
 import { EMOJI_LIST } from '../../utils/const'
 import { AmountDisplay, DateConvert } from '../../utils/common'
+import { ConfirmModal } from '../../components/Modal/ConfirmModal'
+import { useGetReviewListById } from '../../query/review'
+import * as reviewApi from '../../api/review'
+import { getLoginInfo } from '../../api/login'
 
-const ReviewList = ({ pId, page, goPage, addReviewId }) => {
+const ReviewList = ({ pId, page, goPage, modifiedReviewId, reloadReviewList }) => {
   // console.log('-- (4)ReviewList Render --')
 
-  // hook
-  const { element: listTop, onMoveToElement } = useMoveScroll()
+  const loginMemberId = getLoginInfo().id
+  const listSize = 8
 
-  // fetch data
-  const query = useGetReviewListById(pId, page, addReviewId)
-  if (query.isLoading) return <Loading />
-  if (query.isError) return toast.error(query.error.message)
-  const { reviewList, totalElements, totalPages } = query.data
-  const list = reviewList || []
+  // state, hook
+  const [confirmModal, setConfirmModal] = useState({})
 
   // handle
-  const handleReviewDel = e => {
-    const delReviewId = e.target.value
-    toast.info(`delete reviewId=${delReviewId}`)
+  const handleReviewDel = (e, confirm) => {
+    const reviewId = Number(e.target.value.split('|')[0])
+    const memberId = Number(e.target.value.split('|')[1])
+
+    if (loginMemberId !== memberId) return toast.warning('삭제권한이 없습니다.')
+    if (loginMemberId === memberId) {
+      if (!confirm) {
+        return setConfirmModal({
+          msg: '정말 삭제하시겠습니까?',
+          fnConfirm: () => handleReviewDel(e, true),
+        })
+      }
+
+      // db delete
+      reviewApi.deleteReviewInfo(reviewId).then(data => {
+        reloadReviewList(-reviewId)
+      })
+    }
   }
 
   const handlePageMove = e => {
     goPage(Number(e.target.value))
-    onMoveToElement()
   }
 
-  // pagination
-  const pageCnt = 5
-  const pageBlock = Math.ceil(page / pageCnt)
-  const isNextBlcok = totalPages > pageBlock * pageCnt
-  const isPrevBlock = page > pageCnt
-  const sPage = (pageBlock - 1) * pageCnt + 1
-  const ePage = sPage + pageCnt - 1 > totalPages ? totalPages : sPage + pageCnt - 1
-  const pageList = new Array(ePage - sPage + 1).fill().map((el, idx) => sPage + idx)
+  const confirmModalClose = () => {
+    setConfirmModal({})
+  }
+
+  // fetch data
+  const { isLoading, isFetching, isError, error, data } = useGetReviewListById(pId, page, listSize, modifiedReviewId)
+  if (isLoading || isFetching) return <Loading />
+  if (isError) return toast.error(error.message)
+  if (!data) return null
+  const { reviewList, totalElements, totalPages } = data
 
   return (
-    <>
-      <h3 ref={listTop}>
+    <InfoReviewList>
+      <ConfirmModal
+        msg={confirmModal.msg}
+        fnCancel={confirmModalClose}
+        fnConfirm={confirmModal.fnConfirm}
+        position={confirmModal.position}
+      />
+      <h3>
         이 장소에 대한 리뷰 <span className="review-cnt">{AmountDisplay(totalElements)}</span>개
       </h3>
-      <ul className="review-list">
-        {list.map(item => (
-          <li key={item.reviewId} className={addReviewId === item.reviewId ? 'ani-border-twinkle' : ''}>
+      <List>
+        {reviewList.map(item => (
+          <Item key={item.reviewId} isModifyed={modifiedReviewId === item.reviewId}>
             <span className="review-emoji">{EMOJI_LIST.find(el => el.id === item.emojiId).emoji}</span>
             <p className="review-comment">{item.content}</p>
             <span className="review-date">{DateConvert(item.createdAt)}</span>
-            <button className="review-del-btn" value={item.reviewId} onClick={handleReviewDel}>
-              ×
-            </button>
-          </li>
+            {loginMemberId === item.memberId && (
+              <button className="review-del-btn" value={`${item.reviewId}|${item.memberId}`} onClick={handleReviewDel}>
+                ×
+              </button>
+            )}
+          </Item>
         ))}
-      </ul>
-      <div className="list-pagination">
-        {isPrevBlock && <button>&lt;</button>}
-        {pageList.map(pageNum => (
-          <button key={pageNum} className={page === pageNum ? 'selected' : ''} value={pageNum} onClick={handlePageMove}>
-            {pageNum}
-          </button>
-        ))}
-        {isNextBlcok && <button>&gt;</button>}
-      </div>
-    </>
+      </List>
+      <MemoPagination page={page} totalPages={totalPages} movePage={handlePageMove} />
+    </InfoReviewList>
   )
 }
 

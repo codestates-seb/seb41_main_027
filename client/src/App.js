@@ -70,6 +70,7 @@ function App() {
               <Route path="bookmark" element={<Bookmark />} />
               <Route path="myinfo" element={<MyInfo />} />
             </Route>
+            <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="*" element={<NotFound />} />
@@ -80,6 +81,7 @@ function App() {
             <Routes>
               <Route path="/:infoId" element={<InfoModal />} />
               <Route path="/addPlace" element={<AddPlaceModal />} />
+              <Route path="/mypage/myinfo/pwdedit" element={<PwdEditFormModal />} />
             </Routes>
           )}
         </Main>
