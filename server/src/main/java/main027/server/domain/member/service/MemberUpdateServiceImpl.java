@@ -37,6 +37,11 @@ public class MemberUpdateServiceImpl implements MemberUpdateService {
             memberVerifier.verifyExistsNickName(member.getNickName());
         }
 
+        if (member.getPassword() != null) {
+            String encryptedPassword = passwordEncoder.encode(member.getPassword());
+            member.setPassword(encryptedPassword);
+        }
+
         Member updatedMember = beanUtils.copyNonNullProperties(member, verifiedMember);
 
 

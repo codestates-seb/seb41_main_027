@@ -52,6 +52,25 @@ public class PlaceDto extends BaseTime {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
+    public static class SearchResponseDto {
+        private Long placeId;
+        private String name;
+        private String address;
+        private String description;
+        private int likeCount;
+    }
+
+    @Data
+    public static class SearchPageResponseDto{
+        List<SearchResponseDto> placeList;
+        private Long totalPages;
+        private Long presentPage;
+        private Long totalElements;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class PlaceResponseDto {
         private Long placeId;
         private Long memberId;

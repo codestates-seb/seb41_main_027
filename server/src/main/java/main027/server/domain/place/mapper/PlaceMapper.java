@@ -5,6 +5,7 @@ import main027.server.domain.place.entity.Place;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,31 @@ public interface PlaceMapper {
     Place placePostDtoToPlace(PlaceDto.PlacePostDto placePostDto, Long memberId);
 
     Place placePatchDtoToPlace(PlaceDto.PlacePatchDto placePatchDto);
+
+    default PlaceDto.SearchPageResponseDto searchPageToList(Page<Place> pages) {
+        PlaceDto.SearchPageResponseDto result = new PlaceDto.SearchPageResponseDto();
+        List<PlaceDto.SearchResponseDto> list = pages.getContent().stream()
+                                                     .map(content ->searchToPlaceResponseDto(content))
+                                                     .collect(Collectors.toList());
+        result.setPlaceList(list);
+        result.setTotalPages(Long.valueOf(pages.getTotalPages()));
+        result.setPresentPage(Long.valueOf(pages.getPageable().getPageNumber() + 1));
+        result.setTotalElements(pages.getTotalElements());
+
+        return result;
+
+    }
+
+    default PlaceDto.SearchResponseDto searchToPlaceResponseDto(Place place) {
+        PlaceDto.SearchResponseDto result = new PlaceDto.SearchResponseDto();
+        result.setPlaceId(place.getPlaceId());
+        result.setName(place.getName());
+        result.setAddress(place.getAddress());
+        result.setDescription(place.getDescription());
+        result.setLikeCount(place.getPlaceLikeUserList().size());
+
+        return result;
+    }
 
     default PlaceDto.PageResponseDto pageToList(Page<Place> pages, Long memberId) {
         PlaceDto.PageResponseDto result = new PlaceDto.PageResponseDto();
