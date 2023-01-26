@@ -34,6 +34,8 @@ const Wrapper = styled.li`
   } */
 
   .card-title {
+    display: flex;
+    flex-direction: row;
     align-items: flex-start;
     font-weight: 500;
     font-size: 16px;
