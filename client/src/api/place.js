@@ -37,9 +37,13 @@ export const getPlace = async (sort, id) => {
   return result.data
 }
 
-// function removeEmptyParams(query) {
-//   return query.replace(/[^=&]+=(?:&|$)/g, ' ')
-// }
-
-// const testQuery = 'f=1&search=&state_id=2&foo=&bar=12'
-// console.info(removeEmptyParams(testQuery))
+// create
+export const createPlace = async body => {
+  try {
+    const result = await customAxios.post(API_PLACE_ENDPOINT, body)
+    return result.data
+  } catch (error) {
+    console.log(error)
+    toast.error(error.message)
+  }
+}

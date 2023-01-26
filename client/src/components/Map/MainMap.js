@@ -65,7 +65,8 @@ const MainMap = ({ sort, id }) => {
   const points = items.placeList
 
   // console.log('points', points)
-
+  console.log('sort : ', sort)
+  console.log('categoryId : ', id)
   return (
     <Container>
       <SearchBar />
