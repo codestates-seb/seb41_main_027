@@ -8,6 +8,7 @@ import * as place from '../../api/place'
 const AddPlaceInfo = () => {
   const location = useLocation()
   // console.log('location', location)
+  // console.log('location', location)
 
   // state, hook
   const [selectedCategory, setSelectedCategory] = useState(null)

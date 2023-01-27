@@ -53,7 +53,7 @@ public class DataHolder extends StopWatch {
     @PreDestroy
     private void destroy() {
         this.stop();
-        log.info("END [{}] [{}] [{}ms]", uri, method, this.getTotalTimeMillis());
+        log.info("END [{}] [{}] [{}]ms", uri, method, this.getTotalTimeMillis());
     }
 
 }
