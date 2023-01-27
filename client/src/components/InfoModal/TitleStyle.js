@@ -30,13 +30,6 @@ export const InfoTitle = styled.div`
         font-weight: 600;
       }
     }
-
-    & > button {
-      font-size: 44px;
-      font-weight: 200;
-      color: #999;
-      padding-bottom: 5px;
-    }
   }
 
   .head-address {
@@ -54,4 +47,11 @@ export const InfoTitle = styled.div`
       letter-spacing: -0.6px;
     }
   }
+`
+
+export const ModalCloseBtn = styled.button`
+  font-size: 44px;
+  font-weight: 200;
+  color: #999;
+  padding-bottom: 5px;
 `

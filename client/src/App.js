@@ -10,6 +10,7 @@ import ScrollToTop from './utils/ScrollToTop'
 
 const Home = lazy(() => import('./pages/Home'))
 const Place = lazy(() => import('./pages/Place'))
+const PlaceInfo = lazy(() => import('./pages/PlaceInfo'))
 const Mypage = lazy(() => import('./pages/Mypage/Mypage'))
 const MyInfo = lazy(() => import('./pages/Mypage/MyInfo'))
 const Bookmark = lazy(() => import('./pages/Mypage/Bookmark'))
@@ -73,10 +74,13 @@ function App() {
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/placeinfo" element={<PlaceInfo />}>
+              <Route path=":placeId" element={<InfoModal />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
 
-          {/* 장소 상세보기 모달 라우터 */}
+          {/* 모달 중첩 라우터 */}
           {bgLocation && (
             <Routes>
               <Route path="/:infoId" element={<InfoModal />} />

@@ -4,12 +4,12 @@ import { toast } from 'react-toastify'
 import Loading from '../Loading/Loading'
 import { InfoReviewList, List, Item } from './ReviewListStyle'
 import { MemoPagination } from '../../components/Pagination/Pagination'
-import { EMOJI_LIST } from '../../utils/const'
 import { AmountDisplay, DateConvert } from '../../utils/common'
 import { ConfirmModal } from '../../components/Modal/ConfirmModal'
 import { useGetReviewListById } from '../../query/review'
 import * as reviewApi from '../../api/review'
 import { getLoginInfo } from '../../api/login'
+import { EMOJI_LIST } from '../../utils/const'
 
 const ReviewList = ({ pId, page, goPage, modifiedReviewId, reloadReviewList }) => {
   // console.log('-- (4)ReviewList Render --')
@@ -70,7 +70,12 @@ const ReviewList = ({ pId, page, goPage, modifiedReviewId, reloadReviewList }) =
       <List>
         {reviewList.map(item => (
           <Item key={item.reviewId} isModifyed={modifiedReviewId === item.reviewId}>
-            <span className="review-emoji">{EMOJI_LIST.find(el => el.id === item.emojiId).emoji}</span>
+            <span className="review-emoji">
+              <img
+                src={EMOJI_LIST.find(el => el.id === item.emojiId).icon}
+                alt={EMOJI_LIST.find(el => el.id === item.emojiId).alt}
+              />
+            </span>
             <p className="review-comment">{item.content}</p>
             <span className="review-date">{DateConvert(item.createdAt)}</span>
             {loginMemberId === item.memberId && (

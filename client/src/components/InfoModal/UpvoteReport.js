@@ -33,7 +33,7 @@ const UpvoteReport = ({ item, queryRefresh }) => {
     } else if (loginMemberId) {
       // db update
       likeAPi.updateLike(pId, !likeState.isLiked).then(data => {
-        setLikeState({ isLiked: data.isLiked, likeCnt: data.likeCount })
+        if (data) setLikeState({ isLiked: data.isLiked, likeCnt: data.likeCount })
         queryRefresh()
       })
     }
