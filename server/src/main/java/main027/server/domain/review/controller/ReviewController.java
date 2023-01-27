@@ -47,14 +47,15 @@ public class ReviewController {
     @TimeTrace
     @Cacheable(value = "reviews", key = "#placeId")
     @GetMapping("/{placeId}")
-    public ResponseEntity getPlaceReviews(@PathVariable Long placeId,
+    @ResponseStatus(HttpStatus.OK)
+    public ReviewDto.ListResponse getPlaceReviews(@PathVariable Long placeId,
                                           @RequestParam(defaultValue = "1") int page,
                                           @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
 
         ReviewDto.ListResponse response = mapper.pageToList(reviewService.findReviews(placeId, pageable));
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        return response;
     }
 
     @TimeTrace
