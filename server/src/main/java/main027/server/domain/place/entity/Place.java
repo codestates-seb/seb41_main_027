@@ -66,7 +66,7 @@ public class Place extends BaseTime implements Serializable {
     private Set<Bookmark> bookmarkList = new HashSet<>();
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<PlaceLikeUser> placeLikeUserList = new ArrayList<>();
+    private Set<PlaceLikeUser> placeLikeUserList = new HashSet<>();
 
     public void setMember(Member member) {
         this.member = member;
