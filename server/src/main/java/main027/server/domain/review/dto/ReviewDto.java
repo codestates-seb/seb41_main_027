@@ -49,6 +49,8 @@ public class ReviewDto {
      */
     @Getter
     @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class ListResponse {
         private List<Response> reviewList = new ArrayList<>();
         /** 페이지의 전체 페이지 수 */
