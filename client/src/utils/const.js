@@ -16,15 +16,27 @@ export const MEMBER_NICKNAME_REGEX = /^[0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ]{2,12}$/
 export const MEMBER_PWD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,20}/
 
 // emoji
+import {
+  emojiIcon1,
+  emojiIcon2,
+  emojiIcon3,
+  emojiIcon4,
+  emojiIcon5,
+  emojiIcon6,
+  emojiIcon7,
+  emojiIcon8,
+  emojiIcon9,
+  emojiIcon10,
+} from '../assets/emoji'
 export const EMOJI_LIST = [
-  { id: 1, emoji: '😀' },
-  { id: 2, emoji: '🤔' },
-  { id: 3, emoji: '🙂' },
-  { id: 4, emoji: '😍' },
-  { id: 5, emoji: '🤥' },
-  { id: 6, emoji: '🤩' },
-  { id: 7, emoji: '🥹' },
-  { id: 8, emoji: '😧' },
-  { id: 9, emoji: '😂' },
-  { id: 10, emoji: '😆' },
+  { id: 1, icon: emojiIcon1, alt: 'emoji happy' },
+  { id: 2, icon: emojiIcon2, alt: 'emoji concern' },
+  { id: 3, icon: emojiIcon3, alt: 'emoji smile' },
+  { id: 4, icon: emojiIcon4, alt: 'emoji crazy love' },
+  { id: 5, icon: emojiIcon5, alt: 'emoji unhappy' },
+  { id: 6, icon: emojiIcon6, alt: 'emoji satisfaction' },
+  { id: 7, icon: emojiIcon7, alt: 'emoji pleading' },
+  { id: 8, icon: emojiIcon8, alt: 'emoji anguished' },
+  { id: 9, icon: emojiIcon9, alt: 'emoji relieved laughter' },
+  { id: 10, icon: emojiIcon10, alt: 'emoji persevere' },
 ]

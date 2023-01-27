@@ -30,16 +30,12 @@ import { useGetPlaceInfoById } from '../../query/place'
 export const InfoModal = () => {
   // console.log('-- InfoModal Render --')
 
-  // id check
-  const pId = useParams().infoId
-  if (!Number(pId)) {
-    console.log('infomodal null')
-    return null
-  }
+  // parameter, id check
+  const pId = useParams().infoId || useParams().placeId
+  if (!Number(pId)) return null
 
   // state, hook
   const navigate = useNavigate()
-  const location = useLocation()
   const queryClient = useQueryClient()
   const { element: reviewListTop, onMoveToElement } = useMoveScroll()
   const [page, setPage] = useState(1) // review list

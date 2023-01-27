@@ -60,10 +60,9 @@ export const InfoReviewAddForm = styled.form`
   }
 `
 
-export const EmojiBtn = styled.button`
+export const EmojiBox = styled.div`
   width: 56px;
   height: 56px;
-  font-size: 24px;
   padding: 14px 16px;
   background-color: #fff;
   box-shadow: var(--box-shadow-list);

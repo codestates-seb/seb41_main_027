@@ -52,9 +52,14 @@ export const Item = styled.li`
 
   .review-emoji {
     position: absolute;
-    top: -8px;
-    left: 8px;
+    top: -12px;
+    left: 12px;
     font-size: 24px;
+
+    & > img {
+      width: 22px;
+      height: 22px;
+    }
   }
 
   .review-date {

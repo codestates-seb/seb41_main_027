@@ -31,7 +31,7 @@ const ShareBookmark = ({ item, queryRefresh }) => {
     description: description,
     likeCnt: likeCount,
     reviewCnt: useRecoilValue(reviewTotalCntByPlaceId),
-    linkUrl: window.location.href,
+    linkUrl: `${window.location.origin}/placeinfo/${pId}`,
   }
 
   // handle

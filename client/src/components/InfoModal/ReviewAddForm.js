@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { InfoReviewAddForm, EmojiBtn } from './ReviewAddFormStyle'
-import { EMOJI_LIST } from '../../utils/const'
+import { InfoReviewAddForm, EmojiBox } from './ReviewAddFormStyle'
 import useMoveScroll from '../../hooks/useMoveScroll'
 import * as review from '../../api/review'
 import { getLoginInfo } from '../../api/login'
+import { EMOJI_LIST } from '../../utils/const'
 
 const ReviewAddForm = ({ pId, reloadReviewList }) => {
   // console.log('-- (6)ReviewAddForm Render --')
@@ -24,8 +24,8 @@ const ReviewAddForm = ({ pId, reloadReviewList }) => {
   emojiList.push(EMOJI_LIST.filter((el, idx) => idx >= 5))
 
   // handle
-  const handleChangeEmoji = e => {
-    setSelectedEmoji(Number(e.target.value))
+  const handleChangeEmoji = emojiId => {
+    setSelectedEmoji(emojiId)
     onMoveToElement()
   }
 
@@ -57,9 +57,9 @@ const ReviewAddForm = ({ pId, reloadReviewList }) => {
         {emojiList.map((gItem, gIdx) => (
           <div className="emoji-list" key={gIdx}>
             {gItem.map(item => (
-              <EmojiBtn key={item.id} value={item.id} selected={item.id === selectedEmoji} onClick={handleChangeEmoji}>
-                {item.emoji}
-              </EmojiBtn>
+              <EmojiBox key={item.id} selected={item.id === selectedEmoji} onClick={() => handleChangeEmoji(item.id)}>
+                <img src={item.icon} alt={item.alt} />
+              </EmojiBox>
             ))}
           </div>
         ))}
