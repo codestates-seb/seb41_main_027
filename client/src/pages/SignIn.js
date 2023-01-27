@@ -1,17 +1,14 @@
-import { faThumbTack } from '@fortawesome/free-solid-svg-icons'
-// import { useForm } from 'react-hook-form';
 import axios from 'axios'
-// import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+// import { useForm } from 'react-hook-form';
 
 import { API_LOGIN_ENDPOINT } from '../utils/const'
 import { customAxios } from '../utils/customAxios'
+import { setLoginInfo } from '../api/login'
 
 import styled from 'styled-components'
 import Logo from '../assets/LogoTypeSignature.svg'
-import { setLoginInfo } from '../api/login'
-// import { API_LOGIN_ENDPOINT } from '../utils/const'
 
 //💄 Demo Styles --------------------------------
 const Wrapper = styled.div`
@@ -157,8 +154,19 @@ const Container = styled.div`
   }
 
   .errmsg {
-    color: #ff2c2c;
-    font-weight: 400;
+    width: 100%;
+    margin: 8px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e90000;
+    font-size: 15px;
+    font-weight: 40;
+    line-height: 22px;
+    border-radius: 8px;
+    border: 0.2px solid #fbcdcd;
+    background: #ffeded;
   }
 
   a,
@@ -180,8 +188,6 @@ const Container = styled.div`
 `
 
 // 🤖  Regex set ----------------------------------------
-// const LOGIN_URL = 'http://52.78.152.135:8080/auth/login'
-
 const EMAIL_REGEX = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
 const PWD_REGEX = /(?=.*[0-9])(?=.*[a-z]).{8,20}/
 // 8자 이상 20자 이하, 숫자와 영문의 조합으로 구성
@@ -238,19 +244,45 @@ const SignIn = () => {
         const { authorization, refresh } = response.headers
         setLoginInfo(memberId, nickName, authorization, refresh)
         navigate(callbackUrl, { replace: true })
-
         // 상태 및 인풋 날리기 clean!
         // 입력을 위한 대한 속성 값 필요
         setEmail('')
         setpassword('')
       })
     } catch (err) {
+      // 1. DB에 계정이 존재하지 않음: 404
+      // 2. 이미 등록되어 있는 계정인데 + 이메일 or 비밀번호가 틀렸다면: 409
+      console.log(err)
       if (!err?.response) {
-        setErrMsg('서버의 응답이 없습니다. 새로고침을 해주세요.')
+        setErrMsg(
+          <p>
+            서버의 응답이 없어요. <br />
+            새로고침 후 다시 시도해주세요.😭
+          </p>,
+        )
+      } else if (err.response?.status === 404) {
+        setErrMsg(
+          <p>
+            존재하지 않는 계정이에요.
+            <br /> 이메일을 다시 한 번 확인 해주세요. 🥹
+          </p>,
+        )
       } else if (err.response?.status === 409) {
-        setErrMsg('이미 사용중인 닉네임입니다. 닉네임을 변경해주세요.')
+        setErrMsg(
+          <p>
+            이메일 또는 비밀번호가 맞지 않아요.
+            <br />
+            다시 한 번 확인 해주세요. 🥹
+          </p>,
+        )
       } else {
-        setErrMsg('로그인에 실패했습니다.😭 다시 시도해주세요.')
+        setErrMsg(
+          <p>
+            로그인에 실패했어요.
+            <br />
+            새로고침 후 다시 시도해주세요.😭
+          </p>,
+        )
       }
       errRef.current.focus()
     }
