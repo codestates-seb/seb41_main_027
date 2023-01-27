@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { categoryValue } from '../../recoil/atoms'
+import * as place from '../../api/place'
 
 const AddPlaceInfo = () => {
   const location = useLocation()
@@ -27,15 +28,9 @@ const AddPlaceInfo = () => {
       latitude: `${location.state.position.position.lat}`,
       longitude: `${location.state.position.position.lng}`,
     }
-    // console.log('body : ', body)
-    // console.log('event : ', e)
-
-    // review.createReviewInfo(body).then(data => {
-    //   // console.log('created reviewId', data.reviewId)
-    //   createdReview(Number(data.reviewId))
-    //   setSelectedEmoji(null)
-    //   e.target.comment_text.value = ''
-    // })
+    place.createPlace(body).then(data => {
+      console.log('created place', data)
+    })
   }
 
   return (

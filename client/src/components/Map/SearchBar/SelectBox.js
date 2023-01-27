@@ -1,4 +1,6 @@
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
+import { categoryId } from '../../../recoil/atoms'
 
 const Wrapper = styled.div`
   position: relative;
@@ -44,14 +46,28 @@ const Wrapper = styled.div`
 `
 
 const SearchBar = () => {
+  // State
+  const [Id, setId] = useRecoilState(categoryId)
+
+  // Handle
+  const handleChange = e => {
+    setId(e.target.value)
+  }
+
   return (
     <Wrapper className="select-wrapper">
-      <select className="select" defaultValue={'전체보기'}>
-        <option>전체보기</option>
-        <option>제로웨이스트샵</option>
-        <option>공방</option>
-        <option>푸드</option>
-        <option>카페</option>
+      <select
+        className="select"
+        onChange={e => {
+          handleChange(e)
+        }}
+        value={Id}
+      >
+        <option value="">전체보기</option>
+        <option value="1">제로웨이스트샵</option>
+        <option value="2">공방</option>
+        <option value="3">푸드</option>
+        <option value="4">카페</option>
       </select>
     </Wrapper>
   )

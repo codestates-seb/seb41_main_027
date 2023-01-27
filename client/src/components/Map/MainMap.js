@@ -48,7 +48,7 @@ const MarkerInfoBox = styled.div`
 `
 const { kakao } = window
 
-const MainMap = ({ sort }) => {
+const MainMap = ({ sort, id }) => {
   const mapRef = useRef()
   const [map, setMap] = useState()
   const location = useLocation()
@@ -58,14 +58,15 @@ const MainMap = ({ sort }) => {
 
   // fetch data
 
-  const query = useGetPlace(sort)
+  const query = useGetPlace(sort, id)
   if (query.isLoading) return <Loading />
   if (query.isError) return toast.error(query.error.message)
   const items = query.data
   const points = items.placeList
 
   // console.log('points', points)
-
+  console.log('sort : ', sort)
+  console.log('categoryId : ', id)
   return (
     <Container>
       <SearchBar />
