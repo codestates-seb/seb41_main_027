@@ -1,14 +1,11 @@
 import axios from '../../api/sign'
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-// import { customAxios } from '../utils/customAxios'
-// import { API_MEMBER_ENDPOINT } from '../utils/const'
-// import '../Sign/Register.css'
+import { customAxios } from '../../utils/customAxios'
+import { API_MEMBER_ENDPOINT } from '../../utils/const'
 import styled from 'styled-components'
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-// import { vaildEmail, createMember } from '../../api/member'
 
 //💄 Demo Styles --------------------------------
 const Container = styled.div`
@@ -163,8 +160,6 @@ const Container = styled.div`
 `
 
 // 🤖  Regex set ----------------------------------------
-const REGISTER_URL = 'http://52.78.152.135:8080/members'
-
 const EMAIL_REGEX = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
 const USERNAME_REGEX = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/
 // 2자 이상 16자 이하, 영어 또는 숫자 또는 한글로 구성
@@ -239,14 +234,7 @@ const Register = () => {
       return
     }
     try {
-      // const response = await customAxios.post(API_MEMBER_ENDPOINT, { username: email, nickName, password })
-      const response = await axios.post(
-        REGISTER_URL,
-        { email, nickName, password },
-        {
-          headers: { 'Content-Type': 'application/json', withCredentials: true },
-        },
-      )
+      const response = await customAxios.post(API_MEMBER_ENDPOINT, { email, nickName, password })
       console.log(response?.data)
       console.log(response?.accessToken)
       console.log(JSON.stringify(response))
@@ -261,7 +249,7 @@ const Register = () => {
       if (!err?.response) {
         setErrMsg('서버의 응답이 없습니다. 새로고침 후 다시 시도해주세요.😭')
       } else if (err.response?.status === 409) {
-        setErrMsg('이미 사용중인 닉네임과 비밀번호입니다. 변경해주세요.')
+        setErrMsg('이미 사용중인 닉네임입니다. 변경해주세요.')
       } else {
         setErrMsg('회원 가입에 실패했습니다.😭 다시 시도해주세요.')
       }
