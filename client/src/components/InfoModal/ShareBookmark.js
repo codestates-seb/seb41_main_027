@@ -4,6 +4,7 @@ import { faShareNodes, faBookmark as bookmarkOn } from '@fortawesome/free-solid-
 import { faBookmark as bookmarkOff } from '@fortawesome/free-regular-svg-icons'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
 
 import { InfoShareBookmark } from './ShareBookmarkStyle'
 import { ConfirmModal } from '../../components/Modal/ConfirmModal'
@@ -11,6 +12,7 @@ import { ClipBoardCopy } from '../../utils/common'
 import KakaoShareBtn from '../Button/KakaoShareBtn'
 import * as bookmarkApi from '../../api/bookmark'
 import { getLoginInfo } from '../../api/login'
+import { reviewCnt } from '../../recoil/reviewState'
 
 const ShareBookmark = ({ item, queryRefresh }) => {
   // console.log('-- (7)ShareBookmark Render --')
@@ -28,7 +30,7 @@ const ShareBookmark = ({ item, queryRefresh }) => {
     title: name,
     description: description,
     likeCnt: likeCount,
-    reviewCnt: 0,
+    reviewCnt: useRecoilValue(reviewCnt),
     linkUrl: window.location.href,
   }
 
