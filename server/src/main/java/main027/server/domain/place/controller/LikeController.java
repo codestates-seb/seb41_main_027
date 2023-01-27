@@ -9,6 +9,7 @@ import main027.server.domain.place.mapper.PlaceMapper;
 import main027.server.domain.place.service.PlaceLikeService;
 import main027.server.global.aop.logging.DataHolder;
 import main027.server.global.aop.logging.annotation.TimeTrace;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ public class LikeController {
 
     @TimeTrace
     @PostMapping("/{placeId}")
+    @CacheEvict(value = "places", allEntries = true)
     public ResponseEntity likePlace(@PathVariable Long placeId) {
         PlaceLikeUser placeLikeUser = placeLikeUserMapper.placeLikeDtoToPlace(dataHolder.getMemberId(), placeId);
         return new ResponseEntity(placeLikeService.changeLikeUserStatus(placeLikeUser), HttpStatus.OK);
