@@ -71,8 +71,8 @@ export const InfoModal = () => {
 
   const handleModalClose = useCallback(() => {
     const bgLocation = location.state && location.state.bgLocation
-    if (!bgLocation) navigate('/')
     if (bgLocation) navigate(bgLocation.pathname)
+    if (!bgLocation) navigate('/')
   }, [pId])
 
   // fetch data
