@@ -235,11 +235,15 @@ class PlaceControllerTest {
                 new PlaceDto.SearchResponseDto(1L,
                                                "강남역7번출구맥도날드",
                                                "서울시 강남구",
+                                               "37",
+                                               "127",
                                                "존나 맛없어요",
                                                10),
                 new PlaceDto.SearchResponseDto(2L,
                                                "건대역7번출구맥도날드",
                                                "서울시 광진구",
+                                               "37",
+                                               "127",
                                                "존나 맛없어요",
                                                3));
 
@@ -277,6 +281,8 @@ class PlaceControllerTest {
                                                 fieldWithPath("placeList").type(JsonFieldType.ARRAY).description("결과 데이터").optional(),
                                                 fieldWithPath("placeList[].placeId").type(JsonFieldType.NUMBER).description("장소 식별자"),
                                                 fieldWithPath("placeList[].name").type(JsonFieldType.STRING).description("장소 이름"),
+                                                fieldWithPath("placeList[].latitude").type(JsonFieldType.STRING).description("위도"),
+                                                fieldWithPath("placeList[].longitude").type(JsonFieldType.STRING).description("경도"),
                                                 fieldWithPath("placeList[].address").type(JsonFieldType.STRING).description("장소 주소"),
                                                 fieldWithPath("placeList[].description").type(JsonFieldType.STRING).description(
                                                         "장소 설명"),
