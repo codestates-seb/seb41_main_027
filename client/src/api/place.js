@@ -41,9 +41,12 @@ export const getPlace = async (sort, id) => {
 export const createPlace = async body => {
   try {
     const result = await customAxios.post(API_PLACE_ENDPOINT, body)
+    toast.success('장소가 등록되었습니다. ')
     return result.data
   } catch (error) {
     console.log(error)
-    toast.error(error.message)
+    if (error.response.data.status && error.response.data.status === 409) {
+      toast.error(' 이미 등록된 곳입니다. ')
+    } else toast.error(error.message)
   }
 }
