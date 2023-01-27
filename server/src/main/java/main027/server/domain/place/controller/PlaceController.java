@@ -8,6 +8,9 @@ import main027.server.domain.place.service.PlaceService;
 import main027.server.domain.place.service.PlaceUpdateService;
 import main027.server.global.aop.logging.DataHolder;
 import main027.server.global.aop.logging.annotation.TimeTrace;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,8 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -40,13 +41,15 @@ public class PlaceController {
     }
 
     @TimeTrace
+    @CachePut(value = "place", key = "#placeId")
     @PatchMapping("/{placeId}")
-    public ResponseEntity patchPlace(@PathVariable("placeId") Long placeId,
-                                     @Validated @RequestBody PlaceDto.PlacePatchDto placePatchDto) {
+    @ResponseStatus(HttpStatus.OK)
+    public PlaceDto.PlaceResponseDto patchPlace(@PathVariable("placeId") Long placeId,
+                                                @Validated @RequestBody PlaceDto.PlacePatchDto placePatchDto) {
         placePatchDto.setPlaceId(placeId);
-        Place place = placeUpdateService.updatePlace(dataHolder.getMemberId(), placeMapper.placePatchDtoToPlace(placePatchDto));
-        return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place, dataHolder.getMemberId()),
-                                    HttpStatus.OK);
+        Place place = placeUpdateService.updatePlace(dataHolder.getMemberId(),
+                                                     placeMapper.placePatchDtoToPlace(placePatchDto));
+        return placeMapper.placeToPlaceResponseDto(place, dataHolder.getMemberId());
     }
 
     @TimeTrace
@@ -60,15 +63,17 @@ public class PlaceController {
     }
 
     @TimeTrace
+    @Cacheable(value = "place", key = "#placeId")
     @GetMapping("/{placeId}")
-    public ResponseEntity getPlace(@PathVariable("placeId") Long placeId) {
+    @ResponseStatus(HttpStatus.OK)
+    public PlaceDto.PlaceResponseDto getPlace(@PathVariable("placeId") Long placeId) {
         Place place = placeService.findPlace(placeId);
 
-        return new ResponseEntity<>(placeMapper.placeToPlaceResponseDto(place, dataHolder.getMemberId()),
-                                    HttpStatus.OK);
+        return placeMapper.placeToPlaceResponseDto(place, dataHolder.getMemberId());
     }
 
     @TimeTrace
+    @Cacheable(value = "places")
     @GetMapping
     public ResponseEntity getPlaces(@RequestParam(value = "id", required = false) Long categoryId,
                                     @RequestParam(value = "sortby", defaultValue = "") String sortBy,
@@ -80,6 +85,7 @@ public class PlaceController {
     }
 
     @TimeTrace
+    @CacheEvict(value = "place", key = "#placeId")
     @DeleteMapping("/{placeId}")
     public ResponseEntity deletePlace(@PathVariable("placeId") Long placeId) {
         placeService.deletePlace(dataHolder.getMemberId(), placeId);
