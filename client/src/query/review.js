@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil'
 
 import { QUERY_STALETIME, QUERY_RETRY } from '../utils/const'
 import * as review from '../api/review'
-import { reviewCnt } from '../recoil/reviewState'
+import { reviewTotalCntByPlaceId } from '../recoil/reviewState'
 
 // ----- 리뷰 관련 쿼리 정의(only Get) -----
 
@@ -17,10 +17,10 @@ export const useGetReviewListById = (pId, page, size, createdReivewId) => {
   )
 
   // total review cnt state save
-  const setReviewCnt = useSetRecoilState(reviewCnt)
+  const setTotalReviewCntByPlaceId = useSetRecoilState(reviewTotalCntByPlaceId)
   useEffect(() => {
-    if (data) setReviewCnt(data.totalElements)
-  }, [data, setReviewCnt])
+    if (data) setTotalReviewCntByPlaceId(data.totalElements)
+  }, [data, setTotalReviewCntByPlaceId])
 
   return { isLoading, isFetching, isError, error, data }
 }

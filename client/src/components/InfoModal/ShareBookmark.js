@@ -12,7 +12,7 @@ import { ClipBoardCopy } from '../../utils/common'
 import KakaoShareBtn from '../Button/KakaoShareBtn'
 import * as bookmarkApi from '../../api/bookmark'
 import { getLoginInfo } from '../../api/login'
-import { reviewCnt } from '../../recoil/reviewState'
+import { reviewTotalCntByPlaceId } from '../../recoil/reviewState'
 
 const ShareBookmark = ({ item, queryRefresh }) => {
   // console.log('-- (7)ShareBookmark Render --')
@@ -30,7 +30,7 @@ const ShareBookmark = ({ item, queryRefresh }) => {
     title: name,
     description: description,
     likeCnt: likeCount,
-    reviewCnt: useRecoilValue(reviewCnt),
+    reviewCnt: useRecoilValue(reviewTotalCntByPlaceId),
     linkUrl: window.location.href,
   }
 

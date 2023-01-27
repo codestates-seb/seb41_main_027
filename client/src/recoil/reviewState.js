@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-export const reviewCnt = atom({
-  key: 'reviewCnt',
+export const reviewTotalCntByPlaceId = atom({
+  key: 'reviewTotalCntByPlaceId',
   default: 0,
 })
