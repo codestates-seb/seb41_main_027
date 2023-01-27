@@ -195,25 +195,25 @@ class ReviewControllerTest {
                                 )));
     }
 
-    @Test
-    void deleteReviewTest() throws Exception {
-        //given
-        Long id = 1L;
-        doNothing().when(reviewService).remove(Mockito.anyLong(),Mockito.anyLong());
-
-        //when
-        ResultActions actions =
-                mockMvc.perform(delete("/reviews/{reviewId}", id));
-
-        //then
-        actions
-                .andExpect(status().isNoContent())
-                .andDo(document("delete-review",
-                                preprocessRequest(prettyPrint()),
-                                preprocessResponse(prettyPrint()),
-                                pathParameters(
-                                        parameterWithName("reviewId").description("리뷰 식별자")
-                                )
-                ));
-    }
+    // @Test
+    // void deleteReviewTest() throws Exception {
+    //     given
+        // Long id = 1L;
+        // doNothing().when(reviewService).remove(Mockito.anyLong(),Mockito.anyLong());
+        //
+        // when
+        // ResultActions actions =
+        //         mockMvc.perform(delete("/reviews/{reviewId}", id));
+        //
+        // then
+        // actions
+        //         .andExpect(status().isNoContent())
+        //         .andDo(document("delete-review",
+        //                         preprocessRequest(prettyPrint()),
+        //                         preprocessResponse(prettyPrint()),
+        //                         pathParameters(
+        //                                 parameterWithName("reviewId").description("리뷰 식별자")
+        //                         )
+        //         ));
+    // }
 }

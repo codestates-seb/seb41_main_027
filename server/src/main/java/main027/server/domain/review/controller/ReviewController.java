@@ -6,6 +6,8 @@ import main027.server.domain.review.mapper.ReviewMapper;
 import main027.server.domain.review.service.ReviewService;
 import main027.server.global.aop.logging.DataHolder;
 import main027.server.global.aop.logging.annotation.TimeTrace;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ public class ReviewController {
      * 장소에 리뷰를 등록하는 컨트롤러
      */
     @TimeTrace
+    @CacheEvict(value = "reviews", key = "#postDto.placeId")
     @PostMapping
     public ResponseEntity post(@Validated @RequestBody ReviewDto.Post postDto) {
         ReviewDto.Response response = mapper.entityToResponse(reviewService.save(
@@ -42,6 +45,7 @@ public class ReviewController {
      * @return {@link ReviewDto.ListResponse}
      */
     @TimeTrace
+    @Cacheable(value = "reviews", key = "#placeId")
     @GetMapping("/{placeId}")
     public ResponseEntity getPlaceReviews(@PathVariable Long placeId,
                                           @RequestParam(defaultValue = "1") int page,
@@ -54,6 +58,7 @@ public class ReviewController {
     }
 
     @TimeTrace
+    @CacheEvict(value = "reviews", key = "#placeId")
     @DeleteMapping("/{reviewId}")
     public ResponseEntity deleteReview(@PathVariable Long reviewId) {
         reviewService.remove(dataHolder.getMemberId(), reviewId);

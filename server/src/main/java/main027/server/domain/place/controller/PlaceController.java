@@ -11,6 +11,7 @@ import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +34,7 @@ public class PlaceController {
 
     @TimeTrace
     @PostMapping
+    @CacheEvict(value = "places")
     public ResponseEntity postPlace(@Validated @RequestBody PlaceDto.PlacePostDto placePostDto) {
         Place place = placeService.createPlace(
                 placeMapper.placePostDtoToPlace(placePostDto, dataHolder.getMemberId()));
@@ -41,7 +43,8 @@ public class PlaceController {
     }
 
     @TimeTrace
-    @CachePut(value = "place", key = "#placeId")
+    // @CacheEvict(value = "place", key = "#placeId")
+    @CacheEvict(value = "places")
     @PatchMapping("/{placeId}")
     @ResponseStatus(HttpStatus.OK)
     public PlaceDto.PlaceResponseDto patchPlace(@PathVariable("placeId") Long placeId,
@@ -63,7 +66,7 @@ public class PlaceController {
     }
 
     @TimeTrace
-    @Cacheable(value = "place", key = "#placeId")
+    // @Cacheable(value = "place", key = "#placeId")
     @GetMapping("/{placeId}")
     @ResponseStatus(HttpStatus.OK)
     public PlaceDto.PlaceResponseDto getPlace(@PathVariable("placeId") Long placeId) {
@@ -75,17 +78,18 @@ public class PlaceController {
     @TimeTrace
     @Cacheable(value = "places")
     @GetMapping
-    public ResponseEntity getPlaces(@RequestParam(value = "id", required = false) Long categoryId,
+    @ResponseStatus(HttpStatus.OK)
+    public PlaceDto.PageResponseDto getPlaces(@RequestParam(value = "id", required = false) Long categoryId,
                                     @RequestParam(value = "sortby", defaultValue = "") String sortBy,
                                     @RequestParam(defaultValue = "1") int page) {
         Pageable pageable = PageRequest.of(page - 1, 50);
-        return new ResponseEntity(placeMapper.pageToList(placeService.findPlaces(pageable, categoryId, sortBy),
-                                                         dataHolder.getMemberId()),
-                                  HttpStatus.OK);
+        return placeMapper.pageToList(placeService.findPlaces(pageable, categoryId, sortBy),
+                                      dataHolder.getMemberId());
     }
 
     @TimeTrace
-    @CacheEvict(value = "place", key = "#placeId")
+    // @Caching(evict = { @CacheEvict(value = "places", allEntries = true), @CacheEvict(value="place", key="#placeId") })
+    @CacheEvict(value = "places", allEntries = true)
     @DeleteMapping("/{placeId}")
     public ResponseEntity deletePlace(@PathVariable("placeId") Long placeId) {
         placeService.deletePlace(dataHolder.getMemberId(), placeId);
