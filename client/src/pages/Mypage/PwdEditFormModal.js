@@ -78,7 +78,6 @@ const PwdEditFormModal = () => {
     navigate(-1)
   }
 
-  // 8자 ~ 20자 사이의 영문자와 숫자 조합으로 입력해 주세요.
   return (
     <ModalDimmed onClick={handleModalClose}>
       <ModalWrapper onClick={e => e.stopPropagation()}>

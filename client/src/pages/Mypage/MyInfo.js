@@ -19,10 +19,10 @@ import { MEMBER_NICKNAME_REGEX } from '../../utils/const'
 import * as memberApi from '../../api/member'
 import { useGetMemberInfoById } from '../../query/member'
 import { ConfirmModal } from '../../components/Modal/ConfirmModal'
-import { getLoginInfo } from '../../api/login'
+import * as loginApi from '../../api/login'
 
 const MyInfo = () => {
-  const loginMemberId = getLoginInfo().id
+  const loginMemberId = loginApi.getLoginInfo().id
 
   // hook
   const refNickName = useRef(null)
@@ -66,8 +66,10 @@ const MyInfo = () => {
 
     // db update
     memberApi.updateMemberInfo({ nickName: changeNickname }).then(data => {
+      loginApi.resetNickName(data.nickName)
       changeEditMode(false)
       queryClient.invalidateQueries({ queryKey: ['getMemberInfoById'] })
+      navigate(location.pathname, { replace: true })
     })
   }
 
@@ -107,12 +109,7 @@ const MyInfo = () => {
   // fetch data
   const { isLoading, isFetching, isError, error, data } = useGetMemberInfoById(loginMemberId)
   if (isLoading || isFetching) return <Loading />
-  if (isError) {
-    const errorCode = error.response.data.status
-    console.log('errorCode', errorCode)
-    if (errorCode === 401) return navigate('/signin')
-    return toast.error(error.message)
-  }
+  if (isError) return toast.error(error.message)
   if (!data) return null
 
   return (
