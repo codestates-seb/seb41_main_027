@@ -96,11 +96,11 @@ const RadioButton = () => {
   return (
     <Wrapper>
       <div className="tabs">
-        <input type="radio" id="time" name="tabs" onClick={handleChange} />
+        <input type="radio" id="time" name="tabs" onChange={handleChange} />
         <label className="tab" htmlFor="time">
           등록 순
         </label>
-        <input type="radio" id="default" name="tabs" defaultChecked onClick={handleChange} />
+        <input type="radio" id="default" name="tabs" defaultChecked onChange={handleChange} />
         <label className="tab" htmlFor="default">
           추천 순
         </label>

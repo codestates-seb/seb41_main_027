@@ -30,7 +30,7 @@ const KakaoShareBtn = props => {
       content: {
         title: title,
         description: description,
-        imageUrl: 'https://cdn-icons-png.flaticon.com/512/3638/3638422.png',
+        imageUrl: `${window.location.origin}/thumbnail.png`,
         link: {
           mobileWebUrl: linkUrl,
           webUrl: linkUrl,
@@ -43,7 +43,7 @@ const KakaoShareBtn = props => {
       },
       buttons: [
         {
-          title: '상세 보기',
+          title: '자세히 보기',
           link: {
             mobileWebUrl: linkUrl,
             webUrl: linkUrl,

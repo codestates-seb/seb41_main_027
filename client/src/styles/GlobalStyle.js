@@ -204,6 +204,90 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  // animation (side down)
+  @keyframes slide-down {
+    from {
+      opacity: 1;
+      margin-top: 0%;
+    }
+    to {
+      opacity: 0;
+      margin-top: 50%;
+    }
+  }
+  @-moz-keyframes slide-down {
+    from {
+      opacity: 1;
+      margin-top: 0%;
+    }
+    to {
+      opacity: 0;
+      margin-top: 50%;
+    }
+  }
+  @-webkit-keyframes slide-down {
+    from {
+      opacity: 1;
+      margin-top: 0%;
+    }
+    to {
+      opacity: 0;
+      margin-top: 50%;
+    }
+  }
+  @-o-keyframes slide-down {
+    from {
+      opacity: 1;
+      margin-top: 0%;
+    }
+    to {
+      opacity: 0;
+      margin-top: 50%;
+    }
+  }
+
+  // animation (side-up)
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      margin-top: 50%;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0%;
+    }
+  }
+  @-moz-keyframes slide-up {
+    from {
+      opacity: 0;
+      margin-top: 50%;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0%;
+    }
+  }
+  @-webkit-keyframes slide-up {
+    from {
+      opacity: 0;
+      margin-top: 50%;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0%;
+    }
+  }
+  @-o-keyframes slide-up {
+    from {
+      opacity: 0;
+      margin-top: 50%;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0%;
+    }
+  }
+
   // root
   :root { 
     // 💄 CI set 

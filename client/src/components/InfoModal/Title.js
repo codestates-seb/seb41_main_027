@@ -1,10 +1,10 @@
 import React, { useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
-import { ClipBoardCopy } from '../../utils/common'
 import { toast } from 'react-toastify'
 
-import { InfoTitle } from './TitleStyle'
+import { ClipBoardCopy } from '../../utils/common'
+import { InfoTitle, ModalCloseBtn } from './TitleStyle'
 
 const Title = ({ item, modalClose }) => {
   // console.log('-- (1)Title Render --')
@@ -28,7 +28,7 @@ const Title = ({ item, modalClose }) => {
           <span className="category">{category}</span>
           <p>{name}</p>
         </div>
-        <button onClick={modalClose}>×</button>
+        <ModalCloseBtn onClick={modalClose}>×</ModalCloseBtn>
       </div>
       <div className="head-address">
         <p ref={refAddress}>{address}</p>

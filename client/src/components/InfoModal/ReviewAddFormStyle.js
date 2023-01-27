@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const InfoReviewAddForm = styled.form`
   width: 100%;
@@ -18,34 +18,6 @@ export const InfoReviewAddForm = styled.form`
       flex-direction: row;
       justify-content: space-between;
       margin-bottom: 10px;
-
-      .emoji-item {
-        width: 56px;
-        height: 56px;
-
-        & label {
-          font-size: 24px;
-          padding: 14px 16px;
-          background-color: #fff;
-          box-shadow: var(--box-shadow-list);
-          border-radius: 8px;
-        }
-
-        & input[type='radio'] {
-          width: 0;
-          height: 0;
-          opacity: 0;
-        }
-
-        & input[type='radio']:checked + label {
-          background-color: var(--ecogreen-01);
-          animation: fadein 1s;
-          -moz-animation: fadein 1s; /* Firefox */
-          -webkit-animation: fadein 1s; /* Safari and Chrome */
-          -o-animation: fadein 1s; /* Opera */
-          animation-fill-mode: both;
-        }
-      }
     }
   }
 
@@ -86,4 +58,24 @@ export const InfoReviewAddForm = styled.form`
       }
     }
   }
+`
+
+export const EmojiBox = styled.div`
+  width: 56px;
+  height: 56px;
+  padding: 14px 16px;
+  background-color: #fff;
+  box-shadow: var(--box-shadow-list);
+  border-radius: 8px;
+
+  ${props =>
+    props.selected &&
+    css`
+      background-color: var(--ecogreen-01);
+      animation: fadein 1s;
+      -moz-animation: fadein 1s; /* Firefox */
+      -webkit-animation: fadein 1s; /* Safari and Chrome */
+      -o-animation: fadein 1s; /* Opera */
+      animation-fill-mode: both;
+    `}
 `

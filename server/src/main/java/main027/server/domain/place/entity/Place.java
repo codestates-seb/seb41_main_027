@@ -8,6 +8,7 @@ import main027.server.domain.review.entity.Review;
 import main027.server.global.audit.BaseTime;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Set;
 
 @Data
 @Entity
-public class Place extends BaseTime {
+public class Place extends BaseTime implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,7 +66,7 @@ public class Place extends BaseTime {
     private Set<Bookmark> bookmarkList = new HashSet<>();
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<PlaceLikeUser> placeLikeUserList = new ArrayList<>();
+    private Set<PlaceLikeUser> placeLikeUserList = new HashSet<>();
 
     public void setMember(Member member) {
         this.member = member;
