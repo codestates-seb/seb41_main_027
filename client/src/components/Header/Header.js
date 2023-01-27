@@ -1,12 +1,11 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { useState, useEffect, useMemo } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
-import { API_LOGOUT_ENDPOINT, API_MEMBER_ENDPOINT } from '../../utils/const'
+import { API_LOGOUT_ENDPOINT } from '../../utils/const'
 import { toast } from 'react-toastify'
 import { customAxios } from '../../utils/customAxios'
 import { getLoginInfo } from '../../api/login'
-import { useGetMemberInfoById } from '../../query/member'
 
 const HeaderW = styled.header`
   z-index: 400;
@@ -39,9 +38,11 @@ const HeaderW = styled.header`
 `
 
 const Header = () => {
-  const [loginMemberId, setLoginMemberId] = useState(getLoginInfo().id)
-  const { data, isLoading } = useGetMemberInfoById(localStorage.getItem('id'))
-  if (isLoading) return
+  const { id, nickName } = getLoginInfo()
+  const [loginMemberId, setLoginMemberId] = useState(id)
+
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const HandleSignOut = async () => {
     /*
@@ -66,9 +67,9 @@ const Header = () => {
       localStorage.clear()
       setLoginMemberId('')
       toast.success('로그아웃 되었습니다.')
-      // 메뉴 상태 변경(todo)
+      navigate(location.pathname, { replace: true })
     } catch (error) {
-      //에러처리(todo)
+      //에러처리
       console.error(error.message)
       toast.error('로그아웃에 실패했습니다.')
     }
@@ -83,16 +84,16 @@ const Header = () => {
         {!loginMemberId && (
           <>
             <li>
-              <Link to="/signup">회원가입</Link>
+              <Link to="/signin">로그인</Link>
             </li>
             <li>
-              <Link to="/signin">로그인</Link>
+              <Link to="/signup">회원가입</Link>
             </li>
           </>
         )}
         {loginMemberId && (
           <>
-            <h1>{data.nickName} 님 환영합니다! 🥰</h1>
+            <h1>{nickName} 님 환영합니다! 🥰</h1>
             <li>
               <Link to="/" onClick={HandleSignOut}>
                 로그아웃
