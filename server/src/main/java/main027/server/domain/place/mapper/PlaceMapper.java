@@ -39,6 +39,8 @@ public interface PlaceMapper {
         result.setPlaceId(place.getPlaceId());
         result.setName(place.getName());
         result.setAddress(place.getAddress());
+        result.setLatitude(place.getLatitude());
+        result.setLongitude(place.getLongitude());
         result.setDescription(place.getDescription());
         result.setLikeCount(place.getPlaceLikeUserList().size());
 
