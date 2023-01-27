@@ -56,6 +56,7 @@ public class PlaceDto extends BaseTime {
         private Long placeId;
         private String name;
         private String address;
+        private String category;
         private String latitude;
         private String longitude;
         private String description;
