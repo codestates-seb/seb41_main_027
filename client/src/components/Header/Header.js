@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
-import { API_LOGOUT_ENDPOINT } from '../../utils/const'
+import { API_LOGOUT_ENDPOINT, API_MEMBER_ENDPOINT } from '../../utils/const'
 import { toast } from 'react-toastify'
 import { customAxios } from '../../utils/customAxios'
 import { getLoginInfo } from '../../api/login'
+import { useGetMemberInfoById } from '../../query/member'
 
 const HeaderW = styled.header`
   z-index: 400;
@@ -39,21 +40,22 @@ const HeaderW = styled.header`
 
 const Header = () => {
   const [loginMemberId, setLoginMemberId] = useState(getLoginInfo().id)
+  const { data, isLoading } = useGetMemberInfoById(localStorage.getItem('id'))
+  if (isLoading) return
 
   const HandleSignOut = async () => {
     /*
      * signin
-     - localStorage.clear()
-     - 로그인 성공 : setLoginInfo > callbackUrl redirect
-  
+    - localStorage.clear()
+    - 로그인 성공 : setLoginInfo > callbackUrl redirect
+
     * 로그아웃
-     = /auth/logout api
-       성공: localStorage.clear()
-  
+    = /auth/logout api
+    성공: localStorage.clear()
+
     * 비로그인 페이지(token) > api > 401 > reissue(refreshToken) > 401 > signin
-       - OK : setLoginInfo
-    
-  
+    - OK : setLoginInfo
+
      */
     // 로그인을 할 때 -> 액세스, 리프래쉬를 받음(서버에서 응답으로 보내는 헤더)
     // 클라이언트에서 요청 헤더에 담아야 할 것
@@ -79,20 +81,25 @@ const Header = () => {
       </h1>
       <ul>
         {!loginMemberId && (
-          <li>
-            <Link to="/signin">로그인</Link>
-          </li>
+          <>
+            <li>
+              <Link to="/signup">회원가입</Link>
+            </li>
+            <li>
+              <Link to="/signin">로그인</Link>
+            </li>
+          </>
         )}
         {loginMemberId && (
-          <li>
-            <Link to="/" onClick={HandleSignOut}>
-              로그아웃
-            </Link>
-          </li>
+          <>
+            <h1>{data.nickName} 님 환영합니다! 🥰</h1>
+            <li>
+              <Link to="/" onClick={HandleSignOut}>
+                로그아웃
+              </Link>
+            </li>
+          </>
         )}
-        <li>
-          <Link to="/signup">회원가입</Link>
-        </li>
       </ul>
     </HeaderW>
   )

@@ -73,10 +73,10 @@ const CategorySelectBox = () => {
         <option value="기본" disabled selected>
           카테고리를 설정해 주세요
         </option>
-        <option value="제로웨이스트샵">제로웨이스트샵</option>
-        <option value="공방">공방</option>
-        <option value="푸드">푸드</option>
-        <option value="카페">카페</option>
+        <option value="1">제로웨이스트샵</option>
+        <option value="2">공방</option>
+        <option value="3">푸드</option>
+        <option value="4">카페</option>
       </select>
     </Wrapper>
   )
