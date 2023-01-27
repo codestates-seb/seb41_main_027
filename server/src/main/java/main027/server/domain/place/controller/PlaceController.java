@@ -11,6 +11,7 @@ import main027.server.global.aop.logging.annotation.TimeTrace;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -87,7 +88,8 @@ public class PlaceController {
     }
 
     @TimeTrace
-    @CacheEvict(value = "place", key = "#placeId")
+    // @Caching(evict = { @CacheEvict(value = "places", allEntries = true), @CacheEvict(value="place", key="#placeId") })
+    @CacheEvict(value = "places", allEntries = true)
     @DeleteMapping("/{placeId}")
     public ResponseEntity deletePlace(@PathVariable("placeId") Long placeId) {
         placeService.deletePlace(dataHolder.getMemberId(), placeId);
