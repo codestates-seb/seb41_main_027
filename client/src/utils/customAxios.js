@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { API_CONNECT_TIMEOUT } from './const'
+import { API_CONNECT_TIMEOUT, API_REISSUE_ENDPOINT } from './const'
 import * as loginApi from '../api/login'
 
 const { REACT_APP_API_URL } = process.env
@@ -26,21 +26,31 @@ customAxios.interceptors.response.use(
   function (response) {
     return response
   },
-  function (error) {
-    const errorData = error.response.data
-
+  async function (error) {
+    const { status, message } = error.response.data
     // Access Token reissue
-    if (errorData && errorData.status === 401 && errorData.message === 'Invalid Access Token') {
-      loginApi
-        .reissueAccessToken()
-        .then(data => {
-          // Access Token update
-          loginApi.resetAccessToken(data)
-        })
-        .catch(() => {})
+    if (status && status === 401) {
+      try {
+        const originalRequest = error.config
+        const result = await customAxios.post(API_REISSUE_ENDPOINT)
+
+        const newAccessToken = result.headers.authorization
+        if (newAccessToken) {
+          // new Access Token save
+          loginApi.resetAccessToken(newAccessToken)
+
+          // request header setting
+          originalRequest.headers.Authorization = newAccessToken
+          return await customAxios.request(originalRequest)
+        }
+      } catch (error) {
+        // reissue fail
+        loginApi.removeLoginInfo()
+        console.log(error)
+        window.location.href = '/signin'
+      }
 
       return Promise.reject(error)
-      //return new Promise(() => {})
     }
 
     return Promise.reject(error)
