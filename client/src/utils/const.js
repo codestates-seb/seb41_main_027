@@ -1,5 +1,6 @@
 // api
 export const API_PLACE_ENDPOINT = '/places'
+export const API_SEARCH_ENDPOINT = '/places/search'
 export const API_BOOKMARK_ENDPOINT = '/bookmarks'
 export const API_MEMBER_ENDPOINT = '/members'
 export const API_REVIEW_ENDPOINT = '/reviews'
