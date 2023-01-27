@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { InfoReviewAddForm } from './ReviewAddFormStyle'
-import { EMOJI_LIST } from '../../utils/const'
+import { InfoReviewAddForm, EmojiBox } from './ReviewAddFormStyle'
 import useMoveScroll from '../../hooks/useMoveScroll'
 import * as review from '../../api/review'
 import { getLoginInfo } from '../../api/login'
+import { EMOJI_LIST } from '../../utils/const'
 
 const ReviewAddForm = ({ pId, reloadReviewList }) => {
   // console.log('-- (6)ReviewAddForm Render --')
+
   const loginMemberId = getLoginInfo().id
 
   // state, hook
@@ -23,8 +24,8 @@ const ReviewAddForm = ({ pId, reloadReviewList }) => {
   emojiList.push(EMOJI_LIST.filter((el, idx) => idx >= 5))
 
   // handle
-  const handleChangeEmoji = e => {
-    setSelectedEmoji(Number(e.target.value))
+  const handleChangeEmoji = emojiId => {
+    setSelectedEmoji(emojiId)
     onMoveToElement()
   }
 
@@ -55,23 +56,15 @@ const ReviewAddForm = ({ pId, reloadReviewList }) => {
         <h3>이모지를 클릭해 리뷰를 남겨보세요!</h3>
         {emojiList.map((gItem, gIdx) => (
           <div className="emoji-list" key={gIdx}>
-            {gItem.map((item, idx) => (
-              <span className="emoji-item" key={item.id}>
-                <input
-                  type="radio"
-                  id={`radio${item.id}`}
-                  name="emoji_id"
-                  value={item.id}
-                  onChange={handleChangeEmoji}
-                  required
-                />
-                <label htmlFor={`radio${item.id}`}>{item.emoji}</label>
-              </span>
+            {gItem.map(item => (
+              <EmojiBox key={item.id} selected={item.id === selectedEmoji} onClick={() => handleChangeEmoji(item.id)}>
+                <img src={item.icon} alt={item.alt} />
+              </EmojiBox>
             ))}
           </div>
         ))}
       </section>
-      {selectedEmoji !== null && (
+      {selectedEmoji && (
         <section className="review-add-comment ani-fadein">
           {!loginMemberId && (
             <div className="login-comment">

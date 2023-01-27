@@ -43,7 +43,7 @@ const KakaoShareBtn = props => {
       },
       buttons: [
         {
-          title: '상세 보기',
+          title: '자세히 보기',
           link: {
             mobileWebUrl: linkUrl,
             webUrl: linkUrl,

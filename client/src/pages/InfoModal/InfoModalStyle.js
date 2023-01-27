@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ModalDimmed = styled.div`
   position: fixed;
@@ -16,6 +16,7 @@ export const ModalWrapper = styled.div`
   width: 750px;
   height: calc(100vh - 18%);
   max-height: 720px;
+
   position: relative;
   top: 50%;
   left: 50%;
@@ -30,6 +31,14 @@ export const ModalWrapper = styled.div`
   box-shadow: 0px 4px 10px rgba(25, 1, 52, 0.4);
   border-radius: 16px;
   overflow: hidden;
+
+  /* animation */
+  animation: slide-up 0.3s;
+  -moz-animation: slide-up 0.3s;
+  -webkit-animation: slide-up 0.3s;
+  -o-animation: slide-up 0.3s;
+
+  animation-fill-mode: forwards;
 
   @media (max-width: 750px) {
     width: calc(100vw - 10%);
@@ -148,7 +157,7 @@ export const InfoMapReviewAdd = styled.div`
   flex-direction: column;
   align-items: flex-start;
   flex-grow: 1;
-  gap: 26px;
+  gap: 40px;
 `
 
 export const InfoBottom = styled.div`

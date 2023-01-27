@@ -1,5 +1,6 @@
-import { customAxios } from '../utils/customAxios'
 import { toast } from 'react-toastify'
+
+import { customAxios } from '../utils/customAxios'
 import { API_LIKE_ENDPOINT } from '../utils/const'
 
 // like axios CRUD
@@ -13,6 +14,6 @@ export const updateLike = async (pId, isLiked) => {
     return result.data
   } catch (error) {
     console.error(error)
-    toast.error(error.message)
+    toast.error('데이터 처리에 실패했습니다.')
   }
 }

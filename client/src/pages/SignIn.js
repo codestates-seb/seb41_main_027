@@ -233,8 +233,12 @@ const SignIn = () => {
     }
     try {
       const response = await customAxios.post(API_LOGIN_ENDPOINT, { username: email, password }).then(response => {
-        setLoginInfo(response.data.memberId, response.headers.authorization, response.headers.refresh)
+        // localstorage login info save
+        const { memberId, nickName } = response.data
+        const { authorization, refresh } = response.headers
+        setLoginInfo(memberId, nickName, authorization, refresh)
         navigate(callbackUrl, { replace: true })
+
         // 상태 및 인풋 날리기 clean!
         // 입력을 위한 대한 속성 값 필요
         setEmail('')
