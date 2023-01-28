@@ -23,6 +23,8 @@ const SearchBar = () => {
   // state
   const [resetKeyword, setResetKeyword] = useRecoilState(searchValue)
   const navigate = useNavigate()
+
+  // handler
   const onClickReset = () => {
     setResetKeyword('')
     navigate(`/`)
