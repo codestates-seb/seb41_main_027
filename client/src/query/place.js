@@ -15,20 +15,17 @@ export const useGetPlaceInfoById = pId => {
   })
 }
 
-// 여기가 잘못된거 같음... 확인바람...
-// 장소 list 모두 조회
-// export const useGetPlaceList = () => {
-//   const { data } = useQuery(['getPlace', page, sort], () => place.getPlaceList(), {
-//     staleTime: QUERY_STALETIME,
-//     notifyOnChangeProps: 'tracked',
-//     retry: false,
-//   })
-//   return data
-// }
-
 export const useGetPlace = (sort, id) => {
   return useQuery(['getPlace', sort, id], ({ queryKey }) => place.getPlace(queryKey[1], queryKey[2]), {
     enabled: !!sort,
+    staleTime: QUERY_STALETIME,
+    retry: false,
+  })
+}
+
+export const useKeywordSearch = keyword => {
+  return useQuery(['keywordSearch', keyword], ({ queryKey }) => place.keywordSearch(queryKey[1]), {
+    enabled: !!keyword,
     staleTime: QUERY_STALETIME,
     retry: false,
   })
