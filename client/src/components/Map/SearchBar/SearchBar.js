@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import SelectBox from './SelectBox'
 import RadioButton from './RadioButton'
 import SearchInput from './SearchInput'
+import { useRecoilValue } from 'recoil'
+import { searchValue } from '../../../recoil/atoms'
+import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
   // Position 🫡
@@ -17,11 +20,14 @@ const Wrapper = styled.div`
 `
 
 const SearchBar = () => {
+  // state
+  const resetKeyword = useRecoilValue(searchValue)
   return (
     <Wrapper>
       <RadioButton />
       <SelectBox />
       <SearchInput />
+      {resetKeyword && <Link to="/">초기화</Link>}
     </Wrapper>
   )
 }

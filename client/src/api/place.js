@@ -55,10 +55,10 @@ export const createPlace = async body => {
 export const keywordSearch = async keyword => {
   try {
     const result = await customAxios.get(API_SEARCH_ENDPOINT + `?keyword=${keyword}`)
-    console.log(result.data)
+    // console.log(result.data)
     return result.data
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     toast.error('2글자 이상 검색하세요!')
   }
 }

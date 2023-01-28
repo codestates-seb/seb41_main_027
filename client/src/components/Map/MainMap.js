@@ -66,17 +66,18 @@ const MainMap = ({ sort, id }) => {
     const items = query.data
     setPoints(items.placeList)
 
-    console.log('points', points)
-    console.log('sort : ', sort)
-    console.log('categoryId : ', id)
+    // console.log('points', points)
+    // console.log('sort : ', sort)
+    // console.log('categoryId : ', id)
   } else {
     const query = useKeywordSearch(keyword)
     if (query.isLoading) return <Loading />
     if (query.isError) return toast.error(query.error.message)
     const items = query.data
-    console.log('keywordSearch : ', items)
+    // console.log('keywordSearch : ', items)
     setPoints(items.placeList)
   }
+
   return (
     <Container>
       <SearchBar />
