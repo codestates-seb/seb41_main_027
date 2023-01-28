@@ -29,9 +29,6 @@ export const getPlace = async (sort, id) => {
   function removeEmptyParams(query) {
     return query.replace(/[^=&]+=(?:&|$)/g, ' ')
   }
-  // console.log(`${API_PLACE_ENDPOINT}?sortby=${sort}`)
-  // console.log('sort : ' + sort)
-  // console.log('result.data : ', result.data)
   removeEmptyParams(sortAndId)
   console.log(result)
   return result.data
