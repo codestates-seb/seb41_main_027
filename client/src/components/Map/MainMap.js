@@ -23,9 +23,7 @@ const Container = styled.section`
   border-radius: 32px 0px 0px 0px;
   box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.4);
   background-color: #fff;
-
-  .site-list,
-  .addPlaceBtn {
+  .site-list {
     position: absolute;
     z-index: 1500;
     // Demo Position 🫡
@@ -102,12 +100,6 @@ const MainMap = ({ sort, categoryId }) => {
   return (
     <Container>
       <SearchBar />
-      {id && (
-        <Link to={`/place`}>
-          <button className="addPlaceBtn">장소 등록하기</button>
-        </Link>
-      )}
-
       <div className="site-list">
         {id && points.length !== 0 ? (
           <Link to={`/place`}>

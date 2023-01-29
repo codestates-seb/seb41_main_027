@@ -30,7 +30,8 @@ const Wrapper = styled.nav`
     li:not(:first-child) {
       cursor: pointer;
       margin-bottom: 16px;
-      a {
+      a,
+      button {
         width: 68px;
         height: 75px;
         display: flex;
