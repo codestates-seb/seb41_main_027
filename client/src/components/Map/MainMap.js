@@ -72,7 +72,7 @@ const MainMap = ({ sort, categoryId }) => {
   const [keyword, setKeyword] = useRecoilState(searchValue)
   const [points, setPoints] = useRecoilState(placesAll)
   const { id } = getLoginInfo()
-  const [loginMemberId, setLoginMemberId] = useState(id)
+
   console.log('keyword : ', keyword)
   // fetch data
   if (keyword === '') {
@@ -97,7 +97,7 @@ const MainMap = ({ sort, categoryId }) => {
   return (
     <Container>
       <SearchBar />
-      {loginMemberId && (
+      {id && (
         <Link to={`/place`}>
           <button className="addPlaceBtn">장소 등록하기</button>
         </Link>
