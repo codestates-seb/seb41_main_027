@@ -249,8 +249,8 @@ const SignIn = () => {
       })
     } catch (err) {
       // 1. DB에 계정이 존재하지 않음: 404
-      // 2. 이미 등록되어 있는 계정인데 + 이메일 or 비밀번호가 틀렸다면: 409
-      console.log(err)
+      // 2. 이미 등록되어 있는 계정인데 + 비밀번호가 틀렸다면: 400
+      console.log('err', err)
       if (!err?.response) {
         setErrMsg(
           <p>
@@ -258,19 +258,19 @@ const SignIn = () => {
             새로고침 후 다시 시도해주세요.😭
           </p>,
         )
+      } else if (err.response?.status === 400) {
+        setErrMsg(
+          <p>
+            비밀번호가 맞지 않아요.
+            <br />
+            다시 한 번 확인 해주세요. 🥹
+          </p>,
+        )
       } else if (err.response?.status === 404) {
         setErrMsg(
           <p>
             존재하지 않는 계정이에요.
             <br /> 이메일을 다시 한 번 확인 해주세요. 🥹
-          </p>,
-        )
-      } else if (err.response?.status === 409) {
-        setErrMsg(
-          <p>
-            이메일 또는 비밀번호가 맞지 않아요.
-            <br />
-            다시 한 번 확인 해주세요. 🥹
           </p>,
         )
       } else {
