@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { toast } from 'react-toastify'
 
-import { ClipBoardCopy } from '../../utils/common'
+import { clipboardCopy } from '../../utils/common'
 import { InfoTitle, ModalCloseBtn } from './TitleStyle'
 
 const Title = ({ item, modalClose }) => {
@@ -16,7 +16,7 @@ const Title = ({ item, modalClose }) => {
 
   // handle
   const handleClickCopy = () => {
-    ClipBoardCopy(refAddress.current.innerText).then(() => {
+    clipboardCopy(refAddress.current.innerText).then(() => {
       toast.info('주소가 복사되었습니다.')
     })
   }
