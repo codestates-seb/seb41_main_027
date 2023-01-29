@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Transactional
 @Service
@@ -64,7 +65,7 @@ public class PlaceServiceImpl implements PlaceService {
     @TimeTrace
     public void deletePlace(Long memberId, Long placeId) {
         Place findPlace = placeVerifier.findVerifiedPlace(placeId);
-        if (findPlace.getMember().getMemberId() != memberId) {
+        if (!Objects.equals(findPlace.getMember().getMemberId(), memberId)) {
             throw new PermissionDeniedException(ExceptionCode.PERMISSION_DENIED);
         }
         placeRepository.delete(findPlace);

@@ -15,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Transactional
 @Service
 @RequiredArgsConstructor
@@ -55,7 +57,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void remove(Long memberId, Long reviewId) {
         Review findReview = reviewVerifier.findVerifiedReview(reviewId);
-        if (findReview.getMember().getMemberId() != memberId) {
+        if (!Objects.equals(findReview.getMember().getMemberId(), memberId)) {
             throw new PermissionDeniedException(ExceptionCode.PERMISSION_DENIED);
         }
         reviewRepository.deleteById(reviewId);
