@@ -5,7 +5,7 @@ import { categoryValue } from '../../recoil/atoms'
 
 const Wrapper = styled.div`
   position: relative;
-  width: 408px;
+  width: 306px;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   // Dropdown ico Demo

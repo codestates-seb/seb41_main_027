@@ -8,16 +8,6 @@ import { Link } from 'react-router-dom'
 import ReportModal from '../../pages/Report/ReportModal'
 import { useState } from 'react'
 
-// li사이즈만 빼둠 Nav css 셋업 안된 상태 -> 추후 Acitve 스타일링 필요
-// <a href="/" className={type.page === "home" ? "selected" : ""}>
-
-const StyleFontAwesomeIcon = styled(FontAwesomeIcon)`
-  font-size: 28px;
-  color: #fff;
-  :hover {
-    color: #13c57c;
-  }
-`
 const Wrapper = styled.nav`
   z-index: 1000;
   display: flex;
@@ -48,11 +38,12 @@ const Wrapper = styled.nav`
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(255, 255, 255, 1);
+        /* color: rgba(255, 255, 255, 0.7); */
         font-size: 14px;
         line-height: 140%;
         font-weight: 600;
-        border-radius: 8px;
+        border-radius: 16px;
         span {
           margin-top: 8px;
           letter-spacing: -0.5px;
@@ -84,31 +75,31 @@ const Nav = () => {
         </li>
         <li>
           <Link to="/">
-            <StyleFontAwesomeIcon icon={faMap} />
+            <FontAwesomeIcon icon={faMap} size="2x" />
             <span>친환경지도</span>
           </Link>
         </li>
         <li>
           <Link to="/mypage">
-            <StyleFontAwesomeIcon icon={faUser} />
+            <FontAwesomeIcon icon={faUser} size="2x" />
             <span>마이페이지</span>
           </Link>
         </li>
         <li>
           <Link to="/Aboutus">
-            <StyleFontAwesomeIcon icon={faPagelines} />
+            <FontAwesomeIcon icon={faPagelines} size="2x" />
             <span>서비스소개</span>
           </Link>
         </li>
         <li>
           <button onClick={() => window.open('https://open.kakao.com/o/g8FLpt1e', '_blank')}>
-            <StyleFontAwesomeIcon icon={faComment} />
+            <FontAwesomeIcon icon={faComment} size="2x" />
             <span>오픈채팅</span>
           </button>
         </li>
         <li>
           <button onClick={() => setReportModalOpen(true)}>
-            <StyleFontAwesomeIcon icon={faBug} />
+            <FontAwesomeIcon icon={faBug} size="2x" />
             <span>오류제보</span>
           </button>
         </li>
