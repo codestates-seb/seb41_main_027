@@ -1,6 +1,6 @@
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import styled from 'styled-components'
-import { categoryId } from '../../../recoil/atoms'
+import { categoryId, searchValue } from '../../../recoil/atoms'
 
 const Wrapper = styled.div`
   position: relative;
@@ -48,6 +48,7 @@ const Wrapper = styled.div`
 const SearchBar = () => {
   // State
   const [Id, setId] = useRecoilState(categoryId)
+  const keyword = useRecoilValue(searchValue)
 
   // Handle
   const handleChange = e => {
@@ -62,6 +63,7 @@ const SearchBar = () => {
           handleChange(e)
         }}
         value={Id}
+        disabled={keyword.length > 1 ? true : false}
       >
         <option value="">전체보기</option>
         <option value="1">제로웨이스트샵</option>
