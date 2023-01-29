@@ -23,8 +23,8 @@ export const updatePlaceDescription = async (pId, body) => {
 }
 
 // 장소 list 가져오기 이상없음..
-export const getPlace = async (sort, id) => {
-  const sortAndId = `?sortby=${sort}&id=${id}`
+export const getPlace = async (sort, categoryId) => {
+  const sortAndId = `?sortby=${sort}&id=${categoryId}`
   const result = await customAxios.get(`${API_PLACE_ENDPOINT}` + sortAndId)
   function removeEmptyParams(query) {
     return query.replace(/[^=&]+=(?:&|$)/g, ' ')
