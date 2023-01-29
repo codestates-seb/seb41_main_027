@@ -52,7 +52,6 @@ export const createPlace = async body => {
 export const keywordSearch = async keyword => {
   try {
     const result = await customAxios.get(API_SEARCH_ENDPOINT + `?keyword=${keyword}`)
-<<<<<<< HEAD
     // console.log('result.data', result.data)
     if (result.data.placeList.length === 0) {
       toast.success('정보가 없습니다.')
@@ -60,12 +59,6 @@ export const keywordSearch = async keyword => {
     return result.data
   } catch (error) {
     // console.log(error)
-=======
-    console.log(result.data)
-    return result.data
-  } catch (error) {
-    console.log(error)
->>>>>>> 8da47cdf634c698b98fb811645aae488f43b5003
     toast.error('2글자 이상 검색하세요!')
   }
 }
