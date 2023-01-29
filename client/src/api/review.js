@@ -23,9 +23,9 @@ export const createReviewInfo = async body => {
 }
 
 // delete
-export const deleteReviewInfo = async reviewId => {
+export const deleteReviewInfo = async (placeId, reviewId) => {
   try {
-    const result = await customAxios.delete(`${API_REVIEW_ENDPOINT}/${reviewId}`)
+    const result = await customAxios.delete(`${API_REVIEW_ENDPOINT}/${placeId}/${reviewId}`)
     toast.success('리뷰가 삭제되었습니다.')
     return result.data
   } catch (error) {
