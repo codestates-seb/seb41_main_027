@@ -1,12 +1,11 @@
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { searchValue } from '../../../recoil/atoms'
-
-// li사이즈만 빼둠 Nav css 셋업 안된 상태 -> 추후 Acitve 스타일링 필요
-// <a href="/" className={type.page === "home" ? "selected" : ""}>
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const StyleFontAwesomeIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
@@ -16,7 +15,6 @@ const StyleFontAwesomeIcon = styled(FontAwesomeIcon)`
 const Wrapper = styled.div`
   width: 400px;
   max-width: 100%;
-
   .SearchBar {
     display: flex;
     justify-content: space-between;
@@ -37,7 +35,21 @@ const Wrapper = styled.div`
       font-size: 18px;
     }
   }
-  .SearchQuerySubmit {
+  .btn-wrap {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    .btn-reset {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 16px;
+      background: #17ac52;
+      border-radius: 12px;
+    }
   }
 `
 
@@ -45,11 +57,12 @@ const SearchInput = () => {
   // state, hook
   const [keyword, setKeyword] = useRecoilState(searchValue)
   const [search, setSearch] = useState()
+  const navigate = useNavigate()
 
   // handler
   const handleOnKeyPress = e => {
     if (e.key === 'Enter') {
-      setSearch(e.target.value)
+      // setSearch(e.target.value)
       e.preventDefault()
       handleSearch(e)
     }
@@ -60,7 +73,16 @@ const SearchInput = () => {
   }
   const handleSearch = e => {
     e.preventDefault()
-    setKeyword(search)
+    if (search && search.length > 1) {
+      setKeyword(search)
+    } else {
+      // e.preventDefault()
+      toast.error('최소 2글자 이상이어야 합니다.')
+    }
+  }
+  const onClickReset = () => {
+    setKeyword('')
+    navigate(`/`)
   }
   return (
     <Wrapper>
@@ -75,9 +97,16 @@ const SearchInput = () => {
             onChange={onChangeSearch}
             onKeyPress={handleOnKeyPress}
           />
-          <button className="SearchQuerySubmit" name="">
-            <StyleFontAwesomeIcon icon={faSearch} onClick={handleSearch} />
-          </button>
+          <div className="btn-wrap">
+            <button className="SearchQuerySubmit" name="" disabled={!search}>
+              <StyleFontAwesomeIcon icon={faSearch} onClick={handleSearch} />
+            </button>
+            {keyword && (
+              <button className="btn-reset" onClick={onClickReset}>
+                <FontAwesomeIcon icon={faRotateLeft} />
+              </button>
+            )}
+          </div>
         </div>
       </form>
     </Wrapper>

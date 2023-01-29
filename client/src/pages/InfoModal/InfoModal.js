@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 
 import {

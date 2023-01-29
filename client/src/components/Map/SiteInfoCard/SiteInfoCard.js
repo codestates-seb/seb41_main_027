@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil'
 import { addPlaceInfo, listClick } from '../../../recoil/atoms'
 import { Link, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUp, faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 
 const Wrapper = styled.li`
   // Style 💄
@@ -130,13 +130,13 @@ const SiteInfoCard = ({ positions, index }) => {
         ) : (
           <div className="add-place">
             <Link to="/addPlace" state={{ bgLocation: location, position: positions }}>
-              등록하기
+              <FontAwesomeIcon icon={faSquarePlus} />
             </Link>
           </div>
         )}
       </div>
       <div>
-        <span className="tag-category">카페</span>
+        <span className="tag-category">{positions.category ? positions.category.slice(0, 2) : '주소'}</span>
         <p className="site-addr">{positions.address}</p>
       </div>
     </Wrapper>

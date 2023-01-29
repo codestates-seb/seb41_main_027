@@ -3,12 +3,17 @@ import { MapMarker, Map, CustomOverlayMap } from 'react-kakao-maps-sdk'
 import { useRef, useState } from 'react'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 import { listClick, searchValue, placesAll } from '../../recoil/atoms'
+
 import SearchBar from './SearchBar/SearchBar'
 import SiteInfoCard from './SiteInfoCard/SiteInfoCard'
 import { useGetPlace, useKeywordSearch } from '../../query/place'
 import Loading from '../Loading/Loading'
 import { toast } from 'react-toastify'
 import { Link, useLocation } from 'react-router-dom'
+import { getLoginInfo } from '../../api/login'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const Container = styled.section`
   position: relative;
@@ -24,10 +29,10 @@ const Container = styled.section`
     position: absolute;
     z-index: 1500;
     // Demo Position 🫡
-    top: 140px;
+    top: 40px;
     right: 32px;
     width: inherit;
-    height: 71.5%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -42,13 +47,30 @@ const Container = styled.section`
     }
     border-radius: 12px;
   }
+  .addPlaceBtn {
+    margin-bottom: 12px;
+    width: 100%;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    background-color: #da4c1f;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(1, 25, 54, 0.25);
+  }
+  .addPlaceBtn:hover {
+    background-color: #ff1f1f;
+    box-shadow: 0px 4px 16px rgba(215, 0, 0, 0.5);
+  }
 `
 const MarkerInfoBox = styled.div`
   color: black;
 `
 const { kakao } = window
 
-const MainMap = ({ sort, id }) => {
+const MainMap = ({ sort, categoryId }) => {
   const mapRef = useRef()
   const [map, setMap] = useState()
   const location = useLocation()
@@ -57,30 +79,38 @@ const MainMap = ({ sort, id }) => {
   const [clickPoint, setClickPoint] = useRecoilState(listClick)
   const [keyword, setKeyword] = useRecoilState(searchValue)
   const [points, setPoints] = useRecoilState(placesAll)
+  const { id } = getLoginInfo()
   console.log('keyword : ', keyword)
   // fetch data
   if (keyword === '') {
-    const query = useGetPlace(sort, id)
+    const query = useGetPlace(sort, categoryId)
     if (query.isLoading) return <Loading />
     if (query.isError) return toast.error(query.error.message)
     const items = query.data
     setPoints(items.placeList)
-
     console.log('points', points)
-    console.log('sort : ', sort)
-    console.log('categoryId : ', id)
+    // console.log('sort : ', sort)
+    // console.log('categoryId : ', categoryId)
   } else {
     const query = useKeywordSearch(keyword)
     if (query.isLoading) return <Loading />
     if (query.isError) return toast.error(query.error.message)
     const items = query.data
-    console.log('keywordSearch : ', items)
     setPoints(items.placeList)
   }
+  console.log('points 길이 : ', points.length)
   return (
     <Container>
       <SearchBar />
       <div className="site-list">
+        {id && (
+          <Link to={`/place`}>
+            <button className="addPlaceBtn">
+              <FontAwesomeIcon icon={faPlus} />
+              장소 등록하기
+            </button>
+          </Link>
+        ): null}
         {points.map((point, index) => (
           <SiteInfoCard index={index} key={index} positions={point} />
         ))}

@@ -15,8 +15,8 @@ export const useGetPlaceInfoById = pId => {
   })
 }
 
-export const useGetPlace = (sort, id) => {
-  return useQuery(['getPlace', sort, id], ({ queryKey }) => place.getPlace(queryKey[1], queryKey[2]), {
+export const useGetPlace = (sort, categoryId) => {
+  return useQuery(['getPlace', sort, categoryId], ({ queryKey }) => place.getPlace(queryKey[1], queryKey[2]), {
     enabled: !!sort,
     staleTime: QUERY_STALETIME,
     retry: false,

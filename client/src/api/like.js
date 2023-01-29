@@ -5,6 +5,12 @@ import { API_LIKE_ENDPOINT } from '../utils/const'
 
 // like axios CRUD
 
+// get like list
+export const getLikeList = async (page, size) => {
+  const result = await customAxios.get(`${API_LIKE_ENDPOINT}?page=${page}&size=${size}`)
+  return result.data
+}
+
 // update
 export const updateLike = async (pId, isLiked) => {
   try {

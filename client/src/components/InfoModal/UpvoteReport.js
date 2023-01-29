@@ -8,16 +8,18 @@ import * as likeAPi from '../../api/like'
 import { ConfirmModal } from '../../components/Modal/ConfirmModal'
 import { InfoUpvoteReport } from './UpvoteReportStyle'
 import { getLoginInfo } from '../../api/login'
+import ReportModal from '../../pages/Report/ReportModal'
 
 const UpvoteReport = ({ item, queryRefresh }) => {
   // console.log('-- (2)UpvoteReport Render --')
 
   const loginMemberId = getLoginInfo().id
-  const { placeId: pId, likeCount: likeCnt, isLiked: isLiked } = item
+  const { placeId: pId, name: pName, likeCount: likeCnt, isLiked: isLiked } = item
 
   // state, hook
   const navigate = useNavigate()
   const [confirmModal, setConfirmModal] = useState({})
+  const [reportModalOpen, setReportModalOpen] = useState(false)
   const [likeState, setLikeState] = useState({
     isLiked: isLiked,
     likeCnt: likeCnt,
@@ -51,6 +53,7 @@ const UpvoteReport = ({ item, queryRefresh }) => {
         fnConfirm={confirmModal.fnConfirm}
         position={confirmModal.position}
       />
+      {reportModalOpen && <ReportModal subject={[pId, pName]} modalClose={() => setReportModalOpen(false)} />}
       <div className="head-like">
         <button onClick={handleLikeEdit}>
           {likeState.isLiked && <FontAwesomeIcon icon={likeOn} />}
@@ -60,7 +63,7 @@ const UpvoteReport = ({ item, queryRefresh }) => {
       </div>
       <div className="head-report">
         <FontAwesomeIcon icon={faFlag} />
-        <button onClick={() => window.open('')}>장소 오류 제보하기</button>
+        <button onClick={() => setReportModalOpen(true)}>장소 오류 제보하기</button>
       </div>
     </InfoUpvoteReport>
   )
