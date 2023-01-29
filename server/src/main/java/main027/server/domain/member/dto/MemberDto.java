@@ -25,7 +25,8 @@ public class MemberDto {
         private String nickName;
 
         @NotBlank
-        @Size(min = 8, max = 16, message = "비밀번호는 최소 8자 이상, 최대 16자 이하여야 합니다.")
+        @Pattern(regexp = "^[#?!@$%^&*a-zA-Z0-9]{8,16}$",
+                message = "비밀번호는 8 ~ 16 글자여야 합니다.")
         private String password;
     }
 
@@ -38,7 +39,8 @@ public class MemberDto {
                 message = "닉네임은 최소 2글자 이상 12글자 이하여야 합니다. 또, 특수문자 및 공백은 포함될 수 없습니다.")
         private String nickName;
 
-        @Size(min = 8, max = 16, message = "비밀번호는 최소 8자 이상, 최대 16자 이하여야 합니다.")
+        @Pattern(regexp = "^[#?!@$%^&*a-zA-Z0-9]{8,16}$",
+                message = "비밀번호는 8 ~ 16 글자여야 합니다.")
         private String password;
 
         public Patch(String nickName) {

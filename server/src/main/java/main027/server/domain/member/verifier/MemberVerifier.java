@@ -38,6 +38,8 @@ public class MemberVerifier {
             throw new BusinessLogicException(ExceptionCode.EMAIL_ALREADY_EXISTS);
         if (memberByNickName.isPresent())
             throw new BusinessLogicException(ExceptionCode.NICKNAME_ALREADY_EXISTS);
+
+
     }
 
     public void verifyExistsNickName(String nickName) {
