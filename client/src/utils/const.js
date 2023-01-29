@@ -13,8 +13,8 @@ export const QUERY_RETRY = 1
 export const QUERY_STALETIME = 20000
 
 // regular expression
-export const MEMBER_NICKNAME_REGEX = /^[0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ]{2,12}$/
-export const MEMBER_PWD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,20}/
+export const MEMBER_NICKNAME_REGEX = /^[0-9a-zA-Zㄱ-힣]{2,12}$/
+export const MEMBER_PWD_REGEX = /^[#?!@$%^&*-a-zA-Z0-9]{8,16}$/
 
 // emoji
 import {
