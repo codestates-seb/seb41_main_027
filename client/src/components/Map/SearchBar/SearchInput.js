@@ -7,9 +7,6 @@ import { searchValue } from '../../../recoil/atoms'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
-// li사이즈만 빼둠 Nav css 셋업 안된 상태 -> 추후 Acitve 스타일링 필요
-// <a href="/" className={type.page === "home" ? "selected" : ""}>
-
 const StyleFontAwesomeIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
   color: #13c57c;
