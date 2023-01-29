@@ -256,8 +256,7 @@ const Register = () => {
       toast.success('회원가입이 완료되었습니다.')
       navigate('/signin')
     } catch (err) {
-      // err: 이미 사용중인 이메일: 409 &  이미 사용중인 닉네임: 409
-      console.log(err)
+      console.log('err', err)
       if (!err?.response) {
         setErrMsg(
           <p>
@@ -265,10 +264,24 @@ const Register = () => {
             새로고침 후 다시 시도해주세요.😭
           </p>,
         )
-      } else if (err.response?.status === 409) {
+      } else if (err.response?.data.message === 'This Email Already Exists') {
         setErrMsg(
           <p>
-            이미 사용중인 이메일 혹은 닉네임 이에요. <br />
+            이미 사용중인 이메일이에요. <br />
+            변경해주세요.🥹
+          </p>,
+        )
+      } else if (err.response?.data.message === 'This NickName Already Exists') {
+        setErrMsg(
+          <p>
+            이미 사용중인닉네임 이에요. <br />
+            변경해주세요.🥹
+          </p>,
+        )
+      } else if (err.response?.data.message === 'Email and NickName Already Exists') {
+        setErrMsg(
+          <p>
+            이미 사용중인 이메일과 닉네임 이에요. <br />
             변경해주세요.🥹
           </p>,
         )
