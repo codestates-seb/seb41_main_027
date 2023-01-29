@@ -3,6 +3,7 @@ import { MapMarker, Map, CustomOverlayMap } from 'react-kakao-maps-sdk'
 import { useRef, useState } from 'react'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 import { listClick, searchValue, placesAll } from '../../recoil/atoms'
+
 import SearchBar from './SearchBar/SearchBar'
 import SiteInfoCard from './SiteInfoCard/SiteInfoCard'
 import { useGetPlace, useKeywordSearch } from '../../query/place'
@@ -10,6 +11,9 @@ import Loading from '../Loading/Loading'
 import { toast } from 'react-toastify'
 import { Link, useLocation } from 'react-router-dom'
 import { getLoginInfo } from '../../api/login'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const Container = styled.section`
   position: relative;
@@ -21,15 +25,14 @@ const Container = styled.section`
   box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.4);
   background-color: #fff;
 
-  .site-list,
-  .addPlaceBtn {
+  .site-list {
     position: absolute;
     z-index: 1500;
     // Demo Position 🫡
-    top: 140px;
+    top: 40px;
     right: 32px;
     width: inherit;
-    height: 71.5%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -45,16 +48,21 @@ const Container = styled.section`
     border-radius: 12px;
   }
   .addPlaceBtn {
-    padding: 10px 20px;
-    top: 90px;
-    height: 40px;
-    border-radius: 18px;
-    background-color: #da4c1f;
-    color: white;
+    margin-bottom: 12px;
+    width: 100%;
+    height: 48px;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin: 0px 66px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    background-color: #da4c1f;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(1, 25, 54, 0.25);
+  }
+  .addPlaceBtn:hover {
+    background-color: #ff1f1f;
+    box-shadow: 0px 4px 16px rgba(215, 0, 0, 0.5);
   }
 `
 const MarkerInfoBox = styled.div`
@@ -96,13 +104,16 @@ const MainMap = ({ sort, categoryId }) => {
   return (
     <Container>
       <SearchBar />
-      {id && (
-        <Link to={`/place`}>
-          <button className="addPlaceBtn">장소 등록하기</button>
-        </Link>
-      )}
 
       <div className="site-list">
+        {id && (
+          <Link to={`/place`}>
+            <button className="addPlaceBtn">
+              <FontAwesomeIcon icon={faPlus} />
+              장소 등록하기
+            </button>
+          </Link>
+        )}
         {points.map((point, index) => (
           <SiteInfoCard index={index} key={index} positions={point} />
         ))}
