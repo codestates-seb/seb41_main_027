@@ -67,7 +67,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
