@@ -2,6 +2,9 @@ import styled from 'styled-components'
 import SelectBox from './SelectBox'
 import RadioButton from './RadioButton'
 import SearchInput from './SearchInput'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { searchValue } from '../../../recoil/atoms'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Wrapper = styled.div`
   // Position 🫡
@@ -15,11 +18,21 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 const SearchBar = () => {
+  // state
+  const [resetKeyword, setResetKeyword] = useRecoilState(searchValue)
+  const navigate = useNavigate()
+
+  // handler
+  const onClickReset = () => {
+    setResetKeyword('')
+    navigate(`/`)
+  }
   return (
     <Wrapper>
       <RadioButton />
       <SelectBox />
       <SearchInput />
+      {resetKeyword && <button onClick={onClickReset}>초기화</button>}
     </Wrapper>
   )
 }

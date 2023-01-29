@@ -5,6 +5,8 @@ import { faPagelines } from '@fortawesome/free-brands-svg-icons'
 import { faMap, faComment, faBug, faUser } from '@fortawesome/free-solid-svg-icons'
 import Logo from '../Nav/images/Logo.svg'
 import { Link } from 'react-router-dom'
+import ReportModal from '../../pages/Report/ReportModal'
+import { useState } from 'react'
 
 // li사이즈만 빼둠 Nav css 셋업 안된 상태 -> 추후 Acitve 스타일링 필요
 // <a href="/" className={type.page === "home" ? "selected" : ""}>
@@ -38,7 +40,8 @@ const Wrapper = styled.nav`
     li:not(:first-child) {
       cursor: pointer;
       margin-bottom: 16px;
-      a {
+      a,
+      button {
         width: 68px;
         height: 75px;
         display: flex;
@@ -55,7 +58,8 @@ const Wrapper = styled.nav`
           letter-spacing: -0.5px;
         }
       }
-      a:hover:not(.logo) {
+      a:hover:not(.logo),
+      button:hover:not(.logo) {
         color: #13c57c;
         font-weight: 700;
         background-color: rgba(255, 255, 255, 0.99);
@@ -66,8 +70,12 @@ const Wrapper = styled.nav`
 `
 
 const Nav = () => {
+  // 오류 제보 모달 팝업
+  const [reportModalOpen, setReportModalOpen] = useState(false)
+
   return (
     <Wrapper>
+      {reportModalOpen && <ReportModal modalClose={() => setReportModalOpen(false)} />}
       <ul>
         <li className="logo">
           <Link to="/" className="logo">
@@ -93,16 +101,16 @@ const Nav = () => {
           </Link>
         </li>
         <li>
-          <Link to="">
+          <button onClick={() => window.open('https://open.kakao.com/o/g8FLpt1e', '_blank')}>
             <StyleFontAwesomeIcon icon={faComment} />
             <span>오픈채팅</span>
-          </Link>
+          </button>
         </li>
         <li>
-          <Link to="">
+          <button onClick={() => setReportModalOpen(true)}>
             <StyleFontAwesomeIcon icon={faBug} />
             <span>오류제보</span>
-          </Link>
+          </button>
         </li>
       </ul>
     </Wrapper>

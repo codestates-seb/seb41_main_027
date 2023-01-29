@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 // import { useForm } from 'react-hook-form';
 
-import { API_LOGIN_ENDPOINT } from '../utils/const'
+import { API_LOGIN_ENDPOINT, MEMBER_PWD_REGEX } from '../utils/const'
 import { customAxios } from '../utils/customAxios'
 import { setLoginInfo } from '../api/login'
 
@@ -189,8 +189,6 @@ const Container = styled.div`
 
 // 🤖  Regex set ----------------------------------------
 const EMAIL_REGEX = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
-const PWD_REGEX = /(?=.*[0-9])(?=.*[a-z]).{8,20}/
-// 8자 이상 20자 이하, 숫자와 영문의 조합으로 구성
 
 const SignIn = () => {
   localStorage.clear()
@@ -221,7 +219,7 @@ const SignIn = () => {
   }, [email])
 
   useEffect(() => {
-    setValidPassword(PWD_REGEX.test(password))
+    setValidPassword(MEMBER_PWD_REGEX.test(password))
   }, [password])
 
   useEffect(() => {
@@ -232,7 +230,7 @@ const SignIn = () => {
     e.preventDefault()
     // 버튼 활성화 되었을 경우 (js hack)
     const v1 = EMAIL_REGEX.test(email)
-    const v2 = PWD_REGEX.test(password)
+    const v2 = MEMBER_PWD_REGEX.test(password)
     if (!v1 || !v2) {
       setErrMsg('입력된 정보를 다시 확인해주세요.')
       return
