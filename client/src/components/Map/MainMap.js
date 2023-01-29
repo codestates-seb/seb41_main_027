@@ -3,7 +3,6 @@ import { MapMarker, Map, CustomOverlayMap } from 'react-kakao-maps-sdk'
 import { useRef, useState } from 'react'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 import { listClick, searchValue, placesAll } from '../../recoil/atoms'
-
 import SearchBar from './SearchBar/SearchBar'
 import SiteInfoCard from './SiteInfoCard/SiteInfoCard'
 import { useGetPlace, useKeywordSearch } from '../../query/place'
@@ -103,14 +102,14 @@ const MainMap = ({ sort, categoryId }) => {
     <Container>
       <SearchBar />
       <div className="site-list">
-        {id && (
+        {id && points.length !== 0 ? (
           <Link to={`/place`}>
             <button className="addPlaceBtn">
               <FontAwesomeIcon icon={faPlus} />
               장소 등록하기
             </button>
           </Link>
-        )}
+        ) : null}
         {points.map((point, index) => (
           <SiteInfoCard index={index} key={index} positions={point} />
         ))}
