@@ -11,6 +11,8 @@ import main027.server.global.utils.CustomBeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -23,7 +25,7 @@ public class PlaceUpdateServiceImpl implements PlaceUpdateService {
     @TimeTrace
     public Place updatePlace(Long memberId, Place place) {
         Place verifiedPlace = placeVerifier.findVerifiedPlace(place.getPlaceId());
-        if (verifiedPlace.getMember().getMemberId() != memberId) {
+        if (!Objects.equals(verifiedPlace.getMember().getMemberId(), memberId)) {
             throw new PermissionDeniedException(ExceptionCode.PERMISSION_DENIED);
         }
         Place updatedPlace = beanUtils.copyNonNullProperties(place, verifiedPlace);
