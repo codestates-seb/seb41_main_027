@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components'
-import { useState } from 'react'
 import { useNavigate, Outlet, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons'
 
 import Nav from '../../components/Nav/Nav'
 import Header from '../../components/Header/Header'
@@ -49,7 +47,7 @@ const Menu = styled.li`
 `
 
 const FontAwesomeIconStyle = styled(FontAwesomeIcon)`
-  color: ${props => props.iconColor};
+  color: ${props => props.color};
   font-size: 18px;
   vertical-align: top;
 `
@@ -80,12 +78,10 @@ const Mypage = () => {
               selected={menuName === 'bookmark'}
               onClick={() => handleClickTab('bookmark')}
             >
-              북마크&nbsp;
-              <FontAwesomeIconStyle icon={faBookmark} iconColor="green" />
+              북마크 리스트
             </Menu>
             <Menu aria-label="나의정보 탭 선택" selected={menuName === 'like'} onClick={() => handleClickTab('like')}>
-              추천장소&nbsp;
-              <FontAwesomeIconStyle icon={faHeart} iconColor="red" />
+              내가 추천한 장소
             </Menu>
             <Menu
               aria-label="나의정보 탭 선택"

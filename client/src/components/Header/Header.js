@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
 
 import { API_LOGOUT_ENDPOINT } from '../../utils/const'
 import { toast } from 'react-toastify'
@@ -38,34 +37,16 @@ const HeaderW = styled.header`
 `
 
 const Header = () => {
-  const { id, nickName } = getLoginInfo()
-  const [loginMemberId, setLoginMemberId] = useState(id)
+  const { id: loginMemberId, nickName } = getLoginInfo()
 
   const navigate = useNavigate()
   const location = useLocation()
 
   const HandleSignOut = async () => {
-    /*
-     * signin
-    - localStorage.clear()
-    - 로그인 성공 : setLoginInfo > callbackUrl redirect
-
-    * 로그아웃
-    = /auth/logout api
-    성공: localStorage.clear()
-
-    * 비로그인 페이지(token) > api > 401 > reissue(refreshToken) > 401 > signin
-    - OK : setLoginInfo
-
-     */
-    // 로그인을 할 때 -> 액세스, 리프래쉬를 받음(서버에서 응답으로 보내는 헤더)
-    // 클라이언트에서 요청 헤더에 담아야 할 것
-    // 로그인 후 접근 & refresh)
     try {
       await customAxios.post(API_LOGOUT_ENDPOINT)
       // 로그인 상태 변경
       localStorage.clear()
-      setLoginMemberId('')
       toast.success('로그아웃 되었습니다.')
       navigate(location.pathname, { replace: true })
     } catch (error) {
