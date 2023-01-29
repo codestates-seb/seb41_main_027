@@ -82,7 +82,7 @@ const MainMap = ({ sort, categoryId }) => {
     const items = query.data
     setPoints(items.placeList)
 
-    // console.log('points', points)
+    console.log('points', points)
     // console.log('sort : ', sort)
     // console.log('categoryId : ', categoryId)
   } else {
