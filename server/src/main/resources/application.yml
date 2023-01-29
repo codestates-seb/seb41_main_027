@@ -6,10 +6,10 @@ spring:
     # Local 개발 환경에서는 Intellij의 Active Profile을 local로 설정하면 됩니다.
     # Local 그룹 에서는 inmemory DB를 이용하며, 스프링부트 실행시에 StubData가 자동으로 DB에 넣어집니다.
     group:
-      local: h2-inMemory, stubData, redis
+      local: h2-inMemory, stubData, redis, mail
       # dev 그룹 에서는 db 설정을 mysql로 변경합니다.
       # DB의 usrename, password, URL은 외부에 노출시키면 안되기 때문에 EC2에 환경변수를 따로 생성해, 실행 시 불러오도록 합니다.
-      dev: dev-db, redis
+      dev: dev-db, redis, mail
 #      prod:
 
 #    include:
@@ -87,3 +87,23 @@ spring:
   redis:
     host: localhost
     port: 6379
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: mail
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
