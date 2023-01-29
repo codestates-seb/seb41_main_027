@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const AddPlaceModalWrapper = styled.div`
-  width: 472px;
-  height: 600px;
+  width: 370px;
+  height: 450px;
   position: relative;
   z-index: 9200;
   top: 50%;

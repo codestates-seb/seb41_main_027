@@ -52,7 +52,10 @@ export const createPlace = async body => {
 export const keywordSearch = async keyword => {
   try {
     const result = await customAxios.get(API_SEARCH_ENDPOINT + `?keyword=${keyword}`)
-    // console.log(result.data)
+    // console.log('result.data', result.data)
+    if (result.data.placeList.length === 0) {
+      toast.success('정보가 없습니다.')
+    }
     return result.data
   } catch (error) {
     // console.log(error)
