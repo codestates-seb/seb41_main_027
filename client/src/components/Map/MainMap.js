@@ -80,7 +80,6 @@ const MainMap = ({ sort, categoryId }) => {
     if (query.isError) return toast.error(query.error.message)
     const items = query.data
     setPoints(items.placeList)
-
     console.log('points', points)
     // console.log('sort : ', sort)
     // console.log('categoryId : ', categoryId)
@@ -89,18 +88,17 @@ const MainMap = ({ sort, categoryId }) => {
     if (query.isLoading) return <Loading />
     if (query.isError) return toast.error(query.error.message)
     const items = query.data
-    // console.log('keywordSearch : ', items)
     setPoints(items.placeList)
   }
-
+  console.log('points 길이 : ', points.length)
   return (
     <Container>
       <SearchBar />
-      {id && (
+      {id && points.length !== 0 ? (
         <Link to={`/place`}>
           <button className="addPlaceBtn">장소 등록하기</button>
         </Link>
-      )}
+      ) : null}
 
       <div className="site-list">
         {points.map((point, index) => (
