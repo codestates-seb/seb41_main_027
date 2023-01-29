@@ -55,7 +55,13 @@ jobs:
       working-directory: ./server/src/main/resources
     - name: database url
       run: echo "MYSQL_DATABASE_URL=${{secrets.MYSQL_DATABASE_URL}}" >> env.yml
-      working-directory: ./server/src/main/resources   
+      working-directory: ./server/src/main/resources
+    - name: mail username
+      run: echo "MAIL_USERNAME=${{secrets.MAIL_USERNAME}}" >> env.yml
+      working-directory: ./server/src/main/resources    
+    - name: mail password
+      run: echo "MAIL_PASSWORD=${{secrets.MAIL_PASSWORD}}" >> env.yml
+      working-directory: ./server/src/main/resources    
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
