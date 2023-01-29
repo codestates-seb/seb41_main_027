@@ -136,7 +136,7 @@ const SiteInfoCard = ({ positions, index }) => {
         )}
       </div>
       <div>
-        <span className="tag-category">{positions.category.slice(0, 2)}</span>
+        <span className="tag-category">{positions.category ? positions.category.slice(0, 2) : '주소'}</span>
         <p className="site-addr">{positions.address}</p>
       </div>
     </Wrapper>
