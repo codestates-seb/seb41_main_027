@@ -1,4 +1,4 @@
-package main027.server.global.auth.Redis;
+package main027.server.global.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
