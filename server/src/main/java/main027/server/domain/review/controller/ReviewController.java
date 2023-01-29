@@ -60,8 +60,9 @@ public class ReviewController {
 
     @TimeTrace
     @CacheEvict(value = "reviews", key = "#placeId")
-    @DeleteMapping("/{reviewId}")
-    public ResponseEntity deleteReview(@PathVariable Long reviewId) {
+    @DeleteMapping("/{placeId}/{reviewId}")
+    public ResponseEntity deleteReview(@PathVariable Long reviewId,
+                                       @PathVariable Long placeId) {
         reviewService.remove(dataHolder.getMemberId(), reviewId);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
