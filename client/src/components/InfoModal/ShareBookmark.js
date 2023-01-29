@@ -8,7 +8,7 @@ import { useRecoilValue } from 'recoil'
 
 import { InfoShareBookmark } from './ShareBookmarkStyle'
 import { ConfirmModal } from '../../components/Modal/ConfirmModal'
-import { ClipBoardCopy } from '../../utils/common'
+import { clipboardCopy } from '../../utils/common'
 import KakaoShareBtn from '../Button/KakaoShareBtn'
 import * as bookmarkApi from '../../api/bookmark'
 import { getLoginInfo } from '../../api/login'
@@ -16,9 +16,10 @@ import { reviewTotalCntByPlaceId } from '../../recoil/reviewState'
 
 const ShareBookmark = ({ item, queryRefresh }) => {
   // console.log('-- (7)ShareBookmark Render --')
-  const loginMemberId = getLoginInfo().id
 
+  const loginMemberId = getLoginInfo().id
   const { placeId: pId, kakaoId, name, description, likeCount, isBookMarked } = item
+  const shareLinkUrl = `${window.location.origin}/placeinfo/${pId}`
 
   // state, hook
   const navigate = useNavigate()
@@ -31,12 +32,12 @@ const ShareBookmark = ({ item, queryRefresh }) => {
     description: description,
     likeCnt: likeCount,
     reviewCnt: useRecoilValue(reviewTotalCntByPlaceId),
-    linkUrl: `${window.location.origin}/placeinfo/${pId}`,
+    linkUrl: shareLinkUrl,
   }
 
   // handle
   const handleClickCopy = () => {
-    ClipBoardCopy(window.location.href).then(() => toast.info('URL이 복사되었습니다.'))
+    clipboardCopy(shareLinkUrl).then(() => toast.info('URL이 복사되었습니다.'))
   }
 
   const handleBookmarkEdit = () => {
@@ -55,7 +56,7 @@ const ShareBookmark = ({ item, queryRefresh }) => {
   }
 
   const handleClickKakaoMapMove = () => {
-    window.open(`https://map.kakao.com/?itemId=${kakaoId}`, '_blank')
+    window.open(`https://place.map.kakao.com/${kakaoId}`, '_blank')
   }
 
   const confirmModalClose = () => {

@@ -72,7 +72,6 @@ const MainMap = ({ sort, categoryId }) => {
   const [keyword, setKeyword] = useRecoilState(searchValue)
   const [points, setPoints] = useRecoilState(placesAll)
   const { id } = getLoginInfo()
-
   console.log('keyword : ', keyword)
   // fetch data
   if (keyword === '') {
@@ -81,6 +80,9 @@ const MainMap = ({ sort, categoryId }) => {
     if (query.isError) return toast.error(query.error.message)
     const items = query.data
     setPoints(items.placeList)
+    console.log('points', points)
+    // console.log('sort : ', sort)
+    // console.log('categoryId : ', categoryId)
   } else {
     const query = useKeywordSearch(keyword)
     if (query.isLoading) return <Loading />
