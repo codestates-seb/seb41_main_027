@@ -34,7 +34,7 @@ public class PlaceController {
 
     @TimeTrace
     @PostMapping
-    @CacheEvict(value = "places")
+    @CacheEvict(value = "places", allEntries = true)
     public ResponseEntity postPlace(@Validated @RequestBody PlaceDto.PlacePostDto placePostDto) {
         Place place = placeService.createPlace(
                 placeMapper.placePostDtoToPlace(placePostDto, dataHolder.getMemberId()));
