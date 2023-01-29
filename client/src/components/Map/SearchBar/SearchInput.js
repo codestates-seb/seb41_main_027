@@ -4,6 +4,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { searchValue } from '../../../recoil/atoms'
+import { toast } from 'react-toastify'
 
 // li사이즈만 빼둠 Nav css 셋업 안된 상태 -> 추후 Acitve 스타일링 필요
 // <a href="/" className={type.page === "home" ? "selected" : ""}>
@@ -49,7 +50,7 @@ const SearchInput = () => {
   // handler
   const handleOnKeyPress = e => {
     if (e.key === 'Enter') {
-      setSearch(e.target.value)
+      // setSearch(e.target.value)
       e.preventDefault()
       handleSearch(e)
     }
@@ -60,7 +61,12 @@ const SearchInput = () => {
   }
   const handleSearch = e => {
     e.preventDefault()
-    setKeyword(search)
+    if (search && search.length > 1) {
+      setKeyword(search)
+    } else {
+      // e.preventDefault()
+      toast.error('최소 2글자 이상이어야 합니다.')
+    }
   }
   return (
     <Wrapper>
@@ -75,7 +81,7 @@ const SearchInput = () => {
             onChange={onChangeSearch}
             onKeyPress={handleOnKeyPress}
           />
-          <button className="SearchQuerySubmit" name="">
+          <button className="SearchQuerySubmit" name="" disabled={!search}>
             <StyleFontAwesomeIcon icon={faSearch} onClick={handleSearch} />
           </button>
         </div>
