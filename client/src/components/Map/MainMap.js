@@ -72,7 +72,6 @@ const MainMap = ({ sort, categoryId }) => {
   const [keyword, setKeyword] = useRecoilState(searchValue)
   const [points, setPoints] = useRecoilState(placesAll)
   const { id } = getLoginInfo()
-
   console.log('keyword : ', keyword)
   // fetch data
   if (keyword === '') {
@@ -97,7 +96,6 @@ const MainMap = ({ sort, categoryId }) => {
           <button className="addPlaceBtn">장소 등록하기</button>
         </Link>
       ) : null}
-
       <div className="site-list">
         {points.map((point, index) => (
           <SiteInfoCard index={index} key={index} positions={point} />

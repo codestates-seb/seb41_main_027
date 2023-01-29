@@ -86,6 +86,7 @@ const SearchInput = () => {
   const onClickReset = () => {
     setKeyword('')
     navigate(`/`)
+
   }
   return (
     <Wrapper>

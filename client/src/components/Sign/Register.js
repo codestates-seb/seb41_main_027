@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import styled from 'styled-components'
 
 import { customAxios } from '../../utils/customAxios'
-import { API_MEMBER_ENDPOINT } from '../../utils/const'
+import { API_MEMBER_ENDPOINT, MEMBER_PWD_REGEX } from '../../utils/const'
 
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -177,7 +177,6 @@ const EMAIL_REGEX = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
 const USERNAME_REGEX = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/
 // 2자 이상 16자 이하, 영어 또는 숫자 또는 한글로 구성
 // * 한글 초성 및 모음은 허용하지 않음
-const PWD_REGEX = /(?=.*[0-9])(?=.*[a-z]).{8,20}/
 // 8자 이상 20자 이하, 숫자와 영문의 조합으로 구성
 
 // 🤖 valid set ----------------------------------------
@@ -227,7 +226,7 @@ const Register = () => {
   }, [nickName])
 
   useEffect(() => {
-    setValidPwd(PWD_REGEX.test(password))
+    setValidPwd(MEMBER_PWD_REGEX.test(password))
     setValidMatch(password === matchPwd)
   }, [password, matchPwd])
 
@@ -241,7 +240,7 @@ const Register = () => {
     // 버튼 활성화 되었을 경우 (js hack)
     const v1 = EMAIL_REGEX.test(email)
     const v2 = USERNAME_REGEX.test(nickName)
-    const v3 = PWD_REGEX.test(password)
+    const v3 = MEMBER_PWD_REGEX.test(password)
     if (!v1 || !v2 || !v3) {
       setErrMsg('입력된 정보들을 다시 확인해주세요.')
       return

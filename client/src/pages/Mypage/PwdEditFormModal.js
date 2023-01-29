@@ -59,7 +59,7 @@ const PwdEditFormModal = () => {
     if (isValidCheck) {
       setValidPassword(target, true, '올바른 비밀번호입니다.')
     } else if (!isValidCheck) {
-      setValidPassword(target, false, '8자 ~ 20자 사이의 영문자와 숫자 조합으로 입력해 주세요.')
+      setValidPassword(target, false, '8자 이상 16자 이하로 입력해 주세요.')
     }
 
     if (pwd.value && newPwd.value) {

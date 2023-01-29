@@ -14,6 +14,7 @@ const PlaceInfo = lazy(() => import('./pages/PlaceInfo'))
 const Mypage = lazy(() => import('./pages/Mypage/Mypage'))
 const MyInfo = lazy(() => import('./pages/Mypage/MyInfo'))
 const Bookmark = lazy(() => import('./pages/Mypage/Bookmark'))
+const Like = lazy(() => import('./pages/Mypage/Like'))
 const PwdEditFormModal = lazy(() => import('./pages/Mypage/PwdEditFormModal'))
 const AboutUs = lazy(() => import('./pages/AboutUs/AboutUs'))
 const SignUp = lazy(() => import('./pages/SignUp'))
@@ -31,17 +32,6 @@ const Main = styled.main`
   box-sizing: border-box;
 `
 
-const StyleToastContainer = styled(ToastContainer)`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-`
-
 function App() {
   // 장소 상세 모달 팝업을 위한 로직
   const location = useLocation()
@@ -52,8 +42,8 @@ function App() {
       <Reset />
       <GlobalStyle />
       <ScrollToTop />
-      <StyleToastContainer
-        position="top-center"
+      <ToastContainer
+        position="bottom-center"
         autoClose={500}
         closeOnClick
         hideProgressBar={false}
@@ -69,6 +59,7 @@ function App() {
             <Route path="/mypage" element={<Mypage />}>
               <Route index element={<Navigate to="/mypage/bookmark" />} />
               <Route path="bookmark" element={<Bookmark />} />
+              <Route path="like" element={<Like />} />
               <Route path="myinfo" element={<MyInfo />} />
             </Route>
             <Route path="/aboutus" element={<AboutUs />} />
