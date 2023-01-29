@@ -47,7 +47,7 @@ const Wrapper = styled.div`
       color: blue;
     }
   }
-  .option[value=''][disabled] {
+  .select option[value=''][disabled] {
     display: none;
   }
 `
@@ -70,7 +70,7 @@ const CategorySelectBox = () => {
         }}
         required
       >
-        <option value="기본" disabled selected>
+        <option value="" disabled selected>
           카테고리를 설정해 주세요
         </option>
         <option value="1">제로웨이스트샵</option>

@@ -1,8 +1,8 @@
 import CategorySelectBox from './CategorySelectBox'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { useRecoilValue } from 'recoil'
-import { categoryValue } from '../../recoil/atoms'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { categoryValue, searchValue } from '../../recoil/atoms'
 import * as place from '../../api/place'
 import styled from 'styled-components'
 
@@ -40,6 +40,8 @@ const AddPlaceInfo = () => {
   // state, hook
   const [selectedCategory, setSelectedCategory] = useState(null)
   const category = useRecoilValue(categoryValue)
+  const [keywordReset, setKeywordReset] = useRecoilState(searchValue)
+  const navigate = useNavigate()
 
   // handle
   const handleSubmitPlaceInfo = e => {
@@ -59,6 +61,8 @@ const AddPlaceInfo = () => {
     place.createPlace(body).then(data => {
       console.log('created place', data)
     })
+    setKeywordReset('')
+    navigate(`/`)
   }
 
   return (
