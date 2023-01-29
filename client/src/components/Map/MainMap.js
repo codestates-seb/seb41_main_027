@@ -72,7 +72,6 @@ const MainMap = ({ sort, categoryId }) => {
   const [keyword, setKeyword] = useRecoilState(searchValue)
   const [points, setPoints] = useRecoilState(placesAll)
   const { id } = getLoginInfo()
-
   console.log('keyword : ', keyword)
   // fetch data
   if (keyword === '') {
