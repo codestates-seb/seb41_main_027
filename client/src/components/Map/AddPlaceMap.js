@@ -74,13 +74,13 @@ const AddPlaceMap = () => {
     // }
     const ps = new kakao.maps.services.Places()
     ps.keywordSearch(keyword, (data, status, _pagination) => {
-      // console.log('keyword : ', keyword)
+      console.log('keyword : ', keyword)
       if (status === kakao.maps.services.Status.OK) {
         const bounds = new kakao.maps.LatLngBounds()
         let markers = []
-
+        console.log('카카오데이터 : ', data)
         for (let i = 0; i < data.length; i++) {
-          // console.log('data : ', data[i])
+          console.log('data : ', data[i])
           markers.push({
             position: {
               lat: Number(data[i].y),

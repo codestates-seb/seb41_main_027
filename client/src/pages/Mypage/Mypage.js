@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { useState } from 'react'
 import { useNavigate, Outlet, useLocation } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Nav from '../../components/Nav/Nav'
 import Header from '../../components/Header/Header'
@@ -46,20 +46,24 @@ const Menu = styled.li`
     `}
 `
 
+const FontAwesomeIconStyle = styled(FontAwesomeIcon)`
+  color: ${props => props.color};
+  font-size: 18px;
+  vertical-align: top;
+`
+
 const Mypage = () => {
   useLoginCheck('redirect')
 
   // state, hook
   const navigate = useNavigate()
-  const location = useLocation()
-  const [selectedTab, setSelectedTab] = useState('북마크')
+  const { pathname } = useLocation()
+
+  const menuName = pathname.split('/')[2]
 
   // handle
-  const handleClickTab = e => {
-    const tabName = e.target.innerText
-    setSelectedTab(tabName)
-    if (tabName === '북마크') navigate('/mypage/bookmark')
-    if (tabName === '나의정보') navigate('/mypage/myinfo')
+  const handleClickTab = tabName => {
+    navigate('/mypage/' + tabName)
   }
 
   return (
@@ -69,10 +73,21 @@ const Mypage = () => {
         <Header />
         <Container>
           <TabMenu>
-            <Menu aria-label="북마크 탭 선택" selected={selectedTab === '북마크'} onClick={handleClickTab}>
-              북마크
+            <Menu
+              aria-label="북마크 탭 선택"
+              selected={menuName === 'bookmark'}
+              onClick={() => handleClickTab('bookmark')}
+            >
+              북마크 리스트
             </Menu>
-            <Menu aria-label="나의정보 탭 선택" selected={selectedTab === '나의정보'} onClick={handleClickTab}>
+            <Menu aria-label="나의정보 탭 선택" selected={menuName === 'like'} onClick={() => handleClickTab('like')}>
+              내가 추천한 장소
+            </Menu>
+            <Menu
+              aria-label="나의정보 탭 선택"
+              selected={menuName === 'myinfo'}
+              onClick={() => handleClickTab('myinfo')}
+            >
               나의정보
             </Menu>
           </TabMenu>

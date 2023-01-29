@@ -4,6 +4,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { searchValue } from '../../../recoil/atoms'
+import { toast } from 'react-toastify'
 
 // li사이즈만 빼둠 Nav css 셋업 안된 상태 -> 추후 Acitve 스타일링 필요
 // <a href="/" className={type.page === "home" ? "selected" : ""}>
@@ -42,26 +43,46 @@ const Wrapper = styled.div`
 `
 
 const SearchInput = () => {
+  // state, hook
   const [keyword, setKeyword] = useRecoilState(searchValue)
+  const [search, setSearch] = useState()
+
+  // handler
+  const handleOnKeyPress = e => {
+    if (e.key === 'Enter') {
+      // setSearch(e.target.value)
+      e.preventDefault()
+      handleSearch(e)
+    }
+  }
   const onChangeSearch = e => {
     e.preventDefault()
-    setKeyword(e.target.value)
-    // console.log(keyword)
+    setSearch(e.target.value)
+  }
+  const handleSearch = e => {
+    e.preventDefault()
+    if (search && search.length > 1) {
+      setKeyword(search)
+    } else {
+      // e.preventDefault()
+      toast.error('최소 2글자 이상이어야 합니다.')
+    }
   }
   return (
     <Wrapper>
       <form>
         <div className="SearchBar">
           <input
-            value={keyword}
+            value={search || ''}
             className="SearchQueryInput"
             type="text"
             name=""
             placeholder="장소를 검색해주세요."
             onChange={onChangeSearch}
+            onKeyPress={handleOnKeyPress}
           />
-          <button className="SearchQuerySubmit" type="submit" name="">
-            <StyleFontAwesomeIcon icon={faSearch} />
+          <button className="SearchQuerySubmit" name="" disabled={!search}>
+            <StyleFontAwesomeIcon icon={faSearch} onClick={handleSearch} />
           </button>
         </div>
       </form>

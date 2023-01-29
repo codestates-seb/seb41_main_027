@@ -17,7 +17,7 @@ const Home = () => {
       <Wrapper>
         <Header />
         <>
-          <MainMap sort={sort} id={category} />
+          <MainMap sort={sort} categoryId={category} />
         </>
       </Wrapper>
     </>
