@@ -1,6 +1,6 @@
 import { customAxios } from '../utils/customAxios'
 import { toast } from 'react-toastify'
-import { API_PLACE_ENDPOINT } from '../utils/const'
+import { API_PLACE_ENDPOINT, API_SEARCH_ENDPOINT } from '../utils/const'
 
 // place axios CRUD
 
@@ -41,9 +41,24 @@ export const getPlace = async (sort, id) => {
 export const createPlace = async body => {
   try {
     const result = await customAxios.post(API_PLACE_ENDPOINT, body)
+    toast.success('장소가 등록되었습니다. ')
     return result.data
   } catch (error) {
     console.log(error)
-    toast.error(error.message)
+    if (error.response.data.status && error.response.data.status === 409) {
+      toast.error(' 이미 등록된 곳입니다. ')
+    } else toast.error(error.message)
+  }
+}
+
+// keyword search
+export const keywordSearch = async keyword => {
+  try {
+    const result = await customAxios.get(API_SEARCH_ENDPOINT + `?keyword=${keyword}`)
+    console.log(result.data)
+    return result.data
+  } catch (error) {
+    console.log(error)
+    toast.error('2글자 이상 검색하세요!')
   }
 }

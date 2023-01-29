@@ -42,26 +42,41 @@ const Wrapper = styled.div`
 `
 
 const SearchInput = () => {
+  // state, hook
   const [keyword, setKeyword] = useRecoilState(searchValue)
+  const [search, setSearch] = useState()
+
+  // handler
+  const handleOnKeyPress = e => {
+    if (e.key === 'Enter') {
+      setSearch(e.target.value)
+      e.preventDefault()
+      handleSearch(e)
+    }
+  }
   const onChangeSearch = e => {
     e.preventDefault()
-    setKeyword(e.target.value)
-    // console.log(keyword)
+    setSearch(e.target.value)
+  }
+  const handleSearch = e => {
+    e.preventDefault()
+    setKeyword(search)
   }
   return (
     <Wrapper>
       <form>
         <div className="SearchBar">
           <input
-            value={keyword}
+            value={search || ''}
             className="SearchQueryInput"
             type="text"
             name=""
             placeholder="장소를 검색해주세요."
             onChange={onChangeSearch}
+            onKeyPress={handleOnKeyPress}
           />
-          <button className="SearchQuerySubmit" type="submit" name="">
-            <StyleFontAwesomeIcon icon={faSearch} />
+          <button className="SearchQuerySubmit" name="">
+            <StyleFontAwesomeIcon icon={faSearch} onClick={handleSearch} />
           </button>
         </div>
       </form>

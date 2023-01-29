@@ -1,11 +1,13 @@
 import { useRef, useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import styled from 'styled-components'
+
 import { customAxios } from '../../utils/customAxios'
 import { API_MEMBER_ENDPOINT } from '../../utils/const'
-import styled from 'styled-components'
+
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { toast } from 'react-toastify'
 
 //💄 Demo Styles --------------------------------
 const Container = styled.div`
@@ -143,8 +145,19 @@ const Container = styled.div`
   }
 
   .errmsg {
-    color: #ff2c2c;
-    font-weight: 400;
+    width: 100%;
+    margin: 8px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e90000;
+    font-size: 15px;
+    font-weight: 40;
+    line-height: 22px;
+    border-radius: 8px;
+    border: 0.2px solid #fbcdcd;
+    background: #ffeded;
   }
 
   a,
@@ -244,12 +257,30 @@ const Register = () => {
       toast.success('회원가입이 완료되었습니다.')
       navigate('/signin')
     } catch (err) {
+      // err: 이미 사용중인 이메일: 409 &  이미 사용중인 닉네임: 409
+      console.log(err)
       if (!err?.response) {
-        setErrMsg('서버의 응답이 없습니다. 새로고침 후 다시 시도해주세요.😭')
+        setErrMsg(
+          <p>
+            서버의 응답이 없어요. <br />
+            새로고침 후 다시 시도해주세요.😭
+          </p>,
+        )
       } else if (err.response?.status === 409) {
-        setErrMsg('이미 사용중인 닉네임입니다. 변경해주세요.')
+        setErrMsg(
+          <p>
+            이미 사용중인 이메일 혹은 닉네임 이에요. <br />
+            변경해주세요.🥹
+          </p>,
+        )
       } else {
-        setErrMsg('회원 가입에 실패했습니다.😭 다시 시도해주세요.')
+        setErrMsg(
+          <p>
+            회원가입에 실패했어요.
+            <br />
+            새로고침 후 다시 시도해주세요.😭
+          </p>,
+        )
       }
       errRef.current.focus()
     }
@@ -273,10 +304,6 @@ const Register = () => {
               ref={userRef}
               autoComplete="off"
               onChange={e => setEmail(e.target.value)}
-              // 멘토님 Q. 지금 비효율 적임 만약 새로 짠다면?
-              // 기존로직: onChange > setEmail > email changed > email 종속 useEffect > 유효성 체크 > 유효성 결과를 > 유효성 메세지 상태에 저장
-              // 필요없는 부분 줄여보기: onChange > 유효성을 체크 함수 > 유효성을 체크하고 메세지 저장 & setEmail
-              // email = {value: "", isValided: false, validatedMessage:""}
               value={email}
               required
               aria-invalid={validEmail ? 'false' : 'true'}
@@ -285,9 +312,6 @@ const Register = () => {
               onBlur={() => setEmailFocus(false)}
             />
             <label htmlFor="email">
-              {/* 멘토님 Q. 유효성 CSS 프롭이나 연산자 이용해서 변경하기를 만약 변경한다면.. 
-                {validEmail && <FontAwesomeIcon icon={faCircleCheck} />}
-                {!validEmail && <FontAwesomeIcon icon={faCircleXmark} />} */}
               <FontAwesomeIcon icon={faCircleCheck} className={validEmail ? 'valid' : 'hide'} />
               <FontAwesomeIcon icon={faCircleXmark} className={validEmail || !nickName ? `hide` : 'invalid'} />
             </label>

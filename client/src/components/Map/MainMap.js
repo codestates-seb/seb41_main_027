@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import { MapMarker, Map, CustomOverlayMap } from 'react-kakao-maps-sdk'
 import { useRef, useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { listClick } from '../../recoil/atoms'
+import { useRecoilState, useResetRecoilState } from 'recoil'
+import { listClick, searchValue, placesAll } from '../../recoil/atoms'
 import SearchBar from './SearchBar/SearchBar'
 import SiteInfoCard from './SiteInfoCard/SiteInfoCard'
-import { useGetPlace } from '../../query/place'
+import { useGetPlace, useKeywordSearch } from '../../query/place'
 import Loading from '../Loading/Loading'
 import { toast } from 'react-toastify'
 import { Link, useLocation } from 'react-router-dom'
@@ -55,18 +55,28 @@ const MainMap = ({ sort, id }) => {
 
   // state, hook
   const [clickPoint, setClickPoint] = useRecoilState(listClick)
-
+  const [keyword, setKeyword] = useRecoilState(searchValue)
+  const [points, setPoints] = useRecoilState(placesAll)
+  console.log('keyword : ', keyword)
   // fetch data
+  if (keyword === '') {
+    const query = useGetPlace(sort, id)
+    if (query.isLoading) return <Loading />
+    if (query.isError) return toast.error(query.error.message)
+    const items = query.data
+    setPoints(items.placeList)
 
-  const query = useGetPlace(sort, id)
-  if (query.isLoading) return <Loading />
-  if (query.isError) return toast.error(query.error.message)
-  const items = query.data
-  const points = items.placeList
-
-  // console.log('points', points)
-  console.log('sort : ', sort)
-  console.log('categoryId : ', id)
+    console.log('points', points)
+    console.log('sort : ', sort)
+    console.log('categoryId : ', id)
+  } else {
+    const query = useKeywordSearch(keyword)
+    if (query.isLoading) return <Loading />
+    if (query.isError) return toast.error(query.error.message)
+    const items = query.data
+    console.log('keywordSearch : ', items)
+    setPoints(items.placeList)
+  }
   return (
     <Container>
       <SearchBar />
