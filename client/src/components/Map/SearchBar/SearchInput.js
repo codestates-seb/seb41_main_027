@@ -60,10 +60,11 @@ const SearchInput = () => {
     setSearch(e.target.value)
   }
   const handleSearch = e => {
+    e.preventDefault()
     if (search && search.length > 1) {
       setKeyword(search)
     } else {
-      e.preventDefault()
+      // e.preventDefault()
       toast.error('최소 2글자 이상이어야 합니다.')
     }
   }
