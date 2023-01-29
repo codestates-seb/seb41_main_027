@@ -1,15 +1,15 @@
 // return promise
-export const ClipBoardCopy = copyData => {
+export const clipboardCopy = copyData => {
   return navigator.clipboard.writeText(copyData)
 }
 
 // 천 단위 콤마 구분(10000 => 10,000)
-export const AmountDisplay = number => {
+export const amountDisplay = number => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
 // 현재 시간 기준 날짜 변환(1 min ago, 2 mins ago, 1 sec ago)
-export const DateConvert = createAt => {
+export const dateConvert = createAt => {
   if (!createAt) return
 
   const cDate = new Date(createAt)
