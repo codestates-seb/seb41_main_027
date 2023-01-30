@@ -53,7 +53,7 @@ const Wrapper = styled.div`
   }
 `
 
-const SearchInput = () => {
+const SearchInput = ({ displayNone }) => {
   // state, hook
   const [keyword, setKeyword] = useRecoilState(searchValue)
   const [search, setSearch] = useState()
@@ -82,7 +82,7 @@ const SearchInput = () => {
   }
   const onClickReset = () => {
     setKeyword('')
-    navigate(`/`)
+    // navigate(`/`)
   }
   return (
     <Wrapper>
@@ -101,7 +101,7 @@ const SearchInput = () => {
             <button className="SearchQuerySubmit" name="" disabled={!search}>
               <StyleFontAwesomeIcon icon={faSearch} onClick={handleSearch} />
             </button>
-            {keyword && (
+            {!displayNone && keyword && (
               <button className="btn-reset" onClick={onClickReset}>
                 <FontAwesomeIcon icon={faRotateLeft} />
               </button>

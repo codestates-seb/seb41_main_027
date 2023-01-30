@@ -96,7 +96,7 @@ const AboutUs = () => {
                 />
                 <img
                   className="service-img"
-                  src="https://us.123rf.com/450wm/arcady31/arcady311108/arcady31110800017/10101139-%EC%83%98%ED%94%8C-%EC%9A%B0%ED%91%9C.jpg"
+                  src="https://user-images.githubusercontent.com/111366402/215396766-e421659b-38df-4fe7-be14-b6fe34307c2c.png"
                   alt="서비스 이미지"
                 />
               </div>
