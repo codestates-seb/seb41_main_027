@@ -95,10 +95,14 @@ const Wrapper = styled.li`
     display: flex;
     align-items: flex-start;
     font-weight: 400;
+    width: 176px;
     font-size: 14px;
     line-height: 17px;
     color: #909499;
     letter-spacing: -0.8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: keep-all;
   }
 `
 

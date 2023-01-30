@@ -66,6 +66,7 @@ const AddPlaceMap = () => {
 
   const mapRef = useRef()
   const [keyword, setKeyword] = useRecoilState(searchValue)
+  const displayNone = 1
   useEffect(() => {
     if (!map) return
     // if (!keyword.replace(/^\s+|\s+$/g, '')) {
@@ -116,7 +117,7 @@ const AddPlaceMap = () => {
   return (
     <Container>
       <Wrapper>
-        <SearchInput />
+        <SearchInput displayNone={displayNone} />
       </Wrapper>
       <Map // 지도를 표시할 Container
         center={clickPoint}
