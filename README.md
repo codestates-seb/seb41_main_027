@@ -46,9 +46,10 @@
 
 ## 👨‍👩‍👧‍👦 팀원 소개
 
-|                임기정 (FE)                |                박승필 (FE)                |                      강보미(FE)                       |               성승훈 (BE)               |              최지민 (BE)              | 황원용(BE)                              |
-| :---------------------------------------: | :---------------------------------------: | :---------------------------------------------------: | :-------------------------------------: | :-----------------------------------: | --------------------------------------- |
-| [gidoldory](https://github.com/gidoldory) | [DubblePos](https://github.com/DubblePos) | [SpringintheFall](https://github.com/SpringintheFall) | [itsowavy](https://github.com/itsowavy) | [tlskals](https://github.com/tlskals) | [wonyongg](https://github.com/wonyongg) |
+|                                                               임기정 (FE)                                                                |                                                               박승필 (FE)                                                                |                                                                강보미(FE)                                                                 |                                                               성승훈 (BE)                                                                |                                                               최지민 (BE)                                                                |                                                                황원용(BE)                                                                |
+| :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                [gidoldory](https://github.com/gidoldory)                                                 |                                                [DubblePos](https://github.com/DubblePos)                                                 |                                           [SpringintheFall](https://github.com/SpringintheFall)                                           |                                                 [itsowavy](https://github.com/itsowavy)                                                  |                                                  [tlskals](https://github.com/tlskals)                                                   |                                                 [wonyongg](https://github.com/wonyongg)                                                  |
+| <img width="300" alt="기정" src="https://user-images.githubusercontent.com/48042650/215429981-a82a945f-58dd-434d-91d2-0f5384371134.png"> | <img width="300" alt="승필" src="https://user-images.githubusercontent.com/48042650/215432195-3583cb1d-1e0e-40e8-8351-5f122e4cd5fb.png"> | <img width="300" alt="보미" src="https://user-images.githubusercontent.com/48042650/215431119-106aa8d3-2dc5-44d5-aef8-c886023ca65b.jpeg"> | <img width="300" alt="승훈" src="https://user-images.githubusercontent.com/48042650/215430809-a6872c3d-43f8-43c9-ba94-83974a7f1ca2.png"> | <img width="300" alt="지민" src="https://user-images.githubusercontent.com/48042650/215432591-3fb551df-240a-4f5e-9d28-d3c66eb03263.png"> | <img width="300" alt="원용" src="https://user-images.githubusercontent.com/48042650/215430252-cb82416f-3d42-46fe-890a-fe2010d6210f.png"> |
 
 </br>
 </br>
@@ -62,7 +63,7 @@
 <img src="https://img.shields.io/badge/JavaScript-FFC000?style=for-the-badge&logo=JavaScript&logoColor=black"/> 
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
 <img src="https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=React_Query&logoColor=white">
-<img src="https://img.shields.io/badge/Recoil-3578E5?style=for-the-badge&logo=Recoil&logoColor=black" > 
+<img src="https://img.shields.io/badge/Recoil-3578E5?style=for-the-badge&logo=Recoil&logoColor=black" >
 
 <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=black"> 
 <img src="https://img.shields.io/badge/Axios-181717?style=for-the-badge&logo=Axios&logoColor=white"> 
@@ -83,8 +84,13 @@
 <img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens"/> 
 <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white"> 
 <img src="https://img.shields.io/badge/Amazon RDS-527FFF?style=for-the-badge&logo=AmazonRDS&logoColor=white"> 
-<img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white"> 
+<img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white">
+
+<img src="https://img.shields.io/badge/Grafana-F2F4F9?style=for-the-badge&logo=grafana&logoColor=orange&labelColor=F2F4F9
+">
 <img src="https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white">
+<img src="https://img.shields.io/badge/sonarqube-F2F4F9?style=for-the-badge&logo=grafana&logoColor=orange&labelColor=F2F4F9
+">
 
 ### Common
 
