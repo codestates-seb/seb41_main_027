@@ -55,7 +55,7 @@ const FontAwesomeIconStyle = styled(FontAwesomeIcon)`
 const Mypage = () => {
   useLoginCheck('redirect')
 
-  // state, hook
+  // state, hook..
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -81,7 +81,7 @@ const Mypage = () => {
               북마크 리스트
             </Menu>
             <Menu aria-label="나의정보 탭 선택" selected={menuName === 'like'} onClick={() => handleClickTab('like')}>
-              내가 추천한 장소
+              내가 좋아요한 장소
             </Menu>
             <Menu
               aria-label="나의정보 탭 선택"
