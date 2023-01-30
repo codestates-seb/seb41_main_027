@@ -51,6 +51,7 @@ public class SecurityConfiguration {
         http
                 .headers().frameOptions().sameOrigin()
                 .and()
+                .csrf().disable()
                 .cors().configurationSource(corsConfigurationSource()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
