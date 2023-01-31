@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareNodes, faBookmark as bookmarkOn } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark as bookmarkOff } from '@fortawesome/free-regular-svg-icons'
@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 
 import { InfoShareBookmark } from './ShareBookmarkStyle'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { ConfirmModal } from '../../components/Modal/ConfirmModal'
-import { clipboardCopy } from '../../utils/common'
 import KakaoShareBtn from '../Button/KakaoShareBtn'
 import * as bookmarkApi from '../../api/bookmark'
 import { getLoginInfo } from '../../api/login'
@@ -33,11 +33,6 @@ const ShareBookmark = ({ item, queryRefresh }) => {
     likeCnt: likeCount,
     reviewCnt: useRecoilValue(reviewTotalCntByPlaceId),
     linkUrl: shareLinkUrl,
-  }
-
-  // handle
-  const handleClickCopy = () => {
-    clipboardCopy(shareLinkUrl).then(() => toast.info('URL이 복사되었습니다.'))
   }
 
   const handleBookmarkEdit = () => {
@@ -72,9 +67,11 @@ const ShareBookmark = ({ item, queryRefresh }) => {
         position={confirmModal.position}
       />
       <div className="bottom-share">
-        <button className="btn-icon" onClick={handleClickCopy}>
-          <FontAwesomeIcon icon={faShareNodes} />
-        </button>
+        <CopyToClipboard text={shareLinkUrl} onCopy={() => toast.info('URL이 복사되었습니다.')}>
+          <button className="btn-icon">
+            <FontAwesomeIcon icon={faShareNodes} />
+          </button>
+        </CopyToClipboard>
         {KakaoShareBtn(kakaoShareInfo)}
       </div>
       <div className="bottom-detail-link">

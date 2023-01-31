@@ -1,8 +1,3 @@
-// return promise
-export const clipboardCopy = copyData => {
-  return navigator.clipboard.writeText(copyData)
-}
-
 // 천 단위 콤마 구분(10000 => 10,000)
 export const amountDisplay = number => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
