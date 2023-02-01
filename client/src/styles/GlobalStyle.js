@@ -8,25 +8,16 @@ const GlobalStyle = createGlobalStyle`
   /* 필요한 부분 추가해주셔요 🥹 */
   * {
     box-sizing: border-box;
+  }
+  html, body{
+    margin: 0; padding: 0; min-height: 100vh; background-color: #ffffff; color: #232629;
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   }
-  
-  html, body{
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background-color: #ffffff;
-    color: #232629;
-  }
 
-  a {
-    text-decoration: none;
-    outline: none;
-    font-size: 100%;
-    color: inherit;
-  }
-
+  a { text-decoration: none; outline: none; font-size: 100%; color: inherit; }
+  input { width: 90%; }
   input, button, textarea {
+    font-family: Pretendard, -apple-system, system-ui, Roboto;
     background-color: transparent;
     border: none;
     outline: none;
@@ -292,12 +283,12 @@ const GlobalStyle = createGlobalStyle`
   :root { 
     // 💄 CI set 
     --ecogreen-01: #17AC52;
-    /* --ecogreen-02: #31B679;
+    --ecogreen-02: #31B679;
     --ecogreen-03: #13C57C;
     --ecored-01:#FF3838;
-    --ecored-02:#FF1F1F; */
+    --ecored-02:#FF1F1F; 
     --border-01: #B8BCCF;
-    /* --border-02: #D9D9D9; */
+    --border-02: #D9D9D9; 
 
     // input focus
     --border-input-focus: 1px solid #76B5F2;

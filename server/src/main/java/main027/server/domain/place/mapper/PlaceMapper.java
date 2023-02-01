@@ -27,7 +27,7 @@ public interface PlaceMapper {
                                                      .collect(Collectors.toList());
         result.setPlaceList(list);
         result.setTotalPages(Long.valueOf(pages.getTotalPages()));
-        result.setPresentPage(Long.valueOf(pages.getPageable().getPageNumber() + 1));
+        result.setPresentPage(Long.valueOf(pages.getPageable().getPageNumber() + 1L));
         result.setTotalElements(pages.getTotalElements());
 
         return result;
@@ -57,7 +57,7 @@ public interface PlaceMapper {
 
         result.setPlaceList(list);
         result.setTotalPages(Long.valueOf(pages.getTotalPages()));
-        result.setPresentPage(Long.valueOf(pages.getPageable().getPageNumber() + 1));
+        result.setPresentPage(Long.valueOf(pages.getPageable().getPageNumber() + 1L));
         result.setTotalElements(pages.getTotalElements());
 
         return result;
@@ -79,10 +79,10 @@ public interface PlaceMapper {
         result.setCreatedAt(place.getCreatedAt());
 
         boolean isBookmarked = place.getBookmarkList().stream()
-                                    .anyMatch(bookmark -> bookmark.getMember().getMemberId() == memberId);
+                                    .anyMatch(bookmark -> bookmark.getMember().getMemberId().equals(memberId));
 
         boolean isLiked = place.getPlaceLikeUserList().stream()
-                               .anyMatch(placeLikeUser -> placeLikeUser.getMember().getMemberId() == memberId);
+                               .anyMatch(placeLikeUser -> placeLikeUser.getMember().getMemberId().equals(memberId));
 
         result.setIsBookMarked(isBookmarked);
         result.setIsLiked(isLiked);
