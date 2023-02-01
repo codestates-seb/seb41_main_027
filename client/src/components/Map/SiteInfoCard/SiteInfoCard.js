@@ -54,7 +54,7 @@ const Wrapper = styled.li`
       align-items: center;
       justify-content: center;
       line-height: 16px;
-      gap: 2px;
+      gap: 4px;
       .ico-like {
         color: #ff3838;
         font-size: 16px;
@@ -66,9 +66,10 @@ const Wrapper = styled.li`
     }
 
     .more-info {
-      margin-left: 8px;
-      font-size: 16px;
-      color: #909499;
+      width: 20px;
+      margin-left: 12px;
+      font-size: 20px;
+      color: rgba(95, 105, 125, 0.7);
       :hover {
         color: #13c57c;
       }

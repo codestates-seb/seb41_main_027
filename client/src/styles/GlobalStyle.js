@@ -9,24 +9,15 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-  
   html, body{
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background-color: #ffffff;
-    color: #232629;
+    margin: 0; padding: 0; min-height: 100vh; background-color: #ffffff; color: #232629;
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   }
 
-  a {
-    text-decoration: none;
-    outline: none;
-    font-size: 100%;
-    color: inherit;
-  }
-
+  a { text-decoration: none; outline: none; font-size: 100%; color: inherit; }
+  input { width: 90%; }
   input, button, textarea {
+    font-family: Pretendard, -apple-system, system-ui, Roboto;
     background-color: transparent;
     border: none;
     outline: none;
