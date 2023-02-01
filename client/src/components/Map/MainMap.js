@@ -30,7 +30,7 @@ const Container = styled.section`
     top: 40px;
     right: 32px;
     width: inherit;
-    height: 100%;
+    height: 71.5%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -79,6 +79,7 @@ const MainMap = ({ sort, categoryId }) => {
   const [points, setPoints] = useRecoilState(placesAll)
   const { id } = getLoginInfo()
   console.log('keyword : ', keyword)
+
   // fetch data
   if (keyword === '') {
     const query = useGetPlace(sort, categoryId)
@@ -96,7 +97,7 @@ const MainMap = ({ sort, categoryId }) => {
     const items = query.data
     setPoints(items.placeList)
   }
-  console.log('points 길이 : ', points.length)
+  // console.log('points 길이 : ', points.length)
   return (
     <Container>
       <SearchBar />
