@@ -292,12 +292,12 @@ const GlobalStyle = createGlobalStyle`
   :root { 
     // 💄 CI set 
     --ecogreen-01: #17AC52;
-    /* --ecogreen-02: #31B679;
+    --ecogreen-02: #31B679;
     --ecogreen-03: #13C57C;
     --ecored-01:#FF3838;
-    --ecored-02:#FF1F1F; */
+    --ecored-02:#FF1F1F; 
     --border-01: #B8BCCF;
-    /* --border-02: #D9D9D9; */
+    --border-02: #D9D9D9; 
 
     // input focus
     --border-input-focus: 1px solid #76B5F2;
