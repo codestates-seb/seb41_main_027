@@ -118,8 +118,8 @@ const AboutUs = () => {
             </div>
           </Content>
           <Content>
-            <h2>크루 이야기</h2>
-            <p className="content-body">에코그린 서울 크루들의 이야기를 통해 궁금한 점을 해소해보세요. 🙂</p>
+            <h2>크루들의 한마디</h2>
+            <p className="content-body">서비스를 이용하는 환경지킴이들에게 전하는 메세지에요.</p>
             <TabAboutUs />
           </Content>
           <Content>
