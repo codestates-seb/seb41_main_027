@@ -8,7 +8,6 @@ const GlobalStyle = createGlobalStyle`
   /* 필요한 부분 추가해주셔요 🥹 */
   * {
     box-sizing: border-box;
-    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   }
   
   html, body{
@@ -17,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     background-color: #ffffff;
     color: #232629;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   }
 
   a {
