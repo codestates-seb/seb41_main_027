@@ -80,7 +80,7 @@ const Nav = () => {
           </Link>
         </li>
         <li>
-          <Link to="/mypage">
+          <Link to="/mypage/bookmark">
             <FontAwesomeIcon icon={faUser} size="2x" />
             <span>마이페이지</span>
           </Link>
