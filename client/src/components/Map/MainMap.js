@@ -86,6 +86,7 @@ const MainMap = ({ sort, categoryId }) => {
   const [points, setPoints] = useRecoilState(placesAll)
   const { id } = getLoginInfo()
   console.log('keyword : ', keyword)
+
   // fetch data
   if (keyword === '') {
     const query = useGetPlace(sort, categoryId)
@@ -103,7 +104,7 @@ const MainMap = ({ sort, categoryId }) => {
     const items = query.data
     setPoints(items.placeList)
   }
-  console.log('points 길이 : ', points.length)
+  // console.log('points 길이 : ', points.length)
   return (
     <Container>
       <SearchBar />
