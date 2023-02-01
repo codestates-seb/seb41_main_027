@@ -25,7 +25,7 @@
 👾 에코그린서울 서비스 테스트를 위한 게스트 아이디 및 패스워드 정보입니다.
 | TEST ID | PW |
 | :-------------------------------: | :------------------------------: |
-| [guest01@echogreen.com](http://echogreenseoul.site/signin) | [qwer1234](http://echogreenseoul.site/signin) |
+| [guest@echogreen.com](http://echogreenseoul.site/signin) | [qwer1234](http://echogreenseoul.site/signin) |
 
 </br>
 </br>

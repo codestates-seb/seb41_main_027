@@ -1,13 +1,9 @@
-package main027.server.domain.place;
+package main027.server.domain.place.controller;
 
 import com.google.gson.Gson;
-import main027.server.domain.bookmark.service.BookmarkService;
-import main027.server.domain.place.controller.PlaceController;
 import main027.server.domain.place.dto.PlaceDto;
 import main027.server.domain.place.entity.Place;
-import main027.server.domain.place.mapper.PlaceLikeUserMapper;
 import main027.server.domain.place.mapper.PlaceMapper;
-import main027.server.domain.place.service.PlaceLikeService;
 import main027.server.domain.place.service.PlaceService;
 import main027.server.domain.place.service.PlaceUpdateService;
 import main027.server.global.aop.logging.DataHolder;
