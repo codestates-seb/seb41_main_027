@@ -13,7 +13,7 @@ const Wrapper = styled.section`
 const Container = styled.section`
   z-index: 1000;
   overflow: hidden;
-  height: calc(100% - 100px);
+  height: calc(100% - 88px);
   border-radius: 32px 0px 0px 0px;
   box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.4);
   background-color: #fff;
@@ -30,19 +30,24 @@ const TabMenu = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
-  font-size: 1.4rem;
+  gap: 40px;
+  font-size: 1.2rem;
   letter-spacing: -0.8px;
 `
 
 const Menu = styled.li`
-  padding: 12px 20px;
-  background-color: #fff;
+  padding: 8px 4px;
+  font-weight: 400;
+  color: rgba(39, 39, 39, 0.7);
+  border-bottom: 4px solid #fff;
   cursor: pointer;
   ${props =>
     props.selected &&
     css`
-      border-bottom: 6px solid var(--ecogreen-01);
+      color: #2c2d2e;
+      font-weight: 500;
+      border-bottom: 4px solid #2c2d2e;
+      /* border-bottom: 4px solid var(--ecogreen-01); */
     `}
 `
 
