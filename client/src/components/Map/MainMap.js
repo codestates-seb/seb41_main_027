@@ -23,14 +23,17 @@ const Container = styled.section`
   border-radius: 32px 0px 0px 0px;
   box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.4);
   background-color: #fff;
+  .site-list-wrap {
+  }
   .site-list {
+    // 🫡 List Position
     position: absolute;
     z-index: 1500;
-    // Demo Position 🫡
-    top: 40px;
+    top: 100px;
     right: 32px;
     width: inherit;
-    height: 71.5%;
+    height: calc(100% - 100px);
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -46,9 +49,13 @@ const Container = styled.section`
     border-radius: 12px;
   }
   .addPlaceBtn {
-    margin-bottom: 12px;
-    width: 100%;
+    position: absolute;
+    z-index: 1500;
+    top: 40px;
+    width: 260px;
+    right: 32px;
     height: 48px;
+    margin-bottom: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,15 +108,15 @@ const MainMap = ({ sort, categoryId }) => {
   return (
     <Container>
       <SearchBar />
+      {id && points.length !== 0 ? (
+        <Link to={`/place`}>
+          <button className="addPlaceBtn">
+            <FontAwesomeIcon icon={faPlus} />
+            장소 등록하기
+          </button>
+        </Link>
+      ) : null}
       <div className="site-list">
-        {id && points.length !== 0 ? (
-          <Link to={`/place`}>
-            <button className="addPlaceBtn">
-              <FontAwesomeIcon icon={faPlus} />
-              장소 등록하기
-            </button>
-          </Link>
-        ) : null}
         {points.map((point, index) => (
           <SiteInfoCard index={index} key={index} positions={point} />
         ))}
