@@ -12,7 +12,7 @@ const useLoginCheck = type => {
     if (!loginMemberId) {
       switch (type) {
         case 'redirect':
-          navigate('/signin', { state: { callbackUrl: pathname } })
+          navigate('/signin', { replace: true, state: { callbackUrl: pathname } })
           break
 
         default:
