@@ -64,7 +64,7 @@ export const ModalWrapper = styled.div`
     padding: 18px;
     line-height: 20px;
     resize: none;
-    font-size: 1rem;
+    font-size: 0.8rem;
     box-shadow: var(--box-shadow-list);
 
     &:focus {
@@ -76,7 +76,9 @@ export const ModalWrapper = styled.div`
   }
 
   & h3 {
+    margin-bottom: 8px;
     color: #545454;
+    letter-spacing: -0.4px;
     font-weight: 500;
     height: 30px;
   }
