@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { searchValue } from '../../../recoil/atoms'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const StyleFontAwesomeIcon = styled(FontAwesomeIcon)`
   font-size: 24px;
@@ -28,6 +28,7 @@ const Wrapper = styled.div`
     box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
   }
   .SearchQueryInput {
+    width: 100%;
     color: #384452;
     ::placeholder {
       color: rgb(0 0 0 / 40%);
@@ -58,6 +59,7 @@ const SearchInput = ({ displayNone }) => {
   const [keyword, setKeyword] = useRecoilState(searchValue)
   const [search, setSearch] = useState()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   // handler
   const handleOnKeyPress = e => {
@@ -93,7 +95,7 @@ const SearchInput = ({ displayNone }) => {
             className="SearchQueryInput"
             type="text"
             name=""
-            placeholder="장소를 검색해주세요."
+            placeholder={pathname === '/' ? '장소를 검색해주세요.' : '등록할 장소를 검색해 주세요.'}
             onChange={onChangeSearch}
             onKeyPress={handleOnKeyPress}
           />
