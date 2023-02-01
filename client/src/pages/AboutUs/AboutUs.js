@@ -11,7 +11,7 @@ const Container = styled.section`
   z-index: 1000;
   overflow: auto;
   height: calc(100% - 88px);
-  padding: 32px;
+  padding: 40px;
   gap: 64px;
   display: flex;
   flex-direction: column;

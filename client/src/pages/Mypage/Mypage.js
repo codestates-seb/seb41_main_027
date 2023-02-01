@@ -17,7 +17,7 @@ const Container = styled.section`
   border-radius: 32px 0px 0px 0px;
   box-shadow: -8px -4px 30px rgba(0, 129, 76, 0.4);
   background-color: #fff;
-
+  padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -31,8 +31,8 @@ const TabMenu = styled.ul`
   justify-content: center;
   align-items: center;
   gap: 16px;
-  font-size: 1.5rem;
-  margin-top: 20px;
+  font-size: 1.4rem;
+  letter-spacing: -0.8px;
 `
 
 const Menu = styled.li`
