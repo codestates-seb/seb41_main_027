@@ -66,9 +66,16 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
-  height: 40px;
-  padding: 0 12px;
-  border-radius: 12px;
+  /* width: 84px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  padding: 2px 16px;
+  font-size: 18px;
+  font-weight: 400;
+  border-radius: 8px;
+  box-sizing: border-box;
   ${props =>
     props.cancel
       ? css`
@@ -85,11 +92,15 @@ export const Button = styled.button`
 `
 
 export const WithdrawalBtn = styled.button`
-  width: 80px;
-  height: 30px;
   position: relative;
   top: calc(100% - 190px);
   left: calc(100% - 80px);
-  border-radius: 8px;
-  background-color: #ccc;
+  width: 84px;
+  height: 40px;
+  padding: 0px 12px;
+  /* background-color: #ccc; */
+  font-size: 16px;
+  color: #535353;
+  border-radius: 12px;
+  box-sizing: border-box;
 `
