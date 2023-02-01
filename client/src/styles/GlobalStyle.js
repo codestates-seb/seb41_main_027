@@ -301,8 +301,8 @@ const GlobalStyle = createGlobalStyle`
     --box-shadow-item: 1px 1px 2px rgb(0 0 0 / 10%);
 
     // toast
-    --toastify-toast-min-weight: 120px;
-    --toastify-toast-min-height: 120px;
+    --toastify-toast-min-weight: 100px;
+    --toastify-toast-min-height: 100px;
   }
 `
 

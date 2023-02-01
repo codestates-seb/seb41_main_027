@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import GlobalStyle from '../src/styles/GlobalStyle'
 import { Reset } from 'styled-reset'
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { Slide, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Suspense, lazy } from 'react'
 
@@ -44,12 +44,14 @@ function App() {
       <ScrollToTop />
       <ToastContainer
         position="bottom-center"
-        autoClose={500}
+        autoClose={600}
         closeOnClick
-        hideProgressBar={false}
+        hideProgressBar
         pauseOnHover
         pauseOnFocusLoss={false}
         draggable={false}
+        transition={Slide}
+        limit={2}
       />
       <Suspense fallback={<Loading />}>
         <Main>
@@ -57,7 +59,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/place" element={<Place />} />
             <Route path="/mypage" element={<Mypage />}>
-              <Route index element={<Navigate to="/mypage/bookmark" />} />
               <Route path="bookmark" element={<Bookmark />} />
               <Route path="like" element={<Like />} />
               <Route path="myinfo" element={<MyInfo />} />
