@@ -9,7 +9,6 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-  
   html, body{
     margin: 0;
     padding: 0;
@@ -27,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   input, button, textarea {
+    font-family: Pretendard, -apple-system, system-ui, Roboto;
     background-color: transparent;
     border: none;
     outline: none;
