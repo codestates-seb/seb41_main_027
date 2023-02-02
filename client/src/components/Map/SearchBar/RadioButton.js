@@ -9,10 +9,6 @@ const Wrapper = styled.div`
     box-sizing: border-box;
   }
 
-  input[type='radio'] {
-    display: none;
-  }
-
   .tabs {
     /* z-index: 10; */
     position: relative;
@@ -45,6 +41,7 @@ const Wrapper = styled.div`
   }
 
   input[type='radio'] {
+    display: none;
     &:checked {
       & + label {
         color: #31b679;
@@ -53,8 +50,7 @@ const Wrapper = styled.div`
       }
     }
   }
-
-  input[id='time'] {
+  input[id='default'] {
     &:checked {
       & ~ .glider {
         transform: translateX(0);
@@ -62,7 +58,7 @@ const Wrapper = styled.div`
     }
   }
 
-  input[id='default'] {
+  input[id='time'] {
     &:checked {
       & ~ .glider {
         transform: translateX(100%);
@@ -85,27 +81,42 @@ const Wrapper = styled.div`
     transition: 0.25s ease-out;
   }
 `
-
 const RadioButton = () => {
   const [radioValue, setRadioValue] = useRecoilState(placeSort)
+  console.log('radioValue : ', radioValue)
+
   const handleChange = e => {
-    setRadioValue(e.target.id)
-    // console.log('radio', e.target.id)
-    // console.log('radioValue', radioValue)
+    setRadioValue(e.target.value)
+    console.log('e.target.value', e.target.value)
+    console.log('클릭시 radioValue : ', radioValue)
   }
   return (
     <Wrapper>
-      <div className="tabs">
-        <input type="radio" id="time" name="tabs" onChange={handleChange} />
-        <label className="tab" htmlFor="time">
-          등록 순
-        </label>
-        <input type="radio" id="default" name="tabs" defaultChecked onChange={handleChange} />
-        <label className="tab" htmlFor="default">
-          추천 순
-        </label>
-        <span className="glider"></span>
-      </div>
+      {radioValue && radioValue === 'default' ? (
+        <div className="tabs">
+          <input type="radio" id="default" name="tabs" value="default" defaultChecked onChange={e => handleChange(e)} />
+          <label className="tab" htmlFor="default">
+            추천 순
+          </label>
+          <input type="radio" id="time" name="tabs" value="time" onChange={e => handleChange(e)} />
+          <label className="tab" htmlFor="time">
+            등록 순
+          </label>
+          <span className="glider"></span>
+        </div>
+      ) : (
+        <div className="tabs">
+          <input type="radio" id="default" name="tabs" value="default" onChange={e => handleChange(e)} />
+          <label className="tab" htmlFor="default">
+            추천 순
+          </label>
+          <input type="radio" id="time" name="tabs" value="time" defaultChecked onChange={e => handleChange(e)} />
+          <label className="tab" htmlFor="time">
+            등록 순
+          </label>
+          <span className="glider"></span>
+        </div>
+      )}
     </Wrapper>
   )
 }

@@ -40,11 +40,15 @@ export const InfoTitle = styled.div`
     height: 30px;
     gap: 10px;
 
-    & > p,
-    & svg {
+    & > p {
       color: #666666;
       font-size: 0.9rem;
       letter-spacing: -0.6px;
+    }
+
+    & > svg {
+      font-size: 0.9rem;
+      cursor: pointer;
     }
   }
 `

@@ -1,5 +1,5 @@
 {
-  "name": "team27-2",
+  "name": "echogreenseoul",
   "version": "0.1.0",
   "private": true,
   "homepage": "/",
@@ -37,6 +37,7 @@
     "axios": "^1.2.2",
     "pretendard": "^1.3.6",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.41.5",
     "react-kakao-maps-sdk": "^1.1.5",

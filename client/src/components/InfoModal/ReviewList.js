@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
+import { useSetRecoilState } from 'recoil'
 
 import Loading from '../Loading/Loading'
 import { InfoReviewList, List, Item } from './ReviewListStyle'
@@ -10,6 +11,7 @@ import { useGetReviewListById } from '../../query/review'
 import * as reviewApi from '../../api/review'
 import { getLoginInfo } from '../../api/login'
 import { EMOJI_LIST } from '../../utils/const'
+import { reviewTotalCntByPlaceId } from '../../recoil/reviewState'
 
 const ReviewList = ({ pId, page, goPage, modifiedReviewId, reloadReviewList }) => {
   // console.log('-- (4)ReviewList Render --')
@@ -51,6 +53,13 @@ const ReviewList = ({ pId, page, goPage, modifiedReviewId, reloadReviewList }) =
 
   // fetch data
   const { isLoading, isFetching, isError, error, data } = useGetReviewListById(pId, page, listSize, modifiedReviewId)
+
+  // total review count state save
+  const setTotalReviewCntByPlaceId = useSetRecoilState(reviewTotalCntByPlaceId)
+  useEffect(() => {
+    if (data) setTotalReviewCntByPlaceId(data.totalElements)
+  }, [data, setTotalReviewCntByPlaceId])
+
   if (isLoading || isFetching) return <Loading />
   if (isError) return toast.error(error.message)
   if (!data) return null
