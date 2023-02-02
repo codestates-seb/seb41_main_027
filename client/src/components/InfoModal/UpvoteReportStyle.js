@@ -26,7 +26,6 @@ export const InfoUpvoteReport = styled.div`
 
     & > button,
     & > svg {
-      background-color: #f8f8f8;
       color: #666666;
     }
   }

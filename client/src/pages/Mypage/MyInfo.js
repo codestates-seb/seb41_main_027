@@ -82,8 +82,9 @@ const MyInfo = () => {
     }
 
     // db delete
-    memberApi.deleteMember()
-    //navigate('/logout')
+    memberApi.deleteMember().then(() => {
+      navigate('/')
+    })
   }
 
   const changeEditMode = editMode => {
