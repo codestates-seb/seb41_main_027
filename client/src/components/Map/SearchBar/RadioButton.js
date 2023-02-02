@@ -42,6 +42,7 @@ const Wrapper = styled.div`
 
   input[type='radio'] {
     display: none;
+    display: none;
     &:checked {
       & + label {
         color: #31b679;
@@ -51,6 +52,7 @@ const Wrapper = styled.div`
     }
   }
   input[id='default'] {
+  input[id='default'] {
     &:checked {
       & ~ .glider {
         transform: translateX(0);
@@ -58,6 +60,7 @@ const Wrapper = styled.div`
     }
   }
 
+  input[id='time'] {
   input[id='time'] {
     &:checked {
       & ~ .glider {
@@ -92,6 +95,31 @@ const RadioButton = () => {
   }
   return (
     <Wrapper>
+      {radioValue && radioValue === 'default' ? (
+        <div className="tabs">
+          <input type="radio" id="default" name="tabs" value="default" defaultChecked onChange={e => handleChange(e)} />
+          <label className="tab" htmlFor="default">
+            추천 순
+          </label>
+          <input type="radio" id="time" name="tabs" value="time" onChange={e => handleChange(e)} />
+          <label className="tab" htmlFor="time">
+            등록 순
+          </label>
+          <span className="glider"></span>
+        </div>
+      ) : (
+        <div className="tabs">
+          <input type="radio" id="default" name="tabs" value="default" onChange={e => handleChange(e)} />
+          <label className="tab" htmlFor="default">
+            추천 순
+          </label>
+          <input type="radio" id="time" name="tabs" value="time" defaultChecked onChange={e => handleChange(e)} />
+          <label className="tab" htmlFor="time">
+            등록 순
+          </label>
+          <span className="glider"></span>
+        </div>
+      )}
       {radioValue && radioValue === 'default' ? (
         <div className="tabs">
           <input type="radio" id="default" name="tabs" value="default" defaultChecked onChange={e => handleChange(e)} />
