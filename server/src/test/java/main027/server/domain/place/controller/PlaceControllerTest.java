@@ -30,6 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -455,7 +456,7 @@ class PlaceControllerTest {
     @Test
     void deletePlace() throws Exception {
         Long id = 1L;
-        doNothing().when(placeService).deletePlace(Mockito.anyLong(),Mockito.anyLong());
+        doNothing().when(placeService).deletePlace(Mockito.anyLong(),Mockito.anyList(), Mockito.anyLong());
 
         ResultActions actions =
                 mockMvc.perform(delete("/places/{placeId}", id));

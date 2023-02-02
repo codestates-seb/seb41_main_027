@@ -10,6 +10,7 @@ import org.springframework.util.StopWatch;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -26,6 +27,7 @@ import java.util.UUID;
 public class DataHolder extends StopWatch {
 
     private Long memberId;
+    private List<String> roles;
     private String uri;
     private String method;
     /**

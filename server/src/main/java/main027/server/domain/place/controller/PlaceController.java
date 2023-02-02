@@ -92,7 +92,7 @@ public class PlaceController {
     @CacheEvict(value = "places", allEntries = true)
     @DeleteMapping("/{placeId}")
     public ResponseEntity deletePlace(@PathVariable("placeId") Long placeId) {
-        placeService.deletePlace(dataHolder.getMemberId(), placeId);
+        placeService.deletePlace(dataHolder.getMemberId(), dataHolder.getRoles(), placeId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

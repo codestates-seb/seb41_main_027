@@ -63,12 +63,11 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @TimeTrace
-    public void deletePlace(Long memberId, Long placeId) {
+    public void deletePlace(Long memberId, List<String> roles, Long placeId) {
         Place findPlace = placeVerifier.findVerifiedPlace(placeId);
-        if (!Objects.equals(findPlace.getMember().getMemberId(), memberId)) {
-            throw new PermissionDeniedException(ExceptionCode.PERMISSION_DENIED);
-        }
-        placeRepository.delete(findPlace);
+        if (Objects.equals(findPlace.getMember().getMemberId(), memberId) || roles.contains("ADMIN")) {
+            placeRepository.delete(findPlace);
+        } else throw new PermissionDeniedException(ExceptionCode.PERMISSION_DENIED);
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -28,6 +29,7 @@ public class DataInterceptor implements HandlerInterceptor {
         try {
             Map<String, Object> claims = verifyJws(request);
             dataHolder.setMemberId(Long.valueOf((Integer) claims.get("memberId")));
+            dataHolder.setRoles((List<String>) claims.get("roles"));
             log.info("로그인 된 사용자 요청");
         } catch (Exception e) {
             log.info("로그인 되지 않은 사용자 요청");
