@@ -95,7 +95,7 @@ export const WithdrawalBtn = styled.button`
   position: relative;
   top: calc(100% - 190px);
   left: calc(100% - 80px);
-  width: 84px;
+  width: 90px;
   height: 40px;
   padding: 0px 12px;
   /* background-color: #ccc; */
