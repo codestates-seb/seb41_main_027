@@ -23,9 +23,11 @@ jobs:
         run: |
           echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env.production
           echo "REACT_APP_KAKAO_API_KEY=$REACT_APP_KAKAO_API_KEY" >> .env.production
+          echo "REACT_APP_ADMIN_MEMBER_ID=$REACT_APP_ADMIN_MEMBER_ID" >> .env.production
         env:
           REACT_APP_API_URL: ${{ secrets.APP_API_URL }} 
           REACT_APP_KAKAO_API_KEY: ${{ secrets.APP_KAKAO_API_KEY }}
+          REACT_APP_ADMIN_MEMBER_ID: ${{ secrets.APP_ADMIN_MEMBER_ID }}
 
       - name: Build
         run: npm run build

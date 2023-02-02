@@ -63,7 +63,7 @@ export const ModalWrapper = styled.div`
     padding: 18px;
     line-height: 20px;
     resize: none;
-    font-size: 0.8rem;
+    font-size: 1rem;
     box-shadow: var(--box-shadow-list);
 
     &:focus {

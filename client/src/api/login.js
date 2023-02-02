@@ -28,3 +28,7 @@ export const resetNickName = nickName => {
   localStorage.removeItem('nickName')
   localStorage.setItem('nickName', nickName)
 }
+
+export const isAdminMember = () => {
+  return getLoginInfo()?.id === Number(process.env.REACT_APP_ADMIN_MEMBER_ID)
+}

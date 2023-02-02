@@ -83,12 +83,12 @@ const Wrapper = styled.div`
 `
 const RadioButton = () => {
   const [radioValue, setRadioValue] = useRecoilState(placeSort)
-  console.log('radioValue : ', radioValue)
+  // console.log('radioValue : ', radioValue)
 
   const handleChange = e => {
     setRadioValue(e.target.value)
-    console.log('e.target.value', e.target.value)
-    console.log('클릭시 radioValue : ', radioValue)
+    // console.log('e.target.value', e.target.value)
+    // console.log('클릭시 radioValue : ', radioValue)
   }
   return (
     <Wrapper>

@@ -14,12 +14,16 @@ export const useGetPlaceInfoById = pId => {
   })
 }
 
-export const useGetPlace = (sort, categoryId) => {
-  return useQuery(['getPlace', sort, categoryId], ({ queryKey }) => place.getPlace(queryKey[1], queryKey[2]), {
-    enabled: !!sort,
-    staleTime: QUERY_STALETIME,
-    retry: false,
-  })
+export const useGetPlace = (sort, categoryId, page) => {
+  return useQuery(
+    ['getPlace', sort, categoryId, page],
+    ({ queryKey }) => place.getPlace(queryKey[1], queryKey[2], queryKey[3]),
+    {
+      enabled: !!sort,
+      staleTime: QUERY_STALETIME,
+      retry: false,
+    },
+  )
 }
 
 export const useKeywordSearch = keyword => {

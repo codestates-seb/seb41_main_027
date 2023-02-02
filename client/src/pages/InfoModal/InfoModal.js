@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 
 import {
@@ -36,6 +36,7 @@ export const InfoModal = () => {
 
   // state, hook
   const navigate = useNavigate()
+  const location = useLocation()
   const queryClient = useQueryClient()
   const { element: reviewListTop, onMoveToElement } = useMoveScroll()
   const [page, setPage] = useState(1) // review list
