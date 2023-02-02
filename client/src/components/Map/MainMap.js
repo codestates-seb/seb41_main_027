@@ -85,7 +85,7 @@ const MainMap = ({ sort, categoryId }) => {
   const [keyword, setKeyword] = useRecoilState(searchValue)
   const [points, setPoints] = useRecoilState(placesAll)
   const { id } = getLoginInfo()
-  console.log('keyword : ', keyword)
+  // console.log('keyword : ', keyword)
 
   // fetch data
   if (keyword === '') {
@@ -94,7 +94,7 @@ const MainMap = ({ sort, categoryId }) => {
     if (query.isError) return toast.error(query.error.message)
     const items = query.data
     setPoints(items.placeList)
-    console.log('points', points)
+    // console.log('points', points)
     // console.log('sort : ', sort)
     // console.log('categoryId : ', categoryId)
   } else {
@@ -133,7 +133,12 @@ const MainMap = ({ sort, categoryId }) => {
       >
         {points.map((point, index) => (
           <>
-            <CustomOverlayMap position={{ lat: point.latitude, lng: point.longitude }} placeInfo={point} yAnchor={2.3}>
+            <CustomOverlayMap
+              key={point.placeId}
+              position={{ lat: point.latitude, lng: point.longitude }}
+              placeInfo={point}
+              yAnchor={2.3}
+            >
               <div
                 className="customoverlay"
                 style={{
@@ -149,7 +154,7 @@ const MainMap = ({ sort, categoryId }) => {
               </div>
             </CustomOverlayMap>
             <MapMarker
-              key={`point-${point.content}-${point.latitude},${point.longitude}`}
+              key={point.kakaoId}
               position={{ lat: point.latitude, lng: point.longitude }}
               onClick={point => {
                 map.panTo(point.getPosition())
