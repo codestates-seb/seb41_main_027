@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Suspense, lazy } from 'react'
 
 import ScrollToTop from './utils/ScrollToTop'
+import { isAdminMember } from './api/login'
 
 const Home = lazy(() => import('./pages/Home'))
 const Place = lazy(() => import('./pages/Place'))
@@ -63,7 +64,7 @@ function App() {
               <Route path="bookmark" element={<Bookmark />} />
               <Route path="like" element={<Like />} />
               <Route path="myinfo" element={<MyInfo />} />
-              <Route path="admin" element={<Admin />} />
+              {isAdminMember() && <Route path="admin" element={<Admin />} />}
             </Route>
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/signup" element={<SignUp />} />
