@@ -32,12 +32,11 @@ export const ModalWrapper = styled.div`
   border-radius: 16px;
   overflow: hidden;
 
-  /* animation */
+  /* modal open animation */
   animation: slide-up 0.3s;
   -moz-animation: slide-up 0.3s;
   -webkit-animation: slide-up 0.3s;
   -o-animation: slide-up 0.3s;
-
   animation-fill-mode: forwards;
 
   @media (max-width: 750px) {
@@ -64,7 +63,7 @@ export const ModalWrapper = styled.div`
     padding: 18px;
     line-height: 20px;
     resize: none;
-    font-size: 0.8rem;
+    font-size: 1rem;
     box-shadow: var(--box-shadow-list);
 
     &:focus {
