@@ -60,16 +60,16 @@ public class TimeTraceAspect {
      * Loggin을 실행하는 메서드 (중복으로 인한 메서드 추출)
      *
      * @param arrow             로그에 표시될 ->, <- 선택
-     * @param uuid              {@link DataHolder} 에 설정된 uuid
+     * @param uri              {@link DataHolder} 에 설정된 uuid
      * @param name              Target 메서드의 클래스명과 메서드명
      * @param lastStopWatchTime 마지막으로 측정된 StopWatch의 ms
      */
-    private void doLogTime(String arrow, String uuid, String name, long lastStopWatchTime,
+    private void doLogTime(String arrow, String uri, String name, long lastStopWatchTime,
                            int millis, int limitMillis) {
         if (lastStopWatchTime <= millis) {
-            log.info(arrow + "[{}][{}ms][{}]", uuid, lastStopWatchTime, name);
+            log.info(arrow + "[{}][{}ms][{}]", uri, lastStopWatchTime, name);
         } else if (lastStopWatchTime <= limitMillis) {
-            log.warn(arrow + "[{}][{}ms][{}]", uuid, lastStopWatchTime, name);
-        } else log.error(arrow + "[{}][{}ms][{}]", uuid, lastStopWatchTime, name);
+            log.warn(arrow + "[{}][{}ms][{}]", uri, lastStopWatchTime, name);
+        } else log.error(arrow + "[{}][{}ms][{}]", uri, lastStopWatchTime, name);
     }
 }

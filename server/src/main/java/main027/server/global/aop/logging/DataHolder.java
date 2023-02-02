@@ -30,10 +30,6 @@ public class DataHolder extends StopWatch {
     private List<String> roles;
     private String uri;
     private String method;
-    /**
-     * 해당 HTTP의 요청을 인식할 id (request가 종료될 때 까지 유지)
-     */
-    private String uuid;
 
     /**
      * 해당 클래스가 생성되어질 때 StopWatch 시작 후 로깅
@@ -41,7 +37,6 @@ public class DataHolder extends StopWatch {
     @PostConstruct
     private void init() {
         this.start();
-        this.uuid = UUID.randomUUID().toString().substring(0, 8);
     }
 
     public void setUri(String uri) {
