@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Nav from '../../components/Nav/Nav'
 import Header from '../../components/Header/Header'
 import useLoginCheck from '../../hooks/useLoginCheck'
+import { isAdminMember } from '../../api/login'
 
 const Wrapper = styled.section`
   width: 100%;
@@ -47,7 +48,6 @@ const Menu = styled.li`
       color: #2c2d2e;
       font-weight: 500;
       border-bottom: 4px solid #2c2d2e;
-      /* border-bottom: 4px solid var(--ecogreen-01); */
     `}
 `
 
@@ -64,7 +64,9 @@ const Mypage = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
+  // data set
   const menuName = pathname.split('/')[2]
+  const isAdminUser = isAdminMember()
 
   // handle
   const handleClickTab = tabName => {
@@ -95,6 +97,15 @@ const Mypage = () => {
             >
               나의정보
             </Menu>
+            {isAdminUser && (
+              <Menu
+                aria-label="장소삭제 탭 선택"
+                selected={menuName === 'admin'}
+                onClick={() => handleClickTab('admin')}
+              >
+                장소삭제(Admin)
+              </Menu>
+            )}
           </TabMenu>
           <Outlet />
         </Container>

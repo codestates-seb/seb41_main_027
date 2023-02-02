@@ -1,39 +1,37 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 
 import Loading from '../../components/Loading/Loading'
-import { ContentWrap, List, Item, FieldName, DelButton, Head, Title, Tail } from './BookmarkStyle'
+import { ContentWrap, Summary, List, Item, FieldName, DelButton, Head, Title, Tail, Span } from './AdminStyle'
 import { MemoPagination } from '../../components/Pagination/Pagination'
-import * as bookmarkApi from '../../api/bookmark'
-import { useGetBookmarkList } from '../../query/bookmark'
+import * as placeApi from '../../api/place'
+import { useGetPlace } from '../../query/place'
 import { ConfirmModal } from '../../components/Modal/ConfirmModal'
 
 const Bookmark = () => {
-  const listSize = 8
-
   // hook, state
-  const location = useLocation()
+  const navigate = useNavigate()
   const [page, setPage] = useState(1)
   const [confirmModal, setConfirmModal] = useState({})
   const queryClient = useQueryClient()
 
   // handle
-  const handleBookmarkDel = (pId, confirm) => {
+  const handlePlaceDel = (pId, confirm) => {
     if (!confirm) {
       return setConfirmModal({
         msg: '정말 삭제하시겠습니까?',
-        fnConfirm: () => handleBookmarkDel(pId, true),
+        fnConfirm: () => handlePlaceDel(pId, true),
       })
     }
 
     // db delete
-    bookmarkApi.updateBookmark(pId, false).then(data => {
+    placeApi.deletePlace(pId).then(data => {
       setPage(1)
-      queryClient.invalidateQueries({ queryKey: ['getBookmarkList'] })
+      queryClient.invalidateQueries({ queryKey: ['getPlace'] })
     })
   }
 
@@ -41,8 +39,8 @@ const Bookmark = () => {
     setPage(Number(e.target.value))
   }
 
-  // fetch data
-  const { isLoading, isFetching, isError, error, data } = useGetBookmarkList(page, listSize)
+  // fetch data : useGetPlace(sort, categoryId, page)
+  const { isLoading, isFetching, isError, error, data } = useGetPlace('time', '', page)
   if (isLoading || isFetching) return <Loading />
   if (isError) return toast.error(error.message)
   if (!data) return null
@@ -51,25 +49,25 @@ const Bookmark = () => {
   return (
     <ContentWrap>
       <ConfirmModal msg={confirmModal.msg} fnCancel={() => setConfirmModal({})} fnConfirm={confirmModal.fnConfirm} />
+      <Summary>
+        <Span bgColor="#ccc">장소 아이디</Span>
+        <Span bgColor="#aaa">회원 아이디</Span>
+        Total <strong>{totalElements}</strong>개
+      </Summary>
       <List>
-        {placeList.length === 0 && <Item>등록된 북마크가 없습니다.</Item>}
+        {placeList.length === 0 && <Item>등록된 장소가 없습니다.</Item>}
         {placeList.map(item => (
           <Item key={item.placeId}>
             <FieldName>
               <Head>{item.category}</Head>
               <Title>
-                <Link to={`/${item.placeId}`} state={{ bgLocation: location }}>
-                  {item.name}
-                </Link>
+                {item.name}
+                <Span bgColor="#ccc">{item.placeId}</Span>
+                <Span bgColor="#aaa">{item.memberId}</Span>
               </Title>
               <Tail>{new Date(item.createdAt).toLocaleString()}</Tail>
             </FieldName>
-            <DelButton
-              type="button"
-              name="place_id"
-              value={item.placeId}
-              onClick={() => handleBookmarkDel(item.placeId)}
-            >
+            <DelButton type="button" name="place_id" value={item.placeId} onClick={() => handlePlaceDel(item.placeId)}>
               <FontAwesomeIcon icon={faTrashCan} />
             </DelButton>
           </Item>

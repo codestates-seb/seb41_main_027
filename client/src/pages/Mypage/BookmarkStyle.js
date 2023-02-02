@@ -33,7 +33,7 @@ export const FieldName = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   gap: 12px;
   flex-grow: 1;
@@ -44,23 +44,29 @@ export const FieldName = styled.div`
   box-shadow: var(--box-shadow-list);
 `
 
-export const Category = styled.span`
+export const Head = styled.span`
+  width: 110px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 8px 12px;
+  padding: 8px;
   border-radius: 8px;
   color: #fff;
   font-size: 0.9rem;
   background-color: var(--ecogreen-01);
 `
 
-export const PlaceName = styled.span`
+export const Title = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-grow: 1;
   color: var(--ecogreen-01);
   font-weight: bold;
   font-size: 1.1rem;
 `
 
-export const Address = styled.span`
+export const Tail = styled.span`
   color: #999999;
   font-size: 0.85rem;
   letter-spacing: -0.6px;

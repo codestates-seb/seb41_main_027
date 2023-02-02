@@ -15,6 +15,7 @@ const Mypage = lazy(() => import('./pages/Mypage/Mypage'))
 const MyInfo = lazy(() => import('./pages/Mypage/MyInfo'))
 const Bookmark = lazy(() => import('./pages/Mypage/Bookmark'))
 const Like = lazy(() => import('./pages/Mypage/Like'))
+const Admin = lazy(() => import('./pages/Mypage/Admin'))
 const PwdEditFormModal = lazy(() => import('./pages/Mypage/PwdEditFormModal'))
 const AboutUs = lazy(() => import('./pages/AboutUs/AboutUs'))
 const SignUp = lazy(() => import('./pages/SignUp'))
@@ -62,6 +63,7 @@ function App() {
               <Route path="bookmark" element={<Bookmark />} />
               <Route path="like" element={<Like />} />
               <Route path="myinfo" element={<MyInfo />} />
+              <Route path="admin" element={<Admin />} />
             </Route>
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/signup" element={<SignUp />} />

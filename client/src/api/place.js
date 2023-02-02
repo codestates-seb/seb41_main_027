@@ -18,19 +18,18 @@ export const updatePlaceDescription = async (pId, body) => {
     return result.data
   } catch (error) {
     console.error(error)
-    toast.error(error.message)
+    return toast.error('데이터 처리에 실패했습니다.')
   }
 }
 
 // 장소 list 가져오기 이상없음..
-export const getPlace = async (sort, categoryId) => {
-  const sortAndId = `?sortby=${sort}&id=${categoryId}`
-  const result = await customAxios.get(`${API_PLACE_ENDPOINT}` + sortAndId)
-  function removeEmptyParams(query) {
-    return query.replace(/[^=&]+=(?:&|$)/g, ' ')
-  }
-  removeEmptyParams(sortAndId)
-  console.log(result)
+export const getPlace = async (sort, categoryId, page) => {
+  let params = `?sortby=${sort}&id=${categoryId}`
+  if (page) params += `&page=${page}`
+
+  const result = await customAxios.get(API_PLACE_ENDPOINT + params)
+
+  // console.log(result)
   return result.data
 }
 
@@ -58,7 +57,19 @@ export const keywordSearch = async keyword => {
     }
     return result.data
   } catch (error) {
-    // console.log(error)
+    console.log(error)
     toast.error('2글자 이상 검색하세요!')
+  }
+}
+
+// place delete(only admin member)
+export const deletePlace = async placeId => {
+  try {
+    const result = await customAxios.delete(`${API_PLACE_ENDPOINT}/${placeId}`)
+    toast.success('장소가 삭제되었습니다.')
+    return result.data
+  } catch (error) {
+    console.error(error)
+    return toast.error('데이터 처리에 실패했습니다.')
   }
 }

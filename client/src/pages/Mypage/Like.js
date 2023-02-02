@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 
 import Loading from '../../components/Loading/Loading'
-import { ContentWrap, List, Item, FieldName, DelButton, Category, PlaceName, Address } from './BookmarkStyle'
+import { ContentWrap, List, Item, FieldName, DelButton, Head, Title, Tail } from './BookmarkStyle'
 import { MemoPagination } from '../../components/Pagination/Pagination'
 import * as likeApi from '../../api/like'
 import { useGetLikeList } from '../../query/like'
@@ -16,7 +16,7 @@ const Bookmark = () => {
   const listSize = 8
 
   // hook, state
-  const navigate = useNavigate()
+  const location = useLocation()
   const [page, setPage] = useState(1)
   const [confirmModal, setConfirmModal] = useState({})
   const queryClient = useQueryClient()
@@ -56,9 +56,13 @@ const Bookmark = () => {
         {placeList.map(item => (
           <Item key={item.placeId}>
             <FieldName>
-              <Category>{item.category}</Category>
-              <PlaceName>{item.name}</PlaceName>
-              <Address>{item.address}</Address>
+              <Head>{item.category}</Head>
+              <Title>
+                <Link to={`/${item.placeId}`} state={{ bgLocation: location }}>
+                  {item.name}
+                </Link>
+              </Title>
+              <Tail>{new Date(item.createdAt).toLocaleString()}</Tail>
             </FieldName>
             <DelButton
               type="button"
