@@ -4,14 +4,13 @@ import * as place from '../api/place'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { placeSort } from '../recoil/atoms'
 
-// ----- 장소 관련 쿼리 정의(only Get) -----
+const baseConfig = { staleTime: QUERY_STALETIME, retry: QUERY_RETRY }
 
 // 장소 상세보기 단건 조회
 export const useGetPlaceInfoById = pId => {
   return useQuery(['getPlaceInfoById', pId], ({ queryKey }) => place.getPlaceInfo(queryKey[1]), {
+    ...baseConfig,
     enabled: !!pId,
-    staleTime: QUERY_STALETIME,
-    retry: QUERY_RETRY,
   })
 }
 

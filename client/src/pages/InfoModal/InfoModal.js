@@ -61,11 +61,14 @@ export const InfoModal = () => {
     [pId],
   )
 
-  const queryRefresh = useCallback(() => {
-    queryClient.invalidateQueries({ queryKey: ['getPlaceInfoById'] })
-  }, [pId])
+  const queryRefresh = useCallback(() => {}, [pId])
 
   const handleModalClose = useCallback(() => {
+    // query refresh
+    queryClient.invalidateQueries({ queryKey: ['getPlaceInfoById'] })
+    queryClient.invalidateQueries({ queryKey: ['getBookmarkList'] })
+    queryClient.invalidateQueries({ queryKey: ['getLikeList'] })
+
     const bgLocation = location.state && location.state.bgLocation
     if (bgLocation) navigate(bgLocation.pathname)
     if (!bgLocation) navigate('/')
@@ -73,6 +76,8 @@ export const InfoModal = () => {
 
   // fetch data
   const { isLoading, isFetching, isError, error, data } = useGetPlaceInfoById(pId)
+
+  // data status process
   if (isLoading || isFetching) return <Loading />
   if (isError) return toast.error(error.message)
   if (!data) return null
