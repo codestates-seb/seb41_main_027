@@ -93,8 +93,8 @@
 - [유저플로우](https://www.figma.com/file/8hnsWs8SFKqHfKd3b3fURd?embed_host=notion&kind=&node-id=0%3A1&t=Gt7nZtgJA6ck5Hcp-1&viewer=1)
 - [사용자 요구사항 정의서](https://codestates.notion.site/SRS-0f07c164390349d8aa254436b5450f43)
 - [화면정의서](https://codestates.notion.site/fd199ff688524021a05471990f0a5482?v=371314e92c854b78b6275d2b3d4c78c4)
-- [API 명세서](https://documenter.getpostman.com/view/23681970/2s8ZDYWLvK)
-- [테이블 명세서](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a1e94d7c-ddf2-4446-8ac4-dc864e04a7ab/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230130%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230130T051519Z&X-Amz-Expires=86400&X-Amz-Signature=58b34bec047d415adc00166f8ebeb3a3e05ee91d3c3a631880d765960adda2e8&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject)
+- [API 명세서](https://docs.google.com/spreadsheets/d/1dvm52WnAIYOlial48pRuY7_qjy5T-E6WzMzHOtPl5ys/edit?usp=sharing)
+
 
 </br>
 </br>
