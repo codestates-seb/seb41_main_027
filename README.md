@@ -94,7 +94,7 @@
 - [사용자 요구사항 정의서](https://codestates.notion.site/SRS-0f07c164390349d8aa254436b5450f43)
 - [화면정의서](https://codestates.notion.site/fd199ff688524021a05471990f0a5482?v=371314e92c854b78b6275d2b3d4c78c4)
 - [API 명세서](https://docs.google.com/spreadsheets/d/1dvm52WnAIYOlial48pRuY7_qjy5T-E6WzMzHOtPl5ys/edit?usp=sharing)
-
+- [프로젝트메뉴얼](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/49b73422-379c-4219-aa6f-b3b0bfd7a7e0/41%E1%84%80%E1%85%B5-Team-027-%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%E1%84%86%E1%85%A6%E1%84%82%E1%85%B2%E1%84%8B%E1%85%A5%E1%86%AF.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230215%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230215T023122Z&X-Amz-Expires=86400&X-Amz-Signature=6be42b31316719c361fc3db36f3c670edb9ed708965353b595062734025566b6&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%2241%25E1%2584%2580%25E1%2585%25B5-Team-027-%25E1%2584%2591%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25A9%25E1%2584%258C%25E1%2585%25A6%25E1%2586%25A8%25E1%2584%2590%25E1%2585%25B3%25E1%2584%2586%25E1%2585%25A6%25E1%2584%2582%25E1%2585%25B2%25E1%2584%258B%25E1%2585%25A5%25E1%2586%25AF.pdf%22&x-id=GetObject)
 
 </br>
 </br>
