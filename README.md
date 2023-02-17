@@ -93,7 +93,7 @@
 - [유저플로우](https://www.figma.com/file/8hnsWs8SFKqHfKd3b3fURd?embed_host=notion&kind=&node-id=0%3A1&t=Gt7nZtgJA6ck5Hcp-1&viewer=1)
 - [사용자 요구사항 정의서](https://codestates.notion.site/SRS-0f07c164390349d8aa254436b5450f43)
 - [화면정의서](https://codestates.notion.site/fd199ff688524021a05471990f0a5482?v=371314e92c854b78b6275d2b3d4c78c4)
-- [테이블 명세서](https://docs.google.com/spreadsheets/d/1dvm52WnAIYOlial48pRuY7_qjy5T-E6WzMzHOtPl5ys/edit?usp=sharing)
+- [테이블 명세서 + ERD](https://docs.google.com/spreadsheets/d/1dvm52WnAIYOlial48pRuY7_qjy5T-E6WzMzHOtPl5ys/edit?usp=sharing)
 
 
 </br>
